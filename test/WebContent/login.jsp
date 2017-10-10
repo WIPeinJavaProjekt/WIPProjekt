@@ -5,14 +5,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login Pagee</title>
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+
 </head>
 <body>
 
-<form action ="login" method="post">
-	User ID: <input type="text" name="userId" /> <br>
-	Password: <input type="password" name="password" /> <br>
-	<input type="submit"/>
+<form class="pure-form pure-form-aligned" action ="login" method="post">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="name">Username</label>
+            <input name="userId" id="name" type="text" placeholder="Username">
+            <span class="pure-form-message-inline">This is a required field.</span>
+        </div>
+
+        <div class="pure-control-group">
+            <label for="name">Password</label>
+            <input name="password" id="password" type="text" placeholder="Password">
+            <span class="pure-form-message-inline">This is a required field.</span>
+        </div>
+
+        <div class="pure-controls">
+            <label for="cb" class="pure-checkbox">
+                <input id="cb" type="checkbox"> I've read the terms and conditions
+            </label>
+
+            <button type="submit" class="pure-button pure-button-primary">Submit</button>
+        </div>
+    </fieldset>
 </form>
+
+
 
 </body>
 </html>
