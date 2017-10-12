@@ -1,12 +1,10 @@
-
-body{
-background-image:url('/Images/background.png');
-background-repeat:no-repeat;
-background-size:contain;
-background-position:center;
+body {
+    background-image: url('/Images/background.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
-.searchbox
-{
-  margin-top:30%;
+.searchbox {
+    margin-top: 30%;
 }
