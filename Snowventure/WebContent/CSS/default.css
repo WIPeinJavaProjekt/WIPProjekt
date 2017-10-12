@@ -1,10 +1,47 @@
 body {
-    background-image: url("../Images/background.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+    background-color: rgba(247, 247, 247, 0.55);
 }
 
-.searchbox {
-    margin-top: 30%;
+.searchbox form fieldset legend {
+	text-align: center;
+}
+
+.boxedinput {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+header {
+    /*position: fixed;
+    top: 0;
+    left: 0;*/
+    background-color: rgba(0, 33, 64, 0.95);
+    padding: 3px;
+}
+
+footer {
+    height: 30px;
+    width: 100%;
+    background: rgba(247, 247, 247, 0.55);
+}
+
+#brandbox {
+    width: 100%;
+    align-items: center;
+    background-image: url("../Images/background.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#brandbox div {
+    padding-top: 7%;
+    /*background-color: rgba(255, 255, 255, 0.65);*/
+    margin-left: 20%;
+    margin-right: 20%;
 }
