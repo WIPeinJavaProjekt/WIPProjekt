@@ -13,8 +13,14 @@
 	<header>
 	
 		<div class="pure-g">
-	    <div class="pure-u-7-8"><p></p></div>
-	    <div class="pure-u-1-8"><p>Warenkorb</p><p>Login</p></div>
+		
+		    <div class="pure-u-7-8"><p></p>
+		    </div>
+		    <div class="pure-u-1-8">
+		    	<p>Warenkorb</p>
+		    	<p>Login</p>
+		    </div>
+		    
 		</div>
 	
 	</header>
@@ -30,18 +36,15 @@
 				        <legend>Welches Abenteuer begegnet dir als Nächstes?</legend>
 				
 				        <select name="categories">
-						  <option value="volvo">Kleidung</option>
-						  <option value="saab">Skischuhe</option>
-						  <option value="fiat">Ausrüstung</option>
+						  <option value="clothes">Kleidung</option>
+						  <option value="shoes">Skischuhe</option>
+						  <option value="equipment">Ausrüstung</option>
 						</select>
 				        <input type="text" placeholder="Suchbegriff eingeben">
 				
 				        <button type="submit" class="pure-button pure-button-primary">SUCHEN</button>
 				    </fieldset>
-				</form>
-			
-				
-			
+				</form>			
 			</div>
 			
 		</div>

@@ -1,5 +1,6 @@
 body {
     background-image: url('/Images/background.png');
+    /* background-image: url("../images/Berge.jpg"); */
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
