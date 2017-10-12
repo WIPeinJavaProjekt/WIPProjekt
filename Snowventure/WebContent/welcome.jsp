@@ -15,28 +15,8 @@
 </head>
 <body>
 	
-	<div id ="brandbox" >
-		<div>
-			<img id ="brandimg" src="Images/brand.png">
-		</div>
-	</div>
-	
-	
-	<header>
-		<div class="pure-g">
-			<div class="pure-u-4-5"></div>
-				<div class="pure-u-1-5">
-			    	<form class="pure-form" action="start" method="post">
-				    	<button type="submit" name="cart" class="pure-button pure-button-primary"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
-				    	<button type="submit" name="login" class="pure-button pure-button-primary"><i class="fa fa-home"></i></button>
-			    	</form>
-		    	</div>
-    	</div>
-	</header>
+	<%@include file = "header.jsp" %> 
 
-
-	
-	
 	<div class="pure-g" id ="searchbox">
 		<div class="pure-u-1-5"></div>
 		<div id="wrapper" class="pure-u-3-5">
