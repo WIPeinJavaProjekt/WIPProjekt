@@ -1,4 +1,4 @@
-package WIP_classes;
+package classes;
 
 import java.util.List;
 

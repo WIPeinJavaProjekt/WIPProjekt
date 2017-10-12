@@ -1,4 +1,4 @@
-package WIP_classes;
+package classes;
 
 public class User {
 
