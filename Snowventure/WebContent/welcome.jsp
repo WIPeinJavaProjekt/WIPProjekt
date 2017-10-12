@@ -13,14 +13,15 @@
 	<header>
 	
 		<div class="pure-g">
-		
-		    <div class="pure-u-7-8"><p></p>
-		    </div>
-		    <div class="pure-u-1-8">
-		    	<p>Warenkorb</p>
-		    	<p>Login</p>
-		    </div>
-		    
+			    <div class="pure-u-7-8"><p></p>
+			    </div>
+			    <div class="pure-u-1-8">
+			    	<form class="pure-form" action="start" method="post">
+				    	<p><button type="submit" name="cart" class="pure-button pure-button-primary">Warenkorb</button></p>
+				    	<p><button type="submit" name="login" class="pure-button pure-button-primary">Login</button></p>
+			    	</form>
+			    </div>
+		     
 		</div>
 	
 	</header>
@@ -29,8 +30,7 @@
 	<div class="pure-g">
 		<div class="pure-u-1-5"></div>
 		<div id="wrapper" class="pure-u-3-5">
-			<div id="search-container" class="searchbox">
-			
+			<div id="search-container" class="searchbox">			
 				<form class="pure-form">
 				    <fieldset>
 				        <legend>Welches Abenteuer begegnet dir als Nächstes?</legend>
@@ -42,7 +42,7 @@
 						</select>
 				        <input type="text" placeholder="Suchbegriff eingeben">
 				
-				        <button type="submit" class="pure-button pure-button-primary">SUCHEN</button>
+				        <button type="submit" class="pure-button pure-button-primary">Suchen</button>
 				    </fieldset>
 				</form>			
 			</div>
@@ -52,12 +52,9 @@
 	</div>
 	
 	
-	<footer>
-	
-		<a>Impressum</a>
-	
-	</footer>
-	
+	<footer>	
+		<a>Impressum</a>	
+	</footer>	
 
 </body>
 </html>

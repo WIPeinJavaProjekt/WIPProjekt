@@ -2,6 +2,8 @@ package servlets;
 
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,24 +19,41 @@ import services.LoginService;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	public LoginServlet() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+		rd.forward(request, response);
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String userId, password;
 		
-		userId = request.getParameter("userId");
-		password = request.getParameter("password");
-		
-		LoginService loginService = new LoginService();
-		boolean result = loginService.authenticate(userId, password);
-		
-		if (result) {
-			response.sendRedirect("success.jsp");
+		if(request.getParameter("login") != null) {
+
+			userId = request.getParameter("userId");
+			password = request.getParameter("password");
+			
+			System.out.println(userId);
+			System.out.println(password);
+			
+		} else if(request.getParameter("register") != null) {
+			
+			response.sendRedirect("register");
+			return;
+			
+		} else if(request.getParameter("back") != null) {
+			
+			response.sendRedirect("start");
 			return;
 		}
-		response.sendRedirect("login.jsp");
-		return;
-	}
+		
+		doGet(request, response);
+		
+		
+	}	
 
 }

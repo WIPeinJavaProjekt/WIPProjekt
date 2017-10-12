@@ -3,9 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Login Pagee</title>
-<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Login Page</title>
+	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 
 </head>
 <body>
@@ -13,8 +13,8 @@
 <form class="pure-form pure-form-aligned" action ="login" method="post">
     <fieldset>
         <div class="pure-control-group">
-            <label for="name">Username</label>
-            <input name="userId" id="name" type="text" placeholder="Username">
+            <label for="userId">Username</label>
+            <input name="userId" id="userId" type="text" placeholder="Username">
             <span class="pure-form-message-inline">This is a required field.</span>
         </div>
 
@@ -25,11 +25,9 @@
         </div>
 
         <div class="pure-controls">
-            <label for="cb" class="pure-checkbox">
-                <input id="cb" type="checkbox"> I've read the terms and conditions
-            </label>
-
-            <button type="submit" class="pure-button pure-button-primary">Submit</button>
+            <button type="submit" name="login" class="pure-button pure-button-primary">Einloggen</button>
+            <button type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>
+            <button type="submit" name="register" class="pure-button pure-button-primary">Registrieren</button>
         </div>
     </fieldset>
 </form>

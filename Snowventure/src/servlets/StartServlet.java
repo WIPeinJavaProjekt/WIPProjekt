@@ -38,6 +38,11 @@ public class StartServlet extends HttpServlet {
 			String searchValue = request.getParameter("search");
 			
 			System.out.println(searchValue);
+		} else if(request.getParameter("search") != null) {	
+			
+			String searchValue = request.getParameter("search");
+			
+			System.out.println(searchValue);
 		}
 		
 		doGet(request, response);
