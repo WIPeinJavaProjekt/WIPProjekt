@@ -10,17 +10,78 @@
 	</head>
 	
 	<body>
-		<center>
-			<h1>Register</h1>
+	
+		<header>
+		
+			<div class="pure-g">
+				    <div class="pure-u-7-8"><p></p>
+				    </div>
+				    <div class="pure-u-1-8">
+				    	<form class="pure-form" action="start" method="post">
+					    	<p>
+						    	<button class="pure-button pure-button-primary"  type="submit" name="cart">
+								    Warenkorb
+							    </button>
+						    </p>
+					    	<p><button type="submit" name="login" class="pure-button pure-button-primary">Login</button></p>
+				    	</form>
+				    </div>
+			     
+			</div>
+		
+		</header>
+	
+			<div class="pure-g">
 			
-			<form action="register" method="post">
+				<div class="pure-u-2-5"></div>
+	
+				<div class="pure-u-2-5">
+					<h1>Register</h1>
+					
+					<form class="pure-form pure-form-aligned" action="register" method="post">				
+					    <fieldset>
+					    	<div class="pure-control-group">
+					            <label for="username">Benutzername</label>
+					            <input id="username" type="text" placeholder="Benutzername">
+					        </div>
+					        <div class="pure-control-group">
+					            <label for="name">Vorname</label>
+					            <input id="name" type="text" placeholder="Vorname">
+					        </div>
+					        <div class="pure-control-group">
+					            <label for="surname">Nachname</label>
+					            <input id="surname" type="text" placeholder="Nachname">
+					        </div>
+					        
+					        <div class="pure-control-group">
+					            <label for="email">E-Mail-Addresse</label>
+					            <input id="email" type="email" placeholder="E-Mail-Addresse">
+					        </div>
+					
+					        <div class="pure-control-group">
+					            <label for="password">Passwort</label>
+					            <input id="password" type="password" placeholder="Passwort">
+					        </div>
+					        <div class="pure-control-group">
+					            <label for="passwordRepeat">Passwort wiederholen</label>
+					            <input id="passwordRepeat" type="password" placeholder="Passwort wiederholen">
+					        </div>			        
+					
+					        <div class="pure-control-group">
+					            <label for="cb" class="pure-checkbox">
+					                <input id="cb" type="checkbox"> I've read the terms and conditions
+					            </label>
+							</div>
+							<div class="pure-control-group">
+					            <button type="submit" name="submitRegister" class="pure-button pure-button-primary">Abschicken</button>
+					            <button type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>
+					        </div>
+					    </fieldset>				
+					</form>
+				</div>
 				
-				<div class="pure-controls">
-		            <button type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>
-		        </div>
-				
-			</form>
-		</center>
+				<div class="pure-u-1-5"></div>
+			</div>
 	</body>
 	
 </html>

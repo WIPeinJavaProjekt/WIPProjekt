@@ -5,7 +5,7 @@ public class User {
 	public String username;
 	public String password;
 	public String name;
-	public String surename;
+	public String surname;
 	public String location;
 	public String houseno;
 	public String postcode;
