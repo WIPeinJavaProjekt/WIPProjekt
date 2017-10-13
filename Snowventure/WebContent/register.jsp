@@ -7,29 +7,13 @@
 		<title>Ski-Shop24</title>
 		<!-- <link type="text/css" rel="stylesheet" href="./css/Start.css" /> -->
 		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="CSS/default.css">
 	</head>
 	
 	<body>
 	
-		<header>
-		
-			<div class="pure-g">
-				    <div class="pure-u-7-8"><p></p>
-				    </div>
-				    <div class="pure-u-1-8">
-				    	<form class="pure-form" action="start" method="post">
-					    	<p>
-						    	<button class="pure-button pure-button-primary"  type="submit" name="cart">
-								    Warenkorb
-							    </button>
-						    </p>
-					    	<p><button type="submit" name="login" class="pure-button pure-button-primary">Login</button></p>
-				    	</form>
-				    </div>
-			     
-			</div>
-		
-		</header>
+		<%@include file = "header.jsp" %> 
 	
 			<div class="pure-g">
 			
