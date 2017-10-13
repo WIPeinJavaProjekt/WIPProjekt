@@ -38,6 +38,23 @@
 					        </div>
 					        
 					        <div class="pure-control-group">
+					            <label for="location">Wohnort</label>
+					            <input id="location" type="text" placeholder="Wohnort">
+					        </div>
+					        <div class="pure-control-group">
+					            <label for="street">Straﬂe</label>
+					            <input id="street" type="text" placeholder="Straﬂe">
+					        </div>
+					        <div class="pure-control-group">
+					            <label for="houseno">Hausnummer</label>
+					            <input id="houseno" type="text" placeholder="Hausnummer">
+					        </div>
+					        <div class="pure-control-group">
+					            <label for="postcode">Postleitzahl</label>
+					            <input id="postcode" type="text" placeholder="Postleitzahl">
+					        </div>
+					        
+					        <div class="pure-control-group">
 					            <label for="email">E-Mail-Addresse</label>
 					            <input id="email" type="email" placeholder="E-Mail-Addresse">
 					        </div>

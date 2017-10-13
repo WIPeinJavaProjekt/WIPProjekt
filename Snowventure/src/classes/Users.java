@@ -11,7 +11,8 @@ public class Users {
 		if(username == null)
 		{}
 		
-		User user = new User("test", "1234", "testname", "testsurename", "loc", "4a", "23923", "test@gmail.com", 1);
+		Adress adress = new Adress("Paderborn", "1", "12345", "Hauptstraße");
+		User user = new User("TestUser", "test", "Test", "User", adress, "Test.User@test.de", 1);
 		lUsers.add(user);		
 		
 		return lUsers;	
