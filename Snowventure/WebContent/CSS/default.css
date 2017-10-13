@@ -10,8 +10,6 @@ body {
     box-sizing: border-box;
     display: block;
     width: 100%;
-    margin-left: 3px;
-    margin-right: 3px;
 }
 
 header {
