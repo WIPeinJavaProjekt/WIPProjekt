@@ -11,7 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="CSS/default.css">
 <link rel="stylesheet" type="text/css" href="CSS/startpageslider.css">
-<script src="JS/startpageslider.js"></script>
+<script src="JS/header.js"></script>
 </head>
 <body>
 
@@ -24,7 +24,6 @@
 				<form class="pure-form">
 				    <fieldset>
 				        <legend>
-				        <h1>Starte dein nächstes Abenteuer!</h1>
 				        </legend>
 						<div class="pure-g">
 					        <div class="pure-u-1-5">
@@ -35,7 +34,7 @@
 								</select>
 							</div>
 					        <div class="pure-u-3-5">
-					        	<input type="text" class="boxedinput" placeholder="Suchbegriff eingeben">
+					        	<input type="text" class="boxedinput" placeholder="Wähle deine Ausrüstung">
 							</div>
 							<div class="pure-u-1-5">
 				        		<button type="submit" class="pure-button pure-button-primary boxedinput">Suchen</button>
@@ -44,7 +43,7 @@
 				    </fieldset>
 				</form>
 			</div>
-<div class="cssSlider">
+<div class="cssSlider" align="center">
 
     <!-- die inputs um den Slider zu Steuern -->
     <input type="radio" name="slider" id="slide01" checked="checked">

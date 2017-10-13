@@ -3,6 +3,12 @@
 .sliderControls {
     margin: 0;
     padding: 0;
+    background-color: rgb(7, 46, 74);
+}
+
+.sliderElements li figure
+{
+	background-color: rgb(7, 46, 74);
 }
 
 .sliderElements:after {
