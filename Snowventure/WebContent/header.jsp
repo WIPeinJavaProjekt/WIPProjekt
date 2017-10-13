@@ -1,4 +1,5 @@
-
+<script src="JS/jquery-3.2.1.min.js"></script>
+<script src="JS/header.js"></script>
 <div id ="brandbox" >
 		<div id="innerbrandbox">
 			<img id ="brandimg" src="Images/brand.png">
