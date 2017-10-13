@@ -6,18 +6,19 @@ public class User {
 	public String password;
 	public String name;
 	public String surname;
-	public String location;
-	public String houseno;
-	public String postcode;
 	public String email;
+	public Adress adress;
 	public int usertype;
 	
-	public User(String username, String password, String name, String surename, String location, String houseno, String postcode, String email, int usertype)
+	public User(String username, String password, String name, String surname, Adress adress, String email, int usertype)
 	{
 		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
 		this.email = email;
-		this.houseno = houseno;
-		this.location = location;
+		this.adress = adress;
+		this.usertype = usertype;
 	}
 	
 	public static User get(String username, int usertype)
