@@ -24,14 +24,14 @@
 				<form class="pure-form">
 				    <fieldset>
 				        <legend>
-				        <h1>Starte dein nï¿½chstes Abenteuer!</h1>
+				        <h1>Starte dein nächstes Abenteuer!</h1>
 				        </legend>
 						<div class="pure-g">
 					        <div class="pure-u-1-5">
 						        <select name="categories" class="boxedinput">
 								  <option value="clothes">Kleidung</option>
 								  <option value="shoes">Skischuhe</option>
-								  <option value="equipment">Ausrï¿½stung</option>
+								  <option value="equipment">Ausrüstung</option>
 								</select>
 							</div>
 					        <div class="pure-u-3-5">
@@ -57,7 +57,7 @@
         <li>
             <figure>
                 <img src="Images/mountain.jpg" alt="" height="400" width="1200">
-                <figcaption>Hier kï¿½nnte deine Beschreibung stehen.</figcaption>
+                <figcaption>Hier könnte deine Beschreibung stehen.</figcaption>
             </figure>
         </li>
         <li>
