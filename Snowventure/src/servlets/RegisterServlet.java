@@ -31,6 +31,8 @@ public class RegisterServlet extends HttpServlet {
 			
 			response.sendRedirect("login");
 			return;
+		} else if(request.getParameter("submitRegister") != null) {
+			System.out.println("Registrierung erfolgreich!");
 		}
 		
 		doGet(request, response);
