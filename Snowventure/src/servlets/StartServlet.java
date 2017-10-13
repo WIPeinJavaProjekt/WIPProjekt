@@ -33,6 +33,10 @@ public class StartServlet extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 			
+		} else if(request.getParameter("start") != null) {	
+			response.sendRedirect("start");
+			return;
+			
 		} else if(request.getParameter("search") != null) {	
 			
 			String searchValue = request.getParameter("search");
@@ -43,7 +47,10 @@ public class StartServlet extends HttpServlet {
 			String searchValue = request.getParameter("search");
 			
 			System.out.println(searchValue);
-		}
+		} else if(request.getParameter("cart") != null) {	
+			response.sendRedirect("cart");
+			return;
+		} 
 		
 		doGet(request, response);
 	}	
