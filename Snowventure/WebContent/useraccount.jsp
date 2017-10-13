@@ -15,10 +15,10 @@
 <style type="text/css">
 
 .pure-menu {
-width: 15%;
+width: 10%;
 text-align: left;
 float: left;
-margin-top:5%;
+margin-top:1%;
 }
 
 .custom-restricted {
@@ -27,12 +27,16 @@ display: inline-box;
 
 #mydata-form {
 	width: 50%;
-	margin-left: 10%;
+	margin-left: 20%;
 	margin-right: 10%;
-	margin-top: 5%;
+	margin-top: 0%;
 	float: left;	
 }
 
+#mydata-form h1 {
+	padding-top: 0%;
+	text-align: center;
+}
 
 </style>
 
@@ -46,7 +50,7 @@ display: inline-box;
 	
 	    <ul class="pure-menu-list">
 	        <li class="pure-menu-item"><a href="useraccount.jsp?page=mydata" class="pure-menu-link">Meine Daten</a></li>
-			<li class="pure-menu-item"><a href="useraccount.jsp?page=users" class="pure-menu-link" >Nutzerübersicht</a></li>
+			<li class="pure-menu-item"><a href="useraccount.jsp?page=usersearch" class="pure-menu-link" >Nutzerübersicht</a></li>
 	        <li class="pure-menu-item"><a href="useraccount.jsp?page=articles" class="pure-menu-link">Artikelübersicht</a></li>
 	        <li class="pure-menu-item"><a href="useraccount.jsp?page=orders" class="pure-menu-link">Bestellungen</a></li>
 	        <li class="pure-menu-item"><p><i>Eingeloggt als: TestUser</i></p></li>
@@ -71,7 +75,9 @@ display: inline-box;
 			var file = $.urlParam('page')+'.jsp';
 		
 	    	if(file == 'mydata.jsp')
-	        document.getElementById("content").InnerHTML = $('#content').load("mydata.jsp");			
+	        	document.getElementById("content").InnerHTML = $('#content').load("mydata.jsp");
+	    	else if(file == 'usersearch.jsp')
+		    	document.getElementById("content").InnerHTML = $('#content').load("usersearch.jsp");
 		</script>
 	
 	</div>
