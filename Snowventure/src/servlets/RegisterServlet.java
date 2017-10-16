@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import classes.Adress;
+import classes.User;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -32,7 +35,14 @@ public class RegisterServlet extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		} else if(request.getParameter("submitRegister") != null) {
+			
+			Adress adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
+					request.getParameter("street"), request.getParameter("postcode"));
+			User user = new User(request.getParameter("username"), request.getParameter("password"), request.getParameter("name"),
+					request.getParameter("surname"), adress, request.getParameter("email"), 0);
+			
 			System.out.println("Registrierung erfolgreich!");
+			System.out.println(user.username);
 		}
 		
 		doGet(request, response);

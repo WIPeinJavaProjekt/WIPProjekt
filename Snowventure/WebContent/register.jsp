@@ -17,51 +17,51 @@
 	
 			<div class="pure-g">
 			
-				<div class="pure-u-2-5"></div>
+				<div class="pure-u-1-5"></div>
 	
-				<div class="pure-u-2-5">
-					<h1>Register</h1>
+				<div class="pure-u-3-5" align="center">
+					<h1>Registrieren</h1>
 					
 					<form class="pure-form pure-form-aligned" action="register" method="post">				
 					    <fieldset>
 					    	<div class="pure-control-group">
 					            <label for="username">Benutzername</label>
-					            <input id="username" type="text" placeholder="Benutzername">
+					            <input id="username" name="username" type="text" placeholder="Benutzername">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="name">Vorname</label>
-					            <input id="name" type="text" placeholder="Vorname">
+					            <input id="name" name="name" type="text" placeholder="Vorname">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="surname">Nachname</label>
-					            <input id="surname" type="text" placeholder="Nachname">
+					            <input id="surname" name="surname" type="text" placeholder="Nachname">
 					        </div>
 					        
 					        <div class="pure-control-group">
 					            <label for="location">Wohnort</label>
-					            <input id="location" type="text" placeholder="Wohnort">
+					            <input id="location" name="location" type="text" placeholder="Wohnort">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="street">Straﬂe</label>
-					            <input id="street" type="text" placeholder="Straﬂe">
+					            <input id="street" name="street" type="text" placeholder="Straﬂe">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="houseno">Hausnummer</label>
-					            <input id="houseno" type="text" placeholder="Hausnummer">
+					            <input id="houseno" name="houseno" type="text" placeholder="Hausnummer">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="postcode">Postleitzahl</label>
-					            <input id="postcode" type="text" placeholder="Postleitzahl">
+					            <input id="postcode" name="postcode" type="text" placeholder="Postleitzahl">
 					        </div>
 					        
 					        <div class="pure-control-group">
 					            <label for="email">E-Mail-Addresse</label>
-					            <input id="email" type="email" placeholder="E-Mail-Addresse">
+					            <input id="email" name="email" type="email" placeholder="E-Mail-Addresse">
 					        </div>
 					
 					        <div class="pure-control-group">
 					            <label for="password">Passwort</label>
-					            <input id="password" type="password" placeholder="Passwort">
+					            <input id="password" name="password" type="password" placeholder="Passwort">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="passwordRepeat">Passwort wiederholen</label>
