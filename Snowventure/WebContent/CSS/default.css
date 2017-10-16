@@ -46,3 +46,27 @@ footer {
     margin-left: 20%;
     margin-right: 20%;
 }
+
+#mydata-form {
+	width: 50%;
+	margin-left: 20%;
+	margin-right: 10%;
+	margin-top: 0%;
+	float: left;	
+}
+
+#mydata-form h1 {
+	padding-top: 0%;
+	text-align: center;
+}
+
+.pure-menu {
+width: 10%;
+text-align: left;
+float: left;
+margin-top:1%;
+}
+
+.custom-restricted {
+display: inline-box;
+

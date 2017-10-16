@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <title>Mein Konto</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,32 +12,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="CSS/default.css">
-<script src="JS/header.js"></script>
-<style type="text/css">
-
-.pure-menu {
-width: 10%;
-text-align: left;
-float: left;
-margin-top:1%;
-}
-
-.custom-restricted {
-display: inline-box;
-}
-
-#mydata-form {
-	width: 50%;
-	margin-left: 20%;
-	margin-right: 10%;
-	margin-top: 0%;
-	float: left;	
-}
-
-#mydata-form h1 {
-	padding-top: 0%;
-	text-align: center;
-}
+<script type="text/javascript" src="JS/header.js"></script>
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" type="image/png" href="Images/favicon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="Images/favicon.png" sizes="96x96">
 
 </style>
 
@@ -45,41 +24,20 @@ display: inline-box;
 
 	<%@include file = "header.jsp" %>
 		
-	<div class="pure-menu custom-restricted-width">
+	<div id="user-account-menu" class="pure-menu custom-restricted-width">
 	    <span class="pure-menu-heading">Mein Konto</span>
 	
 	    <ul class="pure-menu-list">
 	        <li class="pure-menu-item"><a href="useraccount.jsp?page=mydata" class="pure-menu-link">Meine Daten</a></li>
 			<li class="pure-menu-item"><a href="useraccount.jsp?page=usersearch" class="pure-menu-link" >Nutzerübersicht</a></li>
-	        <li class="pure-menu-item"><a href="useraccount.jsp?page=articles" class="pure-menu-link">Artikelübersicht</a></li>
+	        <li class="pure-menu-item"><a href="useraccount.jsp?page=articlesearch" class="pure-menu-link">Artikelübersicht</a></li>
 	        <li class="pure-menu-item"><a href="useraccount.jsp?page=orders" class="pure-menu-link">Bestellungen</a></li>
 	        <li class="pure-menu-item"><p><i>Eingeloggt als: TestUser</i></p></li>
 	    </ul>
 	</div>
 	
 	<div id="content">
-	
-		<script type="text/javascript">
-			
-			$.urlParam = function(name){
-			    var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
-			    if (results==null){
-			       return null;
-			    }
-			    else{
-			       return results[1] || 0;
-			    }
-			}
-		
-			// example.com?param1=name&param2=&id=6
-			var file = $.urlParam('page')+'.jsp';
-		
-	    	if(file == 'mydata.jsp')
-	        	document.getElementById("content").InnerHTML = $('#content').load("mydata.jsp");
-	    	else if(file == 'usersearch.jsp')
-		    	document.getElementById("content").InnerHTML = $('#content').load("usersearch.jsp");
-		</script>
-	
+		<script type="text/javascript" src="JS/useraccount.js"></script>
 	</div>
 	
 </body>
