@@ -2,6 +2,10 @@ package classes;
 
 public class User {
 
+	public int ulid;
+	public int utid;
+	public int udid;
+	public Safetyquestion squestion;
 	public String username;
 	public String password;
 	public String name;
