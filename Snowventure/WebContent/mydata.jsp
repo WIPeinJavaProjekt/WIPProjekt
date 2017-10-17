@@ -50,10 +50,12 @@
             </div>
         </div>
 
-        <button type="submit" class="pure-button pure-button-primary">Änderung speichern</button>
+        <button type="submit" name="update-data" class="pure-button pure-button-primary">Änderung speichern</button>
     </fieldset>
-    
-    <fieldset>
+</form>
+
+<form class="pure-form pure-form-stacked" id="security-form" action="users" method="post">
+<fieldset>
     
     	<legend>
     		<h1>Passwort zurücksetzen</h1>
@@ -76,9 +78,8 @@
 	            <input id="new-passwordRepeat" name="new-passwordRepeat" type="password">
 	        </div>
 	        
-	        <button type="submit" class="pure-button pure-button-primary">Änderung speichern</button>
+	        <button type="submit" name="update-password" class="pure-button pure-button-primary">Änderung speichern</button>
     	</div>
     </fieldset>
-    
-    
 </form>
+    

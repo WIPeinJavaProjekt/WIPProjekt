@@ -60,7 +60,15 @@ footer {
 	text-align: center;
 }
 
-.pure-menu {
+#security-form {
+	width: 50%;
+	margin-left: 30%;
+	margin-right: 10%;
+	margin-top: 0%;
+	float: left;	
+}
+
+#user-account-menu {
 width: 10%;
 text-align: left;
 float: left;
@@ -69,4 +77,4 @@ margin-top:1%;
 
 .custom-restricted {
 display: inline-box;
-
+}
