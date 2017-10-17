@@ -15,7 +15,7 @@ import classes.*;
 /**
  * Servlet implementation class UsersServlet
  */
-@WebServlet(description = "Servlet to access all user objects.", urlPatterns = { "/users" })
+@WebServlet("/users")
 public class UsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,36 +32,30 @@ public class UsersServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		List<User> lUser = Users.get(request.getParameter("username"));
-		request.setAttribute("userlist", lUser);
+		//List<User> lUser = Users.get(request.getParameter("username"));
+		//request.setAttribute("userlist", lUser);
 	
 		ServletContext sc = this.getServletContext();
 		RequestDispatcher rd = sc.getRequestDispatcher("/useraccount.jsp?page=mydata");
 		rd.forward(request, response);
-		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Adress adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
 				request.getParameter("street"), request.getParameter("postcode"));
 		
-		String state = request.getParameter("state");
+		String state = request.getParameter("state").toString();
 		
 		User user = new User("test", request.getParameter("password"), request.getParameter("first-name"),
-				request.getParameter("last-name"), adress, request.getParameter("email"),	state=="Mitarbeiter"?
-																							state=="Kunde"?
-																							2:1:0);
-		
+				request.getParameter("last-name"), adress, request.getParameter("email"),	state.equals("employee")? 2 :
+																							state.equals("customer")? 1 :
+																							0);
+				
 		System.out.println("Daten erfolgreich geändert!");
-		System.out.println(user.username + " testdata: " + request.getParameter("state") + "  " + user.usertype);
+		System.out.println(request.getParameter("first-name")+"  " +request.getParameter("last-name") + "  " + state + "  " + user.usertype);
 		
-		ServletContext sc = this.getServletContext();
-		RequestDispatcher rd = sc.getRequestDispatcher("/useraccount.jsp?page=mydata");
-		rd.forward(request, response);
+		doGet(request, response);
 	}
 
 }
