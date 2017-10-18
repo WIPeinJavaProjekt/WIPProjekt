@@ -10,7 +10,7 @@ public class User2Database {
 	
 	private PreparedStatement pquery = null;
 	
-	public int AddUser(User user) {
+	public static int AddUser(User user) {
 		String query;
 		int udid;
 	    query = "INSERT INTO USERDATA(Name,Surname,Email,Postcode,Street, StreetNo, CITY, Phone) VALUES('%s','%s','%s','%s','%s','%s','%s','%s');";
@@ -40,6 +40,43 @@ public class User2Database {
 			return DatabaseConnector.createConnection().InsertQuery(query);
 		}
 		return -1;
+	}
+	
+	public static ArrayList<User> GetUsers(String pattern) throws SQLException
+	{
+		ArrayList<User> users = new ArrayList<User>();
+		String query;
+		
+		query = "SELECT a.udid, a.name,"+
+				"a.surname, a.email,"+
+				"a.postcode, a.street,"+
+				"a.streetno, a.city, a.phone,"+
+				"b.login, b.password, b.safetyanswer,"+
+				"s.sqid, s.SafetyQuestion"+
+				"FROM USERDATA a "+
+				"left join USERLOGIN b ON a.udid = b.udid"+
+				"left join SAFETYQUESTION s ON s.sqid = b.sqid"+
+				"WHERE b.login like '%"+pattern+"%'"+
+				"ORDER BY b.login";
+		
+		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
+		
+		while(result.next())
+		{
+			Safetyquestion q = new Safetyquestion(result.getInt("sqid"),result.getString("safetyquestion"),result.getString("safetyanswer"));
+			Adress a = new Adress("","","","");
+			User u = new User(q, 
+					result.getString("login"),
+					result.getString("password"),
+					result.getString("name"),
+					result.getString("surname"),
+					
+					);
+			users.add(u);
+			
+		}
+		
+		return users;
 	}
 	
 	
