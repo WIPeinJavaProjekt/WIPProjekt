@@ -30,6 +30,7 @@ public class RegisterServlet extends HttpServlet {
     
     private Adress adress = new Adress();
     private User user = new User();
+    private Safetyquestion sfQuestion = new Safetyquestion();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -41,8 +42,9 @@ public class RegisterServlet extends HttpServlet {
 //		}
 		
 		this.user.adress = this.adress;
-		
-		this.user = Users.get("").get(0);
+		this.user.squestion = this.sfQuestion;
+			
+//		this.user = Users.get("").get(0);
 		
 		if(this.user!=null && this.adress!=null) {
 			request.setAttribute("location", this.user.adress.location);
@@ -54,6 +56,9 @@ public class RegisterServlet extends HttpServlet {
 			request.setAttribute("name", this.user.name);
 			request.setAttribute("surname", this.user.surname);
 			request.setAttribute("email", this.user.email);
+			
+			request.setAttribute("safetyQuestion", this.user.squestion.getAnswer());
+			request.setAttribute("safetyAnswer", this.user.squestion.getQuestion());
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
@@ -89,7 +94,8 @@ public class RegisterServlet extends HttpServlet {
 		
 		this.adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
 				request.getParameter("postcode"), request.getParameter("street"));
-		this.user = new User(request.getParameter("username"), request.getParameter("password"), request.getParameter("name"),
+		this.sfQuestion = new Safetyquestion(1, request.getParameter("safetyQuestion"), request.getParameter("safetyAnswer"));
+		this.user = new User(this.sfQuestion, request.getParameter("username"), request.getParameter("password"), request.getParameter("name"),
 				request.getParameter("surname"), this.adress, request.getParameter("email"), 0);
 		
 		if(password.equals(passwordRepeat)) {
@@ -101,10 +107,6 @@ public class RegisterServlet extends HttpServlet {
 			System.out.println(this.user.adress.street);
 			System.out.println(this.user.adress.houseno);
 			System.out.println(this.user.adress.location);
-			
-			Safetyquestion sQuestion = new Safetyquestion(1, "Test", "123");
-			
-			user.squestion = sQuestion;
 			
 			int result = User2Database.AddUser(this.user);
 			System.out.println(result);

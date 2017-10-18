@@ -5,6 +5,10 @@ public class Safetyquestion {
 	private String question;
 	private String answer;
 	
+	public Safetyquestion () {
+		
+	}
+	
 	public Safetyquestion (int sqid, String question, String answer) {
 		this.sqid = sqid;
 		this.question = question;
