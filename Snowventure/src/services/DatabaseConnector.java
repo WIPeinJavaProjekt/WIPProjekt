@@ -30,8 +30,8 @@ public class DatabaseConnector {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			connect = DriverManager.getConnection("jdbc:mysql://"+dbHost+":3306/"+dbName
-            		+"?user="+dbUser+"&password="+dbPass);
+			connect = DriverManager.getConnection("jdbc:mysql://"+dbHost+":3306/"+dbName,dbUser,dbPass);
+			System.out.print("CONNECTED TO DATABASE!!");
 		} catch (ClassNotFoundException e) {
 			connect = null;
 			System.out.println(e.getMessage());
@@ -49,7 +49,8 @@ public class DatabaseConnector {
 	   
 	public int InsertQuery(String query) {
 		
-		if(this.connect != null)
+		if(this.connect != null) {
+			System.out.println("INSIDE");
 			try {
 				Statement statement = this.connect.createStatement();
 				statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
@@ -59,9 +60,9 @@ public class DatabaseConnector {
 					return keyset.getInt(1);
 			}
 			catch (SQLException e){
-				System.out.println(e);
 			}
-		
+		}
+		System.out.println("OUTSIDE");
 		return -1;
 	}
 	
