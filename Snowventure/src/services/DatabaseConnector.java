@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseConnector {
-	private static Connection con = null;
 	private static String dbHost = "meiserv.de"; // Hostname
 	private static String dbPort = "3306";      // Port -- Standard: 3306
 	private static String dbName = "WIPPROJEKT";   // Datenbankname
@@ -20,6 +19,9 @@ public class DatabaseConnector {
 	
     private DatabaseConnector()
     {
+    	
+    	
+    	
 		try {
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -34,9 +36,13 @@ public class DatabaseConnector {
 			System.out.print("CONNECTED TO DATABASE!!");
 		} catch (ClassNotFoundException e) {
 			connect = null;
+			System.out.println("ClassNotFoundException hallo");
 			System.out.println(e.getMessage());
+			e.printStackTrace();
+			System.out.println("ClassNotFoundException hallo");
 		} catch (SQLException e) {
 			connect = null;
+			System.out.println("SQLException");
 			System.out.println(e.getMessage());
 		}
     }
