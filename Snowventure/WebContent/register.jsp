@@ -26,58 +26,60 @@
 					    <fieldset>
 					    	<div class="pure-control-group">
 					            <label for="username">Benutzername</label>
-					            <input id="username" name="username" type="text" placeholder="Benutzername">
+					            <input id="username" name="username" value="${username}" type="text" required placeholder="Benutzername">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="name">Vorname</label>
-					            <input id="name" name="name" type="text" placeholder="Vorname">
+					            <input id="name" name="name" value="${name}" type="text" required placeholder="Vorname">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="surname">Nachname</label>
-					            <input id="surname" name="surname" type="text" placeholder="Nachname">
+					            <input id="surname" name="surname" value="${surname}" type="text" required placeholder="Nachname">
 					        </div>
 					        
 					        <div class="pure-control-group">
 					            <label for="location">Wohnort</label>
-					            <input id="location" name="location" type="text" placeholder="Wohnort">
+					            <input id="location" name="location" value="${location}" type="text" required placeholder="Wohnort">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="street">Straße</label>
-					            <input id="street" name="street" type="text" placeholder="Straße">
+					            <input id="street" name="street" value="${street}" type="text" required placeholder="Straße">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="houseno">Hausnummer</label>
-					            <input id="houseno" name="houseno" type="text" placeholder="Hausnummer">
+					            <input id="houseno" name="houseno" value="${houseno}" type="text" required placeholder="Hausnummer">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="postcode">Postleitzahl</label>
-					            <input id="postcode" name="postcode" type="text" placeholder="Postleitzahl">
+					            <input id="postcode" name="postcode" value="${postcode}" type="text" required placeholder="Postleitzahl">
 					        </div>
 					        
 					        <div class="pure-control-group">
 					            <label for="email">E-Mail-Addresse</label>
-					            <input id="email" name="email" type="email" placeholder="E-Mail-Addresse">
+					            <input id="email" name="email" value="${email}" type="email" required placeholder="E-Mail-Addresse">
 					        </div>
 					
 					        <div class="pure-control-group">
 					            <label for="password">Passwort</label>
-					            <input id="password" name="password" type="password" placeholder="Passwort">
+					            <input id="password" name="password" type="password" required placeholder="Passwort">
 					        </div>
 					        <div class="pure-control-group">
 					            <label for="passwordRepeat">Passwort wiederholen</label>
-					            <input id="passwordRepeat" type="password" placeholder="Passwort wiederholen">
+					            <input id="passwordRepeat" name="passwordRepeat" type="password" required placeholder="Passwort wiederholen">
 					        </div>			        
 					
-					        <div class="pure-control-group">
-					            <label for="cb" class="pure-checkbox">
-					                <input id="cb" type="checkbox"> I've read the terms and conditions
-					            </label>
-							</div>
 							<div class="pure-control-group">
 					            <button type="submit" name="submitRegister" class="pure-button pure-button-primary">Abschicken</button>
-					            <button type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>
 					        </div>
-					    </fieldset>				
+					    </fieldset>
+					</form>
+					<form class="pure-form pure-form-aligned" action="register" method="post">
+						<div class="pure-control-group">
+							<button name="back" class="pure-button pure-button-primary">Zurück</button>
+						</div>
+					</form>
+					<form class="pure-form pure-form-aligned" action="register" method="get">
+						<p>${error}</p>
 					</form>
 				</div>
 				

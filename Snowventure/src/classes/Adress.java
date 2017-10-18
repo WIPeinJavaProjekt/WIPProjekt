@@ -7,6 +7,10 @@ public class Adress {
 	public String postcode;
 	public String street;
 	
+	public Adress() {
+		
+	}
+	
 	public Adress(String location, String houseno, String postcode, String street) {
 		this.location = location;
 		this.houseno = houseno;
