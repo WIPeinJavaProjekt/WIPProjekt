@@ -19,26 +19,24 @@
 				<div class="pure-u-3-5" align="center">
 					<h1>Einloggen</h1>
 	
-					<form class="pure-form pure-form-aligned" action ="login" method="post">
-					    <fieldset>
+					<form class="pure-form" action ="login" method="post">
+				       	<fieldset class="pure-group">
 					        <div class="pure-control-group">
-					            <label for="userId">Benutzername</label>
-					            <input name="userId" id="userId" type="text" placeholder="Benutzername">
-					            <!-- <span class="pure-form-message-inline">This is a required field.</span> -->
-					        </div>
-					
+					            <input name="userId" id="userId" type="text" placeholder="Benutzername" required>
+					        </div>					
 					        <div class="pure-control-group">
-					            <label for="name">Passwort</label>
-					            <input name="password" id="password" type="text" placeholder="Passwort">
-					            <!-- <span class="pure-form-message-inline">This is a required field.</span> -->
+					            <input name="password" id="password" type="text" placeholder="Passwort" required>
 					        </div>
-					
+				        </fieldset>
+						<fieldset class="pure-group">
 					        <div class="pure-controls">
 					            <button type="submit" name="login" class="pure-button pure-button-primary">Einloggen</button>
-					            <button type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>
-					            <button type="submit" name="register" class="pure-button pure-button-primary">Registrieren</button>
 					        </div>
-					    </fieldset>
+				        </fieldset>
+					</form>
+					<form class="pure-form" action ="login" method="post">
+				            <button type="submit" name="register" class="pure-button pure-button-primary">Registrieren</button>
+				            <button type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>
 					</form>
 				</div>
 				
