@@ -3,12 +3,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.List;
 import classes.*;
 
 public class User2Database {
 	
-	private PreparedStatement pquery = null;
 	
 	public static int AddUser(User user) {
 		String query;
@@ -47,7 +45,7 @@ public class User2Database {
 		ArrayList<User> users = new ArrayList<User>();
 		String query;
 		
-		query = "SELECT a.udid, a.name,"+
+		query = "SELECT a.utid, a.udid, a.name,"+
 				"a.surname, a.email,"+
 				"a.postcode, a.street,"+
 				"a.streetno, a.city, a.phone,"+
@@ -64,13 +62,15 @@ public class User2Database {
 		while(result.next())
 		{
 			Safetyquestion q = new Safetyquestion(result.getInt("sqid"),result.getString("safetyquestion"),result.getString("safetyanswer"));
-			Adress a = new Adress("","","","");
+			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("postcode"),result.getString("street"));
 			User u = new User(q, 
 					result.getString("login"),
 					result.getString("password"),
 					result.getString("name"),
 					result.getString("surname"),
-					
+					a,
+					result.getString("email"),
+					result.getInt("utid")
 					);
 			users.add(u);
 			
