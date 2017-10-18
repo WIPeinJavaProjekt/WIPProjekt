@@ -30,7 +30,7 @@ public class DatabaseConnector {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			connect = DriverManager.getConnection("jdbc:mysql://"+dbHost+"/"+dbName
+			connect = DriverManager.getConnection("jdbc:mysql://"+dbHost+":3306/"+dbName
             		+"?user="+dbUser+"&password="+dbPass);
 		} catch (ClassNotFoundException e) {
 			connect = null;
@@ -59,7 +59,7 @@ public class DatabaseConnector {
 					return keyset.getInt(1);
 			}
 			catch (SQLException e){
-				
+				System.out.println(e);
 			}
 		
 		return -1;
