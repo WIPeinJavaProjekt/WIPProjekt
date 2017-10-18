@@ -31,13 +31,15 @@ public class LoginServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		
 		if(request.getParameter("login") != null) {
 
 			login(request);
 			
 		} else if(request.getParameter("register") != null) {
-			
-			response.sendRedirect("register");
+
+			response.sendRedirect(request.getContextPath() + "/register");
 			return;
 			
 		} else if(request.getParameter("back") != null) {
@@ -55,6 +57,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		if(LoginService.authenticate(userId, password)) {
+			
 			HttpSession session = request.getSession();
 			User user = new User();
 			try {
