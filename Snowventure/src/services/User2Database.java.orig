@@ -34,7 +34,10 @@ public class User2Database {
 					user.usertype,
 					udid
 					);
+<<<<<<< HEAD
 			System.out.println("Userlogin: "+query);
+=======
+>>>>>>> 4c355aef1ef5515a64e193813d5b683083c77d93
 			return DatabaseConnector.createConnection().InsertQuery(query);
 		}
 		return -1;
@@ -59,6 +62,8 @@ public class User2Database {
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
+		System.out.println(result);
+		
 		while(result.next())
 		{
 			Safetyquestion q = new Safetyquestion(result.getInt("sqid"),result.getString("safetyquestion"),result.getString("safetyanswer"));
@@ -78,7 +83,4 @@ public class User2Database {
 		
 		return users;
 	}
-	
-	
-	
 }

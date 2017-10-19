@@ -20,7 +20,7 @@
 </head>
 <body>
 
-	<%@include file = "header.jsp" %>
+	<%@include file = "../Basic/header.jsp" %>
 		
 	<div id="user-account-menu" class="pure-menu custom-restricted-width">
 	    <span class="pure-menu-heading">Mein Konto</span>

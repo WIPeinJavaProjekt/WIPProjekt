@@ -19,7 +19,7 @@ public class AboutServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher rd = request.getRequestDispatcher("/about.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/JSP/Basic/about.jsp");
 		rd.forward(request, response);
 	}
 

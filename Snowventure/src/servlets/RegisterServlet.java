@@ -34,13 +34,6 @@ public class RegisterServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		try {
-//			System.out.println(User2Database.GetUsers("TestUser"));
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
 		this.user.adress = this.adress;
 		this.user.squestion = this.sfQuestion;
 			
@@ -61,7 +54,7 @@ public class RegisterServlet extends HttpServlet {
 			request.setAttribute("safetyAnswer", this.user.squestion.getQuestion());
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/register.jsp");
 		rd.forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
