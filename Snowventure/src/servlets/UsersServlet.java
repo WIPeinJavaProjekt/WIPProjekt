@@ -57,7 +57,7 @@ public class UsersServlet extends HttpServlet {
 		}
 		
 		ServletContext sc = this.getServletContext();
-		RequestDispatcher rd = sc.getRequestDispatcher("/useraccount.jsp?page=mydata");
+		RequestDispatcher rd = sc.getRequestDispatcher("/JSP/User/useraccount.jsp?page=mydata");
 		rd.forward(request, response);
 	}
 
@@ -76,7 +76,7 @@ public class UsersServlet extends HttpServlet {
 																								state.equals("customer")? 2 :
 																								1);
 					
-			System.out.println("Daten erfolgreich geändert!");
+			System.out.println("Daten erfolgreich geï¿½ndert!");
 			System.out.println(request.getParameter("first-name")+"  " +request.getParameter("last-name") + "  " + state + "  " + user.usertype);
 		}
 		else if(request.getParameter("update-password") != null)
@@ -90,13 +90,13 @@ public class UsersServlet extends HttpServlet {
 			
 			if(old_password.toString().equals(sesUser.password.toString()) && new_password != null & old_password.toString() != new_password.toString() && new_password.toString().equals(new_repeated_password.toString()))
 			{	
-				System.out.println("Passwort erfolgreich geändert! (alt:" + old_password.toString() + "  " + "neu:" + new_password.toString() + ")");
+				System.out.println("Passwort erfolgreich geï¿½ndert! (alt:" + old_password.toString() + "  " + "neu:" + new_password.toString() + ")");
 			
 				sesUser.password = new_password.toString();
 				ses.setAttribute("user", sesUser);
 			}
 			else {
-				System.out.println("Ihr Passwort konnte nicht geändert werden. Bitte überprüfen Sie Ihre Eingaben.");
+				System.out.println("Ihr Passwort konnte nicht geï¿½ndert werden. Bitte ï¿½berprï¿½fen Sie Ihre Eingaben.");
 			}	
 		}
 		doGet(request, response);

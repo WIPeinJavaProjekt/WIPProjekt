@@ -34,7 +34,7 @@
 	</div>
 	
 	<div id="content">
-		<script type="text/javascript" src="/Snowventure/JS/useraccount.js"></script>
+		<script type="text/javascript" src="./JS/useraccount.js"></script>
 	</div>
 	
 </body>

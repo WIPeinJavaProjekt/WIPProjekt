@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" href="Images/favicon.png" sizes="96x96">
 </head>
 <body>
-<script src="JS/jquery-3.2.1.min.js"></script>
+<script src="./JS/jquery-3.2.1.min.js"></script>
 	<%@include file = "header.jsp" %>
 	<div class="pure-g">
 		<div class="pure-u-1-5"></div>
