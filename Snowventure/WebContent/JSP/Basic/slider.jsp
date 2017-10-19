@@ -9,25 +9,25 @@
     <ul class="sliderElements">
         <li>
             <figure>
-                <img src="Images/mountain.jpg" alt="" height="400" width="1200">
+                <img src="./Images/mountain.jpg" alt="" height="400" width="1200">
                 <figcaption>Hier könnte deine Beschreibung stehen.</figcaption>
             </figure>
         </li>
         <li>
             <figure>
-                <img src="Images/mountain.jpg" alt="" height="400" width="1200">
+                <img src="./Images/mountain.jpg" alt="" height="400" width="1200">
                 <figcaption>Eine tolle Beschreibung</figcaption>
             </figure>
         </li>
         <li>
             <figure>
-                <img src="Images/skityp.jpg" alt="" height="400" width="1200">
+                <img src="./Images/skityp.jpg" alt="" height="400" width="1200">
                 <figcaption>Die Beschreibung zum dritten Bild</figcaption>
             </figure>
         </li>
         <li>
             <figure>
-                <img src="Images/skityp.jpg" alt="" height="400" width="1200">
+                <img src="./Images/skityp.jpg" alt="" height="400" width="1200">
                 <figcaption>Und noch ein toller Untertitel</figcaption>
             </figure>
         </li>

@@ -1,0 +1,94 @@
+body {
+    background-color: rgba(247, 247, 247, 0.55);
+}
+
+.searchbox form fieldset legend {
+	text-align: center;
+}
+
+.boxedinput {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+}
+
+header {
+    /*position: fixed;
+    top: 0;
+    left: 0;*/
+    background-color: rgba(0, 33, 64, 0.95);
+    padding: 3px;
+}
+
+footer {
+    height: 30px;
+    width: 100%;
+    background: rgba(247, 247, 247, 0.55);
+}
+
+#brandbox {
+    width: 100%;
+    align-items: center;
+    background-image: url("../Images/background.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+ .searchbox {
+ } 
+
+#brandbox div {
+    padding-top: 1%;
+    /*background-color: rgba(255, 255, 255, 0.65);*/
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+#mydata-form {
+	width: 50%;
+	margin-left: 20%;
+	margin-right: 10%;
+	margin-top: 0%;
+	float: left;	
+}
+
+#mydata-form h1 {
+	padding-top: 0%;
+	text-align: center;
+}
+
+#security-form {
+	width: 50%;
+	margin-left: 30%;
+	margin-right: 10%;
+	margin-top: 0%;
+	float: left;	
+}
+
+#user-account-menu {
+width: 10%;
+text-align: left;
+float: left;
+margin-top:1%;
+}
+
+.custom-restricted {
+display: inline-box;
+}
+
+.error{
+	color: #D8000C;
+	background-color: #FFBABA;
+	/* background-image: url('error.png'); */
+}
+
+.info, .success, .warning, .error, .validation {
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+}
