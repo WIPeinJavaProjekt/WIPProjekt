@@ -36,7 +36,7 @@ public class User2Database {
 					user.usertype,
 					udid
 					);
-			System.out.println("Added to Database");
+			System.out.println("Userlogin: "+query);
 			return DatabaseConnector.createConnection().InsertQuery(query);
 		}
 		System.out.println("Error adding to database");
