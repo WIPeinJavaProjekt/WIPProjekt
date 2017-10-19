@@ -6,6 +6,6 @@
 	    <div class="pure-u-1-3"><h3><a href="impressum">Impressum</a></h3></div>
 	</div>
 	
-	<img src="./Images/favicon.png" sizes="128x128">
+	<img src="./Images/favicon.png" height="128px" width= "128px" type ="image/png">
 	
 </footer>

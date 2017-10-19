@@ -21,9 +21,9 @@ header {
 }
 
 footer {
-    height: 30px;
+    height: 15%;
     width: 100%;
-    background: rgba(247, 247, 247, 0.55);
+    background: rgba(30, 30, 30, 0.55);
 }
 
 #brandbox {
