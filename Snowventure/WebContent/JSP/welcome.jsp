@@ -16,11 +16,12 @@
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="32x32">
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="96x96">
+			<script src="./JS/jquery-3.2.1.min.js"></script>
+    <script src="./JS/header.js"></script>
 	</head>
 	
 	<body>	
-	<script src="./JS/jquery-3.2.1.min.js"></script>
-    <script src="./JS/header.js"></script>
+
 		<%@include file = "./Basic/header.jsp" %>
 		
 		
