@@ -117,4 +117,42 @@ public class User2Database {
 		return user;
 	}
 	
+	public static void UpdateUser(User user) {
+		String query = "UPDATE USERDATA SET name='%s', surname ='%s', email ='%s', postcode='%s',street='%s',city='%s', phone='%s',streetno='%s'"
+				+ " WHERE udid in (SELECT udid from userlogin where ulid = '%d')";
+		query = String.format(query,
+				user.name,
+				user.surname,
+				user.email,
+				user.adress.postcode,
+				user.adress.street,
+				user.adress.location,
+				"1337",
+				user.adress.houseno,
+				user.ulid
+				);
+		DatabaseConnector.createConnection().UpdateQuery(query);
+		
+		query = "UPDATE USERLOGIN SET login ='%s', password='%s', safetyanswer='%s', sqid= '%d' where ulid ='%s'";
+		query = String.format(query, 
+				user.username,
+				user.password,
+				user.squestion.getAnswer(),
+				user.squestion.sqid,
+				user.ulid
+				);
+		DatabaseConnector.createConnection().UpdateQuery(query);
+	}
+	
+	
+	public static void UpdateUserRights(User user, int rightnum)
+	{
+		String query = "UPDATE USERLOGIN SET utid= '%d' where ulid ='%d'";
+		query = String.format(query, 
+				rightnum,
+				user.ulid
+				);
+		DatabaseConnector.createConnection().UpdateQuery(query);
+	}
+	
 }
