@@ -24,8 +24,6 @@ public class User2Database {
 				"1337"
 				);
 		udid = DatabaseConnector.createConnection().InsertQuery(query);
-		System.out.println("query: " + query);
-		System.out.println("udid: " + udid);
 		if(udid != -1) {
 			query = "INSERT INTO USERLOGIN(Login, Password, SafetyAnswer,sqid,utid,udid) VALUES('%s','%s','%s','%d','%d','%d');";
 			query = String.format(query,
@@ -36,10 +34,8 @@ public class User2Database {
 					user.usertype,
 					udid
 					);
-			System.out.println("Added to Database");
 			return DatabaseConnector.createConnection().InsertQuery(query);
 		}
-		System.out.println("Error adding to database");
 		return -1;
 	}
 	
@@ -62,6 +58,8 @@ public class User2Database {
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
+		System.out.println(result);
+		
 		while(result.next())
 		{
 			Safetyquestion q = new Safetyquestion(result.getInt("sqid"),result.getString("safetyquestion"),result.getString("safetyanswer"));
@@ -81,7 +79,4 @@ public class User2Database {
 		
 		return users;
 	}
-	
-	
-	
 }
