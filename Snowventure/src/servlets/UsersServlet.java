@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,7 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import classes.*;
+import services.*;
 
 /**
  * Servlet implementation class UsersServlet
@@ -31,10 +35,27 @@ public class UsersServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//List<User> lUser = Users.get(request.getParameter("username"));
-		//request.setAttribute("userlist", lUser);
 	
+		if(request.getParameter("search-user") != null)
+		{
+			try 
+			{
+				List<User> userlist = User2Database.GetUsers(request.getParameter("user-info"));
+				if(userlist != null)
+				{
+					System.out.println(userlist.size());			
+					request.setAttribute("userlist", userlist);
+				}
+			} 
+			catch (SQLException e) 
+			{
+				System.out.println(-1);
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		ServletContext sc = this.getServletContext();
 		RequestDispatcher rd = sc.getRequestDispatcher("/useraccount.jsp?page=mydata");
 		rd.forward(request, response);
@@ -64,9 +85,15 @@ public class UsersServlet extends HttpServlet {
 			String new_password = request.getParameter("new-password");
 			String new_repeated_password = request.getParameter("new-passwordRepeat");
 			
-			if(new_password != null & old_password != new_password && new_password.equals(new_repeated_password))
+			HttpSession ses = request.getSession();
+			User sesUser = (User)(ses.getAttribute("user"));
+			
+			if(old_password.toString().equals(sesUser.password.toString()) && new_password != null & old_password.toString() != new_password.toString() && new_password.toString().equals(new_repeated_password.toString()))
 			{	
-				System.out.println("Passwort erfolgreich geändert! (alt:" + old_password + "  " + "neu:" + new_password + ")");
+				System.out.println("Passwort erfolgreich geändert! (alt:" + old_password.toString() + "  " + "neu:" + new_password.toString() + ")");
+			
+				sesUser.password = new_password.toString();
+				ses.setAttribute("user", sesUser);
 			}
 			else {
 				System.out.println("Ihr Passwort konnte nicht geändert werden. Bitte überprüfen Sie Ihre Eingaben.");

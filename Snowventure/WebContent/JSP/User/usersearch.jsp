@@ -2,7 +2,7 @@
 	<div class="pure-u-1-5"></div>
 	<div id="wrapper" class="pure-u-3-5">
 		<div id="search-container" class="searchbox">
-			<form class="pure-form" action="" method="GET">
+			<form class="pure-form" action="users" method="GET">
 			    <fieldset>
 			        <legend>
 			        <h1>Nutzersuche</h1>
@@ -17,7 +17,7 @@
 							</select>
 						</div>
 				        <div class="pure-u-3-5">
-				        	<input type="text" class="boxedinput" placeholder="Nutzername eingeben">
+				        	<input type="text" name="user-info" class="boxedinput" placeholder="Nutzername eingeben">
 						</div>
 						<div class="pure-u-1-5">
 			        		<button type="submit" name="search-user" class="pure-button pure-button-primary boxedinput">Suchen</button>
