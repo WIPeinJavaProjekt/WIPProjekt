@@ -26,7 +26,7 @@
 		
 		
 			
-		<div class="pure-g" id ="searchbox">
+		<div class="pure-g contentwrapp" id ="searchbox">
 			<div class="pure-u-1-5"></div>
 			<div id="wrapper" class="pure-u-3-5">
 				<div id="search-container" class="searchbox">

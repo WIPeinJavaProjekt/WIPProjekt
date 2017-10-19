@@ -5,9 +5,8 @@
     padding: 0;
 }
 
-.sliderElements li figure
-{
-	background-color: rgb(7, 46, 74);
+.sliderElements li figure {
+    background-color: rgb(7, 46, 74);
 }
 
 .sliderElements:after {
@@ -22,7 +21,7 @@
 
 .cssSlider {
     overflow-x: hidden;
-    margin-left:
+    margin-top: 30px;
 }
 
 .sliderElements {
@@ -112,8 +111,8 @@
     border-radius: 50%;
     display: block;
     cursor: pointer;
-    background: rgba(20, 24, 60, 0.55);
-    color: rgba(20, 24, 60, 1);
+    background: rgba(55, 55, 55, 1);
+    color: rgba(55, 55, 55, 1);
 }
 
 
