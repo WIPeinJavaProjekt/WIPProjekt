@@ -40,8 +40,10 @@
 			        </fieldset>
 				</form>
 				<form class="pure-form" action ="login" method="post">
+					<fieldset>
 			            <button type="submit" name="register" class="pure-button pure-button-primary">Registrieren</button>
 			            <button type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>
+		            </fieldset>
 				</form>
 			</div>
 			
