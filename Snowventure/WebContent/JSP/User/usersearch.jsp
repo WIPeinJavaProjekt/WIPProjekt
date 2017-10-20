@@ -1,3 +1,7 @@
+<%@page import="classes.*"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>   
+
 <div class="pure-g" id ="searchbox">
 	<div class="pure-u-1-5"></div>
 	<div id="wrapper" class="pure-u-3-5">
@@ -38,7 +42,36 @@
 </div>
 
 <div class="search-results">
-
+	<%			
+				List<User> userlist = (List<User>)(request.getSession().getAttribute("userlist"));
+				
+				if(userlist != null && userlist.size() > 0)	{	
+	%>
+	
+	<table class="pure-table pure-table-horizontal">
+	    <thead>
+	        <tr>
+	            <th>ID</th>
+	            <th>Nutzername</th>
+	            <th>Nutzertyp</th>
+	            <th>Option</th>
+	        </tr>
+	    </thead>
+	 	<tbody>
+			<%		
+				for(User user : userlist)
+				{
+			%>
+			<tr class="pure-table-odd">
+				<td><%=user.udid%></td>
+				<td><%=user.username%></td>
+				<td><%=user.usertype == 1 ? "Admin" : user.usertype == 2 ? "Kunde" : "Mitarbeiter"%></td>
+				<td><button type="submit" name="access-editor" class="pure-button pure-button-primary boxedinput" style="width=20%">Bearbeiten</button></td>
+			</tr>
+		 	<%}%>
+	 	</tbody>
+	</table>
+	<%}%>
 </div>
 
 <div class="user-info">

@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -40,14 +41,24 @@ public class UsersServlet extends HttpServlet {
 		{
 			try 
 			{
-				List<User> userlist = User2Database.GetUsers(request.getParameter("user-info"));
+				List<User> userlist = new ArrayList<User>();//= User2Database.GetUsers(request.getParameter("user-info"));
 				if(userlist != null)
 				{
 					System.out.println(userlist.size());			
-					request.setAttribute("userlist", userlist);
 				}
+				User Tuser1 = new User(new Safetyquestion(),"test1" ,"test", "testname2", "testsurname", new classes.Adress("testlocation","test123","2356test","teststreet"), "12@io.com", 1);
+				User Tuser2 = new User(new Safetyquestion(),"test2" ,"test", "testname2", "testsurname", new classes.Adress("testlocation","test123","2356test","teststreet"), "12@io.com", 1);
+
+				userlist.add(Tuser1);
+				userlist.add(Tuser2);		
+				
+				System.out.println(userlist.size());			
+				request.getSession().setAttribute("userlist", userlist);
+
+				RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=usersearch");
+				rd.forward(request, response);
 			} 
-			catch (SQLException e) 
+			catch (Exception e) 
 			{
 				System.out.println(-1);
 				
@@ -55,10 +66,11 @@ public class UsersServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		ServletContext sc = this.getServletContext();
-		RequestDispatcher rd = sc.getRequestDispatcher("/JSP/User/useraccount.jsp?page=mydata");
-		rd.forward(request, response);
+		else {
+			ServletContext sc = this.getServletContext();
+			RequestDispatcher rd = sc.getRequestDispatcher("/JSP/User/useraccount.jsp?page=mydata");
+			rd.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -66,17 +78,16 @@ public class UsersServlet extends HttpServlet {
 		if(request.getParameter("update-data") != null)
 		{
 			Adress adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
-		
-				request.getParameter("street"), request.getParameter("postcode"));
+									   request.getParameter("street"), request.getParameter("postcode"));
 		
 			String state = request.getParameter("state").toString();
 			
 			User user = new User("test", request.getParameter("password"), request.getParameter("first-name"),
-					request.getParameter("last-name"), adress, request.getParameter("email"),	state.equals("employee")? 3 :
-																								state.equals("customer")? 2 :
-																								1);
-					
-			System.out.println("Daten erfolgreich ge�ndert!");
+								 request.getParameter("last-name"), adress, request.getParameter("email"),	state.equals("employee")? 3 :
+																								            state.equals("customer")? 2 :
+																							                1);
+			//User2Database.UpdateUser(user);			
+			
 			System.out.println(request.getParameter("first-name")+"  " +request.getParameter("last-name") + "  " + state + "  " + user.usertype);
 		}
 		else if(request.getParameter("update-password") != null)

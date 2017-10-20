@@ -18,6 +18,6 @@ if($.urlParam('page')!= null)
 {
 	var page = $.urlParam('page');
 	
-	var path = (page == 'articlesearch' ? '/Snowventure/JSP/Articles/articlesearch.jsp' : '/Snowventure/JSP/User/' + page + '.jsp');
+	var path = (page == 'articlesearch' ? './JSP/Articles/articlesearch.jsp' : './JSP/User/' + page + '.jsp');
 	document.getElementById("content").InnerHTML = $('#content').load(path);
 }
