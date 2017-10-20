@@ -41,7 +41,7 @@ public class UsersServlet extends HttpServlet {
 		{
 			try 
 			{
-				List<User> userlist = new ArrayList<User>();//= User2Database.GetUsers(request.getParameter("user-info"));
+				List<User> userlist = User2Database.GetUsers(request.getParameter("user-info"));
 				if(userlist != null)
 				{
 					System.out.println(userlist.size());			
