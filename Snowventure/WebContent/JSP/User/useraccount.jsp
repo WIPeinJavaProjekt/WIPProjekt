@@ -32,7 +32,7 @@ margin-bottom: 3%;
 </head>
 <body>
 	<%@include file = "../Basic/header.jsp" %>
-		
+	<div class="contentwrapp">	
 	<div id="user-account-menu" class="pure-menu custom-restricted-width">
 	    <span class="pure-menu-heading">Mein Konto</span>
 	
@@ -47,6 +47,7 @@ margin-bottom: 3%;
 	
 	<div id="content">
 		<script type="text/javascript" src="./JS/useraccount.js"></script>
+	</div>
 	</div>
 	<%@include file = "../Basic/footer.jsp"%>
 </body>
