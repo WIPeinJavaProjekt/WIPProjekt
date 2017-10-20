@@ -41,17 +41,12 @@ public class UsersServlet extends HttpServlet {
 		{
 			try 
 			{
-				List<User> userlist = new ArrayList<User>();//= User2Database.GetUsers(request.getParameter("user-info"));
+				List<User> userlist = User2Database.GetUsers(request.getParameter("user-info"));
 				if(userlist != null)
 				{
 					System.out.println(userlist.size());			
 				}
-				User Tuser1 = new User(new Safetyquestion(),"test1" ,"test", "testname2", "testsurname", new classes.Adress("testlocation","test123","2356test","teststreet"), "12@io.com", 1);
-				User Tuser2 = new User(new Safetyquestion(),"test2" ,"test", "testname2", "testsurname", new classes.Adress("testlocation","test123","2356test","teststreet"), "12@io.com", 1);
 
-				userlist.add(Tuser1);
-				userlist.add(Tuser2);		
-				
 				System.out.println(userlist.size());			
 				request.getSession().setAttribute("userlist", userlist);
 
