@@ -44,18 +44,18 @@ public class User2Database {
 		ArrayList<User> users = new ArrayList<User>();
 		String query;
 		
-		query = "SELECT a.utid, a.udid, a.name,"+
+		query = "SELECT b.utid, a.udid, a.name,"+
 				"a.surname, a.email,"+
 				"a.postcode, a.street,"+
 				"a.streetno, a.city, a.phone,"+
 				"b.login, b.password, b.safetyanswer,"+
 				"s.sqid, s.SafetyQuestion"+
-				"FROM USERDATA a "+
-				"left join USERLOGIN b ON a.udid = b.udid"+
-				"left join SAFETYQUESTION s ON s.sqid = b.sqid"+
-				"WHERE b.login like '%"+pattern+"%'"+
-				"ORDER BY b.login";
-		
+				" FROM USERDATA a "+
+				" left join USERLOGIN b ON a.udid = b.udid"+
+				" left join SAFETYQUESTION s ON s.sqid = b.sqid"+
+				" WHERE b.login like '%"+pattern+"%'"+
+				" ORDER BY b.login";
+		System.out.println(query);		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
@@ -94,6 +94,7 @@ public class User2Database {
 				"left join SAFETYQUESTION s ON s.sqid = b.sqid"+
 				"WHERE b.login='"+pattern+"'"+
 				"ORDER BY b.login";
+
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
