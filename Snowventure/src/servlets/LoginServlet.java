@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import classes.User;
 import services.LoginService;
-import services.User2Database;
+import services.UserService;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			User user = new User();
 			try {
-				user = User2Database.GetUsers(userId).get(0);
+				user = UserService.GetUsers(userId).get(0);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

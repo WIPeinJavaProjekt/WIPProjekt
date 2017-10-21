@@ -15,6 +15,10 @@ public class Safetyquestion {
 		this.answer = answer;
 	}
 	
+	public String getId() {
+		return Integer.toString(sqid);
+	}
+	
 	public String getQuestion() {
 		return question;
 	}

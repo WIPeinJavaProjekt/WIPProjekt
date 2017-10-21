@@ -14,11 +14,15 @@
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="32x32">
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="96x96">
+		
+		<script src="./JS/jquery-3.2.1.min.js"></script>
+    	<script src="./JS/header.js"></script>
+		
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	</head>
 	
 	<body>
-	<script src="./JS/jquery-3.2.1.min.js"></script>
-    <script src="./JS/header.js"></script>
+	
 		<%@include file = "../Basic/header.jsp" %> 
 	
 		<div class="pure-g">
@@ -71,7 +75,12 @@
 				    <fieldset class="pure-group">
 			        	<label>Sicherheitsfrage</label>			        
 				        <div class="pure-control-group">
-				            <input id="safetyQuestion" name="safetyQuestion" type="text" required placeholder="Sicherheitsfrage">
+				            <select id="safetyQuestion" name="safetyQuestion" required>
+				            	 <option value="">Bitte Sicherheitsfrage auswählen</option>
+							    <c:forEach items="${squestions}" var="squestion">
+							        <option value="${squestion.getId()}">${squestion.getQuestion()}</option>
+							    </c:forEach>
+							</select>
 				        </div>
 				        <div class="pure-control-group">
 				            <input id="safetyAnswer" name="safetyAnswer" type="text" required placeholder="Antwort">
@@ -89,9 +98,11 @@
 						<button name="back" class="pure-button pure-button-primary">Zurück</button>
 					</div>
 				</form>
-				<form class="pure-form pure-form-aligned" action="register" method="get">
-						<p class="error">${error}</p>
-				</form>
+				<c:if test="${not empty error}">
+					<form class="pure-form pure-form-aligned" action="register" method="get">
+							<p class="error">${error}</p>
+					</form>
+				</c:if>
 			</div>	
 			
 			<div class="pure-u-1-5"></div>

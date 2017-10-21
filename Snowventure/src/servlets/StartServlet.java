@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,7 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;	
+import javax.servlet.http.HttpSession;
+
+import classes.User;
+import services.UserService;	
 
 /**
  * Servlet implementation class TestServlet
@@ -23,6 +27,16 @@ public class StartServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println(request.getAttribute("User"));
+		
+		try {
+			User garrit = UserService.GetUser("Garrit");
+			System.out.println(garrit.email);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/welcome.jsp");
 		rd.forward(request, response);
@@ -36,7 +50,7 @@ public class StartServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 			
-		} else if(request.getParameter("start") != null) {	
+		} else if(request.getParameter("start") != null) {
 			response.sendRedirect("start");
 			return;
 			

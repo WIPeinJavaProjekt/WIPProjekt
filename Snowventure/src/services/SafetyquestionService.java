@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import classes.*;
 
-public class Safetyquestion2Database {
-	public ArrayList<Safetyquestion> GetSafetyquestion() throws SQLException
+public class SafetyquestionService {
+	public static ArrayList<Safetyquestion> GetSafetyquestion() throws SQLException
 	{
 		ArrayList<Safetyquestion> squestions = new ArrayList<Safetyquestion>();
 		String query;
-	    query = "SELECT sqid, safetyquestion from safetyquestion;";
+	    query = "SELECT sqid, safetyquestion from SAFETYQUESTION;";
 		
 	    ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 	    

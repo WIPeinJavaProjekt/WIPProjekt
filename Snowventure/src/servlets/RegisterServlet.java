@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,6 +37,13 @@ public class RegisterServlet extends HttpServlet {
 		
 		this.user.adress = this.adress;
 		this.user.squestion = this.sfQuestion;
+		
+		try {
+			ArrayList<Safetyquestion> squestions = SafetyquestionService.GetSafetyquestion();
+			request.setAttribute("squestions", squestions);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 			
 //		this.user = Users.get("").get(0);
 		
@@ -70,7 +78,12 @@ public class RegisterServlet extends HttpServlet {
 			return;
 		} else if(request.getParameter("submitRegister") != null) {
 			
-			registrate(request);
+			int retVal = registrate(request);
+			
+			if(retVal == 0) {
+				response.sendRedirect("start");
+				return;
+			}
 			
 		}
 		
@@ -78,18 +91,20 @@ public class RegisterServlet extends HttpServlet {
 		
 	}
 	
-	private void registrate (HttpServletRequest request) {
+	private int registrate (HttpServletRequest request) throws IOException {
 		
 		System.out.println("Registrate");
+		
+		System.out.println("SQ: " +  request.getParameter("safetyQuestion"));
 		
 		String password = request.getParameter("password");
 		String passwordRepeat = request.getParameter("passwordRepeat");
 		
 		this.adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
 				request.getParameter("postcode"), request.getParameter("street"));
-		this.sfQuestion = new Safetyquestion(1, request.getParameter("safetyQuestion"), request.getParameter("safetyAnswer"));
+		this.sfQuestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion")), "", request.getParameter("safetyAnswer"));
 		this.user = new User(this.sfQuestion, request.getParameter("username"), request.getParameter("password"), request.getParameter("name"),
-				request.getParameter("surname"), this.adress, request.getParameter("email"), 0);
+				request.getParameter("surname"), this.adress, request.getParameter("email"), 1);
 		
 		if(password.equals(passwordRepeat)) {
 			
@@ -101,13 +116,19 @@ public class RegisterServlet extends HttpServlet {
 			System.out.println(this.user.adress.houseno);
 			System.out.println(this.user.adress.location);
 			
-			int result = User2Database.AddUser(this.user);
+			int result = UserService.AddUser(this.user);
 			System.out.println(result);
 			System.out.println("REGISTRATION");
 			this.user = new User();
 			this.adress = new Adress();
+			
+			return 0;
+			
 		} else {
+			System.out.println("Die Passwörter stimmen nicht überein");
 			request.setAttribute("error", "Die Passwörter stimmen nicht überein");
+			
+			return -1;
 		}
 	}
 

@@ -16,15 +16,15 @@
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="32x32">
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="96x96">
-			<script src="./JS/jquery-3.2.1.min.js"></script>
-    <script src="./JS/header.js"></script>
+		
+		<script src="./JS/jquery-3.2.1.min.js"></script>
+   		<script src="./JS/header.js"></script>
+   		
+   		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	</head>
-	
 	<body>	
 
-		<%@include file = "./Basic/header.jsp" %>
-		
-		
+		<%@include file = "./Basic/header.jsp" %>		
 			
 		<div class="pure-g contentwrapp" id ="searchbox">
 			<div class="pure-u-1-5"></div>
