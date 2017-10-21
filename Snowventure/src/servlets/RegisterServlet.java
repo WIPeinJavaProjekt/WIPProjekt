@@ -107,7 +107,7 @@ public class RegisterServlet extends HttpServlet {
 				request.getParameter("surname"), this.adress, request.getParameter("email"), 1);
 		
 		if(password.equals(passwordRepeat)) {
-			
+				
 			System.out.println(this.user.name);
 			System.out.println(this.user.surname);
 			System.out.println(this.user.email);
