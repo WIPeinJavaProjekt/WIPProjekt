@@ -3,6 +3,8 @@
 <html>
 
 	<head>
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		
 		<title>Registrierung</title>
@@ -16,9 +18,7 @@
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="96x96">
 		
 		<script src="./JS/jquery-3.2.1.min.js"></script>
-    	<script src="./JS/header.js"></script>
-		
-		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    	<script src="./JS/header.js"></script>		
 	</head>
 	
 	<body>

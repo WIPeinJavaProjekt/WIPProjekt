@@ -27,16 +27,7 @@ public class StartServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println(request.getAttribute("User"));
-		
-		try {
-			User garrit = UserService.GetUser("Garrit");
-			System.out.println(garrit.email);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/welcome.jsp");
 		rd.forward(request, response);
@@ -50,6 +41,11 @@ public class StartServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 			
+		} else if(request.getParameter("logout") != null) {
+			logout(request);
+			response.sendRedirect("start");
+			return;
+			
 		} else if(request.getParameter("start") != null) {
 			response.sendRedirect("start");
 			return;
@@ -59,17 +55,19 @@ public class StartServlet extends HttpServlet {
 			String searchValue = request.getParameter("search");
 			
 			System.out.println(searchValue);
-		} else if(request.getParameter("search") != null) {	
-			
-			String searchValue = request.getParameter("search");
-			
-			System.out.println(searchValue);
-		} else if(request.getParameter("cart") != null) {	
+		} else if(request.getParameter("settings") != null) {	
+			response.sendRedirect("users");
+			return;
+		}  else if(request.getParameter("cart") != null) {	
 			response.sendRedirect("cart");
 			return;
 		} 
 		
 		doGet(request, response);
-	}	
+	}
+	
+	public void logout(HttpServletRequest request) {
+		request.getSession().setAttribute("userLoggedIn", false);
+	}
 
 }

@@ -35,7 +35,8 @@ public class LoginServlet extends HttpServlet {
 		
 		if(request.getParameter("login") != null) {
 
-			login(request);
+			login(request, response);
+			return;
 			
 		} else if(request.getParameter("register") != null) {
 
@@ -52,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 
 	}
 	
-	public void login(HttpServletRequest request) {
+	public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		
@@ -61,17 +62,17 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			User user = new User();
 			try {
-				user = UserService.GetUsers(userId).get(0);
+				user = UserService.GetUser(userId);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-	        session.setAttribute("user", user);  
+	        session.setAttribute("currentUser", user);
+	        session.setAttribute("userLoggedIn", true);
+	        response.sendRedirect("start");
 		} else {
 			//TODO: Error
+			System.out.println("User nicht in DB / PW falsch");
 		}
-		
-		System.out.println(userId);
-		System.out.println(password);
 	}
 
 }
