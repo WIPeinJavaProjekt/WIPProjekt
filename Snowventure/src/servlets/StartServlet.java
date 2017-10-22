@@ -34,8 +34,6 @@ public class StartServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		
 		if(request.getParameter("login") != null) {
 			
 			response.sendRedirect(request.getContextPath() + "/login");

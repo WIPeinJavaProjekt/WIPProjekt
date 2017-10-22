@@ -31,8 +31,6 @@ public class LoginServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		
 		if(request.getParameter("login") != null) {
 
 			login(request, response);
