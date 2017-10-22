@@ -3,6 +3,8 @@
 <html>
 
 	<head>
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		
 		<title>Registrierung</title>
@@ -16,95 +18,120 @@
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="96x96">
 		
 		<script src="./JS/jquery-3.2.1.min.js"></script>
-    	<script src="./JS/header.js"></script>
-		
-		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    	<script src="./JS/header.js"></script>		
 	</head>
 	
 	<body>
 	
 		<%@include file = "../Basic/header.jsp" %> 
 	
-		<div class="pure-g">
+		<div class="pure-g" id="loginbox">
 		
 			<div class="pure-u-1-5"></div>
-
-			<div class="pure-u-3-5" align="center">
+<div class="pure-u-3-5">
 				<h1>Registrieren</h1>
 				
 				<form class="pure-form" action="register" method="post">
-				    <fieldset class="pure-group">								    
-				    	<label>Name</label>							    	
-				    	<div class="pure-control-group">
-				            <input id="username" name="username" value="${username}" type="text" required placeholder="Benutzername">
-				        </div>					        
-				        <div class="pure-control-group">
-				            <input id="name" name="name" value="${name}" type="text" required placeholder="Vorname">
-				        </div>
-				        <div class="pure-control-group">
-				            <input id="surname" name="surname" value="${surname}" type="text" required placeholder="Nachname">
-				        </div>					        
-				        <div class="pure-control-group">
-				            <input id="email" name="email" value="${email}" type="email" required placeholder="E-Mail-Addresse">
-				        </div>
-			        </fieldset>
-			        <fieldset class="pure-group">
-			        	<label>Passwort</label>				
-				        <div class="pure-control-group">
-				            <input id="password" name="password" type="password" required placeholder="Passwort">
-				        </div>
-				        <div class="pure-control-group">
-				            <input id="passwordRepeat" name="passwordRepeat" type="password" required placeholder="Passwort wiederholen">
-				        </div>
-			        </fieldset>
-		        	<fieldset class="pure-group"> 
-			       		<label>Anschrift</label>
-				        <div class="pure-control-group">
-				            <input id="location" name="location" value="${location}" type="text" required placeholder="Wohnort">
-				        </div>
-				        <div class="pure-control-group">
-				            <input id="street" name="street" value="${street}" type="text" required placeholder="Straße">
-				        </div>
-				        <div class="pure-control-group">
-				            <input id="houseno" name="houseno" value="${houseno}" type="text" required placeholder="Hausnummer">
-				        </div>
-				        <div class="pure-control-group">
-				            <input id="postcode" name="postcode" value="${postcode}" type="text" required placeholder="Postleitzahl">
-				        </div>
-				    </fieldset>
-				    <fieldset class="pure-group">
-			        	<label>Sicherheitsfrage</label>			        
-				        <div class="pure-control-group">
-				            <select id="safetyQuestion" name="safetyQuestion" required>
-				            	 <option value="">Bitte Sicherheitsfrage auswählen</option>
-							    <c:forEach items="${squestions}" var="squestion">
-							        <option value="${squestion.getId()}">${squestion.getQuestion()}</option>
-							    </c:forEach>
-							</select>
-				        </div>
-				        <div class="pure-control-group">
-				            <input id="safetyAnswer" name="safetyAnswer" type="text" required placeholder="Antwort">
-				        </div>
-			        </fieldset>
-					<fieldset>
+				    <div class="pure-g">
+				    <div class ="pure-u-1-2 leftdiv">
+					    <fieldset class="pure-group">								    
+					    	<label>Name</label>							    	
+					    	<div class="pure-control-group">
+					            <input class="boxedinput" id="username"  name="username" value="${username}" type="text" required placeholder="Benutzername">
+					        </div>					        
+					        <div class="pure-control-group">
+					            <input class="boxedinput" id="name" name="name" value="${name}" type="text" required placeholder="Vorname">
+					        </div>
+					        <div class="pure-control-group">
+					            <input class="boxedinput" id="surname" name="surname" value="${surname}" type="text" required placeholder="Nachname">
+					        </div>					        
+					        <div class="pure-control-group">
+					            <input class="boxedinput" id="email" name="email" value="${email}" type="email" required placeholder="E-Mail-Addresse">
+					        </div>
+				        </fieldset>
+				        
+
+			        
+			       </div> 
+			       <div class ="pure-u-1-2"> 
+				        <fieldset class="pure-group rightdiv">
+				        	<label>Passwort</label>				
+					        <div class="pure-control-group">
+					            <input class="boxedinput" id="password" name="password" type="password" required placeholder="Passwort">
+					        </div>
+					        <div class="pure-control-group">
+					            <input class="boxedinput" id="passwordRepeat" name="passwordRepeat" type="password" required placeholder="Passwort wiederholen">
+					        </div>
+				        </fieldset>
+	
+
+				    </div>
+				
+				</div>
+				
+				<div class="pure-g">
+				    <div class ="pure-u-1-2 leftdiv">
+					   	<fieldset class="pure-group"> 
+				       		<label>Anschrift</label>
+					        <div class="pure-control-group">
+					            <input class="boxedinput" id="location" name="location" value="${location}" type="text" required placeholder="Wohnort">
+					        </div>
+					        <div class="pure-control-group">
+					            <input class="boxedinput" id="street" name="street" value="${street}" type="text" required placeholder="Straße">
+					        </div>
+					        <div class="pure-control-group">
+					            <input class="boxedinput" id="houseno" name="houseno" value="${houseno}" type="text" required placeholder="Hausnummer">
+					        </div>
+					        <div class="pure-control-group">
+					            <input class="boxedinput" id="postcode" name="postcode" value="${postcode}" type="text" required placeholder="Postleitzahl">
+					        </div>
+					    </fieldset>
+			        	<fieldset>
 						<div class="pure-control-group">
-				            <button type="submit" name="submitRegister" class="pure-button pure-button-primary">Abschicken</button>
+				            <button class="pure-button pure-button-primary boxedinput" type="submit" name="submitRegister" class="pure-button pure-button-primary">Abschicken</button>
 				        </div>
-			        </fieldset>
-				    
-				</form>
-				<form class="pure-form pure-form-aligned" action="register" method="post">
-					<div class="pure-control-group">
-						<button name="back" class="pure-button pure-button-primary">Zurück</button>
+			        	</fieldset>
 					</div>
+					<div class ="pure-u-1-2 rightdiv">
+						<fieldset class="pure-group">
+				        	<label>Sicherheitsfrage</label>			        
+					        <div class="pure-control-group">
+					            <select class=" boxedinput" id="safetyQuestion" name="safetyQuestion" required>
+					            	 <option value="">Bitte Sicherheitsfrage auswählen</option>
+								    <c:forEach items="${squestions}" var="squestion">
+								        <option value="${squestion.getId()}">${squestion.getQuestion()}</option>
+								    </c:forEach>
+								</select>
+					        </div>
+					        <div class="pure-control-group">
+					            <input class="boxedinput" id="safetyAnswer" name="safetyAnswer" type="text" required placeholder="Antwort">
+					        </div>
+				        </fieldset>
+					</div>
+				</div>
+				
+				
+				
+				
 				</form>
+				
+				<div class="pure-g">
+					<div class ="pure-u-1-2 leftdiv">
+					<form class="pure-form pure-form-aligned" action="register" method="post">
+						<div class="pure-control-group">
+							<button class="pure-button pure-button-primary boxedinput" name="back" class="pure-button pure-button-primary">Zurück</button>
+						</div>
+					</form>
+					</div>
+					<div class ="pure-u-1-2"></div>
+				</div>
 				<c:if test="${not empty error}">
 					<form class="pure-form pure-form-aligned" action="register" method="get">
 							<p class="error">${error}</p>
 					</form>
 				</c:if>
-			</div>	
-			
+		   
+			</div>
 			<div class="pure-u-1-5"></div>
 		</div>
 		

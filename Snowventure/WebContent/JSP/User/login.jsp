@@ -17,32 +17,32 @@
     <script src="./JS/header.js"></script>	
 		<%@include file = "../Basic/header.jsp" %>
 		
-		<div class="pure-g">
+		<div class="pure-g" id="loginbox">
 			
 			<div class="pure-u-1-5"></div>
 
-			<div class="pure-u-3-5" align="center">
-				<h1>Einloggen</h1>
+			<div class="pure-u-3-5">
+				<h1>Anmelden</h1>
 
 				<form class="pure-form" action ="login" method="post">
 			       	<fieldset class="pure-group">
 				        <div class="pure-control-group">
-				            <input name="userId" id="userId" type="text" placeholder="Benutzername" required>
+				            <input class="loginfield" name="userId" id="userId" type="text" placeholder="Benutzername" required>
 				        </div>					
 				        <div class="pure-control-group">
-				            <input name="password" id="password" type="text" placeholder="Passwort" required>
+				            <input class="loginfield" name="password" id="password" type="text" placeholder="Passwort" required>
 				        </div>
 			        </fieldset>
 					<fieldset class="pure-group">
 				        <div class="pure-controls">
-				            <button type="submit" name="login" class="pure-button pure-button-primary">Einloggen</button>
+				            <button class="loginfield pure-button pure-button-primary" type="submit" name="login" class="pure-button pure-button-primary">Anmelden</button>
 				        </div>
 			        </fieldset>
 				</form>
 				<form class="pure-form" action ="login" method="post">
 					<fieldset>
-			            <button type="submit" name="register" class="pure-button pure-button-primary">Registrieren</button>
-			            <button type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>
+			            <button class="loginfield-2 pure-button pure-button-primary" type="submit" name="register" class="pure-button pure-button-primary">Registrieren</button>
+			            <button class="loginfield-2 pure-button pure-button-primary" type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>
 		            </fieldset>
 				</form>
 			</div>

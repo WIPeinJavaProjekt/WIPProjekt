@@ -93,10 +93,6 @@ public class RegisterServlet extends HttpServlet {
 	
 	private int registrate (HttpServletRequest request) throws IOException {
 		
-		System.out.println("Registrate");
-		
-		System.out.println("SQ: " +  request.getParameter("safetyQuestion"));
-		
 		String password = request.getParameter("password");
 		String passwordRepeat = request.getParameter("passwordRepeat");
 		
