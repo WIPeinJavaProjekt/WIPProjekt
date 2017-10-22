@@ -1,7 +1,9 @@
 package servlets;
-
+import classes.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import classes.Safetyquestion;
 import classes.User;
+import services.CategorieService;
+import services.SafetyquestionService;
 import services.UserService;	
 
 /**
@@ -27,12 +32,22 @@ public class StartServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		try {
+			ArrayList<Categorie> categories = CategorieService.GetCategories();
+			request.setAttribute("categories", categories);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/welcome.jsp");
 		rd.forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		
 		
 		if(request.getParameter("login") != null) {
 			

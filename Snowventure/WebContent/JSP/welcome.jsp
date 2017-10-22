@@ -23,22 +23,25 @@
    		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	</head>
 	<body>	
-
+		
 		<%@include file = "./Basic/header.jsp" %>		
 			
-		<div class="pure-g contentwrapp" id ="searchbox">
+		<div class="contentwrapp" id ="searchbox">
+			<div class="pure-g" id ="banner">
 			<div class="pure-u-1-5"></div>
 			<div id="wrapper" class="pure-u-3-5">
 				<div id="search-container" class="searchbox">
 					<form class="pure-form">
 					    <fieldset>
-					        <legend></legend>
+					        <legend>
+					        <h1 id="titlemessage">Teste deine Grenzen</h1>
+					        </legend>
 							<div class="pure-g">
 						        <div class="pure-u-1-5">
 							        <select name="categories" class="boxedinput">
-									  <option value="clothes">Kleidung</option>
-									  <option value="shoes">Skischuhe</option>
-									  <option value="equipment">Ausrüstung</option>
+								        <c:forEach items="${categories}" var="categories">
+							        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
+							    		</c:forEach>
 									</select>
 								</div>
 						        <div class="pure-u-3-5">
@@ -51,9 +54,13 @@
 					    </fieldset>
 					</form>
 				</div>
-				<%@include file = "./Basic/slider.jsp" %>
+				
 			</div>
 			<div class="pure-u-1-5"></div>
+			</div>
+		</div>
+		<div id="articlearea">
+			<%@include file = "./Basic/slider.jsp" %>
 		</div>	
 		<%@include file = "./Basic/footer.jsp" %>
 	</body>

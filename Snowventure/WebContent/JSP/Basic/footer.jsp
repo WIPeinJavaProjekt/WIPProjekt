@@ -1,21 +1,60 @@
 
 <footer>
-	<div id="firstfooterline" class="pure-g">
-	    <div class="pure-u-1-3"><h3>Kontakt</h3>
-	    <i class="fa fa-facebook" aria-hidden="true"></i>
-	    <i class="icon-instagram"></i>
-	    <i class="fa fa-twitter" aria-hidden="true"></i>
-	    
-	    </div>
-	    <div class="pure-u-1-3"><h3>Filialen</h3>
-	    <b>Besuche eine unserer 340 Fillialen in Deutschland</b>
-	    </div>
-	    <div class="pure-u-1-3">
-	    	<h3>Über Snowventure</h3>
-	    	<b><a href="impressum">Impressum</a></b>
+	<div id="firstfooterline" >
+	    <div class="pure-g">
+		    <div class="pure-u-1-3">
+			    <div class="divrowone">
+			    <h3>KONTAKT</h3>
+				    <i class="fa fa-facebook" aria-hidden="true"></i>
+				    <i class="fa fa-twitter" aria-hidden="true"></i>
+				    <i class="icon-instagram" aria-hidden="true"></i>
+				    <i class="fa fa-envelope-open" aria-hidden="true"></i>
+				    
+		    	</div>
+		    </div>
+		    <div class="pure-u-1-3">
+		    	<div class="divborderleft">
+			    	<h3>FILIALEN</h3>
+			    	Besuche eine unserer 340 Fillialen in Deutschland
+			    </div>
+		    </div>
+		    <div class="pure-u-1-3">
+		    	<div class="divborderleft">
+			    	<h3>SNOWVENTURE</h3>
+			    	<a href="impressum">Impressum</a><br>
+			    	<a href="impressum">Jobs</a><br>
+			    	<a href="impressum">Historie</a><br>
+			    	<a href="impressum">Abenteuer</a><br>
+		    	</div>
+		   	</div>
 	   	</div>
-	    
+	   	
+	   	<div class="pure-g">
+		    <div class="pure-u-1-3">
+			    <div class="divrowone">
+			    <h3>ZAHLUNGSARTEN</h3>
+				    
+		    	</div>
+		    </div>
+		    <div class="pure-u-1-3">
+		    	<div class="divborderleft">
+			    	<h3>VERSANDARTEN</h3><br>
+			    
+			    </div>
+		    </div>
+		    <div class="pure-u-1-3">
+		    	<div class="divborderleft">
+			    	<h3>ZERTIFIZIERUNG</h3><br>
+			    	<img src="https://mosaic02.ztat.net/nvg/z-footer-fragment/production/svg-icons/de-DE/1508329839571/trusted_shops.png">
+			    </div>
+		    </div>
+	   	</div>
+	   	
+	   	
 	</div>
+
+	
+
 
 	<div id="secondfooterline" align="center">
 		<h2>NEWSLETTER</h2>

@@ -7,9 +7,19 @@ html * {
     font-family: sans-serif;
 }
 
+
+#searchbox{
+	padding-top:250px;
+	height:400px;
+}
+#banner{
+	background-color: rgba(255,255,255,0.5);
+}
+
 .searchbox form fieldset legend {
     text-align: center;
 }
+
 
 #search-container form * {
     border-radius: 0px !important;
@@ -23,6 +33,11 @@ html * {
     box-sizing: border-box;
     display: block;
     width: 100%;
+    height: 100%;
+}
+
+#articlearea{
+	background-color:rgb(240,240,240);
 }
 
 header {
@@ -33,10 +48,23 @@ header {
     padding: 3px;
 }
 
+header div {
+    vertical-align: middle !important;
+}
+
+header div .pure-u-3-5 {
+    color: rgba(75, 75, 75, 1);
+}
+
+.headerwelcome {
+	padding-right:10px;
+	margin-top: 8px;
+}
+
 footer {
     width: 100%;
     background-color: rgb(231, 227, 221);
-    color: rgba(75, 75, 75, 1);
+    color: rgba(75, 75, 75, 1) !important;
     align-items: center;
 }
 
@@ -45,11 +73,11 @@ footer .pure-u-1-3 {
 }
 
 #firstfooterline {
-    min-height: 70px;
+    min-height: 200px;
+    line-height: 140%;
 }
 
 #firstfooterline div {
-    text-align: center;
     background-color: rgb(215, 204, 185);
 }
 
@@ -70,13 +98,27 @@ footer .pure-u-1-3 {
 
 .contentwrapp {
     background-image: url("../Images/background.png");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
     background-repeat: no-repeat;
     background-position: center top;
 }
+
+#loginbox {
+	background-image: url("../Images/login_background.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.loginfield{
+	width:250px;
+}
+.loginfield-2{
+	width:123px;
+}
+
 
 #brandbox div {
     padding-top: 1%;
@@ -93,12 +135,12 @@ footer .pure-u-1-3 {
     float: none;
 }
 
-#mydata-form  h1 {
+#mydata-form h1 {
     padding-top: 0%;
     text-align: center;
 }
 
-#security-form  h1 {
+#security-form h1 {
     padding-top: 0%;
     text-align: center;
 }
@@ -140,3 +182,41 @@ footer .pure-u-1-3 {
     background-repeat: no-repeat;
     background-position: 10px center;
 }
+
+
+.rightdiv select{
+	height: 40px;
+}
+
+.divrowone, .divborderleft{
+	padding-left: 15px;
+	padding-right: 8 px;
+	height: 180px;
+}
+
+.divborderleft{
+	position: relative;
+	display: inline-block;
+	}
+
+.divborderleft::before{
+   border-left: 1px solid rgba(75, 75, 75, 1);
+   height: 136.8px;
+   content: '';
+   position: absolute;
+   left: 0;
+   top: 12%;
+}
+
+.divborderleft a:link {
+	tex-decoration-line: none;
+    color: rgba(75, 75, 75, 1) !important;
+}
+
+.divborderleft a:hover {
+	text-decoration-line: underline;
+	text-decoration-style: solid;
+    color: rgba(75, 75, 75, 1) !important;
+    text-decoration-color: rgba(75, 75, 75, 1) !important;
+}
+
