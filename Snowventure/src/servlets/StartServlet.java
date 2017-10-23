@@ -19,9 +19,6 @@ import services.CategorieService;
 import services.SafetyquestionService;
 import services.UserService;	
 
-/**
- * Servlet implementation class TestServlet
- */
 @WebServlet("/start")
 public class StartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,7 +27,7 @@ public class StartServlet extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
 		try {
 			ArrayList<Categorie> categories = CategorieService.GetCategories();
@@ -40,6 +37,9 @@ public class StartServlet extends HttpServlet {
 		}
 		
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
+		
+		System.out.println("Current User: " + currentUser != null ? "Kein User" : currentUser.name);
+		System.out.println("Is User logged in: " + request.getSession().getAttribute("userLoggedIn"));
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/welcome.jsp");
 		rd.forward(request, response);
@@ -81,6 +81,7 @@ public class StartServlet extends HttpServlet {
 	
 	public void logout(HttpServletRequest request) {
 		request.getSession().setAttribute("userLoggedIn", false);
+		request.getSession().setAttribute("currentUser", null);
 	}
 
 }

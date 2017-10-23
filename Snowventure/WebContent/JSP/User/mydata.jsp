@@ -59,7 +59,7 @@
     </fieldset>
 </form>
 
-<form class="pure-form pure-form-stacked" id="security-form" action="users?page=mydata" method="post">
+<form class="pure-form pure-form-stacked" id="security-form" action="users" method="post">
 <fieldset>
     
     	<legend>
@@ -88,18 +88,19 @@
     </fieldset>
 </form>
 
-<form class="pure-form pure-form-stacked" id="security-form" action="users?page=mydata" method="post">
-<fieldset>
+<form class="pure-form pure-form-stacked" id="security-form" action="users" method="post">
+	<fieldset>
     
     	<legend>
     		<h1>Meine Sicherheitsfrage</h1>
     	</legend>
     	
     	<div class="pure-class-g">         
-            <div class="pure-control-group">      
-	            <select class=" boxedinput" id="safetyQuestion" name="safetyQuestion" required>
+            <div class="pure-control-group">
+	            <select class="boxedinput" id="safetyQuestion" name="safetyQuestion" required>
+	            	<option value="">Bitte Sicherheitsfrage auswählen</option>
 				    <c:forEach items="${squestions}" var="squestion">
-				        <option value="${squestion.getId()}" selected="${currentUser.squestion.getId()==squestion.getId()?'true':'false'}" >${squestion.getQuestion()}</option>
+				        <option>${squestion.getQuestion()}</option>
 				    </c:forEach>
 				</select>
 			</div>

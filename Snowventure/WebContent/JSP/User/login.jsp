@@ -30,7 +30,7 @@
 				            <input class="loginfield" name="userId" id="userId" type="text" placeholder="Benutzername" required>
 				        </div>					
 				        <div class="pure-control-group">
-				            <input class="loginfield" name="password" id="password" type="text" placeholder="Passwort" required>
+				            <input class="loginfield" name="password" id="password" type="password" placeholder="Passwort" required>
 				        </div>
 			        </fieldset>
 					<fieldset class="pure-group">

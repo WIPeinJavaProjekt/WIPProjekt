@@ -28,7 +28,7 @@
 		<div class="pure-g" id="loginbox">
 		
 			<div class="pure-u-1-5"></div>
-<div class="pure-u-3-5">
+			<div class="pure-u-3-5">
 				<h1>Registrieren</h1>
 				
 				<form class="pure-form" action="register" method="post">
@@ -96,7 +96,7 @@
 						<fieldset class="pure-group">
 				        	<label>Sicherheitsfrage</label>			        
 					        <div class="pure-control-group">
-					            <select class=" boxedinput" id="safetyQuestion" name="safetyQuestion" required>
+					            <select class="boxedinput" id="safetyQuestion" name="safetyQuestion" required>
 					            	 <option value="">Bitte Sicherheitsfrage auswählen</option>
 								    <c:forEach items="${squestions}" var="squestion">
 								        <option value="${squestion.getId()}">${squestion.getQuestion()}</option>

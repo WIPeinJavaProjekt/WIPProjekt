@@ -33,6 +33,13 @@ public class UsersServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try {
+			ArrayList<Safetyquestion> squestions = SafetyquestionService.GetSafetyquestion();
+			request.setAttribute("squestions", squestions);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 			
 		if(request.getParameter("search-user") != null)
 		{
@@ -53,24 +60,11 @@ public class UsersServlet extends HttpServlet {
 			catch (Exception e) 
 			{
 				System.out.println(-1);
-				
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		else {
-			
-			try {
-				System.out.println("sQuestion into attributes.");
-				ArrayList<Safetyquestion> squestions = SafetyquestionService.GetSafetyquestion();
-				request.setAttribute("squestions", squestions);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				System.out.println(-1);	
-			}
-			
-			ServletContext sc = this.getServletContext();
-			RequestDispatcher rd = sc.getRequestDispatcher("/JSP/User/useraccount.jsp?page=mydata");
+			RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=mydata");
 			rd.forward(request, response);
 		}
 	}
