@@ -12,12 +12,11 @@ public class User {
 	public String surname;
 	public String email;
 	public Adress adress;
-	public int usertype;
 	
 	public User()
 	{}
 	
-	public User(String username, String password, String name, String surname, Adress adress, String email, int usertype)
+	public User(String username, String password, String name, String surname, Adress adress, String email, int utid)
 	{
 		this.username = username;
 		this.password = password;
@@ -25,10 +24,10 @@ public class User {
 		this.surname = surname;
 		this.email = email;
 		this.adress = adress;
-		this.usertype = usertype;
+		this.utid = utid;
 	}
 	
-	public User(Safetyquestion question, String username, String password, String name, String surname, Adress adress, String email, int usertype)
+	public User(Safetyquestion question, String username, String password, String name, String surname, Adress adress, String email, int utid)
 	{
 		this.squestion = question;
 		this.username = username;
@@ -37,8 +36,22 @@ public class User {
 		this.surname = surname;
 		this.email = email;
 		this.adress = adress;
-		this.usertype = usertype;
+		this.utid = utid;
 	}
+	
+	public User(Safetyquestion question, String username, String password, String name, String surname, Adress adress, String email, int utid, int ulid)
+	{
+		this.squestion = question;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.adress = adress;
+		this.utid = utid;
+		this.ulid = ulid;
+	}
+
 	
 	public static User get(String username, int usertype)
 	{	
@@ -66,7 +79,7 @@ public class User {
 	
 	public String getUtid()
 	{
-		return Integer.toString(this.usertype);
+		return Integer.toString(this.utid);
 	}
 	
 	public String getEmail()

@@ -84,15 +84,19 @@ public class UsersServlet extends HttpServlet {
 		{			
 			Adress adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
 									   request.getParameter("street"), request.getParameter("postcode"));		
-			String usertype = request.getParameter("state").toString();
+			
+			String usertype = request.getParameter("state");
 		
 			user.adress = adress;
 			user.email = request.getParameter("email");
 			user.surname = request.getParameter("last-name");
 			user.name = request.getParameter("first-name");			
-			user.utid = usertype.equals("admin")? 1 : usertype.equals("employee")? 3 : 2;
+			
+			if(usertype != null && usertype != "")
+			{user.utid = usertype.equals("admin")? 1 : usertype.equals("employee")? 3 : 2;}
 			
 			UserService.UpdateUser(user);	
+			UserService.UpdateUserRights(user, user.utid);
 			
 			session.setAttribute("currentUser", user);
 		}
@@ -124,9 +128,7 @@ public class UsersServlet extends HttpServlet {
 			{	
 				System.out.println("Passwort alt:" + old_password.toString() + "	neu:" + new_password.toString());	
 				user.password = new_password.toString();
-				
-				System.out.println(user.udid + "  " + user.utid + "  " + user.ulid);
-				
+						
 				UserService.UpdateUser(user);	
 				
 				session.setAttribute("currentUser", user);

@@ -30,7 +30,7 @@ public class UserService {
 					user.password,
 					user.squestion.getAnswer(),
 					user.squestion.sqid,
-					user.usertype,
+					user.utid,
 					udid
 					);
 			System.out.println("Userlogin: "+query);
@@ -44,7 +44,7 @@ public class UserService {
 		ArrayList<User> users = new ArrayList<User>();
 		String query;
 		
-		query = "SELECT b.utid, a.udid, a.name,"+
+		query = "SELECT b.utid, a.udid, b.ulid, a.name,"+
 				"a.surname, a.email,"+
 				"a.postcode, a.street,"+
 				"a.streetno, a.city, a.phone,"+
@@ -68,7 +68,8 @@ public class UserService {
 					result.getString("surname"),
 					a,
 					result.getString("email"),
-					result.getInt("utid")
+					result.getInt("utid"),
+					result.getInt("ulid")
 					);
 			users.add(u);
 			
@@ -82,7 +83,7 @@ public class UserService {
 		User user = null;
 		String query;
 		
-		query = "SELECT b.utid, a.udid, a.name,"+
+		query = "SELECT b.utid, a.udid, b.ulid, a.name,"+
 				"a.surname, a.email,"+
 				"a.postcode, a.street,"+
 				"a.streetno, a.city, a.phone,"+
@@ -109,7 +110,8 @@ public class UserService {
 					result.getString("surname"),
 					a,
 					result.getString("email"),
-					result.getInt("utid")
+					result.getInt("utid"),
+					result.getInt("ulid")
 					);
 			user = u;
 			
@@ -134,7 +136,7 @@ public class UserService {
 				);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 		
-		query = "UPDATE USERLOGIN SET login ='%s', password='%s', safetyanswer='%s', sqid= '%d' where ulid ='%s'";
+		query = "UPDATE USERLOGIN SET login ='%s', password='%s', safetyanswer='%s', sqid= '%d' where ulid ='%d'";
 		query = String.format(query, 
 				user.username,
 				user.password,
