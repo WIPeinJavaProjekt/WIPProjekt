@@ -18,4 +18,24 @@ public class Adress {
 		this.street = street;	
 	}
 
+	public String getLocation()
+	{
+		return this.location;
+	}
+	
+	public String getStreet()
+	{
+		return this.street;
+	}
+
+	public String getPostcode()
+	{
+		return this.postcode;
+	}
+	
+	public String getHouseno()
+	{
+		return this.houseno;
+	}
+	
 }

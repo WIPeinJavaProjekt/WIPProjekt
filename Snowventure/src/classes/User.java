@@ -59,4 +59,33 @@ public class User {
 		return this.name;
 	}
 	
+	public String getUsername()
+	{
+		return this.username;
+	}
+	
+	public String getUtid()
+	{
+		return Integer.toString(this.usertype);
+	}
+	
+	public String getEmail()
+	{
+		return this.email;
+	}
+	
+	public String getSurname()
+	{
+		return this.surname;
+	}
+	
+	public Adress getAdress()
+	{
+		return this.adress;
+	}
+	
+	public Safetyquestion getSquestion()
+	{
+		return this.squestion;
+	}
 }

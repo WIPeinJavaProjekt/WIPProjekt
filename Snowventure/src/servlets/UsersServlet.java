@@ -33,7 +33,7 @@ public class UsersServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+			
 		if(request.getParameter("search-user") != null)
 		{
 			try 
@@ -59,6 +59,16 @@ public class UsersServlet extends HttpServlet {
 			}
 		}
 		else {
+			
+			try {
+				System.out.println("sQuestion into attributes.");
+				ArrayList<Safetyquestion> squestions = SafetyquestionService.GetSafetyquestion();
+				request.setAttribute("squestions", squestions);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println(-1);	
+			}
+			
 			ServletContext sc = this.getServletContext();
 			RequestDispatcher rd = sc.getRequestDispatcher("/JSP/User/useraccount.jsp?page=mydata");
 			rd.forward(request, response);
@@ -68,43 +78,69 @@ public class UsersServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-
-		if(request.getParameter("update-data") != null)
-		{
-			Adress adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
-									   request.getParameter("street"), request.getParameter("postcode"));
+		User user = (User)session.getAttribute("currentUser");
 		
-			String state = request.getParameter("state").toString();
+		if(request.getParameter("update-data") != null)
+		{			
+			Adress adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
+									   request.getParameter("street"), request.getParameter("postcode"));		
+			String usertype = request.getParameter("state").toString();
+		
+			user.adress = adress;
+			user.email = request.getParameter("email");
+			user.surname = request.getParameter("last-name");
+			user.name = request.getParameter("first-name");			
+			user.utid = usertype.equals("admin")? 1 : usertype.equals("employee")? 3 : 2;
 			
-			User user = new User("test", request.getParameter("password"), request.getParameter("first-name"),
-								 request.getParameter("last-name"), adress, request.getParameter("email"),	state.equals("employee")? 3 :
-																								            state.equals("customer")? 2 :
-																							                1);
-			//User2Database.UpdateUser(user);			
+			UserService.UpdateUser(user);	
 			
-			System.out.println(request.getParameter("first-name")+"  " +request.getParameter("last-name") + "  " + state + "  " + user.usertype);
+			session.setAttribute("currentUser", user);
 		}
 		else if(request.getParameter("update-password") != null)
 		{
-			String old_password = request.getParameter("password");
-			String new_password = request.getParameter("new-password");
-			String new_repeated_password = request.getParameter("new-passwordRepeat");
-			
-			HttpSession ses = request.getSession();
-			User sesUser = (User)(ses.getAttribute("user"));
-			
-			if(old_password.toString().equals(sesUser.password.toString()) && new_password != null & old_password.toString() != new_password.toString() && new_password.toString().equals(new_repeated_password.toString()))
-			{	
-				System.out.println("Passwort erfolgreich geï¿½ndert! (alt:" + old_password.toString() + "  " + "neu:" + new_password.toString() + ")");
-			
-				sesUser.password = new_password.toString();
-				ses.setAttribute("user", sesUser);
-			}
-			else {
-				System.out.println("Ihr Passwort konnte nicht geï¿½ndert werden. Bitte ï¿½berprï¿½fen Sie Ihre Eingaben.");
-			}	
+			changePassword(request);
 		}
+		else if(request.getParameter("update-squestion") != null)
+		{
+			user.squestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyquestion")), "", request.getParameter("safetyAnswer"));
+			UserService.UpdateUser(user);	
+		}
+		
 		doGet(request, response);
 	}
 
+	private void changePassword(HttpServletRequest request)
+	{
+		String old_password = request.getParameter("password");
+		String new_password = request.getParameter("new-password");
+		String new_repeated_password = request.getParameter("new-passwordRepeat");
+		
+		HttpSession session = request.getSession();
+		User user = (User)(session.getAttribute("currentUser"));
+		
+		if(LoginService.authenticate(user.username, old_password))
+		{			
+			if(new_password.toString().equals(new_repeated_password.toString()))
+			{	
+				System.out.println("Passwort alt:" + old_password.toString() + "	neu:" + new_password.toString());	
+				user.password = new_password.toString();
+				
+				System.out.println(user.udid + "  " + user.utid + "  " + user.ulid);
+				
+				UserService.UpdateUser(user);	
+				
+				session.setAttribute("currentUser", user);
+				return;
+			}
+			else {
+				System.out.println("Die Passwörter stimmen nicht überein.");
+				request.setAttribute("passworderror", "Die Passwörter stimmen nicht überein.");
+				return;
+			}		
+		}		
+		
+		System.out.println("Das angegebene Nutzerpasswort ist falsch.");
+		request.setAttribute("passworderror", "Das angegebene Nutzerpasswort ist falsch.");
+	}
+	
 }

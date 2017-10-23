@@ -100,7 +100,7 @@ public class RegisterServlet extends HttpServlet {
 				request.getParameter("postcode"), request.getParameter("street"));
 		this.sfQuestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion")), "", request.getParameter("safetyAnswer"));
 		this.user = new User(this.sfQuestion, request.getParameter("username"), request.getParameter("password"), request.getParameter("name"),
-				request.getParameter("surname"), this.adress, request.getParameter("email"), 1);
+				request.getParameter("surname"), this.adress, request.getParameter("email"), 2);
 		
 		if(password.equals(passwordRepeat)) {
 				

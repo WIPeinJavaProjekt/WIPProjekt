@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,18 +19,6 @@
 <link rel="icon" type="image/png" href="./Images/favicon.png" sizes="32x32">
 <link rel="icon" type="image/png" href="./Images/favicon.png" sizes="96x96">
 
-<style>
-
-.pure-table{
-width: 54%;
-float: left;
-margin-left: 28%;
-margin-right: 25%;
-margin-bottom: 3%;
-}
-</style>
-
-
 </head>
 <body>
 	<%@include file = "../Basic/header.jsp" %>
@@ -38,10 +28,13 @@ margin-bottom: 3%;
 	
 	    <ul class="pure-menu-list">
 	        <li class="pure-menu-item"><a href="users?page=mydata" class="pure-menu-link">Meine Daten</a></li>
+	        <c:if test="${currentUser.utid==1}">
 			<li class="pure-menu-item"><a href="users?page=usersearch" class="pure-menu-link" >Nutzerübersicht</a></li>
+			</c:if>
+	        <c:if test="${currentUser.utid==1||currentUser.utid==3}"> 
 	        <li class="pure-menu-item"><a href="users?page=articlesearch" class="pure-menu-link">Artikelübersicht</a></li>
+	        </c:if>  
 	        <li class="pure-menu-item"><a href="users?page=orders" class="pure-menu-link">Bestellungen</a></li>
-	        <li class="pure-menu-item"><p id="currently-logged-user"><i>Eingeloggt als: TestUser</i></p></li>
 	    </ul>
 	</div>
 	

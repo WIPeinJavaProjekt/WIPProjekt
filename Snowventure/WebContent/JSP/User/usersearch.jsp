@@ -3,7 +3,7 @@
 <%@page import="java.util.ArrayList"%>   
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
-<div class="pure-g" id ="searchbox">
+<div class="pure-g" id ="account-searchbox">
 	<div class="pure-u-1-5"></div>
 	<div id="wrapper" class="pure-u-3-5">
 		<div id="search-container" class="searchbox">
@@ -15,10 +15,11 @@
 					<div class="pure-g">
 				        <div class="pure-u-1-5">
 					        <select name="categories" class="boxedinput">
-					          <option value="all" <c:if test="${category} eq 'all'">selected="true"</c:if>>Alle</option>
-							  <option value="customer" <c:if test="${category} eq 'customer'">selected="true"</c:if>>Kunde</option>
-							  <option value="employee" <c:if test="${category} eq 'employee'">selected="true"</c:if>>Mitarbeiter</option>
-							  <option value="admin" <c:if test="${category} eq 'admin'">selected="true"</c:if>>Admin</option>
+					        <c:set var="cat" value="${category}"/>
+					          <option value="all" <c:if test="cat eq 'all'">selected</c:if>>Alle</option>
+							  <option value="customer" <c:if test="cat eq 'customer'">selected</c:if>>Kunde</option>
+							  <option value="employee" <c:if test="cat eq 'employee'">selected</c:if>>Mitarbeiter</option>
+							  <option value="admin" <c:if test="cat eq 'admin'">selected</c:if>>Admin</option>
 							</select>
 						</div>
 				        <div class="pure-u-3-5">

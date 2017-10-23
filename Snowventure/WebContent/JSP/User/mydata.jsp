@@ -1,78 +1,69 @@
+<%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
 <form class="pure-form pure-form-stacked" id="mydata-form" action="users" method="post">
     <fieldset>
-        <legend>
-        	<h1>Personenangaben</h1>
-        </legend>
         
-        <%@page import="classes.Safetyquestion"%>  
-		<%
-		//If user exists already - should be deleted from session.
-		if(request.getSession().getAttribute("user") != null)
-		request.getSession().removeAttribute("user");
-		
-		//User initilization for test purposes.
-		classes.User Tuser = new classes.User(new Safetyquestion(),"test1" ,"test", "testname2", "testsurname", new classes.Adress("testlocation","test123","2356test","teststreet"), "12@io.com", 1);
-		request.getSession().setAttribute("user", Tuser);
-						
-		classes.User user = (classes.User)(request.getSession().getAttribute("user"));
-		%>
-		
+        <legend>
+        	<h1>Meine Personenangaben</h1>
+        </legend>
+       		
         <div class="pure-g">
             
 	            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 	                <label for="first-name">Vorname</label>
-	                <input id="first-name" name="first-name" class="pure-u-23-24" type="text" value="<%=user.name%>" required>
+	                <input id="first-name" name="first-name" class="pure-u-23-24" type="text" value="${currentUser.name}" required>
 	            </div>
 	
 	            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 	                <label for="last-name">Nachname</label>
-	                <input id="last-name" name="last-name" class="pure-u-23-24" type="text" value="<%=user.surname%>" required>
+	                <input id="last-name" name="last-name" class="pure-u-23-24" type="text" value="${currentUser.surname}" required>
 	            </div>
 	
 	            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 	                <label for="email">E-Mail</label>
-	                <input id="email" name="email" class="pure-u-23-24" type="email" value="<%=user.email%>" required>
+	                <input id="email" name="email" class="pure-u-23-24" type="email" value="${currentUser.email}" required>
 	            </div>			 
 			
 				<div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 	                <label for="street">Straße</label>
-	                <input id="street" name="street" class="pure-u-23-24" type="text" value="<%=user.adress.street%>" required>
+	                <input id="street" name="street" class="pure-u-23-24" type="text" value="${currentUser.adress.getStreet()}" required>
 	            </div>
 	
 				<div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 	                <label for="houseno">Hausnummer</label>
-	                <input id="houseno" name="houseno" class="pure-u-23-24" type="text" value="<%=user.adress.houseno%>" required>
+	                <input id="houseno" name="houseno" class="pure-u-23-24" type="text" value="${currentUser.adress.getHouseno()}" required>
 	            </div>
 	
 	            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 	                <label for="location">Stadt</label>
-	                <input id="location" name="location" class="pure-u-23-24" type="text" value="<%=user.adress.location%>" required>
+	                <input id="location" name="location" class="pure-u-23-24" type="text" value="${currentUser.adress.getLocation()}" required>
 	            </div>
 	            
 	            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 	                <label for="postcode">PLZ</label>
-	                <input id="postcode" name="postcode" class="pure-u-23-24" type="text" value="<%=user.adress.postcode%>" required>
+	                <input id="postcode" name="postcode" class="pure-u-23-24" type="text" value="${currentUser.adress.postcode}" required>
 	            </div>			
-			
+				<c:if test="${currentUser.utid == '1'}">
 	            <div class="pure-u-1 pure-u-md-1-3">
 	                <label for="state">Nutzertyp</label>
 	                <select id="state" name="state" class="pure-input-1-2" required>
-	                    <option value="customer" selected="<%=user.usertype==2?true:false%>" >Kunde</option>
-	                    <option value="employee" selected="<%=user.usertype==3?true:false%>">Mitarbeiter</option>
-	                    <option value="admin" selected="<%=user.usertype==1?true:false%>">Admin</option>
+	                    <option value="customer" selected="${currentUser.utid=='2'?true:false}" >Kunde</option>
+	                    <option value="employee" selected="${currentUser.utid=='3'?true:false}">Mitarbeiter</option>
+	                    <option value="admin" selected="${currentUser.utid=='1'?true:false}">Admin</option>
 	                </select>
 	            </div>
+	            </c:if>
         </div>
 
         <button type="submit" name="update-data" class="pure-button pure-button-primary">Änderung speichern</button>
     </fieldset>
 </form>
 
-<form class="pure-form pure-form-stacked" id="security-form" action="users" method="post">
+<form class="pure-form pure-form-stacked" id="security-form" action="users?page=mydata" method="post">
 <fieldset>
     
     	<legend>
-    		<h1>Passwort zurücksetzen</h1>
+    		<h1>Mein Passwort zurücksetzen</h1>
     	</legend>
     	
     	<div class="pure-class-g">
@@ -96,4 +87,35 @@
     	</div>
     </fieldset>
 </form>
+
+<form class="pure-form pure-form-stacked" id="security-form" action="users?page=mydata" method="post">
+<fieldset>
+    
+    	<legend>
+    		<h1>Meine Sicherheitsfrage</h1>
+    	</legend>
+    	
+    	<div class="pure-class-g">         
+            <div class="pure-control-group">      
+	            <select class=" boxedinput" id="safetyQuestion" name="safetyQuestion" required>
+				    <c:forEach items="${squestions}" var="squestion">
+				        <option value="${squestion.getId()}" selected="${currentUser.squestion.getId()==squestion.getId()?'true':'false'}" >${squestion.getQuestion()}</option>
+				    </c:forEach>
+				</select>
+			</div>
+ 	        <div class="pure-control-group">
+	            <input class="boxedinput" id="safetyAnswer" name="safetyAnswer" type="text" value="${currentUser.squestion.getAnswer()}" required placeholder="Antwort">
+	        </div>
+	        
+	        <button type="submit" name="update-squestion" class="pure-button pure-button-primary">Änderung speichern</button>
+    	</div>
+    </fieldset>
+</form>
+
+<c:if test="${not empty passworderror}">
+	<form class="pure-form pure-form-aligned" action="users?page=mydata" method="get">
+			<p class="error">${passworderror}</p>
+	</form>
+</c:if>
+
     
