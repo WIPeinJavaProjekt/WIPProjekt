@@ -34,13 +34,6 @@ public class UsersServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		try {
-			ArrayList<Safetyquestion> squestions = SafetyquestionService.GetSafetyquestion();
-			request.setAttribute("squestions", squestions);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-			
 		if(request.getParameter("search-user") != null)
 		{
 			try 
@@ -60,10 +53,21 @@ public class UsersServlet extends HttpServlet {
 			catch (Exception e) 
 			{
 				System.out.println(-1);
+				
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		else {
+			
+			try {
+				ArrayList<Safetyquestion> squestions = SafetyquestionService.GetSafetyquestion();
+				request.getSession().setAttribute("squestions", squestions);				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println(-1);	
+			}
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=mydata");
 			rd.forward(request, response);
 		}
@@ -100,8 +104,10 @@ public class UsersServlet extends HttpServlet {
 		}
 		else if(request.getParameter("update-squestion") != null)
 		{
-			user.squestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyquestion")), "", request.getParameter("safetyAnswer"));
-			UserService.UpdateUser(user);	
+			user.squestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion").toString()), "", request.getParameter("safetyAnswer").toString());
+			UserService.UpdateUser(user);
+			session.setAttribute("currentUser", user);
+			System.out.println("sQuestion updated.");	
 		}
 		
 		doGet(request, response);

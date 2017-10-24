@@ -1,6 +1,6 @@
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
-<form class="pure-form pure-form-stacked" id="mydata-form" action="users" method="post">
+<form class="pure-form pure-form-stacked" id="mydata-form" action="users?page=mydata" method="post">
     <fieldset>
         
         <legend>
@@ -47,9 +47,9 @@
 	            <div class="pure-u-1 pure-u-md-1-3">
 	                <label for="state">Nutzertyp</label>
 	                <select id="state" name="state" class="pure-input-1-2" required>
-	                    <option value="customer" selected="${currentUser.utid=='2'?true:false}" >Kunde</option>
-	                    <option value="employee" selected="${currentUser.utid=='3'?true:false}">Mitarbeiter</option>
-	                    <option value="admin" selected="${currentUser.utid=='1'?true:false}">Admin</option>
+	                    <option value="customer" <c:if test="${currentUser.utid=='2'}"><c:out value="selected"/></c:if>>Kunde</option>
+	                    <option value="employee" <c:if test="${currentUser.utid=='3'}"><c:out value="selected"/></c:if>>Mitarbeiter</option>
+	                    <option value="admin" <c:if test="${currentUser.utid=='1'}"><c:out value="selected"/></c:if>>Admin</option>
 	                </select>
 	            </div>
 	            </c:if>
@@ -59,7 +59,7 @@
     </fieldset>
 </form>
 
-<form class="pure-form pure-form-stacked" id="security-form" action="users" method="post">
+<form class="pure-form pure-form-stacked" id="security-form" action="users?page=mydata" method="post">
 <fieldset>
     
     	<legend>
@@ -88,20 +88,28 @@
     </fieldset>
 </form>
 
-<form class="pure-form pure-form-stacked" id="security-form" action="users" method="post">
-	<fieldset>
+<c:if test="${not empty passworderror}">
+	<form class="pure-form pure-form-aligned" action="users?page=mydata" method="get">
+		<p class="error">${passworderror}</p>
+	</form>
+</c:if>
+
+<form class="pure-form pure-form-stacked" id="security-form" action="users?page=mydata" method="post">
+<fieldset>
     
     	<legend>
     		<h1>Meine Sicherheitsfrage</h1>
     	</legend>
     	
     	<div class="pure-class-g">         
-            <div class="pure-control-group">
-	            <select class="boxedinput" id="safetyQuestion" name="safetyQuestion" required>
-	            	<option value="">Bitte Sicherheitsfrage auswählen</option>
+            <div class="pure-control-group">      
+	            <select class=" boxedinput" id="safetyQuestion" name="safetyQuestion" required>
 				    <c:forEach items="${squestions}" var="squestion">
-				        <option>${squestion.getQuestion()}</option>
-				    </c:forEach>
+						<option value="${squestion.getId()}" <c:if test="${currentUser.squestion.getId()==squestion.getId()}">
+																<c:out value="selected"/>
+															 </c:if> >${squestion.getQuestion()}
+						</option>
+					</c:forEach>
 				</select>
 			</div>
  	        <div class="pure-control-group">
@@ -112,11 +120,5 @@
     	</div>
     </fieldset>
 </form>
-
-<c:if test="${not empty passworderror}">
-	<form class="pure-form pure-form-aligned" action="users?page=mydata" method="get">
-			<p class="error">${passworderror}</p>
-	</form>
-</c:if>
 
     

@@ -88,10 +88,11 @@ public class DatabaseConnector {
 	}
 	
 	public void UpdateQuery(String query) {
+		System.out.println("Im using the update");
 		if(this.connect != null)
 			try {
 				Statement statement = this.connect.createStatement();
-				statement.executeUpdate(query);
+				System.out.println(statement.executeUpdate(query));
 			}
 			catch (SQLException e){
 				

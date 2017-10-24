@@ -122,7 +122,7 @@ public class UserService {
 	
 	public static void UpdateUser(User user) {
 		String query = "UPDATE USERDATA SET name='%s', surname ='%s', email ='%s', postcode='%s',street='%s',city='%s', phone='%s',streetno='%s'"
-				+ " WHERE udid in (SELECT udid from userlogin where ulid = '%d')";
+				+ " WHERE udid in (SELECT udid from USERLOGIN where ulid = '%d')";
 		query = String.format(query,
 				user.name,
 				user.surname,
@@ -134,8 +134,11 @@ public class UserService {
 				user.adress.houseno,
 				user.ulid
 				);
-		DatabaseConnector.createConnection().UpdateQuery(query);
 		
+		System.out.println(query);
+
+		DatabaseConnector.createConnection().UpdateQuery(query);
+				
 		query = "UPDATE USERLOGIN SET login ='%s', password='%s', safetyanswer='%s', sqid= '%d' where ulid ='%d'";
 		query = String.format(query, 
 				user.username,
@@ -144,6 +147,9 @@ public class UserService {
 				user.squestion.sqid,
 				user.ulid
 				);
+		
+		System.out.println(query);
+
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
