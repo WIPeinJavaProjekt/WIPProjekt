@@ -33,7 +33,7 @@
 			</form>			
 			</div>
 				<div>
-				<form class="add-new-user-form" action="" method="GET">
+				<form class="add-new-user-form" action="register" method="GET">
 					<div class="pure-u-1-5" id="add-new-user">
 				        <button type="submit" name="new-user" class="pure-button pure-button-primary boxedinput" style="width=20%">Nutzer anlegen</button>
 				    </div>
@@ -70,7 +70,7 @@
 							</c:when>
 						</c:choose>
 					</td>
-					<td style="padding:0%"><button type="submit" name="access-editor" class="pure-button pure-button-primary boxedinput" style="width:100%;height:100%">Bearbeiten</button></td>
+					<td style="padding:0%"><button type="submit" name="editUser" class="pure-button pure-button-primary boxedinput" style="width:100%;height:100%">Bearbeiten</button></td>
 				</tr>
 			</c:forEach>
 		 	</tbody>

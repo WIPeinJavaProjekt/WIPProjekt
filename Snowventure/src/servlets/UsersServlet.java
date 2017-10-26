@@ -34,7 +34,7 @@ public class UsersServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getParameter("search-user") != null)
+		if(request.getParameter("search-user") != null || request.getParameter("back") != null)
 		{
 			try 
 			{

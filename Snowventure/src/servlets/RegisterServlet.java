@@ -81,7 +81,14 @@ public class RegisterServlet extends HttpServlet {
 			int retVal = registrate(request);
 			
 			if(retVal == 0) {
-				response.sendRedirect("start");
+				
+				if(request.getSession().getAttribute("currentUser")==null || ((User)(request.getSession().getAttribute("currentUser"))).utid!=1)
+				{
+					response.sendRedirect("start");
+				}
+				else {
+					response.sendRedirect("users?page=usersearch");
+				}
 				return;
 			}
 			
@@ -95,12 +102,13 @@ public class RegisterServlet extends HttpServlet {
 		
 		String password = request.getParameter("password");
 		String passwordRepeat = request.getParameter("passwordRepeat");
+		String usertype = request.getParameter("state");
 		
 		this.adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
 				request.getParameter("postcode"), request.getParameter("street"));
 		this.sfQuestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion")), "", request.getParameter("safetyAnswer"));
 		this.user = new User(this.sfQuestion, request.getParameter("username"), request.getParameter("password"), request.getParameter("name"),
-				request.getParameter("surname"), this.adress, request.getParameter("email"), 2);
+				request.getParameter("surname"), this.adress, request.getParameter("email"), usertype == null ? 2 : usertype.toString().equals("admin")? 1 : usertype.toString().equals("employee")? 3 : 2);
 		
 		if(password.equals(passwordRepeat)) {
 				
@@ -111,6 +119,7 @@ public class RegisterServlet extends HttpServlet {
 			System.out.println(this.user.adress.street);
 			System.out.println(this.user.adress.houseno);
 			System.out.println(this.user.adress.location);
+			System.out.println(this.user.utid);
 			
 			int result = UserService.AddUser(this.user);
 			System.out.println(result);
