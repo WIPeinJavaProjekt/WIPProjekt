@@ -4,32 +4,11 @@ import java.util.*;
 
 public class Order {
 
-	public String orderID;
-	public User user;
-	public List<Article> articles;
-	public Date orderDate;	
+	public Adress adress;
+	public ShoppingCart shoppingCart;
 	
-	public Order()
-	{}
-	
-	public Order(String orderID, User user, List<Article> articles, Date date)
-	{
-		this.orderID = orderID;
-		this.user = user;
-		this.articles = articles;
-		this.orderDate = date;
-	}
-	
-	public void get(String orderID)
-	{}
-	
-	public boolean insert()
-	{
-		return true;
-	}
-	
-	public boolean update()
-	{
-		return true;
+	public Order(Adress a, ShoppingCart scp) {
+		adress = a;
+		shoppingCart = scp;
 	}
 }

@@ -1,37 +1,57 @@
 package classes;
 
+import java.util.ArrayList;
+import java.sql.*;
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+
 public class Article {
 
-	public String ID;
+	public int ID;
 	public String name;
 	public String description;
-	public double price;
+	public ArrayList<ArticleVersion> versions;
+	private int selectedversion;
 	
-	public Article(String ID)
+	
+	public Article(int ID)
 	{
 		this.ID = ID;
+		selectedversion = 0;
 	}
 	
-	public Article(String ID, String name, String description, double price)
+	public Article(int ID, String name, String description)
 	{
 		this.ID = ID;
 		this.name = name;
 		this.description = description;
-		this.price = price;
+		versions = new ArrayList<ArticleVersion>();
+		selectedversion = 0;
 	}
 	
-	public Article get(String ID)
+	public Article(Article a)
 	{
-		return null;
+		this.ID = a.ID;
+		this.name = a.name;
+		this.description = a.description;
+		this.versions = a.versions;
+		this.selectedversion = a.selectedversion;
 	}
 	
-	public boolean insert()
-	{
-		return true;
+	
+	public int GetSelectedVersion() {
+		return selectedversion;
 	}
 	
-	public boolean update()
-	{
-		return true;
+	public void SetSelectedVersion(int s) {
+		if(s>= 0&& s< versions.size())
+			selectedversion = s;
 	}
+	
+	public double GetPrice() {
+		return versions.get(selectedversion).price;
+	}
+	
 }

@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.ArrayList;
+
 public class User {
 
 	public int ulid;
@@ -12,6 +14,8 @@ public class User {
 	public String surname;
 	public String email;
 	public Adress adress;
+	public ArrayList<Order> orders = new ArrayList<Order>();
+	public ShoppingCart shoppingcart = new ShoppingCart();
 	
 	public User()
 	{}
