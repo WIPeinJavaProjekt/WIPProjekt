@@ -15,7 +15,6 @@ public class Article {
 	public ArrayList<ArticleVersion> versions;
 	private int selectedversion;
 	
-	
 	public Article(int ID)
 	{
 		this.ID = ID;
@@ -36,7 +35,7 @@ public class Article {
 		this.ID = a.ID;
 		this.name = a.name;
 		this.description = a.description;
-		this.versions = a.versions;
+		this.versions = new ArrayList<ArticleVersion>(a.versions);
 		this.selectedversion = a.selectedversion;
 	}
 	
@@ -53,5 +52,4 @@ public class Article {
 	public double GetPrice() {
 		return versions.get(selectedversion).price;
 	}
-	
 }

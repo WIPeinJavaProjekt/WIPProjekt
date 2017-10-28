@@ -1,15 +1,15 @@
 package classes;
 
 public class ShoppingCartPosition {
-	public ArticleVersion article;
+	public Article article;
 	public int amount;
 	
-	public ShoppingCartPosition(ArticleVersion a, int amount) {
+	public ShoppingCartPosition(Article a, int amount) {
 		this.article = a;
 		this.amount = amount;
 	}
 	
 	public double GetPositionPrice() {
-		return article.price * amount;
+		return article.versions.get(article.GetSelectedVersion()).price * amount;
 	}
 }

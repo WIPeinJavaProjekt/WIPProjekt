@@ -3,15 +3,17 @@ package classes;
 import java.util.ArrayList;
 
 public class ShoppingCart {
-	ArrayList<ShoppingCartPosition> cart = new ArrayList<ShoppingCartPosition>();
+	public ArrayList<ShoppingCartPosition> cart;
 	
 	public ShoppingCart() {
-		
+		cart = new ArrayList<ShoppingCartPosition>();
 	}
 	
 	public ShoppingCart(ArrayList<ShoppingCartPosition> cart) {
-		this.cart = cart;
+		this.cart = new ArrayList<ShoppingCartPosition>(cart);
 	}
+	
+
 	
 	public double GetShoppingCartPrice() {
 		double amount=0;

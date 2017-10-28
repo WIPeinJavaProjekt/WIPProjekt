@@ -78,7 +78,7 @@ public class ArticleService {
 		return av;
 	}
 	
-	public static ArrayList<Article> GetAllArticles(String namepattern) throws SQLException{
+	public static ArrayList<Article> GetAllArticlesByName(String namepattern) throws SQLException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
 		String query = "SELECT aid, name, description FROM ARTICLE WHERE name ='%s';";
@@ -89,7 +89,26 @@ public class ArticleService {
 		while(result.next())
 		{
 			Article a = new Article(result.getInt("aid"),result.getString("name"),result.getString("name"));
-			a.versions = GetAllArticleVersion(a);
+			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
+			articles.add(a);
+		}
+		
+		return articles;
+	}
+	
+	//Categorie nicht im Artikel enthalten da keine Relevanz für weitere Verarbeitung verkomplizierung für Bestellungen etc | Was passiert wenn sich Kategorie ändert? z.B. durch Umstruktuierung usw.
+	public static ArrayList<Article> GetAllArticlesByCategorie(Categorie c) throws SQLException{
+		ArrayList<Article> articles = new ArrayList<Article>();
+		
+		String query = "SELECT aid, name, description FROM ARTICLE WHERE acid ='%d';";
+		query = String.format(query, c.GetACID());
+		
+		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
+		
+		while(result.next())
+		{
+			Article a = new Article(result.getInt("aid"),result.getString("name"),result.getString("name"));
+			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
 			articles.add(a);
 		}
 		
@@ -111,25 +130,41 @@ public class ArticleService {
 		
 		return article;
 	}
-	
-	
+		
 	public static Article GetSelectedArticle(ArticleVersion av) throws SQLException {
 		Article article = new Article( GetArticle(av.ID));
 		
-		for(int i = 0; i< article.versions.size(); i++)
+		return PrepSelectedArticle(av.versionid,article);
+	}
+		
+	public static Article GetSelectedArticle(int avid) throws SQLException{
+		Article article = new Article( GetArticleIdFromAvid(avid));
+		
+		return PrepSelectedArticle(avid,article);
+	}
+
+	public static int GetArticleIdFromAvid(int avid) throws SQLException{
+		int aid = -1;
+		
+		String query = "SELECT TOP 1 aid from articleversion where avid='%d'";
+		query = String.format(query, avid);
+		aid = DatabaseConnector.createConnection().InsertQuery(query);
+		
+		return aid;
+	}
+	
+	private static Article PrepSelectedArticle(int avid, Article a) {
+		for(int i = 0; i< a.versions.size(); i++)
 		{
-			if(article.versions.get(i).versionid == av.versionid)
+			if(a.versions.get(i).versionid == avid)
 			{
-				article.SetSelectedVersion(i);
-				return article;
+				a.SetSelectedVersion(i);
+				return a;
 			}
 			
 		}
 		
-		return article;
+		return a;
 	}
-	
-	
-	
 	
 }
