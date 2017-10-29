@@ -55,27 +55,34 @@
 		    </thead>
 		 	<tbody>
 		 	<c:forEach var="user" items="${userlist}">
-				<tr class="pure-table-odd">
-					<td><c:out value="${user.username}"/></td>
-					<td>
-						<c:choose>
-							<c:when test="${user.utid == 1}">
-							 	Admin
-							</c:when>
-							<c:when test="${user.utid == 2}">
-							 	Kunde
-							</c:when>
-							<c:when test="${user.utid == 3}">
-							 	Mitarbeiter
-							</c:when>
-						</c:choose>
-					</td>
-					<td style="padding:0%"><button type="submit" name="editUser" class="pure-button pure-button-primary boxedinput" style="width:100%;height:100%">Bearbeiten</button></td>
-				</tr>
+					<tr class="pure-table-odd">
+						<td id="uname"><c:out value="${user.username}"/></td>
+						<td>
+							<c:choose>
+								<c:when test="${user.utid == 1}">
+								 	Admin
+								</c:when>
+								<c:when test="${user.utid == 2}">
+								 	Kunde
+								</c:when>
+								<c:when test="${user.utid == 3}">
+								 	Mitarbeiter
+								</c:when>
+							</c:choose>
+						</td>
+						<td style="padding:0%">
+							<a href="users?page=userinfo" class="pure-button pure-button-primary boxedinput" style="width:100%;height:100%">Bearbeiten</a>		
+						</td>
+					</tr>
 			</c:forEach>
 		 	</tbody>
 		</table>
 	</c:if>
+	<c:if test="${nouserfound eq 'true'}">
+		<form class="pure-form pure-form-aligned" action="users?page=usersearch" method="get">
+			<p class="error">Es wurde keine Suchergebnisse gefunden.</p>
+		</form>	
+	</c:if>	
 </div>
 
 <div class="user-info">

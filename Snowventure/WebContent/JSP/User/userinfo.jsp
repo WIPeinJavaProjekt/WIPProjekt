@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:if test="${not empty selectedUser}">
+	<h1>${selectedUser.username}</h1>
+</c:if>
+
 <form class="pure-form" action="register" method="post">
     <div class="pure-g">
 	    <div class ="pure-u-1-2 leftdiv">
@@ -65,9 +69,9 @@
 	        </fieldset>
 		    
 	       	<fieldset>
-			<div class="pure-control-group">
-	            <button class="pure-button pure-button-primary boxedinput" type="submit" name="submitRegister" class="pure-button pure-button-primary">Abschicken</button>
-	        </div>
+				<div class="pure-control-group">
+		            <button class="pure-button pure-button-primary boxedinput" type="submit" name="submitRegister" class="pure-button pure-button-primary">Abschicken</button>
+		        </div>
 	       	</fieldset>
 		</div>
 		<div class ="pure-u-1-2 rightdiv">
