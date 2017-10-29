@@ -35,7 +35,7 @@ public class UsersServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("search-user") != null || request.getParameter("back") != null)
-		{
+		{			
 			try 
 			{
 				List<User> userlist = UserService.GetUsers(request.getParameter("user-info"));
@@ -44,8 +44,13 @@ public class UsersServlet extends HttpServlet {
 					System.out.println(userlist.size());			
 				}
 
-				System.out.println(userlist.size());			
+				System.out.println(userlist.size());	
 				request.getSession().setAttribute("userlist", userlist);
+				
+				if(userlist.size() == 0 && request.getParameter("back") == null)
+				{ request.getSession().setAttribute("nouserfound", "true");	}
+				else 
+				{ request.getSession().setAttribute("nouserfound", "false"); }
 
 				RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=usersearch");
 				rd.forward(request, response);
@@ -58,6 +63,23 @@ public class UsersServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		/*else if (request.getParameter("page") == "userinfo")
+		{
+			try {
+				User user = UserService.GetUser(request.getParameter("uname"));
+				if(user != null) 
+				{
+				request.getSession().setAttribute("selectedUser", user);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=userinfo");
+			rd.forward(request, response);
+		}*/
 		else {
 			
 			try {
@@ -109,7 +131,7 @@ public class UsersServlet extends HttpServlet {
 			session.setAttribute("currentUser", user);
 			System.out.println("sQuestion updated.");	
 		}
-		
+				
 		doGet(request, response);
 	}
 

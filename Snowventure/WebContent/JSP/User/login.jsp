@@ -39,6 +39,9 @@
 				        </div>
 			        </fieldset>
 				</form>
+				
+				<a name="passwordforgotten" href="forgottenPassword?param=login">Passwort vergessen?</a> 
+					
 				<form class="pure-form" action ="login" method="post">
 					<fieldset>
 			            <button class="loginfield-2 pure-button pure-button-primary" type="submit" name="register" class="pure-button pure-button-primary">Registrieren</button>
