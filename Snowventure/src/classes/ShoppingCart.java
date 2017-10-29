@@ -13,7 +13,12 @@ public class ShoppingCart {
 		this.cart = new ArrayList<ShoppingCartPosition>(cart);
 	}
 	
-
+	public ShoppingCart(ShoppingCart scp)
+	{
+		this.cart = new ArrayList<ShoppingCartPosition>(scp.cart);
+	}
+	
+	
 	
 	public double GetShoppingCartPrice() {
 		double amount=0;

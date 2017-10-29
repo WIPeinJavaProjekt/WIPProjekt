@@ -114,7 +114,8 @@ public class UserService {
 					result.getInt("ulid")
 					);
 			user = u;
-			
+			user.orders = new ArrayList<Order>(OrderService.GetAllOrders(u.ulid));
+			user.shoppingcart = new ShoppingCart(ShoppingCartService.GetShoppingCart(user));
 		}
 		
 		return user;

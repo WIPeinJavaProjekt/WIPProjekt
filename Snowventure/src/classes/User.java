@@ -14,8 +14,8 @@ public class User {
 	public String surname;
 	public String email;
 	public Adress adress;
-	public ArrayList<Order> orders = new ArrayList<Order>();
-	public ShoppingCart shoppingcart = new ShoppingCart();
+	public ArrayList<Order> orders;
+	public ShoppingCart shoppingcart;
 	
 	public User()
 	{}

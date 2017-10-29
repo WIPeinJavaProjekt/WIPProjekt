@@ -31,7 +31,6 @@ public class ShoppingCartService {
 		return scp;
 	}
 
-
 	//HILFSMETHODEN
 	private static int AddShoppingCart(User u) {
 		int scpid = 1;
