@@ -6,6 +6,12 @@ import classes.User;
 
 public class LoginService {
 
+	/**
+	 * Checks whether user-credentials are correct (Comparing with the database)
+	 * @param userId
+	 * @param password
+	 * @return boolean value
+	 */
 	public static boolean authenticate(String userId, String password) {
 		if(password != null && !password.equals("")){
 			User user = new User();

@@ -4,9 +4,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import classes.*;
 
-public class UserService {
+public class UserService {	
 	
-	
+	/**
+	 * Add a new User into the database.
+	 * @param user New user, that should be added to database
+	 * @return int value depending on success of insertion
+	 */
 	public static int AddUser(User user) {
 		String query;
 		int udid;
@@ -39,6 +43,12 @@ public class UserService {
 		return -1;
 	}
 	
+	/**
+	 * Returns all users where login matches the given pattern
+	 * @param pattern Searchvalue
+	 * @return ArrayList of Users
+	 * @throws SQLException
+	 */
 	public static ArrayList<User> GetUsers(String pattern) throws SQLException
 	{
 		ArrayList<User> users = new ArrayList<User>();
@@ -80,6 +90,12 @@ public class UserService {
 		return users;
 	}
 	
+	/**
+	 * Method to get a User matching the pattern
+	 * @param pattern Input value to search the User
+	 * @return Returns a User
+	 * @throws SQLException
+	 */
 	public static User GetUser(String pattern) throws SQLException
 	{
 		User user = null;
@@ -122,7 +138,10 @@ public class UserService {
 		
 		return user;
 	}
-	
+	 /**
+	  * Method to Update User-data
+	  * @param user
+	  */
 	public static void UpdateUser(User user) {
 		String query = "UPDATE USERDATA SET name='%s', surname ='%s', email ='%s', postcode='%s',street='%s',city='%s', phone='%s',streetno='%s'"
 				+ " WHERE udid in (SELECT udid from USERLOGIN where ulid = '%d')";
@@ -156,7 +175,11 @@ public class UserService {
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
-	
+	/**
+	 * Method to update the userrights
+	 * @param user
+	 * @param rightnum
+	 */
 	public static void UpdateUserRights(User user, int rightnum)
 	{
 		String query = "UPDATE USERLOGIN SET utid= '%d' where ulid ='%d'";

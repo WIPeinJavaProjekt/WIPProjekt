@@ -19,7 +19,7 @@ import classes.Users;
 import services.*;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation for registration
  */
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
@@ -33,6 +33,9 @@ public class RegisterServlet extends HttpServlet {
     private User user = new User();
     private Safetyquestion sfQuestion = new Safetyquestion();
 
+    /**
+     * doGet loads user-data when it's not null (e.g. when passwords do not match - so that the other fields keep filled with data)
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		this.user.adress = this.adress;
@@ -44,8 +47,6 @@ public class RegisterServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-			
-//		this.user = Users.get("").get(0);
 		
 		if(this.user!=null && this.adress!=null) {
 			request.setAttribute("location", this.user.adress.location);
@@ -98,6 +99,15 @@ public class RegisterServlet extends HttpServlet {
 		
 	}
 	
+	/**
+	 * 
+	 * @param request HttpServletRequest
+	 * @return int-value (0 for success, -1 for error)
+	 * @throws IOException
+	 * 
+	 * Registration method to write user-data into the database.
+	 * Checks whether passwords are the same.
+	 */
 	private int registrate (HttpServletRequest request) throws IOException {
 		
 		String password = request.getParameter("password");

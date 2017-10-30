@@ -19,6 +19,9 @@ import services.CategorieService;
 import services.SafetyquestionService;
 import services.UserService;	
 
+/**
+ * Start servlet implementation for the main page and the navigation
+ */
 @WebServlet("/start")
 public class StartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -79,6 +82,10 @@ public class StartServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	/**
+	 * Logout-method to handle the user logout.
+	 * @param request HttpServletRequest
+	 */
 	public void logout(HttpServletRequest request) {
 		request.getSession().setAttribute("userLoggedIn", false);
 		request.getSession().setAttribute("currentUser", null);

@@ -16,6 +16,10 @@ import classes.User;
 import services.LoginService;
 import services.UserService;
 
+/**
+ * Servlet für den Login eines Users
+ */
+
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -51,6 +55,14 @@ public class LoginServlet extends HttpServlet {
 
 	}
 	
+	/** 
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @return Returns a boolean value
+	 * @throws IOException
+	 * 
+	 * The "login"-method checks whether the user is in the database and can be logged in.
+	 */
 	public boolean login(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
