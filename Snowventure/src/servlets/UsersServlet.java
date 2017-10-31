@@ -67,17 +67,18 @@ public class UsersServlet extends HttpServlet {
 		
 		User user = (User)request.getSession().getAttribute("currentUser");
 		
-		if(request.getParameter("update-data") != null)
-		{			
+		if(request.getParameter("update-data") != null){			
 			updateCurrentUser(user, request);
 		}
-		else if(request.getParameter("update-password") != null)
-		{
+		else if(request.getParameter("update-password") != null){
 			changePassword(request);
 		}
-		else if(request.getParameter("update-squestion") != null)
-		{
+		else if(request.getParameter("update-squestion") != null){
 			changeSafetyQuestion(user, request);
+		}
+		else if(request.getParameter("addArticle") != null){
+			response.sendRedirect("article");
+			return;
 		}
 				
 		doGet(request, response);
