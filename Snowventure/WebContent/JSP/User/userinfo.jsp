@@ -1,17 +1,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${not empty selectedUser}">
-	<h1>${selectedUser.username}</h1>
-</c:if>
-
 <form class="pure-form" action="register" method="post">
+    
+    <c:if test="${not empty selectedUser && not empty currentUser}">
+    <legend>
+    	<h1>Ausgewählter Nutzer:	"${selectedUser.username}"</h1>
+    </legend>
+    </c:if>
+    
     <div class="pure-g">
 	    <div class ="pure-u-1-2 leftdiv">
 		    <fieldset class="pure-group">								    
 		    	<label>Name</label>							    	
+		    	<c:if test="${selectedUser == null || empty currentUser}">
 		    	<div class="pure-control-group">
 		            <input class="boxedinput" id="username"  name="username" value="${username}" type="text" required placeholder="Benutzername">
-		        </div>					        
+		        </div>	
+		        </c:if>				        
 		        <div class="pure-control-group">
 		            <input class="boxedinput" id="name" name="name" value="${name}" type="text" required placeholder="Vorname">
 		        </div>
@@ -60,17 +65,23 @@
 		        <div class="pure-control-group">
 	                <label>Nutzertyp</label>
 	                <select id="state" name="state" class="boxedinput" required>
-	                    <option value="customer" <c:if test="${selectedUser.utid=='2'}"><c:out value="selected"/></c:if>>Kunde</option>
-	                    <option value="employee" <c:if test="${selectedUser.utid=='3'}"><c:out value="selected"/></c:if>>Mitarbeiter</option>
-	                    <option value="admin" <c:if test="${selectedUser.utid=='1'}"><c:out value="selected"/></c:if>>Admin</option>
+	                    <option value="customer" <c:if test="${not empty currentUser && selectedUser.utid=='2'}"><c:out value="selected"/></c:if>>Kunde</option>
+	                    <option value="employee" <c:if test="${not empty currentUser && selectedUser.utid=='3'}"><c:out value="selected"/></c:if>>Mitarbeiter</option>
+	                    <option value="admin" <c:if test="${not empty currentUser && selectedUser.utid=='1'}"><c:out value="selected"/></c:if>>Admin</option>
 	                </select>
 	            </div>
 	            </c:if>
 	        </fieldset>
-		    
 	       	<fieldset>
 				<div class="pure-control-group">
+				<c:choose>
+				<c:when test="${empty currentUser || selectedUser == null}">
 		            <button class="pure-button pure-button-primary boxedinput" type="submit" name="submitRegister" class="pure-button pure-button-primary">Abschicken</button>
+		        </c:when>
+		        <c:when test="${not empty currentUser && selectedUser != null}">
+		            <button class="pure-button pure-button-primary boxedinput" type="submit" name="submitUpdate" class="pure-button pure-button-primary">Speichern</button>
+		        </c:when>
+		        </c:choose>   
 		        </div>
 	       	</fieldset>
 		</div>
@@ -81,14 +92,15 @@
 		            <select class="boxedinput" id="safetyQuestion" name="safetyQuestion" required>
 		            	 <option value="">Bitte Sicherheitsfrage auswählen</option>
 					    <c:forEach items="${squestions}" var="squestion">
-					        <option value="${squestion.getId()}">${squestion.getQuestion()}</option>
+					        <option value="${squestion.getId()}"  <c:if test="${not empty currentUser && squestion.getId() == selectedUser.squestion.getId()}">selected</c:if>>${squestion.getQuestion()}</option>
 					    </c:forEach>
 					</select>
 		        </div>
 		        <div class="pure-control-group">
-		            <input class="boxedinput" id="safetyAnswer" name="safetyAnswer" type="text" required placeholder="Antwort">
+		            <input class="boxedinput" id="safetyAnswer" name="safetyAnswer" type="text"  <c:if test="${not empty currentUser && selectedUser != null}">value="${ selectedUser.squestion.getAnswer() }"</c:if> required placeholder="Antwort">
 		        </div>
 	        </fieldset>
 		</div>
 	</div>
 </form>
+<div class="pure-u-1-5"></div>

@@ -18,74 +18,42 @@ import classes.*;
 import services.*;
 
 /**
- * Servlet implementation class UsersServlet
+ * Servlet für die Bearbeitung und Rückgabe von Nutzern
  */
+
 @WebServlet("/users")
 public class UsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public UsersServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("search-user") != null || request.getParameter("back") != null)
 		{			
-			try 
-			{
-				List<User> userlist = UserService.GetUsers(request.getParameter("user-info"));
-				if(userlist != null)
-				{
-					System.out.println(userlist.size());			
-				}
-
-				System.out.println(userlist.size());	
-				request.getSession().setAttribute("userlist", userlist);
-				
-				if(userlist.size() == 0 && request.getParameter("back") == null)
-				{ request.getSession().setAttribute("nouserfound", "true");	}
-				else 
-				{ request.getSession().setAttribute("nouserfound", "false"); }
-
-				RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=usersearch");
-				rd.forward(request, response);
-			} 
-			catch (Exception e) 
-			{
-				System.out.println(-1);
-				
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		/*else if (request.getParameter("page") == "userinfo")
+			searchforUsers(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=usersearch");
+			rd.forward(request, response);
+			return;
+		}		
+		else if (request.getParameter("selecteduser") != null)
 		{
-			try {
-				User user = UserService.GetUser(request.getParameter("uname"));
-				if(user != null) 
-				{
-				request.getSession().setAttribute("selectedUser", user);
-				}
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			getSelectedUser(request, response);
 			RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=userinfo");
 			rd.forward(request, response);
-		}*/
-		else {
-			
-			try {
+			return;
+		}
+		else 
+		{		
+			try 
+			{
 				ArrayList<Safetyquestion> squestions = SafetyquestionService.GetSafetyquestion();
 				request.getSession().setAttribute("squestions", squestions);				
-			} catch (SQLException e) {
+			} 
+			catch (SQLException e) 
+			{
 				e.printStackTrace();
 				System.out.println(-1);	
 			}
@@ -97,28 +65,11 @@ public class UsersServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("currentUser");
+		User user = (User)request.getSession().getAttribute("currentUser");
 		
 		if(request.getParameter("update-data") != null)
 		{			
-			Adress adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
-									   request.getParameter("street"), request.getParameter("postcode"));		
-			
-			String usertype = request.getParameter("state");
-		
-			user.adress = adress;
-			user.email = request.getParameter("email");
-			user.surname = request.getParameter("last-name");
-			user.name = request.getParameter("first-name");			
-			
-			if(usertype != null && usertype != "")
-			{user.utid = usertype.equals("admin")? 1 : usertype.equals("employee")? 3 : 2;}
-			
-			UserService.UpdateUser(user);	
-			UserService.UpdateUserRights(user, user.utid);
-			
-			session.setAttribute("currentUser", user);
+			updateCurrentUser(user, request);
 		}
 		else if(request.getParameter("update-password") != null)
 		{
@@ -126,15 +77,20 @@ public class UsersServlet extends HttpServlet {
 		}
 		else if(request.getParameter("update-squestion") != null)
 		{
-			user.squestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion").toString()), "", request.getParameter("safetyAnswer").toString());
-			UserService.UpdateUser(user);
-			session.setAttribute("currentUser", user);
-			System.out.println("sQuestion updated.");	
+			changeSafetyQuestion(user, request);
 		}
 				
 		doGet(request, response);
 	}
 
+	
+	
+	/** 
+	 * @param request HttpServletRequest
+	 * @throws IOException
+	 * 
+	 * The "changePassword"-method checks whether the given password is correct for this specific user and can be updated to the new password.
+	 */
 	private void changePassword(HttpServletRequest request)
 	{
 		String old_password = request.getParameter("password");
@@ -167,4 +123,113 @@ public class UsersServlet extends HttpServlet {
 		request.setAttribute("passworderror", "Das angegebene Nutzerpasswort ist falsch.");
 	}
 	
+	
+	
+	/** 
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @throws IOException
+	 * 
+	 * The "searchforUsers"-method gets all users depending on the given search criteria (username). 
+	 * If available the result list is added into the session attributes.
+	 */
+	private void searchforUsers(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{		
+		List<User> userlist = null;
+		
+		try 
+		{
+			userlist = UserService.GetUsers(request.getParameter("user-info"));
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		System.out.println(userlist.size());	
+		request.getSession().setAttribute("userlist", userlist);
+		
+		if(userlist.size() == 0 && request.getParameter("back") == null)
+		{ 
+			request.getSession().setAttribute("nouserfound", true);	
+		}
+		else 
+		{ 
+			request.getSession().setAttribute("nouserfound", false); 
+		}
+	}
+	
+	
+	
+	/** 
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @throws IOException
+	 * 
+	 * The "getSelectedUser"-method searches for the user having the given username and if available the user is set into session attributes.
+	 */
+	private void getSelectedUser(HttpServletRequest request, HttpServletResponse response) throws IOException 
+	{		
+		try {
+			User user = UserService.GetUser(request.getParameter("selecteduser"));
+			if(user != null) 
+			{
+				request.getSession().setAttribute("selectedUser", user);
+				System.out.println("User is selected and set as attribute.");
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	/** 
+	 * @param user User
+	 * @param request HttpServletRequest
+	 * @throws IOException
+	 * 
+	 * The "updateCurrentUser"-method updates data and rights of the user which is currently logged in and resets the currentUser attribute of the session.
+	 */
+	private void updateCurrentUser(User user, HttpServletRequest request) throws IOException
+	{
+		Adress adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
+				   				   request.getParameter("street"), request.getParameter("postcode"));		
+
+		String usertype = request.getParameter("state");
+		
+		user.adress = adress;
+		user.email = request.getParameter("email");
+		user.surname = request.getParameter("last-name");
+		user.name = request.getParameter("first-name");			
+		
+		if(usertype != null && usertype != "")
+		{
+			user.utid = usertype.equals("admin")? 1 : usertype.equals("employee")? 3 : 2;
+		}
+		
+		UserService.UpdateUser(user);	
+		UserService.UpdateUserRights(user, user.utid);
+		
+		request.getSession().setAttribute("currentUser", user);
+	}
+	
+	
+	/** 
+	 * @param user User
+	 * @param request HttpServletRequest
+	 * @throws IOException
+	 * 
+	 * The "changeSafetyQuestion"-method updates the safetyquestion and answer of the user which is currently logged in and resets the currentUser attribute of the session.
+	 */
+	private void changeSafetyQuestion(User user, HttpServletRequest request) throws IOException
+	{
+		user.squestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion").toString()), "", request.getParameter("safetyAnswer").toString());
+		
+		UserService.UpdateUser(user);
+		
+		request.getSession().setAttribute("currentUser", user);
+		
+		System.out.println("sQuestion updated.");	
+	}
 }

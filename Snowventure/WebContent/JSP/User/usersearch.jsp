@@ -44,6 +44,7 @@
 </div>
 
 <div class="search-results">
+	<div class="pure-u-1-5"></div>
 	<c:if test="${ not empty userlist }">
 		<table class="pure-table pure-table-horizontal">
 		    <thead>
@@ -71,7 +72,7 @@
 							</c:choose>
 						</td>
 						<td style="padding:0%">
-							<a href="users?page=userinfo" class="pure-button pure-button-primary boxedinput" style="width:100%;height:100%">Bearbeiten</a>		
+							<a href="users?page=userinfo&selecteduser=${user.username}" class="pure-button pure-button-primary boxedinput" style="width:100%;height:100%">Bearbeiten</a>		
 						</td>
 					</tr>
 			</c:forEach>
@@ -83,6 +84,7 @@
 			<p class="error">Es wurde keine Suchergebnisse gefunden.</p>
 		</form>	
 	</c:if>	
+	<div class="pure-u-1-5"></div>	
 </div>
 
 <div class="user-info">

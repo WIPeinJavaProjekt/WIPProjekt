@@ -31,9 +31,9 @@
 						<form class="pure-form pure-form-aligned" method="post" action="forgottenPassword">
 							<fieldset class="pure-group">
 							    <div class="pure-control-group">
-									<input class="boxedinput" id="username" name="username" type="text" required placeholder="Nutzername" value="${userpw.username}">					
+									<input class="boxedinput" id="username" name="username" type="text" required placeholder="Nutzername" value="${userpw.username}" <c:if test="${ not empty userpw }">readonly</c:if>>					
 									<div class="pure-control-group">
-								       <button class="pure-button pure-button-primary boxedinput" type="submit" name="confirmusername" class="pure-button pure-button-primary">Bestätigen</button>
+								       <button class="pure-button pure-button-primary boxedinput" type="submit" name="confirmusername" class="pure-button pure-button-primary" <c:if test="${ not empty userpw }">disabled</c:if> >Bestätigen</button>
 								    </div>
 							    </div>
 					        </fieldset>    

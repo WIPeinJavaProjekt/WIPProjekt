@@ -14,30 +14,21 @@ import classes.User;
 import services.UserService;
 
 /**
- * Servlet implementation class ForgottenPasswordServlet
+ * Servlet zum Zurücksetzen des Passwortes eines Nutzers
  */
 @WebServlet("/forgottenPassword")
 public class ForgottenPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ForgottenPasswordServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("param") != null)
 		{
-			request.getSession().removeAttribute("userpw");
-			request.getSession().removeAttribute("correctAnswer");
-			request.getSession().removeAttribute("pwerror");
+			removeResetAttributes(request, response);
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/forgottenpassword.jsp");
@@ -45,9 +36,6 @@ public class ForgottenPasswordServlet extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("back") != null)
@@ -57,9 +45,7 @@ public class ForgottenPasswordServlet extends HttpServlet {
 		}
 		else if(request.getParameter("confirmusername") != null)
 		{
-			request.getSession().removeAttribute("userpw");
-			request.getSession().removeAttribute("correctAnswer");
-			request.getSession().removeAttribute("pwerror");
+			removeResetAttributes(request, response);
 			
 			try {
 				User user = UserService.GetUser(request.getParameter("username"));		
@@ -78,29 +64,59 @@ public class ForgottenPasswordServlet extends HttpServlet {
 		}
 		else if (request.getParameter("submitNewPassword") != null)
 		{
-			String npw = request.getParameter("newpassword");
-			String npwrepeat = request.getParameter("newpasswordrepeat");
-			
-			if(npw.toString().equals(npwrepeat.toString()))
-			{
-				User user = (User)request.getSession().getAttribute("userpw");
-				
-				user.password = npw;
-				
-				UserService.UpdateUser(user);
-				
-				request.getSession().removeAttribute("userpw");
-				request.getSession().removeAttribute("correctAnswer");
-				request.getSession().removeAttribute("pwerror");
-				
-				response.sendRedirect(request.getContextPath() + "/login");
-				return;
-			}
-			else 
-			{
-				request.getSession().setAttribute("pwerror", "Die Passwörter stimmen nicht überein.");
-			}
+			if(changePassword(request, response))
+			{return;}
 		}
 		doGet(request, response);
+	}
+	
+	
+	
+	/** 
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @return Returns a boolean value
+	 * @throws IOException
+	 * 
+	 * The "changePassword"-method checks whether the given passwords are equal and resets the password value of the given user.
+	 */
+	private boolean changePassword(HttpServletRequest request, HttpServletResponse response) throws IOException 
+	{
+		String npw = request.getParameter("newpassword");
+		String npwrepeat = request.getParameter("newpasswordrepeat");
+		
+		if(npw.toString().equals(npwrepeat.toString()))
+		{
+			User user = (User)request.getSession().getAttribute("userpw");
+			
+			user.password = npw;
+			
+			UserService.UpdateUser(user);
+			
+			removeResetAttributes(request, response);
+			
+			response.sendRedirect(request.getContextPath() + "/login");
+			return true;
+		}
+		else 
+		{
+			request.getSession().setAttribute("pwerror", "Die Passwörter stimmen nicht überein.");
+			return false;
+		}
+	}
+	
+	
+	/** 
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @throws IOException
+	 * 
+	 * The "removeResetAttributes"-method removes all attributes that are necessary to reset the users password.
+	 */
+	private void removeResetAttributes(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		request.getSession().removeAttribute("userpw");
+		request.getSession().removeAttribute("correctAnswer");
+		request.getSession().removeAttribute("pwerror");
 	}
 }

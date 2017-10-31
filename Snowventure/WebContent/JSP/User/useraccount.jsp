@@ -38,10 +38,13 @@
 	    </ul>
 	</div>
 	
+	<div class="pure-u-4-5">
 	<div id="content">
 		<script type="text/javascript" src="./JS/useraccount.js"></script>
 	</div>
 	</div>
+	</div>
+	
 	<%@include file = "../Basic/footer.jsp"%>
 </body>
 </html>

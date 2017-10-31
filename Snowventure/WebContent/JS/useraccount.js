@@ -5,7 +5,7 @@
 					
 // example_link to work with: example.com?param1=name&param2=&id=6		
 $.urlParam = function(name){
-    var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
+    var results = new RegExp('[\?&]' + name + '=([^&]*)').exec(window.location.href);
     if (results==null){
        return null;
     }
