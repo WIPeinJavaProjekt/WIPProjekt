@@ -80,6 +80,18 @@ public class UsersServlet extends HttpServlet {
 			response.sendRedirect("article");
 			return;
 		}
+		else if(request.getParameter("back") != null)
+		{
+			response.sendRedirect("users?page=usersearch");
+			return;
+		}
+		else if(request.getParameter("updateSelection") != null)
+		{
+			User selectedUser = (User)request.getSession().getAttribute("selectedUser");			
+			updateSelectedUser(selectedUser, request);
+			response.sendRedirect("users?page=userinfo&selectedUser=" + selectedUser.username );
+			return;
+		}
 				
 		doGet(request, response);
 	}
@@ -201,8 +213,8 @@ public class UsersServlet extends HttpServlet {
 		
 		user.adress = adress;
 		user.email = request.getParameter("email");
-		user.surname = request.getParameter("last-name");
-		user.name = request.getParameter("first-name");			
+		user.surname = request.getParameter("surname");
+		user.name = request.getParameter("name");			
 		
 		if(usertype != null && usertype != "")
 		{
@@ -232,5 +244,52 @@ public class UsersServlet extends HttpServlet {
 		request.getSession().setAttribute("currentUser", user);
 		
 		System.out.println("sQuestion updated.");	
+	}
+	
+	
+	
+	/** 
+	 * @param user User
+	 * @param request HttpServletRequest
+	 * @throws IOException
+	 * 
+	 * The "updateSelectedUser"-method updates data and rights of the selected user and resets the selectedUser attribute of the session.
+	 */
+	private void updateSelectedUser(User user, HttpServletRequest request) throws IOException
+	{
+		Adress adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
+				   				   request.getParameter("street"), request.getParameter("postcode"));
+		
+		user.squestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion").toString()), "", request.getParameter("safetyAnswer").toString());
+
+		String password = request.getParameter("password");
+		String passwordrepeat = request.getParameter("passwordRepeat");
+		
+		if(password != "" && passwordrepeat != "" && password.equals(passwordrepeat))
+		{
+			user.password = request.getParameter("password").toString();
+			request.getSession().removeAttribute("error");
+		}
+		else if(password != "" && passwordrepeat != "")
+		{
+			request.getSession().setAttribute("error", "Die Passwörter stimmen nicht überein.");
+		}
+		
+		String usertype = request.getParameter("state");
+		
+		user.adress = adress;
+		user.email = request.getParameter("email");
+		user.surname = request.getParameter("surname");
+		user.name = request.getParameter("name");			
+
+		if(usertype != null && usertype != "")
+		{
+			user.utid = usertype.equals("admin")? 1 : usertype.equals("employee")? 3 : 2;
+		}
+		
+		UserService.UpdateUser(user);	
+		UserService.UpdateUserRights(user, user.utid);
+		
+		request.getSession().setAttribute("selectedUser", user);
 	}
 }

@@ -11,12 +11,12 @@
             
 	            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 	                <label for="first-name">Vorname</label>
-	                <input id="first-name" name="first-name" class="pure-u-23-24" type="text" value="${currentUser.name}" required>
+	                <input id="first-name" name="name" class="pure-u-23-24" type="text" value="${currentUser.name}" required>
 	            </div>
 	
 	            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 	                <label for="last-name">Nachname</label>
-	                <input id="last-name" name="last-name" class="pure-u-23-24" type="text" value="${currentUser.surname}" required>
+	                <input id="last-name" name="surname" class="pure-u-23-24" type="text" value="${currentUser.surname}" required>
 	            </div>
 	
 	            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
