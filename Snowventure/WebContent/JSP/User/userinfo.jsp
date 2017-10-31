@@ -3,19 +3,19 @@
 <form class="pure-form" action="register" method="post">
     
     <c:if test="${not empty selectedUser && not empty currentUser}">
-    <legend>
-    	<h1>Ausgewählter Nutzer:	"${selectedUser.username}"</h1>
-    </legend>
+	    <legend>
+	    	<h1>Ausgewählter Nutzer:	"${selectedUser.username}"</h1>
+	    </legend>
     </c:if>
     
     <div class="pure-g">
 	    <div class ="pure-u-1-2 leftdiv">
-		    <fieldset class="pure-group">								    
-		    	<label>Name</label>							    	
+		    <fieldset class="pure-group">
+		    	<label>Name</label>
 		    	<c:if test="${selectedUser == null || empty currentUser}">
-		    	<div class="pure-control-group">
-		            <input class="boxedinput" id="username"  name="username" value="${username}" type="text" required placeholder="Benutzername">
-		        </div>	
+			    	<div class="pure-control-group">
+			            <input class="boxedinput" id="username"  name="username" value="${username}" type="text" required placeholder="Benutzername">
+			        </div>	
 		        </c:if>				        
 		        <div class="pure-control-group">
 		            <input class="boxedinput" id="name" name="name" value="${name}" type="text" required placeholder="Vorname">

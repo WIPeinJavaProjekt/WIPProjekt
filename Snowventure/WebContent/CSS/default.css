@@ -112,6 +112,16 @@ footer .pure-u-1-3 {
 	background-size: cover;
 }
 
+#articlebox {
+	background-image: url("../Images/login_background.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
 .loginfield{
 	width:250px;
 }

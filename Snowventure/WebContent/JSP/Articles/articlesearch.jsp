@@ -22,14 +22,17 @@
 						<div class="pure-u-1-5">
 			        		<button type="submit" class="pure-button pure-button-primary boxedinput">Suchen</button>
 			        	</div>
-			        	
-			        	<div class="pure-u-1-5">
-			        		<button type="submit" name="addArticle" class="pure-button pure-button-primary boxedinput">Artikel hinzufügen</button>
-			        	</div>
 			        </div>
 			    </fieldset>
-			</form>
+			</form>			
 		</div>
+		<div>
+			<form class="pure-form" action="users" method="POST">
+				<div class="pure-u-1-5">
+	        		<button type="submit" name="addArticle" class="pure-button pure-button-primary boxedinput">Artikel hinzufügen</button>
+	        	</div>
+			</form>		
+		</div>	
 	</div>
 	<div class="pure-u-1-5"></div>
 </div>

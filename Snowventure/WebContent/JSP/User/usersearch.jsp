@@ -31,15 +31,15 @@
 			        </div>
 			    </fieldset>
 			</form>			
-			</div>
-				<div>
-				<form class="add-new-user-form" action="register" method="GET">
-					<div class="pure-u-1-5" id="add-new-user">
-				        <button type="submit" name="new-user" class="pure-button pure-button-primary boxedinput" style="width=20%">Nutzer anlegen</button>
-				    </div>
-				</form>		
-			</div>			
 		</div>
+		<div>
+			<form class="add-new-user-form" action="register" method="GET">
+				<div class="pure-u-1-5" id="add-new-user">
+			        <button type="submit" name="new-user" class="pure-button pure-button-primary boxedinput" style="width=20%">Nutzer anlegen</button>
+			    </div>
+			</form>		
+		</div>			
+	</div>
 	<div class="pure-u-1-5"></div>
 </div>
 

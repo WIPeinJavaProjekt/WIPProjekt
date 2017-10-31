@@ -30,6 +30,12 @@ public class Article {
 		selectedversion = 0;
 	}
 	
+	public Article(String name, String description)
+	{
+		this.name = name;
+		this.description = description;
+	}
+	
 	public Article(Article a)
 	{
 		this.ID = a.ID;
