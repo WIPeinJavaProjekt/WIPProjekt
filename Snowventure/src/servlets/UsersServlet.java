@@ -40,6 +40,7 @@ public class UsersServlet extends HttpServlet {
 		}		
 		else if (request.getParameter("selecteduser") != null)
 		{
+			request.getSession().removeAttribute("error");
 			getSelectedUser(request, response);
 			RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=userinfo");
 			rd.forward(request, response);
@@ -265,10 +266,11 @@ public class UsersServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String passwordrepeat = request.getParameter("passwordRepeat");
 		
+		request.getSession().removeAttribute("error");
+		
 		if(password != "" && passwordrepeat != "" && password.equals(passwordrepeat))
 		{
 			user.password = request.getParameter("password").toString();
-			request.getSession().removeAttribute("error");
 		}
 		else if(password != "" && passwordrepeat != "")
 		{

@@ -64,6 +64,7 @@ public class RegisterServlet extends HttpServlet {
 		}
 		
 		request.getSession().removeAttribute("selectedUser");
+		request.getSession().removeAttribute("error");
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/register.jsp");
 		rd.forward(request, response);
