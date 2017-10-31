@@ -73,7 +73,6 @@ public class DatabaseConnector {
 	}
 	
 	public ResultSet SelectQuery(String query) {
-		System.out.println("Im using the select");
 		if(this.connect != null)
 			try {
 				Statement statement = this.connect.createStatement();

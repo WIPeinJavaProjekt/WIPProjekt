@@ -28,8 +28,6 @@ public class ArticleService {
 				return dummy;
 		}
 		
-		System.out.println("aid addArticle: " + aid);
-		
 		return aid;
 	}
 	
@@ -46,11 +44,7 @@ public class ArticleService {
 				av.price,
 				av.ID);
 		
-		System.out.println("Artikelversion insert: " + query);
-		
 		avid = DatabaseConnector.createConnection().InsertQuery(query);
-		
-		System.out.println("avid: " + avid);
 		
 		return avid;
 	}
