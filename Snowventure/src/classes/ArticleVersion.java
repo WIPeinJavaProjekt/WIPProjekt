@@ -6,6 +6,8 @@ public class ArticleVersion extends Article{
 	public String propertyvalue;
 	public double price;
 	
+	public ArticleVersion() {};
+	
 	public ArticleVersion(int versionid, String property,String propertyvalue, double price, Article a)
 	{
 		super(a);
@@ -14,6 +16,4 @@ public class ArticleVersion extends Article{
 		this.propertyvalue = propertyvalue;
 		this.price = price;
 	}
-	
-	
 }

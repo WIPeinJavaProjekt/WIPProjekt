@@ -15,6 +15,8 @@ public class Article {
 	public ArrayList<ArticleVersion> versions;
 	private int selectedversion;
 	
+	public Article(){}
+	
 	public Article(int ID)
 	{
 		this.ID = ID;
@@ -34,6 +36,8 @@ public class Article {
 	{
 		this.name = name;
 		this.description = description;
+		versions = new ArrayList<ArticleVersion>();
+		selectedversion = 0;
 	}
 	
 	public Article(Article a)

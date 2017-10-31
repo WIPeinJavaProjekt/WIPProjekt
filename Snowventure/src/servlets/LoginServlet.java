@@ -77,7 +77,6 @@ public class LoginServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 	        session.setAttribute("currentUser", user);
-	        session.setAttribute("userLoggedIn", true);
 	        response.sendRedirect("start");
 	        
 	        return true;

@@ -2,9 +2,9 @@ package services;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
+
 import classes.*;
-
-
 
 public class ArticleService {
 	
@@ -16,26 +16,41 @@ public class ArticleService {
 				a.name,
 				a.description);
 		aid = DatabaseConnector.createConnection().InsertQuery(query);
+		a.ID = aid;
 		
 		for(ArticleVersion av: a.versions) {
 			
+			av.ID = a.ID;
+			
 			int dummy = AddArticleVersion(av);
+			System.out.println("dummy: " + dummy);
 			if(dummy == -1)
 				return dummy;
 		}
+		
+		System.out.println("aid addArticle: " + aid);
 		
 		return aid;
 	}
 	
 	public static int AddArticleVersion(ArticleVersion av) {
+		
+		Locale.setDefault(Locale.ENGLISH);
+		
 		String query;
 		int avid = -1;
-		query = "INSERT INTO ARTICLEVERSION(property,propertyvalue,defaultprice) VALUES('%s','%s','%f')";
+		query = "INSERT INTO ARTICLEVERSION(property,propertyvalue,defaultprice,aid) VALUES('%s','%s','%f','%d')";
 		query = String.format(query,
 				av.property,
 				av.propertyvalue,
-				av.price);
+				av.price,
+				av.ID);
+		
+		System.out.println("Artikelversion insert: " + query);
+		
 		avid = DatabaseConnector.createConnection().InsertQuery(query);
+		
+		System.out.println("avid: " + avid);
 		
 		return avid;
 	}

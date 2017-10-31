@@ -42,7 +42,6 @@ public class StartServlet extends HttpServlet {
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		
 		System.out.println("Current User: " + currentUser != null ? "Kein User" : currentUser.name);
-		System.out.println("Is User logged in: " + request.getSession().getAttribute("userLoggedIn"));
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/welcome.jsp");
 		rd.forward(request, response);
@@ -87,7 +86,6 @@ public class StartServlet extends HttpServlet {
 	 * @param request HttpServletRequest
 	 */
 	public void logout(HttpServletRequest request) {
-		request.getSession().setAttribute("userLoggedIn", false);
 		request.getSession().setAttribute("currentUser", null);
 	}
 
