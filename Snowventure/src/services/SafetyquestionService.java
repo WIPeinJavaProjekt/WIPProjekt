@@ -6,12 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 import classes.*;
 
+/**
+ * Modelclass for Safetyquestion Administration
+ * 
+**/
 public class SafetyquestionService {
+	
+	/**
+	 * Returns all Safetyquestions
+	 * @return ArrayList of Safetyquestions
+	 * @throws SQLException
+	 */
 	public static ArrayList<Safetyquestion> GetSafetyquestion() throws SQLException
 	{
 		ArrayList<Safetyquestion> squestions = new ArrayList<Safetyquestion>();
 		String query;
-	    query = "SELECT sqid, safetyquestion from SAFETYQUESTION;";
+	    query = "SELECT sqid, safetyquestion from SAFETYQUESTION WHERE TechIsActive = 1 AND TechIsDeleted = 0;";
 		
 	    ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 	    

@@ -6,8 +6,17 @@ import java.util.Locale;
 
 import classes.*;
 
+/**
+ * Modelclass for article administration
+ * 
+**/
 public class ArticleService {
 	
+	/**
+	 * Method for adding an Article
+	 * @param a the Article
+	 * @return int value depending on success of insertion
+	 */
 	public static int AddArticle(Article a) {
 		String query;
 		int aid = -1;
@@ -30,6 +39,11 @@ public class ArticleService {
 		return aid;
 	}
 	
+	/**
+	 * Method for adding an Articleversion
+	 * @param av the ArticleVersion
+	 * @return int value depending on success of insertion
+	 */
 	public static int AddArticleVersion(ArticleVersion av) {		
 		Locale.setDefault(Locale.ENGLISH);		
 		String query;
@@ -48,6 +62,10 @@ public class ArticleService {
 		return avid;
 	}
 	
+	/**
+	 * Method for updating an Article
+	 * @param a Article to be updated
+	 */
 	public static void UpdateArticle(Article a)
 	{
 		String query;
@@ -63,6 +81,10 @@ public class ArticleService {
 		
 	}
 	
+	/**
+	 * Method for updating an Articleversion
+	 * @param av Articleversion to be updated
+	 */
 	public static void UpdateArticleVersion(ArticleVersion av) {
 		Locale.setDefault(Locale.ENGLISH);
 		String query;
@@ -81,6 +103,12 @@ public class ArticleService {
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
+	/**
+	 * Method for getting all Articleversions of an Article
+	 * @param a Article
+	 * @return Arraylist of the specific Articleversions
+	 * @throws SQLException
+	 */
 	public static ArrayList<ArticleVersion> GetAllArticleVersion(Article a) throws SQLException {
 		ArrayList<ArticleVersion> av = new ArrayList<ArticleVersion>();
 		
@@ -98,10 +126,15 @@ public class ArticleService {
 		return av;
 	}
 	
+	/**
+	 * Method for getting all Articles
+	 * @return Arraylist of all Articles
+	 * @throws SQLException
+	 */
 	public static ArrayList<Article> GetAllArticles() throws SQLException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
-		String query = "SELECT aid, name, description FROM ARTICLE;";
+		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0;";
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
@@ -115,11 +148,16 @@ public class ArticleService {
 		return articles;
 	}
 	
+	/**
+	 * Method for getting all Articles with specific name
+	 * @param namepattern compare String
+	 * @return Arraylist with specific Articles
+	 * @throws SQLException
+	 */
 	public static ArrayList<Article> GetAllArticlesByName(String namepattern) throws SQLException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
-		String query = "SELECT aid, name, description FROM ARTICLE WHERE name ='%s';";
-		query = String.format(query, namepattern);
+		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND name like '%"+namepattern+"%';";
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
@@ -134,10 +172,17 @@ public class ArticleService {
 	}
 	
 	//Categorie nicht im Artikel enthalten da keine Relevanz für weitere Verarbeitung verkomplizierung für Bestellungen etc | Was passiert wenn sich Kategorie ändert? z.B. durch Umstruktuierung usw.
+	
+	/**
+	 * Method for Getting all Articles with specific categorie
+	 * @param c specific categories
+	 * @return Arraylist with specific Articles
+	 * @throws SQLException
+	 */
 	public static ArrayList<Article> GetAllArticlesByCategorie(Categorie c) throws SQLException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
-		String query = "SELECT aid, name, description FROM ARTICLE WHERE acid ='%d';";
+		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 acid ='%d';";
 		query = String.format(query, c.GetACID());
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
@@ -152,9 +197,15 @@ public class ArticleService {
 		return articles;
 	}
 	
+	/**
+	 * Method for getting a specific Article by its id
+	 * @param id Articleid
+	 * @return Article the specific Article
+	 * @throws SQLException
+	 */
 	public static Article GetArticle(int id) throws SQLException{
 		Article article = new Article(-1);
-		String query = "SELECT aid, name, description FROM ARTICLE WHERE aid='%d';";
+		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 aid='%d';";
 		query = String.format(query, id);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
@@ -167,29 +218,55 @@ public class ArticleService {
 		
 		return article;
 	}
-		
+	
+	
+	/**
+	 * Method for getting a specific Article by its id and selected version
+	 * @param av the selected version
+	 * @return Article the specific Article
+	 * @throws SQLException
+	 */
 	public static Article GetSelectedArticle(ArticleVersion av) throws SQLException {
 		Article article = new Article( GetArticle(av.ID));
 		
 		return PrepSelectedArticle(av.versionid,article);
 	}
-		
+	
+	/**
+	 * Method for getting a specific Article by its id and selected version
+	 * @param avid selected version id
+	 * @return Article the specific Article and selected version
+	 * @throws SQLException
+	 */
 	public static Article GetSelectedArticle(int avid) throws SQLException{
 		Article article = new Article( GetArticleIdFromAvid(avid));
 		
 		return PrepSelectedArticle(avid,article);
 	}
 
-	public static int GetArticleIdFromAvid(int avid) throws SQLException{
+	/**
+	 * Helper Method for getting a specific Articleid by its Articleversionid
+	 * @param avid selected version id
+	 * @return int id of the article
+	 * @throws SQLException
+	 */
+	private static int GetArticleIdFromAvid(int avid) throws SQLException{
 		int aid = -1;
 		
-		String query = "SELECT TOP 1 aid from articleversion where avid='%d'";
+		String query = "SELECT TOP 1 aid from articleversion where TechIsActive = 1 AND TechIsDeleted = 0 avid='%d'";
 		query = String.format(query, avid);
 		aid = DatabaseConnector.createConnection().InsertQuery(query);
 		
 		return aid;
 	}
 	
+	/**
+	 * Helper Method to prepare a selected Article
+	 * @param avid id of the selected version
+	 * @param a Article to be prepared
+	 * @return Article the specific Article and set selected version
+	 * @throws SQLException
+	 */
 	private static Article PrepSelectedArticle(int avid, Article a) {
 		for(int i = 0; i< a.versions.size(); i++)
 		{

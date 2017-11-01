@@ -4,6 +4,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import classes.*;
 
+/**
+ * Modelclass for user administration
+ * 
+**/
 public class UserService {	
 	
 	/**
@@ -62,7 +66,10 @@ public class UserService {
 				" FROM USERDATA a "+
 				" left join USERLOGIN b ON a.udid = b.udid"+
 				" left join SAFETYQUESTION s ON s.sqid = b.sqid"+
-				" WHERE b.login like '%"+pattern+"%'"+
+				" WHERE b.login like '%"+pattern+"%' "+
+				" AND a.TechIsActive = 1 AND a.TechIsDeleted = 0 "+
+				" AND b.TechIsActive = 1 AND b.TechIsDeleted = 0 "+
+				" AND s.TechIsActive = 1 AND s.TechIsDeleted = 0 "+
 				" ORDER BY b.login";
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
@@ -92,7 +99,7 @@ public class UserService {
 	/**
 	 * Method to get a User matching the pattern
 	 * @param pattern Input value to search the User
-	 * @return Returns a User
+	 * @return Returns specific User
 	 * @throws SQLException
 	 */
 	public static User GetUser(String pattern) throws SQLException
@@ -135,6 +142,7 @@ public class UserService {
 		
 		return user;
 	}
+	
 	 /**
 	  * Method to Update User-data
 	  * @param user

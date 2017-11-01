@@ -5,16 +5,28 @@ import java.util.ArrayList;
 import classes.*;
 
 
-
+/**
+ * Modelclass for shoppingcart administration
+ * 
+**/
 public class ShoppingCartService {
 
 	
-	//Bitte diese Methode benutzen, danke
+	/**
+	 * Update Shoppingcart by deleting and adding alls items
+	 * @param u User, who owns the shoppingcart
+	 */
 	public static void UpdateShopping(User u) {
 		DeleteShoppingCartPositions(u);
 		AddShoppingCart(u);
 	}
 	
+	/**
+	 * Get Shoppingcart from User
+	 * @param u User 
+	 * @return Shoppingcart from the User
+	 * @throws SQLException
+	 */
 	public static ShoppingCart GetShoppingCart(User u) throws SQLException {
 		String query ="SELECT avid,ulid,amount from SHOPPINGCART WHERE ulid='%d'";
 		query = String.format(query, u.ulid);
@@ -23,6 +35,12 @@ public class ShoppingCartService {
 		return scp;
 	}
 	
+	/**
+	 * Get Shoppingcart from Userid
+	 * @param ulid Userloginid
+	 * @return Shoppingcart from the Userloginid
+	 * @throws SQLException
+	 */	
 	public static ShoppingCart GetShoppingCart(int ulid) throws SQLException {
 		String query ="SELECT avid,ulid,amount from SHOPPINGCART WHERE ulid='%d'";
 		query = String.format(query, ulid);
@@ -31,7 +49,12 @@ public class ShoppingCartService {
 		return scp;
 	}
 
-	//HILFSMETHODEN
+	/**
+	 * Helper Method for Updating the Shoppingcart
+	 * @param u User, who owns the shoppingcart
+	 * @return positiv in case of success, negativ in case of an error
+	 * @throws SQLException
+	 */	
 	private static int AddShoppingCart(User u) {
 		int scpid = 1;
 		
@@ -46,6 +69,13 @@ public class ShoppingCartService {
 		return scpid;
 	}
 	
+	/**
+	 * Helper Method for Adding a shoppingcartposition
+	 * @param position Shoppingcartposition of the Article to be added
+	 * @param ulid the Userloginid belongs to the position
+	 * @return positiv in case of success, negativ in case of an error
+	 * @throws SQLException
+	 */	
 	private static int AddShoppingCartPosition(ShoppingCartPosition position, int ulid) {
 		int pid = -1;
 		String query ="INSERT INTO SHOPPINGCART(avid,ulid,amount) VALUES(%d,%d,%d);";
@@ -54,6 +84,13 @@ public class ShoppingCartService {
 		return pid;
 	}
 	
+	/**
+	 * Helper Method for Selection all Shoppingcartpositions
+	 * @param position Shoppingcartposition of the Article to be added
+	 * @param ulid the Userloginid belongs to the position
+	 * @return Arraylist of ShoppingCartpositions
+	 * @throws SQLException
+	 */		
 	private static ArrayList<ShoppingCartPosition> GetShoppingCartfromQuery(String query) throws SQLException {
 		ArrayList<ShoppingCartPosition> scp = new ArrayList<ShoppingCartPosition>();
 		
@@ -67,6 +104,10 @@ public class ShoppingCartService {
 		return scp;
 	}
 	
+	/**
+	 * Helper Method for Deleting all Shoppingcartpositions from a specific user
+	 * @param u User, whose shoppingcartpositions should be deleted 
+	 */	
 	private static void DeleteShoppingCartPositions(User u) {
 		String query ="DELETE SHOPPINGCART WHERE ulid = '%d';";
 		query = String.format(query, u.ulid);

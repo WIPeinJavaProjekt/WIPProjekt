@@ -4,8 +4,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import classes.*;
 
-
+/**
+ * Modelclass for Stock administration
+ * 
+**/
 public class StockService {
+	
+	/**
+	 * Get Stock from an ArticleVersion
+	 * @param a ArticleVersion
+	 * @return amount of the submitted article
+	 * @throws SQLException
+	 */
 	public static int GetStock(ArticleVersion a) throws SQLException {
 		int amount = 0;
 		String query;
@@ -21,6 +31,13 @@ public class StockService {
 		return amount;
 	}
 	
+	
+	/**
+	 * Update the Stock of an Article
+	 * @param a ArticleVersion, which 
+	 * @param amount Amount of ArticleVersions added to the Stock, negative value for removal
+	 * @throws SQLException
+	 */
 	public void UpdateStock(ArticleVersion a, int amount) throws SQLException {
 		int newamount = GetStock(a) - Math.abs(amount);
 		if(newamount >=0 )

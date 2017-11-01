@@ -6,8 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import classes.*;
 
-
+/**
+ * Modelclass for categorie administration
+ * 
+**/
 public class CategorieService {
+	
+	/**
+	 * Method for getting all Categories
+	 * @return Arraylist with all Categories
+	 * @throws SQLException
+	 */
 	public static ArrayList<Categorie> GetCategories() throws SQLException
 	{
 		ArrayList<Categorie> categories = new ArrayList<Categorie>();

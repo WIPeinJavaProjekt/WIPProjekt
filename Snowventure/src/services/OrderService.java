@@ -7,11 +7,19 @@ import java.util.Collection;
 
 import classes.*;
 
-
+/**
+ * Modelclass for order administration
+ * 
+**/
 public class OrderService {
 	
 	//Email für info per mail bzw services die per mail ausgeliefert werden per telefon geht ja schlecht...
-	public static int AddOrder(Order o, Adress a){
+	/**
+	 * Add an Order
+	 * @param o the Order
+	 * @return int value depending on success of insertion
+	 */
+	public static int AddOrder(Order o){
 		int oid= -1;
 		String query="INSERT INTO ASSIGNMENT(Name, Surname, Email, Postcode, Street, StreetNo, City,ulid) "+
 					 "VALUES('%s','%s','%s','%s','%s','%s','%s','%d')";
@@ -19,10 +27,10 @@ public class OrderService {
 					o.name,
 					o.surname,
 					o.email,
-					a.postcode,
-					a.street,
-					a.houseno,
-					a.location,
+					o.adress.postcode,
+					o.adress.street,
+					o.adress.houseno,
+					o.adress.location,
 					o.ulid
 				);
 		oid = DatabaseConnector.createConnection().InsertQuery(query);
@@ -37,6 +45,13 @@ public class OrderService {
 		return oid;
 	}
 	
+	/**
+	 * Helper Method for Adding a Orderdetails
+	 * @param shoppingcart shoppingcart, which includes the articles ordered
+	 * @param orid the depending orderid
+	 * @return positiv in case of success, negativ in case of an error
+	 * @throws SQLException
+	 */	
 	private static int AddOrderDetails(ShoppingCart shoppingCart, int orid) {
 		int odid= -1;
 		
@@ -50,6 +65,13 @@ public class OrderService {
 		return odid;
 	}
 	
+	/**
+	 * Helper Method for Adding a Shoppingcartpositions from an order
+	 * @param shoppingcart shoppingcart, which includes the articles ordered
+	 * @param orid the depending orderid
+	 * @return positiv in case of success, negativ in case of an error
+	 * @throws SQLException
+	 */		
 	private static int AddOrderDetailPosition(ShoppingCartPosition p, int orid) {
 		int id= -1;
 		String query = "INSERT INTO ASSIGNMENTDETAILS(orid,avid,ASSIGNMENTPRICE,amount) VALUES('%d','%d','%f','%d');";
@@ -58,6 +80,13 @@ public class OrderService {
 		return id;
 	}
 	
+	/**
+	 * Helper Method for Adding the status life cycle of the order
+	 * @param statuscycle Arraylist contain all order status
+	 * @param orid the depending orderid
+	 * @return positiv in case of success, negativ in case of an error
+	 * @throws SQLException
+	 */	
 	private static int AddOrderStatuscycle(ArrayList<OrderStatus> statuscycle, int orid) {
 		int osid= -1;
 		for(OrderStatus os: statuscycle)
@@ -70,6 +99,13 @@ public class OrderService {
 		return osid;
 	}	
 	
+	/**
+	 * Helper Method for Adding an OrderStatus
+	 * @param os one Orderstatus
+	 * @param orid the depending orderid
+	 * @return positiv in case of success, negativ in case of an error
+	 * @throws SQLException
+	 */	
 	private static int AddOrderStatus(OrderStatus os, int orid) {
 		int osid= -1;
 		
@@ -82,13 +118,26 @@ public class OrderService {
 		return osid;
 	}
 	
+	
+	/**
+	 * Method for Deleting an Order by its Orderid
+	 * @param orid the depending orderid
+	 * @return positiv in case of success, negativ in case of an error
+	 */	
 	public static void DeleteOrder(int orid)
 	{
+		DeleteOrderDetailPosition(orid);
+		DeleteOrderStatuscycle(orid);
 		String query = "DELETE ASSIGNMENT WHERE orid = '%d'";
 		query = String.format(query, orid);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
-
+	
+	/**
+	 * Helper Method for Deleting the Orderpositions by its Orderid
+	 * @param orid the depending orderid
+	 * @return positiv in case of success, negativ in case of an error
+	 */	
 	private static void DeleteOrderDetailPosition(int orid)
 	{
 		String query = "DELETE ASSIGNMENTDETAILS WHERE orid = '%d'";
@@ -96,6 +145,11 @@ public class OrderService {
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 
+	/**
+	 * Helper Method for Deleting the Order life cycle by its Orderid
+	 * @param orid the depending orderid
+	 * @return positiv in case of success, negativ in case of an error
+	 */	
 	private static void DeleteOrderStatuscycle(int orid)
 	{
 		String query = "DELETE ASSIGNMENTSTATUS WHERE orid = '%d'";
@@ -103,6 +157,11 @@ public class OrderService {
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
+	
+	/**
+	 * Method for updating an Order
+	 * @param o the depending order
+	 */	
 	public static void UpdateOrder(Order o) {
 		//update order 
 		
@@ -126,6 +185,12 @@ public class OrderService {
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
+	/**
+	 * Method for getting all Orders from a specific Orderid
+	 * @param ulid Userloginid
+	 * @return Arraylist with all Orders of the Userloginid
+	 * @throws SQLException
+	 */	
 	public static ArrayList<Order> GetAllOrders(int ulid) throws SQLException
 	{
 		ArrayList<Order> orders = new ArrayList<Order>();
@@ -144,6 +209,12 @@ public class OrderService {
 		return orders;
 	}
 	
+	/**
+	 * Method for getting a specific Order 
+	 * @param orid Orderid
+	 * @return the specific Order
+	 * @throws SQLException
+	 */		
 	public static Order GetSpecificOrder(int orid) throws SQLException 
 	{
 		String query = "SELECT ulid, orid, name, surname, email, postcode, street, streetno, city FROM ASSIGNMENT WHERE orid ='%d'";
@@ -162,6 +233,13 @@ public class OrderService {
 		return null;
 	}
 	
+	
+	/**
+	 * Helper Method for getting the Shoppingcart from a specific Order 
+	 * @param orid Orderid
+	 * @return the specific shoppingcart
+	 * @throws SQLException
+	 */	
 	private static ShoppingCart GetShoppingCartFromOrder(int orid) throws SQLException
 	{
 		String query ="SELECT odid,avid,assignmentprice,amount from ASSIGNMENTDETAILS WHERE orid='%d'";
@@ -182,6 +260,12 @@ public class OrderService {
 		return scp;
 	}
 	
+	/**
+	 * Helper Method for getting the status life cycle from a specific Order 
+	 * @param orid Orderid
+	 * @return the specific Arraylist containing the different state
+	 * @throws SQLException
+	 */	
 	private static ArrayList<OrderStatus> GetOrderStatuscycle(int orid) throws SQLException{
 		ArrayList<OrderStatus> statuslist = new ArrayList<OrderStatus>();
 		

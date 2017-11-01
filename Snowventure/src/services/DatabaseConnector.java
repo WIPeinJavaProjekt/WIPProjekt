@@ -6,22 +6,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Class to Connect to the Database
+ */
+
 public class DatabaseConnector {
-	private static String dbHost = "meiserv.de"; // Hostname
-	private static String dbPort = "3306";      // Port -- Standard: 3306
-	private static String dbName = "WIPPROJEKT";   // Datenbankname
-	private static String dbUser = "tech_WIP";     // Datenbankuser
-	private static String dbPass = "wipprojektrocks";      // Datenbankpasswort
+	private static String dbHost = "meiserv.de"; // hostname
+	private static String dbPort = "3306";      // Port -- default: 3306
+	private static String dbName = "WIPPROJEKT";   // databasename
+	private static String dbUser = "tech_WIP";     // databaseuser
+	private static String dbPass = "wipprojektrocks";      // databasepassword
 	
-    private Connection connect = null;
+    private Connection connect = null; //connection
     
-    private static DatabaseConnector databaseconnection = null;
+    private static DatabaseConnector databaseconnection = null; //global connector
 	
+    /**
+     * Method for connecting to the database
+     */
     private DatabaseConnector()
     {
-    	
-    	
-    	
 		try {
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -47,12 +51,21 @@ public class DatabaseConnector {
 		}
     }
     
+    /**
+     * Method to create the DatabaseConnector
+     * @return DatabaseConnector
+     */
 	public static DatabaseConnector createConnection() {
 		if(databaseconnection == null)
 				databaseconnection = new DatabaseConnector();
 		return databaseconnection;
 	}
 	   
+	/**
+	 * Method for an Insertquery 
+	 * @param query Insertquery
+	 * @return int value depending on success of insertion
+	 */
 	public int InsertQuery(String query) {
 		
 		if(this.connect != null) {
@@ -72,6 +85,11 @@ public class DatabaseConnector {
 		return -1;
 	}
 	
+	/**
+	 * Method for a Selectquery
+	 * @param query Selectquery
+	 * @return Resultset containing the Result of the Select
+	 */
 	public ResultSet SelectQuery(String query) {
 		if(this.connect != null)
 			try {
@@ -86,6 +104,10 @@ public class DatabaseConnector {
 		return null;
 	}
 	
+	/**
+	 * Method for an updatequery
+	 * @param query Updatequery
+	 */
 	public void UpdateQuery(String query) {
 		System.out.println("Im using the update");
 		if(this.connect != null)
@@ -99,21 +121,15 @@ public class DatabaseConnector {
 	}
 	
 	
-	
+	/**
+	 * Method for closing the Databaseconnection
+	 * @throws SQLException
+	 */
 	public static void CloseConnection() throws SQLException {
 		if(databaseconnection != null)
 		{
 			databaseconnection.connect.close();
 			databaseconnection= null;
 		}
-	}
-	
-	private void close() {
-        try {
-        	databaseconnection.connect.close();
-        }
-        catch (Exception e) {
-        	
-        }
 	}
 }
