@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css" href="./CSS/w3.css">
 
 <div class="pure-g" id ="account-searchbox">
 	<div class="pure-u-1-5"></div>
@@ -40,14 +41,22 @@
 </div>
 
 <div class="search-results">
-	<div class="pure-u-1-5"></div>
 	<c:if test="${ not empty articles }">
 	 	<c:forEach var="article" items="${articles}">
-			<div class="pure-u-1-5 productCard">
-				<p>${article.GetId()}</p>
-				<p>${article.GetName()}</p>
-				<p>${article.GetDescription()}</p>
-				<p>${article.GetPrice()}</p>
+	 	
+	 		<div class="pure-u-1-5 productCard" onclick="location.href='./article?ID=${article.GetId()}';">
+		 		<div class="w3-card-4" style="width:100%">
+				    <img src="./Images/Brille_schwarz.jpg" style="width:100%">
+				    <div class="w3-container w3-center">
+						<p><b>${article.GetName()}</b></p>
+						<hr size="5">
+						<p>${article.GetDescription()}</p>
+						<hr>
+						<p>Preis: ${article.GetPrice()} &euro; <br>
+						Größe: ${article.GetSize()} <br>
+						Farbe: ${article.GetColor()}</p>
+			    	</div>
+			  	</div>
 			</div>
 		</c:forEach>
 	</c:if>
@@ -56,7 +65,6 @@
 			<p class="error">Es wurde keine Suchergebnisse gefunden.</p>
 		</form>	
 	</c:if>
-	<div class="pure-u-1-5"></div>	
 </div>
 
 <div class="article-info">

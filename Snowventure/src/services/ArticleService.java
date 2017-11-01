@@ -30,10 +30,8 @@ public class ArticleService {
 		return aid;
 	}
 	
-	public static int AddArticleVersion(ArticleVersion av) {
-		
-		Locale.setDefault(Locale.ENGLISH);
-		
+	public static int AddArticleVersion(ArticleVersion av) {		
+		Locale.setDefault(Locale.ENGLISH);		
 		String query;
 		int avid = -1;
 		query = "INSERT INTO ARTICLEVERSION(property,propertyvalue,defaultprice,aid,color,size) VALUES('%s','%s','%f','%d','%s','%s')";
@@ -57,6 +55,8 @@ public class ArticleService {
 		
 		query = String.format(query, a.name,a.description,a.ID);
 		
+		System.out.println(query);
+		
 		DatabaseConnector.createConnection().UpdateQuery(query);
 		for(ArticleVersion av: a.versions)
 			UpdateArticleVersion(av);
@@ -64,10 +64,20 @@ public class ArticleService {
 	}
 	
 	public static void UpdateArticleVersion(ArticleVersion av) {
+		Locale.setDefault(Locale.ENGLISH);
 		String query;
 		query = "UPDATE ARTICLEVERSION SET property = '%s', propertyvalue = '%s', defaultprice = '%f', color = '%s', size = '%s' where avid ='%d'";
 		
-		query = String.format(query, av.property, av.propertyvalue, av.price, av.color,av.size,av.versionid);
+		query = String.format(query,
+				av.property,
+				av.propertyvalue,
+				av.price,
+				av.color,
+				av.size,
+				av.versionid);
+		
+		System.out.println(query);
+		
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
@@ -151,7 +161,7 @@ public class ArticleService {
 		
 		while(result.next())
 		{
-			article = new Article(result.getInt("aid"),result.getString("name"),result.getString("name"));
+			article = new Article(result.getInt("aid"),result.getString("name"),result.getString("description"));
 			article.versions = GetAllArticleVersion(article);
 		}
 		

@@ -37,7 +37,6 @@ public class UserService {
 					user.utid,
 					udid
 					);
-			System.out.println("Userlogin: "+query);
 			return DatabaseConnector.createConnection().InsertQuery(query);
 		}
 		return -1;
@@ -112,8 +111,6 @@ public class UserService {
 				" left join SAFETYQUESTION s ON s.sqid = b.sqid"+
 				" WHERE b.login='"+pattern+"'"+
 				" ORDER BY b.login";
-
-		System.out.println(query);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		

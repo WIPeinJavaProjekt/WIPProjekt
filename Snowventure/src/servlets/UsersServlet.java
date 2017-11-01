@@ -126,28 +126,31 @@ public class UsersServlet extends HttpServlet {
 			request.getSession().setAttribute("noArticleFound", false);
 		}
 		
-		for(Article a: articles) {
-			System.out.println("Artikel:");
-			System.out.println(a.ID);
-			System.out.println(a.name);
-			System.out.println(a.description);
-			System.out.println(a.GetPrice());
-			System.out.println(a.GetSelectedVersion());
-			System.out.println("Versions:");
-			System.out.println(a.versions.size());
-			for(ArticleVersion av: a.versions) {
-				System.out.println(av.price);
-				System.out.println(av.property);
-				System.out.println(av.propertyvalue);
-				System.out.println(av.versionid);
-			}
-			System.out.println("---------------------------------------------------");
-		}
+//		for(Article a: articles) {
+//			System.out.println("Artikel:");
+//			System.out.println(a.ID);
+//			System.out.println(a.name);
+//			System.out.println(a.description);
+//			System.out.println(a.GetPrice());
+//			System.out.println(a.GetSelectedVersion());
+//			System.out.println(a.GetColor());
+//			System.out.println(a.GetSize());
+//			System.out.println("Available Versions:");
+//			System.out.println(a.versions.size());
+//			for(ArticleVersion av: a.versions) {
+//				System.out.println(av.price);
+//				System.out.println(av.property);
+//				System.out.println(av.propertyvalue);
+//				System.out.println(av.versionid);
+//				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//			}
+//			System.out.println("---------------------------------------------------");
+//		}
 		
 		request.getSession().setAttribute("articles", articles);
 		
-		System.out.println("Anzahl Artikel: " + articles.size());
-		System.out.println(searchArticlePattern);
+//		System.out.println("Anzahl Artikel: " + articles.size());
+//		System.out.println(searchArticlePattern);
 		
 	}
 	

@@ -247,7 +247,6 @@ overflow:scroll;
 
 .productCard{
 	background-color: white;
-	border-color: black;
-	border-width: 2px;
+	margin: 10px;
 }
 

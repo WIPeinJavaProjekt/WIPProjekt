@@ -20,4 +20,8 @@ public class ArticleVersion extends Article{
 		this.color = color;
 		this.size = size;
 	}
+	
+	public int GetAvId() {
+		return versionid;
+	}
 }

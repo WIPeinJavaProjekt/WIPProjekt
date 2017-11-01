@@ -8,7 +8,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		
 		<c:choose>
-			<c:when test="false">
+			<c:when test="${updateArticle}">
 				<title>Artikel bearbeiten</title>
 			</c:when>
 			<c:otherwise>
@@ -41,7 +41,7 @@
 			<div class="pure-u-1-5"></div>
 			<div class="pure-u-3-5">			
 				<c:choose>
-					<c:when test="false">
+					<c:when test="${updateArticle}">
 						<h1>Artikel bearbeiten</h1>
 					</c:when>
 					<c:otherwise>
@@ -51,17 +51,26 @@
 			
 				<form class="pure-form" action="article" method="post">
 					<div class="pure-g">
-					    <div class ="pure-u-1-2 leftdiv">
+					    <div class ="pure-u-1-2">
 						    <fieldset class="pure-group">
 						    	<div class="pure-control-group">
-						            <input class="boxedinput" id="articleName"  name="articleName" value="${articleName}" type="text" placeholder="Artikelbezeichnung">
+						            <input required class="boxedinput" id="articleName"  name="articleName" value="${articleName}" type="text" placeholder="Artikelbezeichnung">
 						        </div>			        
 						        <div class="pure-control-group">
-						            <input class="boxedinput" id="articleDescription" name="articleDescription" value="${articleDescription}" type="text" placeholder="Artikelbeschreibung">
+						            <input required class="boxedinput" id="articleDescription" name="articleDescription" value="${articleDescription}" type="text" placeholder="Artikelbeschreibung">
 						        </div>
-						        <div class="pure-control-group">
-						            <input class="boxedinput" id="version" name="version" value="${version}" type="number" placeholder="Version">
-						        </div>
+						        <c:choose>
+									<c:when test="${updateArticle}">
+										<div class="pure-control-group">
+								            <input required class="boxedinput" id="selectedVersion" name="selectedVersion" value="${selectedVersion}" max="${availableVersions}" type="number" placeholder="Version">
+								        </div>	
+									</c:when>
+									<c:otherwise>
+										<div class="pure-control-group">
+								            <input required class="boxedinput" id="selectedVersion" name="selectedVersion" value="${selectedVersion}" max="0" type="number" placeholder="Version">
+								        </div>	
+									</c:otherwise>
+								</c:choose>										        
 						        <div class="pure-control-group">
 						            <input class="boxedinput" id="property" name="property" value="${property}" type="text" placeholder="Eigenschaft">
 						        </div>
@@ -69,7 +78,20 @@
 						            <input class="boxedinput" id="propertyValue" name="propertyValue" value="${propertyValue}" type="text" placeholder="Wert der Eigenschaft">
 						        </div>
 						        <div class="pure-control-group">
-						            <input class="boxedinput" id="price" name="price" value="${price}" type="number" step="0.01" placeholder="Preis">
+						            <input required class="boxedinput" id="color" name="color" value="${color}" type="text" placeholder="Farbe">
+						        </div>
+						        <div class="pure-control-group">
+				             		<select required name="size" class="boxedinput">
+						        		<option value="">Bitte Größe auswählen</option>
+						        		<option value="Unigröße" <c:if test="${not empty size && size=='Unigröße'}"><c:out value="selected"/></c:if>>Unigröße</option>
+								        <option value="S" <c:if test="${not empty size && size=='S'}"><c:out value="selected"/></c:if>>S</option>
+								        <option value="M" <c:if test="${not empty size && size=='M'}"><c:out value="selected"/></c:if>>M</option>
+								        <option value="L" <c:if test="${not empty size && size=='L'}"><c:out value="selected"/></c:if>>L</option>
+								        <option value="XL" <c:if test="${not empty size && size=='XL'}"><c:out value="selected"/></c:if>>XL</option>
+									</select>
+						        </div>
+						        <div class="pure-control-group">
+						            <input required class="boxedinput" id="price" name="price" value="${price}" type="number" step="0.01" placeholder="Preis">
 						        </div>
 						        <div class="pure-control-group">
 						            <input class="boxedinput" type="file" onchange="readURL(this);">
@@ -80,12 +102,12 @@
 					        <fieldset>
 								<div class="pure-control-group">
 								<c:choose>
-									<c:when test="true">
-							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticle">Artikel anlegen</button>
-							        </c:when>
-							        <c:when test="false">
+									<c:when test="${updateArticle}">
 							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="updateArticle">Artikel aktualisieren</button>
 							        </c:when>
+							        <c:otherwise>
+							        	<button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticle">Artikel anlegen</button>
+							        </c:otherwise>
 						        </c:choose>   
 						        </div>
 					       	</fieldset>

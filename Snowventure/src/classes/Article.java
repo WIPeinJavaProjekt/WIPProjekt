@@ -1,17 +1,12 @@
 package classes;
 
 import java.util.ArrayList;
-import java.sql.*;
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-
 
 public class Article {
 
 	public int ID;
 	public String name;
-	public String description;
+	public String description;	
 	public ArrayList<ArticleVersion> versions;
 	private int selectedversion;
 	
@@ -61,6 +56,14 @@ public class Article {
 	
 	public double GetPrice() {
 		return versions.get(selectedversion).price;
+	}
+	
+	public String GetSize() {
+		return versions.get(selectedversion).size;
+	}
+	
+	public String GetColor() {
+		return versions.get(selectedversion).color;
 	}
 	
 	public String GetId() {
