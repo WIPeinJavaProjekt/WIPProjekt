@@ -36,12 +36,14 @@ public class ArticleService {
 		
 		String query;
 		int avid = -1;
-		query = "INSERT INTO ARTICLEVERSION(property,propertyvalue,defaultprice,aid) VALUES('%s','%s','%f','%d')";
+		query = "INSERT INTO ARTICLEVERSION(property,propertyvalue,defaultprice,aid,color,size) VALUES('%s','%s','%f','%d','%s','%s')";
 		query = String.format(query,
 				av.property,
 				av.propertyvalue,
 				av.price,
-				av.ID);
+				av.ID,
+				av.color,
+				av.size);
 		
 		avid = DatabaseConnector.createConnection().InsertQuery(query);
 		
@@ -63,23 +65,23 @@ public class ArticleService {
 	
 	public static void UpdateArticleVersion(ArticleVersion av) {
 		String query;
-		query = "UPDATE ARTICLEVERSION SET property = '%s' and propertyvalue = '%s' defaultprice = '%f' where avid ='%d'";
+		query = "UPDATE ARTICLEVERSION SET property = '%s', propertyvalue = '%s', defaultprice = '%f', color = '%s', size = '%s' where avid ='%d'";
 		
-		query = String.format(query, av.property, av.propertyvalue, av.price, av.versionid);
+		query = String.format(query, av.property, av.propertyvalue, av.price, av.color,av.size,av.versionid);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
 	public static ArrayList<ArticleVersion> GetAllArticleVersion(Article a) throws SQLException {
 		ArrayList<ArticleVersion> av = new ArrayList<ArticleVersion>();
 		
-		String query ="SELECT  avid,property,propertyvalue, defaultprice FROM ARTICLEVERSION WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d'";
+		String query ="SELECT  avid,property,propertyvalue, defaultprice, color, size FROM ARTICLEVERSION WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d'";
 		query = String.format(query, a.ID);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
 		{
-			ArticleVersion version = new ArticleVersion(result.getInt("avid"),result.getString("property"),result.getString("propertyvalue"),result.getDouble("defaultprice"),a);
+			ArticleVersion version = new ArticleVersion(result.getInt("avid"),result.getString("property"),result.getString("propertyvalue"),result.getDouble("defaultprice"),a, result.getString("color"),result.getString("size"));
 			av.add(version);
 		}
 		
