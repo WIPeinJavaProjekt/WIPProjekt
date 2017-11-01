@@ -69,7 +69,7 @@
 						            <input class="boxedinput" id="propertyValue" name="propertyValue" value="${propertyValue}" type="text" placeholder="Wert der Eigenschaft">
 						        </div>
 						        <div class="pure-control-group">
-						            <input class="boxedinput" id="price" name="price" value="${price}" type="number" placeholder="Preis">
+						            <input class="boxedinput" id="price" name="price" value="${price}" type="number" step="0.01" placeholder="Preis">
 						        </div>
 						        <div class="pure-control-group">
 						            <input class="boxedinput" type="file" onchange="readURL(this);">

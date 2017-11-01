@@ -23,7 +23,6 @@ public class ArticleService {
 			av.ID = a.ID;
 			
 			int dummy = AddArticleVersion(av);
-			System.out.println("dummy: " + dummy);
 			if(dummy == -1)
 				return dummy;
 		}
@@ -87,6 +86,23 @@ public class ArticleService {
 		return av;
 	}
 	
+	public static ArrayList<Article> GetAllArticles() throws SQLException{
+		ArrayList<Article> articles = new ArrayList<Article>();
+		
+		String query = "SELECT aid, name, description FROM ARTICLE;";
+		
+		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
+		
+		while(result.next())
+		{
+			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"));
+			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
+			articles.add(a);
+		}
+		
+		return articles;
+	}
+	
 	public static ArrayList<Article> GetAllArticlesByName(String namepattern) throws SQLException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
@@ -97,7 +113,7 @@ public class ArticleService {
 		
 		while(result.next())
 		{
-			Article a = new Article(result.getInt("aid"),result.getString("name"),result.getString("name"));
+			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
 			articles.add(a);
 		}

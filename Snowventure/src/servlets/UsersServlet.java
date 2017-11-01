@@ -46,6 +46,15 @@ public class UsersServlet extends HttpServlet {
 			rd.forward(request, response);
 			return;
 		}
+		else if(request.getParameter("searchArticles") != null) {
+			findArticles(request);
+			
+			response.sendRedirect("users?page=articlesearch");
+			
+//			RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=articlesearch");
+//			rd.forward(request, response);
+			return;
+		}
 		else 
 		{		
 			try 
@@ -97,7 +106,50 @@ public class UsersServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	
+	private void findArticles(HttpServletRequest request) {
+		String searchArticlePattern = request.getParameter("searchArticlePattern");
+		ArrayList<Article> articles = null;
+		
+		try {
+			if(searchArticlePattern.equals("") || searchArticlePattern == null) {
+				articles = ArticleService.GetAllArticles();
+			} else {
+				articles = ArticleService.GetAllArticlesByName(searchArticlePattern);
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(articles.size() == 0) {
+			request.getSession().setAttribute("noArticleFound", true);
+		} else {
+			request.getSession().setAttribute("noArticleFound", false);
+		}
+		
+		for(Article a: articles) {
+			System.out.println("Artikel:");
+			System.out.println(a.ID);
+			System.out.println(a.name);
+			System.out.println(a.description);
+			System.out.println(a.GetPrice());
+			System.out.println(a.GetSelectedVersion());
+			System.out.println("Versions:");
+			System.out.println(a.versions.size());
+			for(ArticleVersion av: a.versions) {
+				System.out.println(av.price);
+				System.out.println(av.property);
+				System.out.println(av.propertyvalue);
+				System.out.println(av.versionid);
+			}
+			System.out.println("---------------------------------------------------");
+		}
+		
+		request.getSession().setAttribute("articles", articles);
+		
+		System.out.println("Anzahl Artikel: " + articles.size());
+		System.out.println(searchArticlePattern);
+		
+	}
 	
 	/** 
 	 * @param request HttpServletRequest

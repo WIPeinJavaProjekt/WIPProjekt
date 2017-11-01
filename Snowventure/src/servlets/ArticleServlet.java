@@ -56,7 +56,7 @@ public class ArticleServlet extends HttpServlet {
 		
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
 		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("version")), request.getParameter("property"), 
-				request.getParameter("propertyValue"), Integer.parseInt(request.getParameter("price")), this.article);
+				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article);
 		
 		this.article.versions.add(this.articleVersion);
 		
@@ -66,6 +66,12 @@ public class ArticleServlet extends HttpServlet {
 //		this.article.versions.add(this.articleVersion);
 		
 		int ret = ArticleService.AddArticle(this.article);
+		
+		if(ret == -1) {
+			//TODO: Insertion Error
+		} else {
+			this.article = null;
+		}
 		
 		System.out.println("Article return: " + ret);		
 	}

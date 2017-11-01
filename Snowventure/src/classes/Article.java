@@ -62,4 +62,16 @@ public class Article {
 	public double GetPrice() {
 		return versions.get(selectedversion).price;
 	}
+	
+	public String GetId() {
+		return Integer.toString(this.ID);
+	}
+	
+	public String GetName() {
+		return this.name;
+	}
+	
+	public String GetDescription() {
+		return this.description;
+	}
 }

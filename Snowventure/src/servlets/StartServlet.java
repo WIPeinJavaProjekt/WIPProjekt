@@ -34,7 +34,7 @@ public class StartServlet extends HttpServlet {
 		
 		try {
 			ArrayList<Categorie> categories = CategorieService.GetCategories();
-			request.setAttribute("categories", categories);
+			request.getSession().setAttribute("categories", categories);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -87,6 +87,7 @@ public class StartServlet extends HttpServlet {
 	 */
 	public void logout(HttpServletRequest request) {
 		request.getSession().setAttribute("currentUser", null);
+		request.getSession().invalidate();
 	}
 
 }

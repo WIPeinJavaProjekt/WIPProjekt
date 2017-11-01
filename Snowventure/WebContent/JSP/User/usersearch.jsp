@@ -83,7 +83,7 @@
 		<form class="pure-form pure-form-aligned" action="users?page=usersearch" method="get">
 			<p class="error">Es wurde keine Suchergebnisse gefunden.</p>
 		</form>	
-	</c:if>	
+	</c:if>
 	<div class="pure-u-1-5"></div>	
 </div>
 
