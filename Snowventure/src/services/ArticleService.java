@@ -205,8 +205,10 @@ public class ArticleService {
 	 */
 	public static Article GetArticle(int id) throws SQLException{
 		Article article = new Article(-1);
-		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 aid='%d';";
+		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid='%d';";
 		query = String.format(query, id);
+		
+//		System.out.println(query);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		

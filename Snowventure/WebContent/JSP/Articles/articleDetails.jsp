@@ -54,44 +54,51 @@
 					    <div class ="pure-u-1-2">
 						    <fieldset class="pure-group">
 						    	<div class="pure-control-group">
-						            <input required class="boxedinput" id="articleName"  name="articleName" value="${articleName}" type="text" placeholder="Artikelbezeichnung">
+						            <input required class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
 						        </div>			        
 						        <div class="pure-control-group">
-						            <input required class="boxedinput" id="articleDescription" name="articleDescription" value="${articleDescription}" type="text" placeholder="Artikelbeschreibung">
+						            <input required class="boxedinput" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
+						            	placeholder="Artikelbeschreibung">
 						        </div>
 						        <c:choose>
 									<c:when test="${updateArticle}">
-										<div class="pure-control-group">
-								            <input required class="boxedinput" id="selectedVersion" name="selectedVersion" value="${selectedVersion}" max="${availableVersions}" type="number" placeholder="Version">
-								        </div>	
+											<div class="pure-control-group">
+												<select required name="selectedVersion" class="boxedinput">
+													<c:forEach items="${article.GetAllVersions()}" var="version">
+										        		<option value="${article.GetAllVersions().indexOf(version)}">${article.GetAllVersions().indexOf(version)}</option>
+										    		</c:forEach>
+												</select>
+									        </div>
 									</c:when>
 									<c:otherwise>
 										<div class="pure-control-group">
-								            <input required class="boxedinput" id="selectedVersion" name="selectedVersion" value="${selectedVersion}" max="0" type="number" placeholder="Version">
+											<select required name="selectedVersion" class="boxedinput">
+									        		<option value="0">0</option>
+											</select>
 								        </div>	
 									</c:otherwise>
 								</c:choose>										        
 						        <div class="pure-control-group">
-						            <input class="boxedinput" id="property" name="property" value="${property}" type="text" placeholder="Eigenschaft">
+						            <input class="boxedinput" id="property" name="property" value="${article.GetProperty()}" type="text" placeholder="Eigenschaft">
 						        </div>
 						        <div class="pure-control-group">
-						            <input class="boxedinput" id="propertyValue" name="propertyValue" value="${propertyValue}" type="text" placeholder="Wert der Eigenschaft">
+						            <input class="boxedinput" id="propertyValue" name="propertyValue" value="${article.GetPropertyValue()}" type="text" placeholder="Wert der Eigenschaft">
 						        </div>
 						        <div class="pure-control-group">
-						            <input required class="boxedinput" id="color" name="color" value="${color}" type="text" placeholder="Farbe">
+						            <input required class="boxedinput" id="color" name="color" value="${article.GetColor()}" type="text" placeholder="Farbe">
 						        </div>
 						        <div class="pure-control-group">
 				             		<select required name="size" class="boxedinput">
 						        		<option value="">Bitte Größe auswählen</option>
-						        		<option value="Unigröße" <c:if test="${not empty size && size=='Unigröße'}"><c:out value="selected"/></c:if>>Unigröße</option>
-								        <option value="S" <c:if test="${not empty size && size=='S'}"><c:out value="selected"/></c:if>>S</option>
-								        <option value="M" <c:if test="${not empty size && size=='M'}"><c:out value="selected"/></c:if>>M</option>
-								        <option value="L" <c:if test="${not empty size && size=='L'}"><c:out value="selected"/></c:if>>L</option>
-								        <option value="XL" <c:if test="${not empty size && size=='XL'}"><c:out value="selected"/></c:if>>XL</option>
+						        		<option value="Unigröße" <c:if test="${not empty article.GetSize() && article.GetSize()=='Unigröße'}"><c:out value="selected"/></c:if>>Unigröße</option>
+								        <option value="S" <c:if test="${not empty article.GetSize() && article.GetSize()=='S'}"><c:out value="selected"/></c:if>>S</option>
+								        <option value="M" <c:if test="${not empty article.GetSize() && article.GetSize()=='M'}"><c:out value="selected"/></c:if>>M</option>
+								        <option value="L" <c:if test="${not empty article.GetSize() && article.GetSize()=='L'}"><c:out value="selected"/></c:if>>L</option>
+								        <option value="XL" <c:if test="${not empty article.GetSize() && article.GetSize()=='XL'}"><c:out value="selected"/></c:if>>XL</option>
 									</select>
 						        </div>
 						        <div class="pure-control-group">
-						            <input required class="boxedinput" id="price" name="price" value="${price}" type="number" step="0.01" placeholder="Preis">
+						            <input required class="boxedinput" id="price" name="price" value="${article.GetPrice()}" type="number" step="0.01" placeholder="Preis">
 						        </div>
 						        <div class="pure-control-group">
 						            <input class="boxedinput" type="file" onchange="readURL(this);">
@@ -116,9 +123,22 @@
 				</form>
 
 				<c:if test="${not empty errorArticle}">
-					<form class="pure-form pure-form-aligned" action="article" method="get">
-							<p class="error">${errorArticle}</p>
-					</form>
+					<div class="pure-g">
+					    <div class ="pure-u-1-2">
+							<form class="pure-form pure-form-aligned" action="article" method="get">
+									<p class="error">${errorArticle}</p>
+							</form>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${not empty successArticle}">
+					<div class="pure-g">
+					    <div class ="pure-u-1-2">
+							<form class="pure-form pure-form-aligned" action="article" method="get">
+									<p class="success">${successArticle}</p>
+							</form>
+						</div>
+					</div>
 				</c:if>
 		   
 			</div>

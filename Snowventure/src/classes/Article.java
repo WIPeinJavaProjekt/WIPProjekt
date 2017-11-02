@@ -44,6 +44,10 @@ public class Article {
 		this.selectedversion = a.selectedversion;
 	}
 	
+	public ArrayList<ArticleVersion> GetAllVersions() {
+		return this.versions;
+	}
+	
 	
 	public int GetSelectedVersion() {
 		return selectedversion;
@@ -60,6 +64,14 @@ public class Article {
 	
 	public String GetSize() {
 		return versions.get(selectedversion).size;
+	}
+	
+	public String GetProperty() {
+		return versions.get(selectedversion).property;
+	}
+	
+	public String GetPropertyValue() {
+		return versions.get(selectedversion).propertyvalue;
 	}
 	
 	public String GetColor() {

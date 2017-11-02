@@ -196,6 +196,13 @@ overflow:scroll;
     text-align: center;
 }
 
+.success {
+    color: #49d800;
+    background-color: #80ff80;
+    /* background-image: url('error.png'); */
+    text-align: center;
+}
+
 .info,
 .success,
 .warning,

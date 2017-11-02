@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import classes.Article;
 import classes.ArticleVersion;
+import classes.Utils;
 import services.ArticleService;
 
 /**
@@ -29,12 +30,15 @@ public class ArticleServlet extends HttpServlet {
         super();
     }
 
+    /**
+     * Checks the URL whether a new Article should be added or an existing article should be modified
+     * Depending on the case, an article gets loaded or not
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getSession().getAttribute("currentUser") == null) {
-			response.sendRedirect("start");
-			return;
-		}
+		Utils.redirectUser(request, response);
+		
+		System.out.println("Get-called");
 		
 		if(request.getParameter("ID") != null) {
 			try {
@@ -49,24 +53,16 @@ public class ArticleServlet extends HttpServlet {
 		}
 		
 		if(this.article!=null) {
-			request.setAttribute("articleName", this.article.name);
-			request.setAttribute("articleDescription", this.article.description);
+			request.setAttribute("article", this.article);
 			request.setAttribute("availableVersions", this.article.versions.size()-1);
-			request.setAttribute("selectedVersion", this.article.GetSelectedVersion());
-			request.setAttribute("price", this.article.GetPrice());
-			request.setAttribute("color", this.article.GetColor());
-			request.setAttribute("size", this.article.GetSize());
-		} else {
-			request.setAttribute("availableVersions", 0);
 		}
+				
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/Articles/articleDetails.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("Selected Version: " + request.getAttribute("selectedVersion"));
 		
 		if(request.getParameter("addArticle") != null) {
 			addArticle(request);
@@ -78,13 +74,15 @@ public class ArticleServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	/**
+	 * Updating the selected article in the database
+	 * @param request
+	 */
 	private void updateArticle(HttpServletRequest request) {
-		
-		//TODO: Finish update article
 		
 		this.article.name = request.getParameter("articleName");
 		this.article.description = request.getParameter("articleDescription");
-//		this.articleVersion.SetSelectedVersion(Integer.parseInt(request.getParameter("selectedVersion")));
+		this.article.SetSelectedVersion(Integer.parseInt(request.getParameter("selectedVersion")));
 		this.articleVersion.property = request.getParameter("property");
 		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
 		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));
@@ -95,8 +93,14 @@ public class ArticleServlet extends HttpServlet {
 		this.article.versions.set(this.article.GetSelectedVersion(), this.articleVersion);
 		
 		ArticleService.UpdateArticle(this.article);
+		
+		request.setAttribute("successArticle", "Artikel wurde erfolgreich geändert");
 	}
 
+	/**
+	 * Adding the article into the Database and setting success or error message
+	 * @param request
+	 */
 	private void addArticle(HttpServletRequest request) {
 		
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
@@ -109,13 +113,13 @@ public class ArticleServlet extends HttpServlet {
 		int ret = ArticleService.AddArticle(this.article);
 		
 		if(ret == -1) {
-			//TODO: Insertion Error
+			request.setAttribute("errorArticle", "Artikel wurde nicht hinzugefügt");
 		} else {
 			this.article = null;
-			//TODO: Success-Message
+			request.setAttribute("successArticle", "Artikel wurde erfolgreich hinzugefügt");
 		}
 		
-		System.out.println("Article return: " + ret);		
+		System.out.println("Article return: " + ret);
 	}
 
 }

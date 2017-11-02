@@ -106,16 +106,16 @@ public class UsersServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	/**
+	 * Returns articles matching the search-pattern to the request
+	 * @param request
+	 */
 	private void findArticles(HttpServletRequest request) {
 		String searchArticlePattern = request.getParameter("searchArticlePattern");
 		ArrayList<Article> articles = null;
 		
 		try {
-			if(searchArticlePattern.equals("") || searchArticlePattern == null) {
-				articles = ArticleService.GetAllArticles();
-			} else {
-				articles = ArticleService.GetAllArticlesByName(searchArticlePattern);
-			}			
+			articles = ArticleService.GetAllArticlesByName(searchArticlePattern);		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -126,31 +126,7 @@ public class UsersServlet extends HttpServlet {
 			request.getSession().setAttribute("noArticleFound", false);
 		}
 		
-//		for(Article a: articles) {
-//			System.out.println("Artikel:");
-//			System.out.println(a.ID);
-//			System.out.println(a.name);
-//			System.out.println(a.description);
-//			System.out.println(a.GetPrice());
-//			System.out.println(a.GetSelectedVersion());
-//			System.out.println(a.GetColor());
-//			System.out.println(a.GetSize());
-//			System.out.println("Available Versions:");
-//			System.out.println(a.versions.size());
-//			for(ArticleVersion av: a.versions) {
-//				System.out.println(av.price);
-//				System.out.println(av.property);
-//				System.out.println(av.propertyvalue);
-//				System.out.println(av.versionid);
-//				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
-//			}
-//			System.out.println("---------------------------------------------------");
-//		}
-		
 		request.getSession().setAttribute("articles", articles);
-		
-//		System.out.println("Anzahl Artikel: " + articles.size());
-//		System.out.println(searchArticlePattern);
 		
 	}
 	
@@ -190,9 +166,7 @@ public class UsersServlet extends HttpServlet {
 		
 		System.out.println("Das angegebene Nutzerpasswort ist falsch.");
 		request.setAttribute("passworderror", "Das angegebene Nutzerpasswort ist falsch.");
-	}
-	
-	
+	}	
 	
 	/** 
 	 * @param request HttpServletRequest
