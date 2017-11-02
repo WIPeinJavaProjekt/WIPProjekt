@@ -1,8 +1,19 @@
 package services;
+import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Locale;
+
+import javax.imageio.ImageIO;
+
+import org.omg.CORBA.portable.InputStream;
+
+import com.mysql.jdbc.PreparedStatement;
 
 import classes.*;
 
@@ -16,8 +27,10 @@ public class ArticleService {
 	 * Method for adding an Article
 	 * @param a the Article
 	 * @return int value depending on success of insertion
+	 * @throws IOException 
+	 * @throws SQLException 
 	 */
-	public static int AddArticle(Article a) {
+	public static int AddArticle(Article a) throws SQLException, IOException {
 		String query;
 		int aid = -1;
 		query = "INSERT INTO ARTICLE(name,description) VALUES('%s','%s')";
@@ -32,6 +45,13 @@ public class ArticleService {
 			av.ID = a.ID;
 			
 			int dummy = AddArticleVersion(av);
+			if(dummy == -1)
+				return dummy;
+		}
+		
+		for(ArticlePicture pic: a.pictures)
+		{
+			int dummy = AddPicture(pic);
 			if(dummy == -1)
 				return dummy;
 		}
@@ -65,8 +85,10 @@ public class ArticleService {
 	/**
 	 * Method for updating an Article
 	 * @param a Article to be updated
+	 * @throws IOException 
+	 * @throws SQLException 
 	 */
-	public static void UpdateArticle(Article a)
+	public static void UpdateArticle(Article a) throws SQLException, IOException
 	{
 		String query;
 		query = "UPDATE ARTICLE SET name ='%s', description ='%s' where aid ='%d'";
@@ -79,6 +101,11 @@ public class ArticleService {
 		for(ArticleVersion av: a.versions)
 			UpdateArticleVersion(av);
 		
+		DeletePicture(a.ID);
+		for(ArticlePicture pic: a.pictures)
+		{
+			int dummy = AddPicture(pic);
+		}
 	}
 	
 	/**
@@ -130,8 +157,9 @@ public class ArticleService {
 	 * Method for getting all Articles
 	 * @return Arraylist of all Articles
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public static ArrayList<Article> GetAllArticles() throws SQLException{
+	public static ArrayList<Article> GetAllArticles() throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
 		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0;";
@@ -142,6 +170,7 @@ public class ArticleService {
 		{
 			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
+			a.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(a.ID).clone();
 			articles.add(a);
 		}
 		
@@ -153,8 +182,9 @@ public class ArticleService {
 	 * @param namepattern compare String
 	 * @return Arraylist with specific Articles
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public static ArrayList<Article> GetAllArticlesByName(String namepattern) throws SQLException{
+	public static ArrayList<Article> GetAllArticlesByName(String namepattern) throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
 		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND name like '%"+namepattern+"%';";
@@ -165,6 +195,7 @@ public class ArticleService {
 		{
 			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
+			a.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(a.ID).clone();
 			articles.add(a);
 		}
 		
@@ -178,8 +209,9 @@ public class ArticleService {
 	 * @param c specific categories
 	 * @return Arraylist with specific Articles
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public static ArrayList<Article> GetAllArticlesByCategorie(Categorie c) throws SQLException{
+	public static ArrayList<Article> GetAllArticlesByCategorie(Categorie c) throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
 		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 acid ='%d';";
@@ -191,6 +223,7 @@ public class ArticleService {
 		{
 			Article a = new Article(result.getInt("aid"),result.getString("name"),result.getString("name"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
+			a.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(a.ID).clone();
 			articles.add(a);
 		}
 		
@@ -202,8 +235,9 @@ public class ArticleService {
 	 * @param id Articleid
 	 * @return Article the specific Article
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public static Article GetArticle(int id) throws SQLException{
+	public static Article GetArticle(int id) throws SQLException, IOException{
 		Article article = new Article(-1);
 		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid='%d';";
 		query = String.format(query, id);
@@ -215,7 +249,8 @@ public class ArticleService {
 		while(result.next())
 		{
 			article = new Article(result.getInt("aid"),result.getString("name"),result.getString("description"));
-			article.versions = GetAllArticleVersion(article);
+			article.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(article).clone();
+			article.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(article.ID).clone();
 		}
 		
 		return article;
@@ -227,8 +262,9 @@ public class ArticleService {
 	 * @param av the selected version
 	 * @return Article the specific Article
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public static Article GetSelectedArticle(ArticleVersion av) throws SQLException {
+	public static Article GetSelectedArticle(ArticleVersion av) throws SQLException, IOException {
 		Article article = new Article( GetArticle(av.ID));
 		
 		return PrepSelectedArticle(av.versionid,article);
@@ -283,4 +319,58 @@ public class ArticleService {
 		return a;
 	}
 	
+	/**
+	 * Method for getting all ArticlePictures from a specific Articleid
+	 * @param aid Articleid
+	 * @return Arraylist of all ArticlePictures
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public static ArrayList<ArticlePicture> GetPicturesFromArticleId(int aid) throws IOException, SQLException{
+		ArrayList<ArticlePicture> pictures = new ArrayList<ArticlePicture>();
+		
+		String query = "SELECT name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 aid ='%d';";
+		query = String.format(query, aid);
+		
+		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
+		
+		while(result.next())
+		{
+			Blob imageblob = result.getBlob("image");
+			InputStream binaryStream = (InputStream) imageblob.getBinaryStream(0, imageblob.length());
+			ArticlePicture p = new ArticlePicture(result.getString("name"),binaryStream);
+			pictures.add(p);
+		}		
+		return pictures;
+	}
+	
+	/**
+	 * Method for adding a ArticlePicture
+	 * @param img
+	 * @return int value depending on success of insertion
+	 * @throws SQLException
+	 * @throws IOException
+	 */
+	public static int AddPicture(ArticlePicture img) throws SQLException, IOException {
+		int apid =-1;
+		String query = "INSERT INTO ARTICLEIMAGE(name,image) VALUES( ?, ?)";
+		PreparedStatement statement = (PreparedStatement) DatabaseConnector.connect.prepareStatement(query);
+		statement.setString(1, img.name);
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		ImageIO.write((RenderedImage) img.image,"png", os); 
+		ByteArrayInputStream fis = new ByteArrayInputStream(os.toByteArray());
+		statement.setBlob(2, fis);
+		apid = statement.executeUpdate();
+		return apid;
+	}
+
+	/**
+	 * Method for deleting all Pictures from an Article
+	 * @param aid Articleid
+	 */
+	public static void DeletePicture(int aid) {
+		String query = "Delete ArticleImage WHERE aid = '%d'";
+		query = String.format(query, aid);
+		DatabaseConnector.createConnection().UpdateQuery(query);
+	}
 }

@@ -17,7 +17,7 @@ public class DatabaseConnector {
 	private static String dbUser = "tech_WIP";     // databaseuser
 	private static String dbPass = "wipprojektrocks";      // databasepassword
 	
-    private Connection connect = null; //connection
+    public static Connection connect = null; //connection
     
     private static DatabaseConnector databaseconnection = null; //global connector
 	

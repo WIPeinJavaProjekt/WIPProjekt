@@ -9,6 +9,8 @@ public class Article {
 	public String description;	
 	public ArrayList<ArticleVersion> versions;
 	private int selectedversion;
+	public ArrayList<ArticlePicture> pictures = new ArrayList<ArticlePicture>();
+	
 	
 	public Article(){}
 	

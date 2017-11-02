@@ -63,10 +63,20 @@ public class ArticleServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("addArticle") != null) {
-			addArticle(request);
+			try {
+				addArticle(request);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		} else if(request.getParameter("updateArticle") != null) {
-			updateArticle(request);
+			try {
+				updateArticle(request);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		doGet(request, response);
@@ -75,8 +85,10 @@ public class ArticleServlet extends HttpServlet {
 	/**
 	 * Updating the selected article in the database
 	 * @param request
+	 * @throws IOException 
+	 * @throws SQLException 
 	 */
-	private void updateArticle(HttpServletRequest request) {
+	private void updateArticle(HttpServletRequest request) throws SQLException, IOException {
 		
 		this.article.name = request.getParameter("articleName");
 		this.article.description = request.getParameter("articleDescription");
@@ -98,8 +110,10 @@ public class ArticleServlet extends HttpServlet {
 	/**
 	 * Adding the article into the Database and setting success or error message
 	 * @param request
+	 * @throws IOException 
+	 * @throws SQLException 
 	 */
-	private void addArticle(HttpServletRequest request) {
+	private void addArticle(HttpServletRequest request) throws SQLException, IOException {
 		
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
 		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
