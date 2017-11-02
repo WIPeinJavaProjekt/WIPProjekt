@@ -27,7 +27,7 @@
 			        	</div>
 			        </div>
 			    </fieldset>
-			</form>			
+			</form>
 		</div>
 		<div>
 			<form class="pure-form" action="users" method="POST">
@@ -40,32 +40,34 @@
 	<div class="pure-u-1-5"></div>
 </div>
 
-<div class="search-results">
-	<c:if test="${ not empty articles }">
-	 	<c:forEach var="article" items="${articles}">
-	 	
-	 		<div class="pure-u-1-5 productCard" onclick="location.href='./article?ID=${article.GetId()}';">
-		 		<div class="w3-card-4" style="width:100%">
-				    <img src="./Images/Brille_schwarz.jpg" style="width:100%">
-				    <div class="w3-container w3-center">
-						<p><b>${article.GetName()}</b></p>
-						<hr size="5">
-						<p>${article.GetDescription()}</p>
-						<hr>
-						<p>Preis: ${article.GetPrice()} &euro; <br>
-						Größe: ${article.GetSize()} <br>
-						Farbe: ${article.GetColor()}</p>
-			    	</div>
-			  	</div>
-			</div>
-		</c:forEach>
-	</c:if>
-	<c:if test="${noArticleFound}">
-		<form class="pure-form pure-form-aligned" action="users?page=articlesearch" method="get">
-			<p class="error">Es wurde keine Suchergebnisse gefunden.</p>
-		</form>	
-	</c:if>
-</div>
+<center>
+	<div class="search-results">	
+		<c:if test="${ not empty articles }">
+		 	<c:forEach var="article" items="${articles}">
+		 	
+		 		<div class="pure-u-1-5 productCard" onclick="location.href='./article?ID=${article.GetId()}';">
+			 		<div class="w3-card-4" style="width:100%">
+					    <img src="./Images/Brille_schwarz.jpg" style="width:100%">
+					    <div class="w3-container w3-center">
+							<p><b>${article.GetName()}</b></p>
+							<hr size="5">
+							<p>${article.GetDescription()}</p>
+							<hr>
+							<p>Preis: ${article.GetPrice()} &euro; <br>
+							Größe: ${article.GetSize()} <br>
+							Farbe: ${article.GetColor()}</p>
+				    	</div>
+				  	</div>
+				</div>
+			</c:forEach>
+		</c:if>
+		<c:if test="${noArticleFound}">
+			<form class="pure-form pure-form-aligned" action="users?page=articlesearch" method="get">
+				<p class="error">Es wurde keine Suchergebnisse gefunden.</p>
+			</form>	
+		</c:if>	
+	</div>
+</center>
 
 <div class="article-info">
 	

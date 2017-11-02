@@ -30,10 +30,10 @@
 			<div class="pure-u-1-5"></div>
 			<div id="wrapper" class="pure-u-3-5">
 				<div id="search-container" class="searchbox">
-					<form class="pure-form">
+					<form class="pure-form" action="start" method="post">
 					    <fieldset>
 					        <legend>
-					        <h1 id="titlemessage">Teste deine Grenzen</h1>
+					        	<h1 id="titlemessage">Teste deine Grenzen</h1>
 					        </legend>
 							<div class="pure-g">
 						        <div class="pure-u-1-5">
@@ -47,7 +47,7 @@
 						        	<input type="text" class="boxedinput" placeholder="Wähle deine Ausrüstung">
 								</div>
 								<div class="pure-u-1-5">
-					        		<button type="submit" class="pure-button pure-button-primary boxedinput">Suchen</button>
+					        		<button type="submit" id="search" name="search" class="pure-button pure-button-primary boxedinput">Suchen</button>
 					        	</div>
 					        </div>
 					    </fieldset>

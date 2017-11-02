@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import classes.Safetyquestion;
-import classes.User;
+import services.ArticleService;
 import services.CategorieService;
 import services.SafetyquestionService;
 import services.UserService;	
@@ -67,9 +66,13 @@ public class StartServlet extends HttpServlet {
 			
 		} else if(request.getParameter("search") != null) {	
 			
-			String searchValue = request.getParameter("search");
+			String searchPattern = request.getParameter("search");
 			
-			System.out.println(searchValue);
+			findArticles(request, searchPattern);
+			
+			response.sendRedirect("articles");			
+			return;
+			
 		} else if(request.getParameter("settings") != null) {	
 			response.sendRedirect("users");
 			return;
@@ -88,6 +91,29 @@ public class StartServlet extends HttpServlet {
 	public void logout(HttpServletRequest request) {
 		request.getSession().setAttribute("currentUser", null);
 		request.getSession().invalidate();
+	}
+	
+	/**
+	 * Returns articles matching the search-pattern to the request
+	 * @param request
+	 * @param searchPattern Input search pattern to compare
+	 */
+	private void findArticles(HttpServletRequest request, String searchPattern) {
+		ArrayList<Article> articles = null;
+		
+		try {
+			articles = ArticleService.GetAllArticlesByName(searchPattern);		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(articles.size() == 0) {
+			request.getSession().setAttribute("noArticleFound", true);
+		} else {
+			request.getSession().setAttribute("noArticleFound", false);
+		}
+		
+		request.getSession().setAttribute("articles", articles);		
 	}
 
 }

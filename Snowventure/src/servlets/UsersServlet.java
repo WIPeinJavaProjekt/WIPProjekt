@@ -51,8 +51,6 @@ public class UsersServlet extends HttpServlet {
 			
 			response.sendRedirect("users?page=articlesearch");
 			
-//			RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=articlesearch");
-//			rd.forward(request, response);
 			return;
 		}
 		else 
@@ -126,8 +124,7 @@ public class UsersServlet extends HttpServlet {
 			request.getSession().setAttribute("noArticleFound", false);
 		}
 		
-		request.getSession().setAttribute("articles", articles);
-		
+		request.getSession().setAttribute("articles", articles);		
 	}
 	
 	/** 

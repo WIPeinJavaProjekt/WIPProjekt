@@ -38,8 +38,6 @@ public class ArticleServlet extends HttpServlet {
 		
 		Utils.redirectUser(request, response);
 		
-		System.out.println("Get-called");
-		
 		if(request.getParameter("ID") != null) {
 			try {
 				this.article = ArticleService.GetArticle(Integer.parseInt(request.getParameter("ID")));
