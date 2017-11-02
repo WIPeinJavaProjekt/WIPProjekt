@@ -97,8 +97,9 @@ public class StartServlet extends HttpServlet {
 	 * Returns articles matching the search-pattern to the request
 	 * @param request
 	 * @param searchPattern Input search pattern to compare
+	 * @throws IOException 
 	 */
-	private void findArticles(HttpServletRequest request, String searchPattern) {
+	private void findArticles(HttpServletRequest request, String searchPattern) throws IOException {
 		ArrayList<Article> articles = null;
 		
 		try {

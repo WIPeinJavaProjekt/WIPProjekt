@@ -107,8 +107,9 @@ public class UsersServlet extends HttpServlet {
 	/**
 	 * Returns articles matching the search-pattern to the request
 	 * @param request
+	 * @throws IOException 
 	 */
-	private void findArticles(HttpServletRequest request) {
+	private void findArticles(HttpServletRequest request) throws IOException {
 		String searchArticlePattern = request.getParameter("searchArticlePattern");
 		ArrayList<Article> articles = null;
 		
