@@ -105,4 +105,9 @@ public class User {
 	{
 		return this.squestion;
 	}
+	
+	public ShoppingCart getShoppingcart()
+	{
+		return this.shoppingcart;
+	}
 }

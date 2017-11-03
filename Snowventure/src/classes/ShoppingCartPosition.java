@@ -12,4 +12,14 @@ public class ShoppingCartPosition {
 	public double GetPositionPrice() {
 		return article.versions.get(article.GetSelectedVersion()).price * amount;
 	}
+	
+	public Article getArticle()
+	{
+		return article;
+	}
+	
+	public int getAmount()
+	{
+		return amount;
+	}
 }
