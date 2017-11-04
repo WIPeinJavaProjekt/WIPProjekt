@@ -11,7 +11,7 @@ import java.util.Locale;
 
 import javax.imageio.ImageIO;
 
-import org.omg.CORBA.portable.InputStream;
+import java.io.InputStream;
 
 import com.mysql.jdbc.PreparedStatement;
 
