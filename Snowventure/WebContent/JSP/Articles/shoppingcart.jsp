@@ -83,7 +83,7 @@
 								</div>
 								<div class="pure-u-1-4" id="scp-info-part">
 									<p><b>Menge</b></p>
-									<select>
+									<select onchange="location.href='./cart?scpid=${position.article.GetSelectedVersion()}&amount=' + jQuery('#amount option:selected').val();">
 										<c:forEach var="counter" begin="1" end="10">
 											<option <c:if test="${ position.amount == counter }">selected</c:if> value="${counter}">${counter}</option>
 										</c:forEach>
@@ -104,8 +104,8 @@
 						<div class="w3-card-4" id="scp-article-card">
 							<h2><b>Ihre Einkaufswagen ist leer.</b></h2>
 							<h4>Ihr Einkaufswagen steht zu Ihrer Verfügung. Nutzen Sie ihn und befüllen Sie ihn mit Ski-Kleidung, Ausrüstung und mehr.
-								<c:if test="${empty currentUser}"><br>Wenn Sie bereits ein Konto besitzen, tippen Sie auf <a href="/Snowventure/login">Anmelden</a>, um den vollen Funktionsumfang von Snowventure nutzen zu können.<br></c:if>  
-								Setzen Sie den Einkauf bei <a href="/Snowventure/articles">Snowventure</a> fort.</h4>
+								<c:if test="${empty currentUser}"><br>Wenn Sie bereits ein Konto besitzen, tippen Sie auf <a href="./login">Anmelden</a>, um den vollen Funktionsumfang von Snowventure nutzen zu können.<br></c:if>  
+								Setzen Sie den Einkauf bei <a href="./articles">Snowventure</a> fort.</h4>
 						</div>
 					</c:otherwise>
 					</c:choose>					
@@ -120,7 +120,7 @@
 							<h4><b>Dieser Artikel ist schön</b></h4>
 							<hr size="5">
 							<p>Variante: XL</p>
-							<p><a href="cart?Aid=1&option=delete">Löschen</a></p>
+							<p><a href="cart?scpid=1&option=delete">Löschen</a></p>
 						</div>
 						<div class="pure-u-1-4" id="scp-info-part">
 							<p><b>Preis</b></p>
@@ -128,7 +128,7 @@
 						</div>
 						<div class="pure-u-1-4" id="scp-info-part">
 							<p><b>Menge</b></p>
-							<select>
+							<select id="amount" onchange="location.href='./cart?scpid=1&amount=' + jQuery('#amount option:selected').val();">
 								<c:forEach var="counter" begin="1" end="10">
 									<option value="${counter}">${counter}</option>
 								</c:forEach>
@@ -137,7 +137,7 @@
 					</div>
 					<div class="w3-card-4" id="scp-article-card">
 				    	<div class="pure-u-11-12" id="sc-conclusion">
-				    	<h3><b>Summe (2 Artikel): EUR 50,34</b></h3>
+				    	<h3><b>Summe (1 Artikel): EUR 50,34</b></h3>
 				    	<h4><input class="pure-button pure-button-primary" type="submit" value="zur Kasse gehen"></h4>
 						</div>
 						<div class="pure-u-1-12" style="height: 15%;"></div>
