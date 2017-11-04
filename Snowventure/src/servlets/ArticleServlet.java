@@ -1,17 +1,21 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import classes.Article;
+import classes.ArticlePicture;
 import classes.ArticleVersion;
 import classes.Utils;
 import services.ArticleService;
@@ -20,6 +24,7 @@ import services.ArticleService;
  * Servlet implementation class ArticleServlet
  */
 @WebServlet("/article")
+@MultipartConfig
 public class ArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -66,7 +71,6 @@ public class ArticleServlet extends HttpServlet {
 			try {
 				addArticle(request);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -74,7 +78,6 @@ public class ArticleServlet extends HttpServlet {
 			try {
 				updateArticle(request);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -112,8 +115,18 @@ public class ArticleServlet extends HttpServlet {
 	 * @param request
 	 * @throws IOException 
 	 * @throws SQLException 
+	 * @throws ServletException 
 	 */
-	private void addArticle(HttpServletRequest request) throws SQLException, IOException {
+	private void addArticle(HttpServletRequest request) throws SQLException, IOException, ServletException {
+		
+//		File articleImage = request.getParameter("articleImage");
+		System.out.println(request.getParameter("articleImage"));
+		
+		Part filePart = request.getPart("articleImage");
+	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+	    InputStream fileContent = filePart.getInputStream();
+	    
+	    ArticlePicture picture = new ArticlePicture(fileName, fileContent);
 		
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
 		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
@@ -121,6 +134,7 @@ public class ArticleServlet extends HttpServlet {
 				request.getParameter("color"), request.getParameter("size"));
 		
 		this.article.versions.add(this.articleVersion);
+		this.article.pictures.add(picture);
 		
 		int ret = ArticleService.AddArticle(this.article);
 		

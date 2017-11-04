@@ -49,7 +49,7 @@
 					</c:otherwise>
 				</c:choose>
 			
-				<form class="pure-form" action="article" method="post">
+				<form class="pure-form" enctype="multipart/form-data" action="article" method="post">
 					<div class="pure-g">
 					    <div class ="pure-u-1-2">
 						    <fieldset class="pure-group">
@@ -101,7 +101,7 @@
 						            <input required class="boxedinput" id="price" name="price" value="${article.GetPrice()}" type="number" step="0.01" placeholder="Preis">
 						        </div>
 						        <div class="pure-control-group">
-						            <input class="boxedinput" type="file" onchange="readURL(this);">
+						            <input class="boxedinput" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
 						            <img id="uploadedImage" src="#"/>
 						        </div>
 					        </fieldset>

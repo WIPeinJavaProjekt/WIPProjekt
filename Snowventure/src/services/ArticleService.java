@@ -51,7 +51,7 @@ public class ArticleService {
 		
 		for(ArticlePicture pic: a.pictures)
 		{
-			int dummy = AddPicture(pic);
+			int dummy = AddPicture(pic, a.ID);
 			if(dummy == -1)
 				return dummy;
 		}
@@ -104,7 +104,7 @@ public class ArticleService {
 		DeletePicture(a.ID);
 		for(ArticlePicture pic: a.pictures)
 		{
-			int dummy = AddPicture(pic);
+			int dummy = AddPicture(pic, a.ID);
 		}
 	}
 	
@@ -329,15 +329,17 @@ public class ArticleService {
 	public static ArrayList<ArticlePicture> GetPicturesFromArticleId(int aid) throws IOException, SQLException{
 		ArrayList<ArticlePicture> pictures = new ArrayList<ArticlePicture>();
 		
-		String query = "SELECT name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 aid ='%d';";
+		String query = "SELECT name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d';";
 		query = String.format(query, aid);
+		
+		System.out.println(query);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
 		{
 			Blob imageblob = result.getBlob("image");
-			InputStream binaryStream = (InputStream) imageblob.getBinaryStream(0, imageblob.length());
+			InputStream binaryStream = (InputStream) imageblob.getBinaryStream(1, imageblob.length());
 			ArticlePicture p = new ArticlePicture(result.getString("name"),binaryStream);
 			pictures.add(p);
 		}		
@@ -351,15 +353,16 @@ public class ArticleService {
 	 * @throws SQLException
 	 * @throws IOException
 	 */
-	public static int AddPicture(ArticlePicture img) throws SQLException, IOException {
+	public static int AddPicture(ArticlePicture img, int aid) throws SQLException, IOException {
 		int apid =-1;
-		String query = "INSERT INTO ARTICLEIMAGE(name,image) VALUES( ?, ?)";
+		String query = "INSERT INTO ARTICLEIMAGE(name,image, aid) VALUES( ?, ?, ?)";
 		PreparedStatement statement = (PreparedStatement) DatabaseConnector.connect.prepareStatement(query);
 		statement.setString(1, img.name);
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		ImageIO.write((RenderedImage) img.image,"png", os); 
 		ByteArrayInputStream fis = new ByteArrayInputStream(os.toByteArray());
 		statement.setBlob(2, fis);
+		statement.setInt(3, aid);
 		apid = statement.executeUpdate();
 		return apid;
 	}

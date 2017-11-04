@@ -47,7 +47,6 @@
 		 	
 		 		<div class="pure-u-1-5 productCard" onclick="location.href='./article?ID=${article.GetId()}';">
 			 		<div class="w3-card-4" style="width:100%">
-					    <img src="./Images/Brille_schwarz.jpg" style="width:100%">
 					    <div class="w3-container w3-center">
 							<p><b>${article.GetName()}</b></p>
 							<hr size="5">
