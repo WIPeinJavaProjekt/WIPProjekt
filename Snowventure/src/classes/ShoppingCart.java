@@ -16,9 +16,7 @@ public class ShoppingCart {
 	public ShoppingCart(ShoppingCart scp)
 	{
 		this.cart = new ArrayList<ShoppingCartPosition>(scp.cart);
-	}
-	
-	
+	}	
 	
 	public double GetShoppingCartPrice() {
 		double amount=0;
@@ -32,6 +30,16 @@ public class ShoppingCart {
 	public ArrayList<ShoppingCartPosition> getCart()
 	{
 		return cart;
+	}
+	
+	public int GetArticleCount()
+	{
+		int count = 0;
+		for(ShoppingCartPosition scp : cart)
+		{
+			count += scp.amount;
+		}
+		return count;
 	}
 	
 }

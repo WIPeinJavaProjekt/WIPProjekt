@@ -91,4 +91,10 @@ public class Article {
 	public String GetDescription() {
 		return this.description;
 	}
+	
+	public ArticlePicture getArticleHeadPicture()
+	{
+		ArticlePicture apic = this.pictures.get(0);	
+		return apic;
+	}
 }
