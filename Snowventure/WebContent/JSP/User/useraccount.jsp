@@ -25,8 +25,8 @@
 	</head>
 	<body>
 		<%@include file = "../Basic/header.jsp" %>
-		<div class="contentwrapp">	
-		<div id="user-account-menu" class="pure-menu custom-restricted-width">
+		<div id="useroptions">	
+		<div id="user-account-menu" class="ure-menu pure-menu-horizontal pure-menu-scrollable">
 		    <span class="pure-menu-heading">Mein Konto</span>
 		
 		    <ul class="pure-menu-list">
@@ -41,11 +41,10 @@
 		    </ul>
 		</div>
 		
-		<div class="pure-u-4-5">
 		<div id="content">
 			<script type="text/javascript" src="./JS/useraccount.js"></script>
 		</div>
-		</div>
+	
 		</div>
 		
 		<%@include file = "../Basic/footer.jsp"%>

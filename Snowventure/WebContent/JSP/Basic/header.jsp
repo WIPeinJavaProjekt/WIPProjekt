@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<link rel="stylesheet" type="text/css" href="./CSS/w3.css">
 <div id ="brandbox" >
 		<div id="innerbrandbox">
 			<a href="start"><img id ="brandimg" src="./Images/brand.png"></a>

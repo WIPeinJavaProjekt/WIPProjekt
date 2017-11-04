@@ -1,43 +1,36 @@
-<div class="cssSlider" align="center">				
-    <!-- die inputs um den Slider zu Steuern -->
-    <input type="radio" name="slider" id="slide01" checked="checked">
-    <input type="radio" name="slider" id="slide02">
-    <input type="radio" name="slider" id="slide03">
-    <input type="radio" name="slider" id="slide04">
 
-    <!-- die einzelnen Slides, hier als Liste angelegt -->
-    <ul class="sliderElements">
-        <li>
-            <figure>
-                <img src="./Images/mountain.jpg" alt="" height="400" width="1200">
-                <figcaption>Hier könnte deine Beschreibung stehen.</figcaption>
-            </figure>
-        </li>
-        <li>
-            <figure>
-                <img src="./Images/mountain.jpg" alt="" height="400" width="1200">
-                <figcaption>Eine tolle Beschreibung</figcaption>
-            </figure>
-        </li>
-        <li>
-            <figure>
-                <img src="./Images/skityp.jpg" alt="" height="400" width="1200">
-                <figcaption>Die Beschreibung zum dritten Bild</figcaption>
-            </figure>
-        </li>
-        <li>
-            <figure>
-                <img src="./Images/skityp.jpg" alt="" height="400" width="1200">
-                <figcaption>Und noch ein toller Untertitel</figcaption>
-            </figure>
-        </li>
-    </ul>
 
-    <!-- Eine Steuerung -->
-    <ul class="sliderControls">
-        <li><label for="slide01"></label></li>
-        <li><label for="slide02"></label></li>
-        <li><label for="slide03"></label></li>
-        <li><label for="slide04"></label></li>
-    </ul>
+
+<div class="w3-content w3-display-container w3slidmod" align="center">
+
+<div class="w3-display-container mySlides">
+   <img  height="512px" width = "auto" src="./Images/mountain.jpg"/>
 </div>
+
+<div class="w3-display-container mySlides">
+   <img  height="512px" width = "auto" src="./Images/skityp.jpg"/>
+</div>
+
+<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+
+</div>
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>

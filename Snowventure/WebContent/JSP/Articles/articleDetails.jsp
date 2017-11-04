@@ -36,7 +36,7 @@
 	
 		<%@include file = "../Basic/header.jsp" %> 
 	
-		<div class="pure-g" id="loginbox">
+		<div class="pure-g" id="articleadminbox">
 		
 			<div class="pure-u-1-5"></div>
 			<div class="pure-u-3-5">			
@@ -49,16 +49,15 @@
 					</c:otherwise>
 				</c:choose>
 			
-				<form class="pure-form" enctype="multipart/form-data" action="article" method="post">
-					<div class="pure-g">
-					    <div class ="pure-u-1-2">
+				<form id="articleadminboxform" class="pure-form" enctype="multipart/form-data" action="article" method="post">
+					
 						    <fieldset class="pure-group">
 						    	<div class="pure-control-group">
 						            <input required class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
 						        </div>			        
 						        <div class="pure-control-group">
-						            <input required class="boxedinput" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
-						            	placeholder="Artikelbeschreibung">
+						            <textarea required class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
+						            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>"></textarea>
 						        </div>
 						        <c:choose>
 									<c:when test="${updateArticle}">
@@ -101,10 +100,10 @@
 						            <input required class="boxedinput" id="price" name="price" value="${article.GetPrice()}" type="number" step="0.01" placeholder="Preis">
 						        </div>
 						        <div class="pure-control-group">
-						            <input class="boxedinput" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
-						            <img id="uploadedImage" src="#"/>
+						            <input class="boxedinput custom-file-input" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
 						        </div>
 					        </fieldset>
+					        
 					        
 					        <fieldset>
 								<div class="pure-control-group">
@@ -118,9 +117,44 @@
 						        </c:choose>   
 						        </div>
 					       	</fieldset>
-				       	</div>
-					</div>
+				       	
+					
 				</form>
+
+
+				<div class="w3-content w3-display-container w3slidmod" align="center">
+
+				<div class="w3-display-container mySlides">
+				   <img id="uploadedImage" height="512px" width = "auto" src="#" class ="imageuploaded"/>
+				</div>
+				
+				<div class="w3-display-container mySlides">
+				   <img  height="512px" width = "auto" src="./Images/skityp.jpg" class ="imageuploaded"/>
+				</div>
+				
+				<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+				<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+				
+				</div>
+				<script>
+				var slideIndex = 1;
+				showDivs(slideIndex);
+				
+				function plusDivs(n) {
+				  showDivs(slideIndex += n);
+				}
+				
+				function showDivs(n) {
+				  var i;
+				  var x = document.getElementsByClassName("mySlides");
+				  if (n > x.length) {slideIndex = 1}    
+				  if (n < 1) {slideIndex = x.length}
+				  for (i = 0; i < x.length; i++) {
+				     x[i].style.display = "none";  
+				  }
+				  x[slideIndex-1].style.display = "block";  
+				}
+				</script>
 
 				<c:if test="${not empty errorArticle}">
 					<div class="pure-g">

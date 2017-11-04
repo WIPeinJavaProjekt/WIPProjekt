@@ -10,7 +10,7 @@
 			<form class="pure-form" action="users?page=usersearch" method="POST">
 			    <fieldset>
 			        <legend>
-			        <h1>Nutzersuche</h1>
+			        <h3>Nutzersuche</h3>
 			        </legend>
 					<div class="pure-g">
 				        <div class="pure-u-1-5">

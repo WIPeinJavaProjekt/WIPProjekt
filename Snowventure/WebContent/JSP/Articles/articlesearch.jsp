@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="./CSS/w3.css">
+
 
 <div class="pure-g" id ="account-searchbox">
 	<div class="pure-u-1-5"></div>
@@ -8,7 +8,7 @@
 			<form class="pure-form" action="users" method="POST">
 			    <fieldset>
 			        <legend>
-			        	<h1>Artikelsuche</h1>
+			        	<h3>Artikelsuche</h3>
 			        </legend>
 					<div class="pure-g">
 				        <div class="pure-u-1-5">

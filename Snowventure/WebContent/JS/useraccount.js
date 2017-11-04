@@ -16,8 +16,12 @@ $.urlParam = function(name){
 
 if($.urlParam('page')!= null)
 {
+	$('#useroptions').removeClass("loginbox");
 	var page = $.urlParam('page');
 	
 	var path = (page == 'articlesearch' ? './JSP/Articles/articlesearch.jsp' : './JSP/User/' + page + '.jsp');
 	document.getElementById("content").InnerHTML = $('#content').load(path);
+}
+else{
+	$('#useroptions').addClass("loginbox");
 }

@@ -126,3 +126,14 @@
     background: #ddd;
     color: #ddd;
 }
+
+
+.w3slidmod{
+	z-index:99;
+	padding-bottom:5px;
+	padding-top:20px;
+	margin-top:10px !important;
+}
+.w3slidmod button {
+	background-color: rgb(7, 46, 74) !important;
+}
