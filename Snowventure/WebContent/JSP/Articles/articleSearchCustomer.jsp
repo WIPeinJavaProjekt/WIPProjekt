@@ -60,9 +60,9 @@
 							    </div>
 							    <div class="w3-container w3-center">
 									<p>
-									<b>${article.GetName()}</b> - ${article.GetName()}</p>
+									<b>${article.GetManufacturer()}</b> - ${article.GetName()}</p>
 									<div style="height:1px; width:100%; background-color:rgb(75,75,75);"></div>
-									<p>Preis: ${article.GetPrice()} &euro; <br></p>
+									<p>${article.GetPriceFormatted()} EUR <br></p>
 						    	</div>
 						  	</div>
 						</div>

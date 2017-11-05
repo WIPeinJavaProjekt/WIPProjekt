@@ -102,6 +102,7 @@ public class ArticleServlet extends HttpServlet {
 		this.articleVersion.color = request.getParameter("color");
 		this.articleVersion.size = request.getParameter("size");
 		this.articleVersion.versionid = this.article.versions.get(this.article.GetSelectedVersion()).versionid;
+		this.article.manufacturer = request.getParameter("manufacturer");
 		
 		this.article.versions.set(this.article.GetSelectedVersion(), this.articleVersion);
 		
@@ -129,6 +130,7 @@ public class ArticleServlet extends HttpServlet {
 	    ArticlePicture picture = new ArticlePicture(fileName, fileContent);
 		
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
+		this.article.manufacturer = request.getParameter("manufacturer");
 		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
 				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, 
 				request.getParameter("color"), request.getParameter("size"));

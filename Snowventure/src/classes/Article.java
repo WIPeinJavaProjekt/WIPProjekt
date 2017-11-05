@@ -7,7 +7,9 @@ public class Article {
 
 	public int ID;
 	public String name;
-	public String description;	
+	public String description;
+	public String manufacturer;
+	public int acid =1;
 	public ArrayList<ArticleVersion> versions;
 	private int selectedversion;
 	public ArrayList<ArticlePicture> pictures = new ArrayList<ArticlePicture>();
@@ -21,13 +23,15 @@ public class Article {
 		selectedversion = 0;
 	}
 	
-	public Article(int ID, String name, String description)
+	public Article(int ID, String name, String description, int acid, String manufacturer)
 	{
 		this.ID = ID;
 		this.name = name;
 		this.description = description;
 		versions = new ArrayList<ArticleVersion>();
 		selectedversion = 0;
+		this.acid = acid;
+		this.manufacturer = manufacturer;
 	}
 	
 	public Article(String name, String description)
@@ -92,6 +96,10 @@ public class Article {
 	
 	public String GetName() {
 		return this.name;
+	}
+	
+	public String GetManufacturer() {
+		return this.manufacturer;
 	}
 	
 	public String GetDescription() {

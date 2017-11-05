@@ -33,10 +33,13 @@ public class ArticleService {
 	public static int AddArticle(Article a) throws SQLException, IOException {
 		String query;
 		int aid = -1;
-		query = "INSERT INTO ARTICLE(name,description) VALUES('%s','%s')";
+		query = "INSERT INTO ARTICLE(name,description,acid,manufacturer) VALUES('%s','%s','%d','%s')";
 		query = String.format(query,
 				a.name,
-				a.description);
+				a.description,
+				a.acid,
+				a.manufacturer);
+		System.out.println(query);
 		aid = DatabaseConnector.createConnection().InsertQuery(query);
 		a.ID = aid;
 		
@@ -162,13 +165,13 @@ public class ArticleService {
 	public static ArrayList<Article> GetAllArticles() throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
-		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0;";
+		String query = "SELECT aid, name, description,acid,manufacturer FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0;";
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
 		{
-			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"));
+			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"),result.getInt("acid"),result.getString("manufacturer"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
 			a.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(a.ID).clone();
 			articles.add(a);
@@ -187,13 +190,13 @@ public class ArticleService {
 	public static ArrayList<Article> GetAllArticlesByName(String namepattern) throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
-		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND name like '%"+namepattern+"%';";
+		String query = "SELECT aid, name, description, acid, manufacturer FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND name like '%"+namepattern+"%';";
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
 		{
-			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"));
+			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"),result.getInt("acid"),result.getString("manufacturer"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
 			a.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(a.ID).clone();
 			articles.add(a);
@@ -214,14 +217,14 @@ public class ArticleService {
 	public static ArrayList<Article> GetAllArticlesByCategorie(Categorie c) throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
-		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 acid ='%d';";
+		String query = "SELECT aid, name, description, acid, manufacturer FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 acid ='%d';";
 		query = String.format(query, c.GetACID());
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
 		{
-			Article a = new Article(result.getInt("aid"),result.getString("name"),result.getString("name"));
+			Article a = new Article(result.getInt("aid"),result.getString("name"),result.getString("name"),result.getInt("acid"),result.getString("manufacturer"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
 			a.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(a.ID).clone();
 			articles.add(a);
@@ -239,7 +242,7 @@ public class ArticleService {
 	 */
 	public static Article GetArticle(int id) throws SQLException, IOException{
 		Article article = new Article(-1);
-		String query = "SELECT aid, name, description FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid='%d';";
+		String query = "SELECT aid, name, description, acid, manufacturer  FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid='%d';";
 		query = String.format(query, id);
 		
 //		System.out.println(query);
@@ -248,7 +251,7 @@ public class ArticleService {
 		
 		while(result.next())
 		{
-			article = new Article(result.getInt("aid"),result.getString("name"),result.getString("description"));
+			article = new Article(result.getInt("aid"),result.getString("name"),result.getString("description"),result.getInt("acid"),result.getString("manufacturer"));
 			article.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(article).clone();
 			article.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(article.ID).clone();
 		}

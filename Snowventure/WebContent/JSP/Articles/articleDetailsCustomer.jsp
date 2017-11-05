@@ -72,7 +72,7 @@
     <div class="pure-u-1-2">
     <div>
 	    <h2>${article.GetName()}</h2>
-	    von <b>${article.GetName()}</b> <br>
+	    von <b>${article.GetManufacturer()}</b> <br>
 	    in der Farbe <i>${article.GetColor()}</i>
 	    <br>
 	    <h3>${article.GetPriceFormatted()} EUR</h3>

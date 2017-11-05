@@ -55,7 +55,10 @@
 						    <fieldset class="pure-group">
 						    	<div class="pure-control-group">
 						            <input required class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
-						        </div>			        
+						        </div>
+						        <div class="pure-control-group">
+						            <input required class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
+						        </div>				        
 						        <div class="pure-control-group">
 						            <textarea required class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
 						            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>">${article.GetDescription()}</textarea>
