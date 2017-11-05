@@ -58,7 +58,7 @@
 						        </div>			        
 						        <div class="pure-control-group">
 						            <textarea required class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
-						            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>"></textarea>
+						            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>">${article.GetDescription()}</textarea>
 						        </div>
 						        <c:choose>
 									<c:when test="${updateArticle}">

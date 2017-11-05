@@ -44,8 +44,8 @@
 
 	<div class="pure-g">
 	    <div class="pure-u-1-4"><p>Artikelnummer</p></div>
-	    <div class="pure-u-1-4"><p>Artikelname</p></div>
-	    <div class="pure-u-1-4"><p>Kurzbeschreibung</p></div>
+	    <div class="pure-u-1-4"><p>Hersteller</p></div>
+	    <div class="pure-u-1-4"><p>Bezeichnung</p></div>
 	</div>
 	<div class="search-results">	
 		<c:if test="${ not empty articles }">
@@ -70,7 +70,7 @@
 				<div class="pure-g" >
 				    <div class="pure-u-1-4"><p><b>${article.GetId()}</b></p></div>
 				    <div class="pure-u-1-4"><p>${article.GetName()}</p></div>
-				    <div class="pure-u-1-4"><p>${article.GetDescription()}</p></div>
+				    <div class="pure-u-1-4"><p>${article.GetName()}</p></div>
 				    <div class="pure-u-1-4">
 				    	<p>
 				    		<i class="fa fa-pencil" style ="cursor: pointer;" onclick="location.href='./article?ID=${article.GetId()}';"></i>

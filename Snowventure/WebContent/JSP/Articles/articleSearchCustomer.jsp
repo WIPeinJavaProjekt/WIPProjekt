@@ -16,7 +16,7 @@
 								</select>
 							</div>
 					        <div class="pure-u-3-5">
-					        	<input type="text" class="boxedinput" placeholder="Wähle deine Ausrüstung">
+					        	<input type="text" class="boxedinput" name ="searchArticlePattern" placeholder="Wähle deine Ausrüstung">
 							</div>
 							<div class="pure-u-1-5">
 				        		<button type="submit" id="search" name="search" class="pure-button pure-button-primary boxedinput">Suchen</button>
@@ -53,7 +53,7 @@
 		<div id="articleresultcontainer" class="search-results" align="left">	
 			<c:if test="${ not empty articles }">
 			 	<c:forEach var="article" items="${articles}">
-				 		<div class="productCard pure-u-1-3" onclick="location.href='./article?ID=${article.GetId()}';">
+				 		<div class="productCard pure-u-1-3" onclick="location.href='./articleshopping?ID=${article.GetId()}';">
 					 		<div  style="width:100%">
 							    <div class="productCardimage">
 							    	<span class="articleimagehelper"></span><img src="./Images/Brille_schwarz.jpg" class="articlesearchimage">

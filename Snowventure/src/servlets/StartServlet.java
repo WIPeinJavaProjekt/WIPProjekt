@@ -66,7 +66,7 @@ public class StartServlet extends HttpServlet {
 			
 		} else if(request.getParameter("search") != null) {	
 			
-			String searchPattern = request.getParameter("search");
+			String searchPattern = request.getParameter("searchArticlePattern");
 			
 			findArticles(request, searchPattern);
 			

@@ -276,7 +276,13 @@ overflow:scroll;
 	height: 480px;
 	margin-top:2px;
 	margin-bottom: 2px;
+	cursor: pointer;
 }
+
+.productCard:hover{
+	border: 1px solid rgb(75,75,75);
+}
+
 .productCardimage{
 	height:360px;
 	width:328px;
@@ -295,6 +301,7 @@ overflow:scroll;
 	    display: inline-block;
     height: 100%;
     vertical-align: middle;
+    cursor: pointer;
 }
 
 #useroptions{
@@ -362,3 +369,21 @@ overflow:scroll;
 	}
 }
 
+
+.div-align-bottom{
+	 height: 261.824px;
+  display: flex;	
+}
+.div-align-bottom form{
+	align-self: flex-end;
+}
+
+.articledescriptioncontainer{
+	max-width:920px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.articleslider {
+	height:360px;
+}

@@ -1,5 +1,6 @@
 package classes;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Article {
@@ -62,6 +63,11 @@ public class Article {
 	
 	public double GetPrice() {
 		return versions.get(selectedversion).price;
+	}
+	
+	public String GetPriceFormatted() {
+		DecimalFormat f = new DecimalFormat("#.00"); 
+		return f.format(GetPrice()).replace(".", ",");
 	}
 	
 	public String GetSize() {
