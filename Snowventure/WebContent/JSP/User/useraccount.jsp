@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>	
-		<title>Mein Konto</title>
+		<title>Kontoübersicht</title>
 		
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,7 @@
 		<%@include file = "../Basic/header.jsp" %>
 		<div id="useroptions">	
 		<div id="user-account-menu" class="ure-menu pure-menu-horizontal pure-menu-scrollable">
-		    <span class="pure-menu-heading">Mein Konto</span>
+		    <span class="pure-menu-heading">Kontoübersicht</span>
 		
 		    <ul class="pure-menu-list">
 		        <li class="pure-menu-item"><a href="users?page=mydata" class="pure-menu-link">Meine Daten</a></li>

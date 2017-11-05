@@ -41,11 +41,17 @@
 </div>
 
 <center>
+
+	<div class="pure-g">
+	    <div class="pure-u-1-4"><p>Artikelnummer</p></div>
+	    <div class="pure-u-1-4"><p>Artikelname</p></div>
+	    <div class="pure-u-1-4"><p>Kurzbeschreibung</p></div>
+	</div>
 	<div class="search-results">	
 		<c:if test="${ not empty articles }">
 		 	<c:forEach var="article" items="${articles}">
 		 	
-		 		<div class="pure-u-1-5 productCard" onclick="location.href='./article?ID=${article.GetId()}';">
+		 		<!-- <div class="pure-u-1-5 productCard" onclick="location.href='./article?ID=${article.GetId()}';">
 			 		<div class="w3-card-4" style="width:100%">
 					    <div class="w3-container w3-center">
 							<p><b>${article.GetName()}</b></p>
@@ -58,6 +64,23 @@
 				    	</div>
 				  	</div>
 				</div>
+				 -->
+				<div >
+				<hr>
+				<div class="pure-g" >
+				    <div class="pure-u-1-4"><p><b>${article.GetId()}</b></p></div>
+				    <div class="pure-u-1-4"><p>${article.GetName()}</p></div>
+				    <div class="pure-u-1-4"><p>${article.GetDescription()}</p></div>
+				    <div class="pure-u-1-4">
+				    	<p>
+				    		<i class="fa fa-pencil" style ="cursor: pointer;" onclick="location.href='./article?ID=${article.GetId()}';"></i>
+				    		<i class="fa fa-trash" aria-hidden="true"></i>
+				    	</p>
+				    </div>				  
+				</div>
+				  
+				</div>
+				
 			</c:forEach>
 		</c:if>
 		<c:if test="${noArticleFound}">

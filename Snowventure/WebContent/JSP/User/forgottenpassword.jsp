@@ -26,14 +26,13 @@
 			
 				<h1>Passwort zurücksetzen</h1>
 		
-				<div class="pure-g">
-					<div class ="pure-u-1-2 leftdiv">
+					
 						<form class="pure-form pure-form-aligned" method="post" action="forgottenPassword">
 							<fieldset class="pure-group">
 							    <div class="pure-control-group">
 									<input class="boxedinput" id="username" name="username" type="text" required placeholder="Nutzername" value="${userpw.username}" <c:if test="${ not empty userpw }">readonly</c:if>>					
 									<div class="pure-control-group">
-								       <button class="pure-button pure-button-primary boxedinput" type="submit" name="confirmusername" class="pure-button pure-button-primary" <c:if test="${ not empty userpw }">disabled</c:if> >Bestätigen</button>
+								       <button class="pure-button pure-button-primary boxedinput" type="submit" name="confirmusername" class="pure-button pure-button-primary" <c:if test="${ not empty userpw }">style="display:none;"</c:if> >Bestätigen</button>
 								    </div>
 							    </div>
 					        </fieldset>    
@@ -62,16 +61,14 @@
 					        </fieldset>
 				        </form>
 						</c:if>											
-					</div>
-				</div>
-				<div class ="pure-u-1-2">	
+					
 					<form class="pure-form pure-form-aligned" action="forgottenPassword" method="post">
 						<div class="pure-control-group">
 							<button class="pure-button pure-button-primary boxedinput" name="back" class="pure-button pure-button-primary">Zurück</button>
 						</div>
 					</form>
 				</div>						
-			</div>
+			
 		<div class="pure-u-1-5"></div>
 	</div>
 

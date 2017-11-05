@@ -19,6 +19,7 @@
 		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="./CSS/default.css">
+		<link rel="stylesheet" type="text/css" href="./CSS/startpageslider.css">
 		
 		<script type="text/javascript" src="/Snowventure/JS/jquery-3.2.1.min.js"></script>		
 		<script type="text/javascript" src="./JS/header.js"></script>
@@ -94,6 +95,19 @@
 								        <option value="M" <c:if test="${not empty article.GetSize() && article.GetSize()=='M'}"><c:out value="selected"/></c:if>>M</option>
 								        <option value="L" <c:if test="${not empty article.GetSize() && article.GetSize()=='L'}"><c:out value="selected"/></c:if>>L</option>
 								        <option value="XL" <c:if test="${not empty article.GetSize() && article.GetSize()=='XL'}"><c:out value="selected"/></c:if>>XL</option>
+								        <option value="XXL" <c:if test="${not empty article.GetSize() && article.GetSize()=='XXL'}"><c:out value="selected"/></c:if>>XXL</option>
+								        <option value="XXXL" <c:if test="${not empty article.GetSize() && article.GetSize()=='XXXL'}"><c:out value="selected"/></c:if>>XXXL</option>
+								        
+								        <option value="40" <c:if test="${not empty article.GetSize() && article.GetSize()=='40'}"><c:out value="selected"/></c:if>>40</option>
+								        <option value="41" <c:if test="${not empty article.GetSize() && article.GetSize()=='41'}"><c:out value="selected"/></c:if>>41</option>
+								        <option value="42" <c:if test="${not empty article.GetSize() && article.GetSize()=='42'}"><c:out value="selected"/></c:if>>42</option>
+								        <option value="43" <c:if test="${not empty article.GetSize() && article.GetSize()=='43'}"><c:out value="selected"/></c:if>>43</option>
+								        <option value="44" <c:if test="${not empty article.GetSize() && article.GetSize()=='44'}"><c:out value="selected"/></c:if>>44</option>
+								        <option value="45" <c:if test="${not empty article.GetSize() && article.GetSize()=='45'}"><c:out value="selected"/></c:if>>45</option>
+								        <option value="46" <c:if test="${not empty article.GetSize() && article.GetSize()=='46'}"><c:out value="selected"/></c:if>>46</option>
+								        <option value="47" <c:if test="${not empty article.GetSize() && article.GetSize()=='47'}"><c:out value="selected"/></c:if>>47</option>
+								        <option value="48" <c:if test="${not empty article.GetSize() && article.GetSize()=='48'}"><c:out value="selected"/></c:if>>48</option>
+								        <option value="49" <c:if test="${not empty article.GetSize() && article.GetSize()=='49'}"><c:out value="selected"/></c:if>>49</option>
 									</select>
 						        </div>
 						        <div class="pure-control-group">
@@ -117,19 +131,17 @@
 						        </c:choose>   
 						        </div>
 					       	</fieldset>
-				       	
-					
 				</form>
 
 
 				<div class="w3-content w3-display-container w3slidmod" align="center">
 
 				<div class="w3-display-container mySlides">
-				   <img id="uploadedImage" height="512px" width = "auto" src="#" class ="imageuploaded"/>
+				   <img id="uploadedImage" src="#" class ="imageuploaded"/>
 				</div>
 				
 				<div class="w3-display-container mySlides">
-				   <img  height="512px" width = "auto" src="./Images/skityp.jpg" class ="imageuploaded"/>
+				   <img  src="./Images/skityp.jpg" class ="imageuploaded"/>
 				</div>
 				
 				<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
