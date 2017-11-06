@@ -31,7 +31,7 @@
 					<div class="pure-u-1-1">
 					
 					<c:choose>
-					<c:when test="${not empty currentUser && currentUser.shoppingcart != null && currentUser.shoppingcart.cart != null && currentUser.shoppingcart.cart.size() > 1}">
+					<c:when test="${not empty currentUser && currentUser.shoppingcart != null && currentUser.shoppingcart.cart != null && currentUser.shoppingcart.cart.size() > 0}">
 						<c:forEach var="position" items="currentUser.shoppingcart.cart">
 							<div class="w3-card-4" id="scp-article-card">
 								<div class="pure-u-1-5" id="sc-aimg-container">
