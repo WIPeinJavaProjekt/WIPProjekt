@@ -97,9 +97,9 @@ public class ArticleService {
 	public static void UpdateArticle(Article a) throws SQLException, IOException
 	{
 		String query;
-		query = "UPDATE ARTICLE SET name ='%s', description ='%s' where aid ='%d'";
+		query = "UPDATE ARTICLE SET name ='%s', description ='%s', manufacturer = '%s', acid = '%s' where aid ='%d'";
 		
-		query = String.format(query, a.name,a.description,a.ID);
+		query = String.format(query, a.name,a.description,a.ID,a.manufacturer,a.acid);
 		
 		System.out.println(query);
 		

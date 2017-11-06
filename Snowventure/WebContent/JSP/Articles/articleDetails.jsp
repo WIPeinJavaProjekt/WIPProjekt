@@ -58,6 +58,13 @@
 						        </div>
 						        <div class="pure-control-group">
 						            <input required class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
+						        </div>
+						        <div class="pure-control-group">
+						        <select name="categories" class="boxedinput">
+								        <c:forEach items="${categories}" var="categories">
+							        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
+							    		</c:forEach>
+									</select>
 						        </div>				        
 						        <div class="pure-control-group">
 						            <textarea required class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 

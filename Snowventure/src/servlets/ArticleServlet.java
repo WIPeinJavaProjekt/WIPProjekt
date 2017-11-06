@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,8 +18,10 @@ import javax.servlet.http.Part;
 import classes.Article;
 import classes.ArticlePicture;
 import classes.ArticleVersion;
+import classes.Categorie;
 import classes.Utils;
 import services.ArticleService;
+import services.CategorieService;
 
 /**
  * Servlet implementation class ArticleServlet
@@ -58,6 +61,14 @@ public class ArticleServlet extends HttpServlet {
 		if(this.article!=null) {
 			request.setAttribute("article", this.article);
 			request.setAttribute("availableVersions", this.article.versions.size()-1);
+		}
+		
+		try {
+			ArrayList<Categorie> categories = CategorieService.GetCategories();
+			request.getSession().setAttribute("categories", categories);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 				
 		
@@ -103,7 +114,7 @@ public class ArticleServlet extends HttpServlet {
 		this.articleVersion.size = request.getParameter("size");
 		this.articleVersion.versionid = this.article.versions.get(this.article.GetSelectedVersion()).versionid;
 		this.article.manufacturer = request.getParameter("manufacturer");
-		
+		this.article.acid = Integer.parseInt(request.getParameter("categories"));
 		this.article.versions.set(this.article.GetSelectedVersion(), this.articleVersion);
 		
 		ArticleService.UpdateArticle(this.article);
@@ -131,6 +142,7 @@ public class ArticleServlet extends HttpServlet {
 		
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
 		this.article.manufacturer = request.getParameter("manufacturer");
+		this.article.acid = Integer.parseInt(request.getParameter("categories"));
 		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
 				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, 
 				request.getParameter("color"), request.getParameter("size"));
