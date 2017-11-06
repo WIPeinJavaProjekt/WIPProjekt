@@ -65,16 +65,15 @@ public class ShoppingCartServlet extends HttpServlet {
 		
 		if(user != null && user.shoppingcart != null && user.shoppingcart.cart != null && user.shoppingcart.cart.size() > 0)
 		{			
-			for(ShoppingCartPosition scp : user.shoppingcart.cart)
+			ShoppingCartPosition scp = user.shoppingcart.cart.get(Integer.parseInt(scpid));
+			
+			if(scp != null)
 			{
-				if(scp.article.GetSelectedVersion() == Integer.parseInt(scpid))
-				{
-					user.shoppingcart.cart.remove(scp);
-					ShoppingCartService.UpdateShopping(user);
-					request.getSession().setAttribute("currentUser", user);
-					return;
-				}
-			}		
+				user.shoppingcart.cart.remove(scp);
+				ShoppingCartService.UpdateShopping(user);
+				request.getSession().setAttribute("currentUser", user);
+				return;
+			}
 		}
 	}
 	
@@ -90,18 +89,30 @@ public class ShoppingCartServlet extends HttpServlet {
 	{
 		User user = (User)request.getSession().getAttribute("currentUser");
 		
-		if(user != null && user.shoppingcart != null && user.shoppingcart.cart != null && user.shoppingcart.cart.size() > 0)
-		{			
-			for(ShoppingCartPosition scp : user.shoppingcart.cart)
-			{
-				if(scp.article.GetSelectedVersion() == Integer.parseInt(scpid))
-				{
-					scp.amount = newamount;
-					ShoppingCartService.UpdateShopping(user);
-					request.getSession().setAttribute("currentUser", user);
-					return;
-				}
-			}		
+		try {
+				if(user != null && user.shoppingcart != null && user.shoppingcart.cart != null && user.shoppingcart.cart.size() > 0)
+				{			
+					if (newamount <= StockService.GetStock(user.shoppingcart.cart.get(Integer.parseInt(scpid)).article.versions.get(user.shoppingcart.cart.get(Integer.parseInt(scpid)).article.GetSelectedVersion())))
+					{
+						ShoppingCartPosition scp = user.shoppingcart.cart.get(Integer.parseInt(scpid));
+						
+						if(scp != null)
+						{
+							scp.amount = newamount;
+							ShoppingCartService.UpdateShopping(user);
+							request.getSession().setAttribute("currentUser", user);
+							return;
+						}
+					}
+					else 
+					{
+						System.out.println("out of stock - amount is higher than stock value");
+					} 
+				}					
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	

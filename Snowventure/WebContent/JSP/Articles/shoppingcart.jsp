@@ -48,12 +48,12 @@
 								</div>
 								<div class="pure-u-1-4" id="scp-info-part">
 									<p><b>Menge</b></p>
-									<select onchange="location.href='./cart?scpid=${position.article.GetSelectedVersion()}&amount=' + jQuery('#amount option:selected').val();">
+									<select onchange="location.href='./cart?scpid=${currentUser.shoppingcart.cart.indexOf(position)}&amount=' + jQuery('#amount option:selected').val();">
 										<c:forEach var="counter" begin="1" end="10">
 											<option <c:if test="${ position.amount == counter }">selected</c:if> value="${counter}">${counter}</option>
 										</c:forEach>
 									</select>
-									<p><a href="cart?scpid=${ position.article.GetSelectedVersion() }&option=delete">Löschen</a></p>
+									<p><a href="cart?scpid=${ currentUser.shoppingcart.cart.indexOf(position) }&option=delete">Löschen</a></p>
 								</div>
 								<hr>
 							</div>
