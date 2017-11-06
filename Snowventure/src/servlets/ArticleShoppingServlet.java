@@ -1,8 +1,9 @@
 package servlets;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -12,12 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 import classes.Article;
-import classes.ArticlePicture;
 import classes.ArticleVersion;
-import classes.Utils;
 import services.ArticleService;
 
 /**
@@ -41,12 +39,10 @@ public class ArticleShoppingServlet  extends HttpServlet {
      */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Utils.redirectUser(request, response);
-		
 		if(request.getParameter("ID") != null) {
 			try {
 				this.article = ArticleService.GetArticle(Integer.parseInt(request.getParameter("ID")));
-				request.getSession().setAttribute("updateArticle", true);
+				
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 			}

@@ -2,7 +2,9 @@ package services;
 import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,11 +13,12 @@ import java.util.Locale;
 
 import javax.imageio.ImageIO;
 
-import java.io.InputStream;
-
 import com.mysql.jdbc.PreparedStatement;
 
-import classes.*;
+import classes.Article;
+import classes.ArticlePicture;
+import classes.ArticleVersion;
+import classes.Categorie;
 
 /**
  * Modelclass for article administration
@@ -196,7 +199,7 @@ public class ArticleService {
 		
 		while(result.next())
 		{
-			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"),result.getInt("acid"),result.getString("manufacturer"));
+			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description") ,result.getInt("acid"), result.getString("manufacturer"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
 			a.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(a.ID).clone();
 			articles.add(a);
@@ -335,8 +338,6 @@ public class ArticleService {
 		String query = "SELECT name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d';";
 		query = String.format(query, aid);
 		
-		System.out.println(query);
-		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
@@ -344,6 +345,7 @@ public class ArticleService {
 			Blob imageblob = result.getBlob("image");
 			InputStream binaryStream = (InputStream) imageblob.getBinaryStream(1, imageblob.length());
 			ArticlePicture p = new ArticlePicture(result.getString("name"),binaryStream);
+			
 			pictures.add(p);
 		}		
 		return pictures;

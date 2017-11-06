@@ -1,9 +1,9 @@
 package servlets;
-import classes.*;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,12 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import classes.Article;
+import classes.Categorie;
+import classes.User;
 import services.ArticleService;
-import services.CategorieService;
-import services.SafetyquestionService;
-import services.UserService;	
+import services.CategorieService;	
 
 /**
  * Start servlet implementation for the main page and the navigation
@@ -103,7 +103,7 @@ public class StartServlet extends HttpServlet {
 		ArrayList<Article> articles = null;
 		
 		try {
-			articles = ArticleService.GetAllArticlesByName(searchPattern);		
+			articles = ArticleService.GetAllArticlesByName(searchPattern);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
