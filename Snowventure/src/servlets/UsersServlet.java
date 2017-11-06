@@ -31,43 +31,58 @@ public class UsersServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getParameter("search-user") != null || request.getParameter("back") != null)
-		{			
-			searchforUsers(request, response);
-			RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=usersearch");
-			rd.forward(request, response);
-			return;
-		}		
-		else if (request.getParameter("selecteduser") != null)
+		User user = (User)request.getSession().getAttribute("currentUser");
+		
+		if(user != null)
 		{
-			request.getSession().removeAttribute("error");
-			getSelectedUser(request, response);
-			RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=userinfo");
-			rd.forward(request, response);
-			return;
-		}
-		else if(request.getParameter("searchArticles") != null) {
-			findArticles(request);
-			
-			response.sendRedirect("users?page=articlesearch");
-			
-			return;
-		}
-		else 
-		{		
-			try 
+			if(user.utid == 1 && request.getParameter("search-user") != null || request.getParameter("back") != null)
+			{			
+				searchforUsers(request, response);
+				RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=usersearch");
+				rd.forward(request, response);
+				return;
+			}		
+			else if (user.utid == 1 && request.getParameter("selecteduser") != null)
 			{
-				ArrayList<Safetyquestion> squestions = SafetyquestionService.GetSafetyquestion();
-				request.getSession().setAttribute("squestions", squestions);				
-			} 
-			catch (SQLException e) 
-			{
-				e.printStackTrace();
-				System.out.println(-1);	
+				request.getSession().removeAttribute("error");
+				getSelectedUser(request, response);
+				RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=userinfo");
+				rd.forward(request, response);
+				return;
 			}
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=mydata");
-			rd.forward(request, response);
+			else if((user.utid == 1 || user.utid == 3) && request.getParameter("searchArticles") != null) 
+			{
+				findArticles(request);
+				
+				response.sendRedirect("users?page=articlesearch");
+				
+				return;
+			}
+			else if((user.utid == 2 && request.getParameter("page") != null && (request.getParameter("page").toString().equals("articlesearch") || request.getParameter("page").toString().equals("usersearch"))) || (user.utid == 3 && request.getParameter("page") != null && request.getParameter("page").toString().equals("usersearch")))
+			{
+				response.sendRedirect("users");
+				
+				return;
+			}
+			else 
+			{		
+				try 
+				{
+					ArrayList<Safetyquestion> squestions = SafetyquestionService.GetSafetyquestion();
+					request.getSession().setAttribute("squestions", squestions);				
+				} 
+				catch (SQLException e) 
+				{
+					e.printStackTrace();
+					System.out.println(-1);	
+				}
+				
+				RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=mydata");
+				rd.forward(request, response);
+			}
+		}
+		else {
+			response.sendRedirect("login");
 		}
 	}
 
