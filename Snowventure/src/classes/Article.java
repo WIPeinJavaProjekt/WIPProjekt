@@ -108,7 +108,9 @@ public class Article {
 	
 	public ArticlePicture getArticleHeadPicture()
 	{
-		ArticlePicture apic = this.pictures.get(0);	
-		return apic;
+		if(this.pictures.size()>0) {
+			ArticlePicture apic = this.pictures.get(0);	
+			return apic;
+		} return null;
 	}
 }

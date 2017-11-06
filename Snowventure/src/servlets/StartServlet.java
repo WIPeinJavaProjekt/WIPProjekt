@@ -1,10 +1,13 @@
 package servlets;
+import java.awt.image.RenderedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import classes.Article;
+import classes.ArticlePicture;
 import classes.Categorie;
 import classes.User;
 import services.ArticleService;
@@ -104,6 +108,21 @@ public class StartServlet extends HttpServlet {
 		
 		try {
 			articles = ArticleService.GetAllArticlesByName(searchPattern);
+			
+			Path currentRelativePath = Paths.get("");
+			request.getSession().setAttribute("imagePath", currentRelativePath.toAbsolutePath().toString() + "\\");
+			
+			for (Article a: articles) {
+				for(ArticlePicture ap: a.pictures) {
+					File file = new File("" + ap.name);
+					try {
+					   ImageIO.write((RenderedImage) ap.image, "jpg", file);  // ignore returned boolean
+					} catch(IOException e) {
+					 System.out.println("Write error for " + file.getPath() + ": " + e.getMessage());
+					}
+				}
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

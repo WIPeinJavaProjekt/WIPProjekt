@@ -21,5 +21,9 @@ public class ArticlePicture {
 		this.name = name;
 		this.image = ImageIO.read(f);
 	}
+
+	public String getName() {
+		return this.name;
+	}
 	
 }
