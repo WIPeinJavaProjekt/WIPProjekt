@@ -114,7 +114,7 @@ public class Article {
 		} return null;
 	}
 	
-	public ArrayList<ArticlePicture> getArticlesPicture()
+	public ArrayList<ArticlePicture> getArticlesPictures()
 	{
 		return this.pictures;
 	}

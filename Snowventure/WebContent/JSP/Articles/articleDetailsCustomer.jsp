@@ -27,19 +27,19 @@
 	
 		<div class="pure-g articledescriptioncontainer">
 		    <div class="pure-u-1-2">		    
-    			<div class="w3-content w3-display-container w3slidmod articleslider" align="center">						
-					<div class="w3-display-container mySlides ">
-						<div class="productCardimage">
-					   		<span class="articleimagehelper"></span><img src="images/${article.getArticleHeadPicture().GetImageId()}" class="articlesearchimage">
-					   	</div>
-					</div>
-					<div class="w3-display-container mySlides ">
-						<div class="productCardimage">
-							<span class="articleimagehelper"></span><img src="./Images/skityp.jpg" class ="articlesearchimage"/>
+    			<div class="w3-content w3-display-container w3slidmod articleslider" align="center">
+    			
+    				<c:forEach items="${article.getArticlesPictures()}" var="ap">
+				   		<div class="w3-display-container mySlides ">
+							<div class="productCardimage">
+						   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.GetImageId()}" class="articlesearchimage"/>
+						   	</div>
 						</div>
-					</div>							
-					<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
-					<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>						
+					</c:forEach>
+					<c:if test="${article.getArticlesPictures().size()>1}"> 
+						<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+						<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+					</c:if>				
 				</div>
 				<script>
 					var slideIndex = 1;

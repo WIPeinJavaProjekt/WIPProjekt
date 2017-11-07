@@ -26,7 +26,6 @@ public class ImageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
         String imgId = request.getPathInfo().substring(1);
-        System.out.println("Image ID:" + imgId);
 
         ArticlePicture ap;
 		try {			
@@ -37,9 +36,7 @@ public class ImageServlet extends HttpServlet {
 	        response.getOutputStream().write(content);
 		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
-		}
-
-       
+		}       
     }
 }
 
