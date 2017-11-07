@@ -55,9 +55,8 @@
 			 	<c:forEach var="article" items="${articles}">
 				 		<div class="productCard pure-u-1-3" onclick="location.href='./articleshopping?ID=${article.GetId()}';">
 					 		<div  style="width:100%">
-					 			${imagePath}${article.getArticleHeadPicture().getName()}
 							    <div class="productCardimage">
-							    	<span class="articleimagehelper"></span><img src="${imagePath}${article.getArticleHeadPicture().getName()}" class="articlesearchimage">
+							    	<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${article.getArticleHeadPicture().GetImageId()}" class="articlesearchimage">
 							    </div>
 							    <div class="w3-container w3-center">
 									<p>

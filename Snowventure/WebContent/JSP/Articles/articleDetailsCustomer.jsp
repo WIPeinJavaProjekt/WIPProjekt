@@ -30,12 +30,12 @@
     			<div class="w3-content w3-display-container w3slidmod articleslider" align="center">						
 					<div class="w3-display-container mySlides ">
 						<div class="productCardimage">
-					   	<span class="articleimagehelper"></span><img src="./Images/Brille_schwarz.jpg" class ="articlesearchimage"/>
+					   		<span class="articleimagehelper"></span><img src="images/${article.getArticleHeadPicture().GetImageId()}" class="articlesearchimage">
 					   	</div>
 					</div>
 					<div class="w3-display-container mySlides ">
 						<div class="productCardimage">
-						<span class="articleimagehelper"></span><img src="./Images/skityp.jpg" class ="articlesearchimage"/>
+							<span class="articleimagehelper"></span><img src="./Images/skityp.jpg" class ="articlesearchimage"/>
 						</div>
 					</div>							
 					<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>

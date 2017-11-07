@@ -30,7 +30,7 @@
 	
 	<body>
 	
-		<%@include file = "../Basic/header.jsp" %> 
+		<%@include file = "../Basic/header.jsp" %>
 	
 		<div class="pure-g" id="loginbox">
 		

@@ -113,4 +113,9 @@ public class Article {
 			return apic;
 		} return null;
 	}
+	
+	public ArrayList<ArticlePicture> getArticlesPicture()
+	{
+		return this.pictures;
+	}
 }

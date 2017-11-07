@@ -33,7 +33,17 @@ public class StartServlet extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		ArrayList<Article> articles;
+		try {
+			articles = ArticleService.GetAllArticlesByName("");
+			request.getSession().setAttribute("articles", articles);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		
 		try {
 			ArrayList<Categorie> categories = CategorieService.GetCategories();

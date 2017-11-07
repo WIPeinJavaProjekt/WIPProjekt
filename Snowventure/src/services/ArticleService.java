@@ -335,7 +335,7 @@ public class ArticleService {
 	public static ArrayList<ArticlePicture> GetPicturesFromArticleId(int aid) throws IOException, SQLException{
 		ArrayList<ArticlePicture> pictures = new ArrayList<ArticlePicture>();
 		
-		String query = "SELECT name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d';";
+		String query = "SELECT aimgid,name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d';";
 		query = String.format(query, aid);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
@@ -344,11 +344,30 @@ public class ArticleService {
 		{
 			Blob imageblob = result.getBlob("image");
 			InputStream binaryStream = (InputStream) imageblob.getBinaryStream(1, imageblob.length());
-			ArticlePicture p = new ArticlePicture(result.getString("name"),binaryStream);
+			byte[] content = result.getBytes("image");
+			ArticlePicture p = new ArticlePicture(result.getString("name"), binaryStream, content, Integer.parseInt(result.getString("aimgid")));
 			
 			pictures.add(p);
 		}		
 		return pictures;
+	}
+	
+	public static ArticlePicture GetPictureFromPictureId(int imgId) throws IOException, SQLException{
+		
+		String query = "SELECT name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aimgid ='%d';";
+		query = String.format(query, imgId);
+		
+		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
+		
+		while(result.next())
+		{
+			Blob imageblob = result.getBlob("image");
+			InputStream binaryStream = (InputStream) imageblob.getBinaryStream(1, imageblob.length());
+			byte[] content = result.getBytes("image");
+			ArticlePicture p = new ArticlePicture(result.getString("name"),binaryStream, content, imgId);
+			return p;
+		}		
+		return null;
 	}
 	
 	/**
