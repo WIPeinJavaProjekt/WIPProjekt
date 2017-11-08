@@ -37,7 +37,7 @@
 		        <c:if test="${currentUser.utid==1||currentUser.utid==3}"> 
 		        <li class="pure-menu-item"><a href="users?page=articlesearch" class="pure-menu-link">Artikelübersicht</a></li>
 		        </c:if>  
-		        <li class="pure-menu-item"><a href="users?page=orders" class="pure-menu-link">Bestellungen</a></li>
+		        <li class="pure-menu-item"><a href="users?page=ordersearch" class="pure-menu-link">Bestellungen</a></li>
 		    </ul>
 		</div>
 		

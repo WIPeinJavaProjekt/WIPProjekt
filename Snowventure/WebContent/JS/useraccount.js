@@ -19,7 +19,7 @@ if($.urlParam('page')!= null)
 	$('#useroptions').removeClass("loginbox");
 	var page = $.urlParam('page');
 	
-	var path = (page == 'articlesearch' ? './JSP/Articles/articlesearch.jsp' : './JSP/User/' + page + '.jsp');
+	var path = (page == 'articlesearch' ? './JSP/Articles/articlesearch.jsp': page == 'ordersearch' ? './JSP/Orders/ordersearch.jsp' : './JSP/User/' + page + '.jsp');
 	document.getElementById("content").InnerHTML = $('#content').load(path);
 }
 else{

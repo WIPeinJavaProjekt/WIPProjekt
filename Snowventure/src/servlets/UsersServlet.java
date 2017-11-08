@@ -58,6 +58,14 @@ public class UsersServlet extends HttpServlet {
 				
 				return;
 			}
+			else if((user.utid == 1 || user.utid == 3) && request.getParameter("searchOrders") != null) 
+			{
+				findOrders(request);
+				
+				response.sendRedirect("users?page=ordersearch");
+				
+				return;
+			}
 			else if((user.utid == 2 && request.getParameter("page") != null && (request.getParameter("page").toString().equals("articlesearch") || request.getParameter("page").toString().equals("usersearch"))) || (user.utid == 3 && request.getParameter("page") != null && request.getParameter("page").toString().equals("usersearch")))
 			{
 				response.sendRedirect("users");
@@ -335,5 +343,42 @@ public class UsersServlet extends HttpServlet {
 		UserService.UpdateUserRights(user, user.utid);
 		
 		request.getSession().setAttribute("selectedUser", user);
+	}
+	
+	
+	/**
+	 * Returns orders matching the search-pattern to the request
+	 * @param request
+	 * @throws IOException 
+	 */
+	private void findOrders(HttpServletRequest request) throws IOException 
+	{		
+		String searchOrderUserPattern = request.getParameter("searchOrderByUserPattern");
+		String searchOrderIDPattern = request.getParameter("searchOrderIDPattern");
+
+		ArrayList<Order> orders = new ArrayList<Order>();
+		
+		try {
+			if(searchOrderIDPattern != null && searchOrderIDPattern != "") 
+			{
+				Order order = OrderService.GetSpecificOrder(Integer.parseInt(searchOrderIDPattern));
+				if (order != null) 
+				{ orders.add(order);}
+			}
+			else if (searchOrderIDPattern == "" && searchOrderUserPattern != null && searchOrderUserPattern != "")
+			{
+				orders = OrderService.GetAllOrders((UserService.GetUser(searchOrderUserPattern)).ulid);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(orders.size() == 0) {
+			request.getSession().setAttribute("noOrderFound", true);
+		} else {
+			request.getSession().setAttribute("noOrderFound", false);
+		}
+		
+		request.getSession().setAttribute("orders", orders);		
 	}
 }
