@@ -39,7 +39,7 @@
 					<c:if test="${article.getArticlesPictures().size()>1}"> 
 						<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
 						<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
-					</c:if>				
+					</c:if>
 				</div>
 				<script>
 					var slideIndex = 1;

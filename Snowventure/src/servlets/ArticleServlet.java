@@ -32,8 +32,8 @@ public class ArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private Article article = new Article();
-	private ArticleVersion articleVersion = new ArticleVersion();	
-       
+	private ArticleVersion articleVersion = new ArticleVersion();	 
+	
     public ArticleServlet() {
         super();
     }
@@ -45,24 +45,7 @@ public class ArticleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Utils.redirectUser(request, response);
-		
-		if(request.getParameter("ID") != null) {
-			try {
-				this.article = ArticleService.GetArticle(Integer.parseInt(request.getParameter("ID")));
-				request.getSession().setAttribute("updateArticle", true);
-			} catch (NumberFormatException | SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			this.article = null;
-			request.getSession().setAttribute("updateArticle", false);
-		}
-		
-		if(this.article!=null) {
-			request.setAttribute("article", this.article);
-			request.setAttribute("availableVersions", this.article.versions.size()-1);
-		}
-		
+
 		try {
 			ArrayList<Categorie> categories = CategorieService.GetCategories();
 			request.getSession().setAttribute("categories", categories);
@@ -70,14 +53,27 @@ public class ArticleServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+		
+		if(request.getParameter("ID") != null) {
+			try {
+				this.article = ArticleService.GetArticle(Integer.parseInt(request.getParameter("ID")));
+				request.getSession().setAttribute("updateArticle", true);
+				request.getSession().setAttribute("article", this.article);
+				request.getSession().setAttribute("availableVersions", this.article.versions.size()-1);
+			} catch (NumberFormatException | SQLException e) {
+				e.printStackTrace();
+			}			
+		} else {
+			this.article = null;
+			request.getSession().setAttribute("updateArticle", false);
+		}		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/Articles/articleDetails.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+				
 		if(request.getParameter("addArticle") != null) {
 			try {
 				addArticle(request);
@@ -91,9 +87,40 @@ public class ArticleServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		} else if(request.getParameter("addImage") != null) {
+			addImage(request);
+		} else if(request.getParameter("addArticleVersion") != null) {
+			addArticleVersion(request);
 		}
 
 		doGet(request, response);
+	}
+
+	private void addArticleVersion(HttpServletRequest request) {
+		this.articleVersion.property = request.getParameter("property");
+		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
+		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));
+		this.articleVersion.color = request.getParameter("color");
+		this.articleVersion.size = request.getParameter("size");
+		this.articleVersion.ID = this.article.ID;
+		
+		ArticleService.AddArticleVersion(articleVersion);
+	}
+
+	private void addImage(HttpServletRequest request) throws IOException, ServletException {
+		Part filePart = request.getPart("articleImage");
+	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+	    InputStream fileContent = filePart.getInputStream();	    
+	    
+	    if(!fileName.equals("")) {
+		    ArticlePicture picture = new ArticlePicture(fileName, fileContent);
+		    
+		    try {
+				ArticleService.AddPicture(picture, this.article.ID);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	    }	    
 	}
 
 	/**
@@ -131,9 +158,6 @@ public class ArticleServlet extends HttpServlet {
 	 */
 	private void addArticle(HttpServletRequest request) throws SQLException, IOException, ServletException {
 		
-//		File articleImage = request.getParameter("articleImage");
-		System.out.println(request.getParameter("articleImage"));
-		
 		Part filePart = request.getPart("articleImage");
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 	    InputStream fileContent = filePart.getInputStream();
@@ -158,8 +182,6 @@ public class ArticleServlet extends HttpServlet {
 			this.article = null;
 			request.setAttribute("successArticle", "Artikel wurde erfolgreich hinzugefügt");
 		}
-		
-		System.out.println("Article return: " + ret);
 	}
 
 }

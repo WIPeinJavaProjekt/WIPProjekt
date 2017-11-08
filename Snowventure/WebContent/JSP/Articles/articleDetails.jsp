@@ -52,43 +52,48 @@
 			
 				<form id="articleadminboxform" class="pure-form" enctype="multipart/form-data" action="article" method="post">
 					
-						    <fieldset class="pure-group">
-						    	<div class="pure-control-group">
-						            <input required class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
-						        </div>
-						        <div class="pure-control-group">
-						            <input required class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
-						        </div>
-						        <div class="pure-control-group">
-						        <select name="categories" class="boxedinput">
-								        <c:forEach items="${categories}" var="categories">
-							        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
-							    		</c:forEach>
+				    <fieldset class="pure-group">
+				    	<div class="pure-control-group">
+				            <input required class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
+				        </div>
+				        <div class="pure-control-group">
+				            <input required class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
+				        </div>
+				        <div class="pure-control-group">
+				        <select name="categories" class="boxedinput">
+						        <c:forEach items="${categories}" var="categories">
+					        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
+					    		</c:forEach>
+							</select>
+				        </div>				        
+				        <div class="pure-control-group">
+				            <textarea required class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
+				            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>">${article.GetDescription()}</textarea>
+				        </div>
+				        <c:choose>
+							<c:when test="${updateArticle}">
+									<div class="pure-control-group">
+										<label> Ausgewählte Version:</label>
+										<select required name="selectedVersion" class="boxedinput">
+											<c:forEach items="${article.GetAllVersions()}" var="version">
+								        		<option value="${article.GetAllVersions().indexOf(version)}">${article.GetAllVersions().indexOf(version)}</option>
+								    		</c:forEach>
+										</select>
+							        </div>
+							</c:when>
+							<c:otherwise>
+								<div class="pure-control-group">
+									<select required name="selectedVersion" class="boxedinput">
+							        		<option value="0">0</option>
 									</select>
-						        </div>				        
-						        <div class="pure-control-group">
-						            <textarea required class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
-						            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>">${article.GetDescription()}</textarea>
-						        </div>
-						        <c:choose>
-									<c:when test="${updateArticle}">
-											<div class="pure-control-group">
-												<select required name="selectedVersion" class="boxedinput">
-													<c:forEach items="${article.GetAllVersions()}" var="version">
-										        		<option value="${article.GetAllVersions().indexOf(version)}">${article.GetAllVersions().indexOf(version)}</option>
-										    		</c:forEach>
-												</select>
-									        </div>
-									</c:when>
-									<c:otherwise>
-										<div class="pure-control-group">
-											<select required name="selectedVersion" class="boxedinput">
-									        		<option value="0">0</option>
-											</select>
-								        </div>	
-									</c:otherwise>
-								</c:choose>										        
-						        <div class="pure-control-group">
+						        </div>	
+							</c:otherwise>
+						</c:choose>
+						<br>
+						
+						<div class="pure-g">
+							<div class="pure-u-1-2">
+								<div class="pure-control-group">
 						            <input class="boxedinput" id="property" name="property" value="${article.GetProperty()}" type="text" placeholder="Eigenschaft">
 						        </div>
 						        <div class="pure-control-group">
@@ -124,58 +129,72 @@
 						            <input required class="boxedinput" id="price" name="price" value="${article.GetPrice()}" type="number" step="0.01" placeholder="Preis">
 						        </div>
 						        <div class="pure-control-group">
-						            <input class="boxedinput custom-file-input" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
+						            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticleVersion">Als neue Artikelversion speichern</button>
 						        </div>
-					        </fieldset>
-					        
-					        
-					        <fieldset>
+							</div>
+							<div class="pure-u-1-2">
 								<div class="pure-control-group">
-								<c:choose>
-									<c:when test="${updateArticle}">
-							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="updateArticle">Artikel aktualisieren</button>
-							        </c:when>
-							        <c:otherwise>
-							        	<button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticle">Artikel anlegen</button>
-							        </c:otherwise>
-						        </c:choose>   
+						            	<input class="boxedinput custom-file-input" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
 						        </div>
-					       	</fieldset>
+						        <div class="pure-control-group">
+						        	<c:if test="${updateArticle}">
+							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addImage" onclick="location.href='./article?ID=${article.GetId()}';" >Bild hinzufügen</button>
+							        </c:if>
+						        </div>
+							</div>
+						</div>
+			        </fieldset>
+			        
+			        
+			        <fieldset>
+						<div class="pure-control-group">
+							<c:choose>
+								<c:when test="${updateArticle}">
+						            <button class="pure-button pure-button-primary boxedinput" type="submit" name="updateArticle">Artikelversion aktualisieren</button>
+						        </c:when>
+						        <c:otherwise>
+						        	<button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticle">Artikel anlegen</button>
+						        </c:otherwise>
+					        </c:choose>   
+				        </div>
+			       	</fieldset>
+			       	
+			       	<div class="w3-content w3-display-container w3slidmod" align="center">
+
+						<c:forEach items="${article.getArticlesPictures()}" var="ap">
+					   		<div class="w3-display-container mySlides ">
+								<div class="productCardimage">
+							   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.GetImageId()}" class="articlesearchimage"/>
+							   	</div>
+							</div>
+						</c:forEach>
+						<c:if test="${article.getArticlesPictures().size()>1}"> 
+							<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+							<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+						</c:if>
+					
+					</div>
 				</form>
 
-
-				<div class="w3-content w3-display-container w3slidmod" align="center">
-
-				<div class="w3-display-container mySlides">
-				   <img id="uploadedImage" src="#" class ="imageuploaded"/>
-				</div>
 				
-				<div class="w3-display-container mySlides">
-				   <img  src="./Images/skityp.jpg" class ="imageuploaded"/>
-				</div>
-				
-				<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
-				<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
-				
-				</div>
 				<script>
-				var slideIndex = 1;
-				showDivs(slideIndex);
-				
-				function plusDivs(n) {
-				  showDivs(slideIndex += n);
-				}
-				
-				function showDivs(n) {
-				  var i;
-				  var x = document.getElementsByClassName("mySlides");
-				  if (n > x.length) {slideIndex = 1}    
-				  if (n < 1) {slideIndex = x.length}
-				  for (i = 0; i < x.length; i++) {
-				     x[i].style.display = "none";  
-				  }
-				  x[slideIndex-1].style.display = "block";  
-				}
+					var slideIndex = 1;
+					showDivs(slideIndex);
+					
+					function plusDivs(n) {
+					  showDivs(slideIndex += n);
+					}
+					
+					function showDivs(n) {
+					  var i;
+					  var x = document.getElementsByClassName("mySlides");
+					  if (n > x.length) {slideIndex = 1}    
+					  if (n < 1) {slideIndex = x.length}
+					  for (i = 0; i < x.length; i++) {
+					     x[i].style.display = "none";  
+					  }
+					  x[slideIndex-1].style.display = "block";  
+					}
 				</script>
 
 				<c:if test="${not empty errorArticle}">

@@ -28,15 +28,16 @@
 				    Ergebnisse filtern:
 				    Preis: <input type="range" min="-10" max="10">
 				    Farbe: 
-				    <select multiple>
-					  <option value="Schwarz">Schwarz</option>
-					  <option value="Weiß">Weiß</option>
-					  <option value="Rot">Rot</option>
-					  <option value="Blau">Blau</option>
-					  <option value="Gelb">Gelb</option>
-					  <option value="Grün">Grün</option>
-					  <option value="Braun">Braun</option>
-					  <option value="Orange">Orange</option>
+  
+				    <select name="colorFilter" multiple>
+					  	<option value="Schwarz">Schwarz</option>
+					  	<option value="Weiß">Weiß</option>
+					  	<option value="Rot">Rot</option>
+					  	<option value="Blau">Blau</option>
+					  	<option value="Gelb">Gelb</option>
+					  	<option value="Grün">Grün</option>
+					  	<option value="Braun">Braun</option>
+					  	<option value="Orange">Orange</option>
 					</select>
 					Filter Größe
 					Hersteller
