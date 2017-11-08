@@ -1,16 +1,20 @@
 package classes;
 
+import java.util.ArrayList;
+
 public class ArticleVersion extends Article{
 	public int versionid;
 	public String property;
 	public String propertyvalue;
-	public String size;
 	public String color;
 	public double price;
+	public ArrayList<String> sizes;
 	
-	public ArticleVersion() {};
+	public ArticleVersion() {
+		sizes = new ArrayList<String>();
+	};
 	
-	public ArticleVersion(int versionid, String property,String propertyvalue, double price, Article a, String color, String size)
+	public ArticleVersion(int versionid, String property,String propertyvalue, double price, Article a, String color, ArrayList<String> size)
 	{
 		super(a);
 		this.versionid = versionid;
@@ -18,7 +22,8 @@ public class ArticleVersion extends Article{
 		this.propertyvalue = propertyvalue;
 		this.price = price;
 		this.color = color;
-		this.size = size;
+		this.sizes = new ArrayList<String>(size);
+		
 	}
 	
 	public int GetAvId() {

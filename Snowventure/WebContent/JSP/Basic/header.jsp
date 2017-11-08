@@ -1,35 +1,59 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="./CSS/w3.css">
-<div id ="brandbox" >
-		<div id="innerbrandbox">
-			<a href="start"><img id ="brandimg" src="./Images/brand.png"></a>
-		</div>
-</div>
-	
+
 	
 <header>
+<form class="pure-form" action="start" method="post">
 	<div class="pure-g">
-		<div class="pure-u-1-5"></div>
-		<div class="pure-u-3-5" align="right" >
+		<div class="pure-u-1-5">
+			
+			<!--  
 			<c:if test="${currentUser == null}">
+				
 				<div><img src="./Images/login.png"></div>
 			</c:if>
 			<c:if test="${currentUser != null}">
-			<div class ="headerwelcome"><b>	Herzlich Willkommen, <i>${currentUser.getName()}!</i>	</b></div>
-			</c:if>
+			<div class ="headerwelcome"><b>	<i>${currentUser.getName()}!</i>	</b></div>
+			</c:if>-->
+		
 		</div>
-			<div class="pure-u-1-5">
-		    	<form class="pure-form" action="start" method="post">
-			    	<c:if test="${currentUser == null}">
-			    		<button type="submit" name="login" class="pure-button pure-button-primary"><i class="fa fa-sign-in"></i></button>
+	
+			
+			
+		
+				
+				<div class="pure-u-3-5" align="left">
+				<div id ="brandbox" >
+						<div id="innerbrandbox">
+						<a href="start"><img id ="brandimg" src="./Images/favicon.png" height= "120px" width="auto"></a>
+						</div>
+					</div>
+					<c:if test="${currentUser == null}">
+			    		<button type="submit" name="login" class="headerbtn">ANMELDEN</button>
 		    		</c:if>
-		    		<c:if test="${currentUser != null}">
-		    			<button type="submit" name="settings" class="pure-button pure-button-primary"><i class="fa fa-cog"></i></button>
-			    		<button type="submit" name="logout" class="pure-button pure-button-primary"><i class="fa fa-sign-out"></i></button>
+			    	<c:if test="${currentUser != null}">
+		    			<button type="submit" name="settings" class="headerbtn">KONTO</button>
+			    		<button type="submit" name="logout" class="headerbtn">(ABMELDEN)</button>
 		    		</c:if>
-		    		<button type="submit" name="start" class="pure-button pure-button-primary"><i class="fa fa-home"></i></button>
-			    	<button type="submit" name="cart" class="pure-button pure-button-primary"><i class="fa fa-shopping-cart"></i></button>
-		    	</form>
+			    	<button type="submit" name="cart" class="headerbtn">WARENKORB</button>
+		    		<button type="submit" name="cart" class="headerbtn">ÜBER UNS</button>
+				</div>
+				
+
+		
+
+	
+
+	
+
+		
+	
+
+   			<div class="pure-u-1-5">
+		    	
 	    	</div>
    	</div>
+   		    	</form>		
+		
+   	<div style="height:2px; width:100%; background-color:rgba(75,75,75,0.1);"></div>
 </header>

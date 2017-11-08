@@ -74,18 +74,57 @@ public class ArticleService {
 		Locale.setDefault(Locale.ENGLISH);		
 		String query;
 		int avid = -1;
-		query = "INSERT INTO ARTICLEVERSION(property,propertyvalue,defaultprice,aid,color,size) VALUES('%s','%s','%f','%d','%s','%s')";
+		query = "INSERT INTO ARTICLEVERSION(property,propertyvalue,defaultprice,aid,color,size) VALUES('%s','%s','%f','%d','%s')";
 		query = String.format(query,
 				av.property,
 				av.propertyvalue,
 				av.price,
 				av.ID,
-				av.color,
-				av.size);
+				av.color);
 		
 		avid = DatabaseConnector.createConnection().InsertQuery(query);
 		
+		int dummy = AddArticleVersionSize(av);
+		
+		if(dummy == -1)
+			return dummy;
+		
 		return avid;
+	}
+	
+	/**
+	 * Method for adding an ArticleversionSize
+	 * @param av the ArticleVersion
+	 * @return int value depending on success of insertion
+	 */
+	public static int AddArticleVersionSize(ArticleVersion av) {
+		int insert = 1;
+		String query = "INSERT INTO ARTICLEVERSIONSIZE(size,avid) VALUES('%s','%s');";
+		
+		
+		for(String s: av.sizes)
+		{
+			query = String.format(query, 
+					s,
+					av.versionid
+					);
+			insert = DatabaseConnector.createConnection().InsertQuery(query);
+			if(insert == -1)
+				return -1;
+		}
+		
+		return insert;
+	}
+	
+	/**
+	 * Helper Method for deleting All AVSizes of a specific articleversion
+	 * @param avid
+	 */
+	private static void DeleteArticleVersionSize(int avid)
+	{
+		String query ="DELETE ARTICLEVERSIONSIZE WHERE avid = '%d'";
+		query = String.format(query, avid);
+		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
 	/**
@@ -121,20 +160,31 @@ public class ArticleService {
 	public static void UpdateArticleVersion(ArticleVersion av) {
 		Locale.setDefault(Locale.ENGLISH);
 		String query;
-		query = "UPDATE ARTICLEVERSION SET property = '%s', propertyvalue = '%s', defaultprice = '%f', color = '%s', size = '%s' where avid ='%d'";
+		query = "UPDATE ARTICLEVERSION SET property = '%s', propertyvalue = '%s', defaultprice = '%f', color = '%s' where avid ='%d'";
 		
 		query = String.format(query,
 				av.property,
 				av.propertyvalue,
 				av.price,
 				av.color,
-				av.size,
 				av.versionid);
 		
 		System.out.println(query);
 		
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
+	
+	
+	
+	/**
+	 * Method for UpdatingArticleVersionsizes
+	 * @param av
+	 */
+	public static void UpdateArticleVersionSize(ArticleVersion av) {
+		DeleteArticleVersionSize(av.versionid);
+		AddArticleVersionSize(av);
+	}
+	
 	
 	/**
 	 * Method for getting all Articleversions of an Article
@@ -145,18 +195,31 @@ public class ArticleService {
 	public static ArrayList<ArticleVersion> GetAllArticleVersion(Article a) throws SQLException {
 		ArrayList<ArticleVersion> av = new ArrayList<ArticleVersion>();
 		
-		String query ="SELECT  avid,property,propertyvalue, defaultprice, color, size FROM ARTICLEVERSION WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d'";
+		String query ="SELECT  avid,property,propertyvalue, defaultprice, color FROM ARTICLEVERSION WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d'";
 		query = String.format(query, a.ID);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
 		{
-			ArticleVersion version = new ArticleVersion(result.getInt("avid"),result.getString("property"),result.getString("propertyvalue"),result.getDouble("defaultprice"),a, result.getString("color"),result.getString("size"));
+			ArrayList<String> sizes = new ArrayList<String>(GetAllArticleVersionsize(result.getInt("avid")));
+			ArticleVersion version = new ArticleVersion(result.getInt("avid"),result.getString("property"),result.getString("propertyvalue"),result.getDouble("defaultprice"),a, result.getString("color"),sizes);
 			av.add(version);
 		}
 		
 		return av;
+	}
+	
+	public static ArrayList<String> GetAllArticleVersionsize(int avid) throws SQLException{
+		ArrayList<String> sizes = new ArrayList<String>();
+		String query = "SELECT size from ARTICLEVERSIONSIZE Where avid ='%d'";
+		query = String.format(query, avid);
+		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
+		
+		while(result.next())
+			sizes.add(result.getString("size"));
+		
+		return sizes;
 	}
 	
 	/**

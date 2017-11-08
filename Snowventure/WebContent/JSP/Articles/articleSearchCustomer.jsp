@@ -49,7 +49,7 @@
 	</div>
 
 <center>
-<div style="height:2px; width:100%; background-color:rgb(75,75,75);"></div>
+
 	<form name="cardForm" id="cardForm" action="articles" method="post">
 		<div id="articleresultcontainer" class="search-results" align="left">	
 			<c:if test="${ not empty articles }">

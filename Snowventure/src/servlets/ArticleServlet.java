@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -101,7 +102,8 @@ public class ArticleServlet extends HttpServlet {
 		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
 		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));
 		this.articleVersion.color = request.getParameter("color");
-		this.articleVersion.size = request.getParameter("size");
+		String[] outerArray = request.getParameterValues("size");
+		this.articleVersion.sizes = new ArrayList<String>(Arrays.asList(outerArray[0].split(",")));
 		this.articleVersion.ID = this.article.ID;
 		
 		ArticleService.AddArticleVersion(articleVersion);
@@ -138,7 +140,8 @@ public class ArticleServlet extends HttpServlet {
 		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
 		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));
 		this.articleVersion.color = request.getParameter("color");
-		this.articleVersion.size = request.getParameter("size");
+		String[] outerArray = request.getParameterValues("size");
+		this.articleVersion.sizes = new ArrayList<String>(Arrays.asList(outerArray[0].split(",")));
 		this.articleVersion.versionid = this.article.versions.get(this.article.GetSelectedVersion()).versionid;
 		this.article.manufacturer = request.getParameter("manufacturer");
 		this.article.acid = Integer.parseInt(request.getParameter("categories"));
@@ -164,12 +167,13 @@ public class ArticleServlet extends HttpServlet {
 	    
 	    ArticlePicture picture = new ArticlePicture(fileName, fileContent);
 		
+	    String[] outerArray = request.getParameterValues("size");
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
 		this.article.manufacturer = request.getParameter("manufacturer");
 		this.article.acid = Integer.parseInt(request.getParameter("categories"));
 		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
 				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, 
-				request.getParameter("color"), request.getParameter("size"));
+				request.getParameter("color"), new ArrayList<String>(Arrays.asList(outerArray[0].split(","))));
 		
 		this.article.versions.add(this.articleVersion);
 		this.article.pictures.add(picture);

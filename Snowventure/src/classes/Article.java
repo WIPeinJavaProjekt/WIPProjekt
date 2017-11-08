@@ -74,8 +74,8 @@ public class Article {
 		return f.format(GetPrice()).replace(".", ",");
 	}
 	
-	public String GetSize() {
-		return versions.get(selectedversion).size;
+	public ArrayList<String> GetSize() {
+		return versions.get(selectedversion).sizes;
 	}
 	
 	public String GetProperty() {
