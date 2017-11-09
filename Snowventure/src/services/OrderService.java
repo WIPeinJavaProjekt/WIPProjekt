@@ -209,6 +209,30 @@ public class OrderService {
 		return orders;
 	}
 	
+	
+	/**
+	 * Method for getting all available Orders
+	 * @return Arraylist with all Orders
+	 * @throws SQLException
+	 */	
+	public static ArrayList<Order> GetAllOrders() throws SQLException
+	{
+		ArrayList<Order> orders = new ArrayList<Order>();
+		String query = "SELECT ulid, orid, name, surname, email, postcode, street, streetno, city FROM ASSIGNMENT";
+		Order o;
+		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
+		
+		while(result.next())
+		{
+			
+			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("code"), result.getString("streetno"));
+			o = new Order(a, GetShoppingCartFromOrder(result.getInt("orid")),GetOrderStatuscycle(result.getInt("orid")),result.getInt("orid"), result.getString("name"), result.getString("surname"), result.getString("email"), result.getInt("ulid"));
+			orders.add(o);
+		}
+		return orders;
+	}
+	
+	
 	/**
 	 * Method for getting a specific Order 
 	 * @param orid Orderid

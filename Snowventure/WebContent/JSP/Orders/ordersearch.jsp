@@ -7,16 +7,11 @@
 			<form class="pure-form" action="users" method="POST">
 			    <fieldset>
 			        <legend>
-			        	<h3>Bestellungen Suchen</h3>
+			        	<h3>Bestellungen</h3>
 			        </legend>
 					<div class="pure-g">
 						<div class="pure-u-4-5">
-					        <div class="pure-u-1-1">
-					        	<input type="text" name="searchOrderByUserPattern" class="boxedinput" placeholder="Nutzernamen eingeben">
-							</div>
-					        <div class="pure-u-1-1">
 					        	<input type="text" name="searchOrderIDPattern" class="boxedinput" placeholder="Bestellnummer eingeben">
-							</div>
 						</div>
 						<div class="pure-u-1-5">
 			        		<button type="submit" name="searchOrders" class="pure-button pure-button-primary boxedinput">Suchen</button>
@@ -30,14 +25,14 @@
 </div>
 
 <center>
-	<div class="pure-g">
-	    <div class="pure-u-1-5"><p><b>Bestellnummer</b></p></div>
-	    <div class="pure-u-1-5"><p><b>Name</b></p></div>
-	    <div class="pure-u-1-5"><p><b>Bestellstatus</b></p></div>
-	    <div class="pure-u-1-5"><p><b>Datum</b></p></div>    
-	</div>
 	<div class="search-results">	
 		<c:if test="${ not empty orders }">
+			<div class="pure-g">
+			    <div class="pure-u-1-5"><p><b>Bestellnummer</b></p></div>
+			    <div class="pure-u-1-5"><p><b>Name</b></p></div>
+			    <div class="pure-u-1-5"><p><b>Bestellstatus</b></p></div>
+			    <div class="pure-u-1-5"><p><b>Datum</b></p></div>    
+			</div>
 		 	<c:forEach var="order" items="${orders}">
 				<div>
 					<hr>

@@ -353,7 +353,6 @@ public class UsersServlet extends HttpServlet {
 	 */
 	private void findOrders(HttpServletRequest request) throws IOException 
 	{		
-		String searchOrderUserPattern = request.getParameter("searchOrderByUserPattern");
 		String searchOrderIDPattern = request.getParameter("searchOrderIDPattern");
 
 		ArrayList<Order> orders = new ArrayList<Order>();
@@ -365,15 +364,15 @@ public class UsersServlet extends HttpServlet {
 				if (order != null) 
 				{ orders.add(order);}
 			}
-			else if (searchOrderIDPattern == "" && searchOrderUserPattern != null && searchOrderUserPattern != "")
+			else 
 			{
-				orders = OrderService.GetAllOrders((UserService.GetUser(searchOrderUserPattern)).ulid);
+				orders = OrderService.GetAllOrders();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		if(orders.size() == 0) {
+		if(orders == null || orders.size() == 0) {
 			request.getSession().setAttribute("noOrderFound", true);
 		} else {
 			request.getSession().setAttribute("noOrderFound", false);
