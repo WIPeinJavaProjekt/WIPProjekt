@@ -10,4 +10,14 @@ public class OrderStatus {
 		this.statusdate = statusdate;
 		this.description = description;
 	}
+	
+	public Date getStatusdate()
+	{
+		return this.statusdate;
+	}
+	
+	public String getDescription()
+	{
+		return this.description;
+	}
 }

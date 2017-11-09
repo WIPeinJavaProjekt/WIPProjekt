@@ -29,4 +29,9 @@ public class ArticleVersion extends Article{
 	public int GetAvId() {
 		return versionid;
 	}
+	
+	public double getPrice()
+	{
+		return price;
+	}
 }

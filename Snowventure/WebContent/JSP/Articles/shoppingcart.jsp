@@ -35,12 +35,12 @@
 						<c:forEach var="position" items="currentUser.shoppingcart.cart">
 							<div class="w3-card-4" id="scp-article-card">
 								<div class="pure-u-1-5" id="sc-aimg-container">
-									<img class="article-img" src="images/${ position.article.getArticleHeadPicture().getImageId()}" alt="pic">
+									<img class="article-img" src="images/${ position.article.getArticleHeadPicture().getImageId()}" alt="Artikelbild">
 								</div>
 						    	<div class="pure-u-1-4" id="scp-info-part">
 									<h4><b>${ position.article.GetName() }</b></h4>
 									<hr size="5">
-									<p>Variante: ${ position.article.selectedversion }</p>
+									<p>Variante: ${ position.article.versions.get(position.article.selectedversion).property }</p>
 								</div>
 								<div class="pure-u-1-4" id="scp-info-part">
 									<p><b>Preis</b></p>

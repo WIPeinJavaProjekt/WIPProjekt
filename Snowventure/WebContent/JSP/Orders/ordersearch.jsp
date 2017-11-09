@@ -53,7 +53,7 @@
 		</c:if>
 		<c:if test="${noOrderFound}">
 			<form class="pure-form pure-form-aligned" action="user?page=ordersearch" method="get">
-				<p class="error">Es wurde keine Suchergebnisse gefunden.</p>
+				<p class="error">Es wurden keine Suchergebnisse gefunden.</p>
 			</form>	
 		</c:if>	
 	</div>
