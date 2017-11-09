@@ -6,8 +6,9 @@ function scalediv(){
 	//$('#brandimg').width($( window ).width()*3/5*0.25);
 	//$('#innerbrandbox').css("padding-left","22%");
 	//$('.contentwrapp').css("min-height",$( window ).height()-$('#brandimg').height()-100);
+	$('#useroptions').css("min-height",$( window ).height()-872.5>350 ? $( window ).height()-872.5 : 350);
 	$('#loginbox').css("min-height",$( window ).height()-$('#brandimg').height()-300 > 99? $( window ).height()-$('#brandimg').height()-300 : 100);
-	$('#articleresultcontainer').css("min-height",$( window ).height()-382);
+	$('#articleresultcontainer').css("min-height",$( window ).height()-392);
 	$('#articleadminbox').css("min-height",$( window ).height()-$('#brandimg').height()-300);
 	$('body').show();
 	//var paddingarticle = (($( window ).width()-(parseInt($( window ).width()/360)-1)*4)%360)/2;

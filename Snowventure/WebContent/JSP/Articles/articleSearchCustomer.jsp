@@ -24,8 +24,6 @@
 				        </div>
 				    </fieldset>
 				    <fieldset>
-				    Baustelle
-				    Ergebnisse filtern:
 				    
 				    <div id="filter_manufacturer">
 				    
@@ -120,9 +118,12 @@
 					        </div>
 					    </dd>
 					</div>
-					<br><br><br><br> Preis: <input type="range" min="-10" max="10">
-				    
-					
+					<div style="clear:both;">
+					<br>
+					<u style="font-size: 16px;">Preis</u>
+					<span> von </span><input name="minprice" type="number" min="0" max="10000" step="1">
+				    <span> bis </span><input name="maxprice" type="number" min="0" max="10000" step="1">
+					</div>
 				</form>
 			</div>			
 		</div>
