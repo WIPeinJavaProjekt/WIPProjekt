@@ -7,9 +7,10 @@ function scalediv(){
 	//$('#innerbrandbox').css("padding-left","22%");
 	//$('.contentwrapp').css("min-height",$( window ).height()-$('#brandimg').height()-100);
 	$('#loginbox').css("min-height",$( window ).height()-$('#brandimg').height()-300 > 99? $( window ).height()-$('#brandimg').height()-300 : 100);
+	$('#articleresultcontainer').css("min-height",$( window ).height()-382);
 	$('#articleadminbox').css("min-height",$( window ).height()-$('#brandimg').height()-300);
 	$('body').show();
-	var paddingarticle = (($( window ).width()-(parseInt($( window ).width()/360)-1)*4)%360)/2;
-	$('#articleresultcontainer').css("padding-left",paddingarticle < 1 ? 180 : paddingarticle);
+	//var paddingarticle = (($( window ).width()-(parseInt($( window ).width()/360)-1)*4)%360)/2;
+	//$('#articleresultcontainer').css("padding-left",paddingarticle < 1 ? 180 + $( window ).width()*0.2 : paddingarticle +$( window ).width()*0.2);
 	
 };

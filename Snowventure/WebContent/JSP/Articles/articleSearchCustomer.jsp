@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="./CSS/w3.css">
 
-	<div class="pure-g" id ="banner">
+	<div class="pure-g" id ="searchfilter">
 		<div class="pure-u-1-5"></div>
 		<div id="wrapper" class="pure-u-3-5">
 			<div id="search-container" class="searchbox">
 				<form class="pure-form" action="start" method="post">
 				    <fieldset>
-						<div class="pure-g">
+						<div class="pure-g" id="searchbar">
 					        <div class="pure-u-1-5">
 						        <select name="categories" class="boxedinput">
 							        <c:forEach items="${categories}" var="categories">
@@ -26,22 +26,103 @@
 				    <fieldset>
 				    Baustelle
 				    Ergebnisse filtern:
-				    Preis: <input type="range" min="-10" max="10">
-				    Farbe: 
+				    
+				    <div id="filter_manufacturer">
+				    
+				    
+					<div class="dropdown"> 
+					    <div>
+					    <a href="javascript:void(0)">
+					      <span class="hida"><u>Hersteller</u></span>    
+					      <p class="multiSel"></p>  
+					    </a>
+					    </div>
+					  
+					    <dd>
+					        <div class="mutliSelect">
+					            <ul>
+				                			<li>
+					                        <label class="control control-checkbox">
+										        Der Hersteller
+										            <input type="checkbox" name="manufacturer" value="Der Hersteller" />
+										        <div class="control_indicator"></div>
+										    </label>
+										    </li>
+										    <li>
+					                        <label class="control control-checkbox">
+										        Der 2.te Hersteller
+										            <input type="checkbox" name="manufacturer" value="Der 2.teHersteller" />
+										        <div class="control_indicator"></div>
+										    </label>
+										    </li>
+					            </ul>
+					        </div>
+					    </dd>
+					</div>
+				    
+				    
+				    </div>
+			    
+				    
+				   
   
-				    <select name="colorFilter" multiple>
-					  	<option value="Schwarz">Schwarz</option>
-					  	<option value="Weiß">Weiß</option>
-					  	<option value="Rot">Rot</option>
-					  	<option value="Blau">Blau</option>
-					  	<option value="Gelb">Gelb</option>
-					  	<option value="Grün">Grün</option>
-					  	<option value="Braun">Braun</option>
-					  	<option value="Orange">Orange</option>
-					</select>
-					Filter Größe
-					Hersteller
-				    </fieldset>
+				    	<div class="dropdown"> 
+					    <div>
+					    <a href="javascript:void(0)">
+					      <span class="hida"><u>Farbe</u></span>    
+					      <p class="multiSel"></p>  
+					    </a>
+					    </div>
+					  
+					    <dd>
+					        <div class="mutliSelect">
+					            <ul>
+					                <li>
+					                        <label class="control control-checkbox">
+										        First checkbox
+										            <input type="checkbox"  />
+										        <div class="control_indicator"></div>
+										    </label>
+										    </li>
+					            </ul>
+					        </div>
+					    </dd>
+					</div>
+					
+					
+										<div class="dropdown"> 
+					    <div>
+					    <a href="javascript:void(0)">
+					      <span class="hida"><u>Größe</u></span>    
+					      <p class="multiSel"></p>  
+					    </a>
+					    </div>
+					  
+					    <dd>
+					        <div class="mutliSelect">
+					            <ul>
+					                <li>
+					                        <label class="control control-checkbox">
+										        First checkbox
+										            <input type="checkbox"  />
+										        <div class="control_indicator"></div>
+										    </label>
+										    </li>
+									 <li>
+					                        <label class="control control-checkbox">
+										        First checkbox
+										            <input type="checkbox"  />
+										        <div class="control_indicator"></div>
+										    </label>
+										    </li>	    
+										    
+					            </ul>
+					        </div>
+					    </dd>
+					</div>
+					<br><br><br><br> Preis: <input type="range" min="-10" max="10">
+				    
+					
 				</form>
 			</div>			
 		</div>
@@ -78,7 +159,7 @@
 		</div>
 	</form>
 </center>
-
+<script type="text/javascript" src="./JS/dropdown.js"></script>	
 <div class="article-info">
 	
 </div>

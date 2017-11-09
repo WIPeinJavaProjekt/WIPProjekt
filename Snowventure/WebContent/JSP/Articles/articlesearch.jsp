@@ -73,8 +73,8 @@
 				    <div class="pure-u-1-4"><p>${article.GetName()}</p></div>
 				    <div class="pure-u-1-4">
 				    	<p>
-				    		<i class="fa fa-pencil" style ="cursor: pointer;" onclick="location.href='./article?ID=${article.GetId()}';"></i>
-				    		<i class="fa fa-trash" aria-hidden="true"></i>
+				    		<i class="fa fa-pencil fa-1g" style ="cursor: pointer;" onclick="location.href='./article?ID=${article.GetId()}';"></i>
+				    		<i class="fa fa-trash fa-1g" aria-hidden="true"></i>
 				    	</p>
 				    </div>				  
 				</div>

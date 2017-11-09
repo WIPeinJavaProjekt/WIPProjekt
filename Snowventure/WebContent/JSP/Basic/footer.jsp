@@ -5,10 +5,10 @@
 		    <div class="pure-u-1-3">
 			    <div class="divrowone">
 			    <h3>KONTAKT</h3>
-				    <i class="fa fa-facebook" aria-hidden="true"></i>
-				    <i class="fa fa-twitter" aria-hidden="true"></i>
-				    <i class="icon-instagram" aria-hidden="true"></i>
-				    <i class="fa fa-envelope-open" aria-hidden="true"></i>
+				    <i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+				    <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+				    <i class="icon-instagram fa-2x" aria-hidden="true"></i>
+				    <i class="fa fa-envelope-open fa-2x" aria-hidden="true"></i>
 				    
 		    	</div>
 		    </div>

@@ -25,18 +25,20 @@
 				<div class="pure-u-3-5" align="left">
 				<div id ="brandbox" >
 						<div id="innerbrandbox">
-						<a href="start"><img id ="brandimg" src="./Images/favicon.png" height= "120px" width="auto"></a>
+						<a href="start"><img id ="brandimg" src="./Images/brand.png" height= "105px" width="auto"></a>
 						</div>
 					</div>
-					<c:if test="${currentUser == null}">
-			    		<button type="submit" name="login" class="headerbtn">ANMELDEN</button>
-		    		</c:if>
-			    	<c:if test="${currentUser != null}">
-		    			<button type="submit" name="settings" class="headerbtn">KONTO</button>
-			    		<button type="submit" name="logout" class="headerbtn">(ABMELDEN)</button>
-		    		</c:if>
-			    	<button type="submit" name="cart" class="headerbtn">WARENKORB</button>
-		    		<button type="submit" name="cart" class="headerbtn">ÜBER UNS</button>
+					<div>
+						<c:if test="${currentUser == null}">
+				    		<button type="submit" name="login" class="headerbtn firstheaderbtn">ANMELDEN</button>
+			    		</c:if>
+				    	<c:if test="${currentUser != null}">
+			    			<button type="submit" name="settings" class="headerbtn">KONTO</button>
+				    		<button type="submit" name="logout" class="headerbtn">(ABMELDEN)</button>
+			    		</c:if>
+				    	<button type="submit" name="cart" class="headerbtn">WARENKORB</button>
+			    		<button type="submit" name="cart" class="headerbtn">ÜBER UNS</button>
+		    		</div>
 				</div>
 				
 
@@ -55,5 +57,5 @@
    	</div>
    		    	</form>		
 		
-   	<div style="height:2px; width:100%; background-color:rgba(75,75,75,0.1);"></div>
+   	<!-- <div style="height:2px; width:100%; background-color:rgba(75,75,75,0.1);"></div> -->
 </header>

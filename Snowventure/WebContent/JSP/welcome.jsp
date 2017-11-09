@@ -5,13 +5,12 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<title>Welcome to SnowSki</title>
-		
+		<title>Willkommen bei Snowventure</title>
+		<link rel="stylesheet" type="text/css" href="./CSS/default.css">
 		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="./CSS/startpageslider.css">
-		<link rel="stylesheet" type="text/css" href="./CSS/default.css">
-		
+
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="32x32">
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="96x96">
@@ -33,9 +32,9 @@
 					<form class="pure-form" action="start" method="post">
 					    <fieldset>
 					        <legend>
-					        	<h1 id="titlemessage">Teste deine Grenzen</h1>
+					        	<h1 id="titlemessage">Starte dein Abenteuer</h1>
 					        </legend>
-							<div class="pure-g">
+							<div class="pure-g" id="searchbar">
 						        <div class="pure-u-1-5">
 							        <select name="categories" class="boxedinput">
 								        <c:forEach items="${categories}" var="categories">
