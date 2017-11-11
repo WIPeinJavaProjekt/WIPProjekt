@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import classes.Article;
+import classes.ArticleColor;
 import classes.ArticleVersion;
 import classes.ShoppingCart;
 import classes.ShoppingCartPosition;
+import services.ArticleColorService;
 import services.ArticleService;
 
 /**
@@ -64,23 +66,28 @@ public class ArticleShoppingServlet  extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("addToCart") != null) {
-			addArticleToCart(request, response);
+			try {
+				addArticleToCart(request, response);
+			} catch (NumberFormatException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 //			response.sendRedirect("articles");
 		}
 		
 		doGet(request, response);
 	}
 
-	private void addArticleToCart(HttpServletRequest request, HttpServletResponse response) {
+	private void addArticleToCart(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, SQLException {
 		ShoppingCart currentCart = (ShoppingCart) request.getSession().getAttribute("currentCart");
 		if(currentCart == null) {
 			currentCart = new ShoppingCart();
 		}
 		
-		//Jacob please fix
-		//ShoppingCartPosition cartPosition = new ShoppingCartPosition(this.article, Integer.parseInt(request.getParameter("amount")));
+		ArticleColor color = ArticleColorService.GetSpecificColor(Integer.parseInt(request.getParameter("color")));
+		ShoppingCartPosition cartPosition = new ShoppingCartPosition(this.article, Integer.parseInt(request.getParameter("amount")),request.getParameter("size"),color);
 		
-		//currentCart.cartPositions.add(cartPosition);		
+		currentCart.cartPositions.add(cartPosition);		
 		request.getSession().setAttribute("currentCart", currentCart);
 	}
 
