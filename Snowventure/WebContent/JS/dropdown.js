@@ -7,6 +7,10 @@ $(".dropdown div ").on('click',"a" , function() {
   $(this).parent().parent().find("dd div ul").slideToggle('fast');
 });
 
+$("#search").on('click', function() {
+	  $(".dropdown div ul").hide();
+	});
+
 $(".dropdown div ul li a").on('click', function() {
   $(".dropdown div ul").hide();
 });

@@ -21,6 +21,15 @@ body *:not(.fa ){
 	padding-bottom:25px;
 }
 
+.pure-menu-item{
+	display:inline;
+}
+
+header .pure-menu-link{
+	color: rgb(75, 75, 75) !important;
+	display: inline-block;
+}
+
 .searchbox form fieldset legend {
     text-align: center;
 }
@@ -46,6 +55,25 @@ body *:not(.fa ){
 	background-color:rgb(240,240,240);
 }
 
+.second-headerbtn{
+	text-align:center;
+	display: inline-block;
+    cursor: pointer;
+    color: rgb(75, 75, 75);
+    background-color: rgba(0,0,0,0);
+    border: 0;
+    height: auto;
+    min-width: 150px;
+    padding:0px;
+    font-size: 16px;
+    font-family: Georgia, serif !important;
+}
+
+.second-headerbtn:hover{
+	margin-top: -6px;
+	border-top: 6px solid rgb(75,75,75);
+}
+
 .headerbtn{
 	text-align:center;
 	    display: inline-block;
@@ -55,7 +83,7 @@ body *:not(.fa ){
     border: 0;
     height: 122px;
     min-width: 150px;
-    padding:0px;
+    padding: 23px 0px 0px 0px !important;
     font-size: 20px;
     font-family: Georgia, serif !important;
 }
@@ -71,10 +99,9 @@ body *:not(.fa ){
 	height: 40px;
 }
 
-.headerbtn:hover{
+.headerbtn:hover, .headerbtn:focus, .headerbtn:focus {
 	background-color: rgb(235, 232, 226);
 	border-bottom: 6px solid rgb(75,75,75);
-	height: 116px;
 }
 
 

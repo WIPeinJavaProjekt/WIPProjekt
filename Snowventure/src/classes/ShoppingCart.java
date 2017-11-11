@@ -42,4 +42,9 @@ public class ShoppingCart {
 		return count;
 	}
 	
+	public int GetCountShoppingCartPosition()
+	{
+		return cartPositions.size();
+	}
+	
 }
