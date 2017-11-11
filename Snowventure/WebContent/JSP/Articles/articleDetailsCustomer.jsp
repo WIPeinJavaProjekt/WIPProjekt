@@ -14,6 +14,7 @@
 		<script type="text/javascript" src="/Snowventure/JS/jquery-3.2.1.min.js"></script>		
 		<script type="text/javascript" src="./JS/header.js"></script>
 		<script type="text/javascript" src="./JS/displayImage.js"></script>
+		<script type="text/javascript" src="./JS/versions.js"></script>
 		
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="32x32">
@@ -73,10 +74,12 @@
 					    	<div class="pure-control-group">
 					            <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge">
 					        </div>
-							<select required name="selectedVersion" class="boxedinput">
+							<label> Ausgewählte Version:</label><br>
+							<select required id="selectedVersion" name="selectedVersion" class="boxedinput" 
+							onchange="changeVersion(${article.GetId()}, 'articleshopping')">
 								<c:forEach items="${article.GetAllVersions()}" var="version">
-									<option value="${article.GetAllVersions().indexOf(version)}">${article.GetAllVersions().indexOf(version)}</option>
-								</c:forEach>
+					        		<option value="${article.GetAllVersions().indexOf(version)}"<c:if test="${article.GetSelectedVersion()==article.GetAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>${article.GetAllVersions().indexOf(version)}</option>
+					    		</c:forEach>
 							</select>
 					    	<button class="pure-button pure-button-primary boxedinput" type="submit" id="addToCart" name="addToCart">IN DEN WARENKORB</button>
 					    </form>

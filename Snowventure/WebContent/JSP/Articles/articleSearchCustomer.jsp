@@ -136,7 +136,7 @@
 		<div id="articleresultcontainer" class="search-results" align="left">	
 			<c:if test="${ not empty articles }">
 			 	<c:forEach var="article" items="${articles}">
-				 		<div class="productCard pure-u-1-3" onclick="location.href='./articleshopping?ID=${article.GetId()}';">
+				 		<div class="productCard pure-u-1-3" onclick="location.href='./articleshopping?ID=${article.GetId()}&version=${article.GetSelectedVersion()}';">
 					 		<div  style="width:100%">
 							    <div class="productCardimage">
 							    	<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${article.getArticleHeadPicture().GetImageId()}" class="articlesearchimage">

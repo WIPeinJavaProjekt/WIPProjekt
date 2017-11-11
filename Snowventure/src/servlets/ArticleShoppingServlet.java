@@ -41,6 +41,7 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		if(request.getParameter("ID") != null) {
 			try {
 				this.article = ArticleService.GetArticle(Integer.parseInt(request.getParameter("ID")));
+				this.article.SetSelectedVersion(Integer.parseInt(request.getParameter("version")));
 				
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();

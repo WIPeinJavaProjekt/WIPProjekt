@@ -74,7 +74,7 @@ public class ArticleService {
 		Locale.setDefault(Locale.ENGLISH);		
 		String query;
 		int avid = -1;
-		query = "INSERT INTO ARTICLEVERSION(property,propertyvalue,defaultprice,aid,color,size) VALUES('%s','%s','%f','%d','%s')";
+		query = "INSERT INTO ARTICLEVERSION(property,propertyvalue,defaultprice,aid,color) VALUES('%s','%s','%f','%d','%s')";
 		query = String.format(query,
 				av.property,
 				av.propertyvalue,
@@ -83,6 +83,7 @@ public class ArticleService {
 				av.color);
 		
 		avid = DatabaseConnector.createConnection().InsertQuery(query);
+		av.versionid = avid;
 		
 		int dummy = AddArticleVersionSize(av);
 		
@@ -451,6 +452,7 @@ public class ArticleService {
 		statement.setBlob(2, fis);
 		statement.setInt(3, aid);
 		apid = statement.executeUpdate();
+		System.out.println(statement);
 		return apid;
 	}
 

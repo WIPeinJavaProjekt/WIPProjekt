@@ -24,6 +24,7 @@
 		<script type="text/javascript" src="/Snowventure/JS/jquery-3.2.1.min.js"></script>		
 		<script type="text/javascript" src="./JS/header.js"></script>
 		<script type="text/javascript" src="./JS/displayImage.js"></script>
+		<script type="text/javascript" src="./JS/versions.js"></script>
 		
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="32x32">
@@ -72,11 +73,12 @@
 				        </div>
 				        <c:choose>
 							<c:when test="${updateArticle}">
-									<div class="pure-control-group">
-										<label> Ausgewählte Version:</label>
-										<select required name="selectedVersion" class="boxedinput">
+									<div class="boxedinput">
+										<label> Ausgewählte Version:</label><br>
+										<select required id="selectedVersion" name="selectedVersion" class="boxedinput" 
+										onchange="changeVersion(${article.GetId()}, 'article')">
 											<c:forEach items="${article.GetAllVersions()}" var="version">
-								        		<option value="${article.GetAllVersions().indexOf(version)}">${article.GetAllVersions().indexOf(version)}</option>
+								        		<option value="${article.GetAllVersions().indexOf(version)}"<c:if test="${article.GetSelectedVersion()==article.GetAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>${article.GetAllVersions().indexOf(version)}</option>
 								    		</c:forEach>
 										</select>
 							        </div>
@@ -103,7 +105,7 @@
 						            <input required class="boxedinput" id="color" name="color" value="${article.GetColor()}" type="text" placeholder="Farbe">
 						        </div>
 						        <div class="pure-control-group">
-				             		<select required name="size" class="boxedinput">
+				             		<select name="size" class="boxedinput">
 						        		<option value="">Bitte Größe auswählen</option>
 						        		<option value="Unigröße" <c:if test="${not empty article.GetSize() && article.GetSize()=='Unigröße'}"><c:out value="selected"/></c:if>>Unigröße</option>
 								        <option value="S" <c:if test="${not empty article.GetSize() && article.GetSize()=='S'}"><c:out value="selected"/></c:if>>S</option>
@@ -138,13 +140,12 @@
 						        </div>
 						        <div class="pure-control-group">
 						        	<c:if test="${updateArticle}">
-							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addImage" onclick="location.href='./article?ID=${article.GetId()}';" >Bild hinzufügen</button>
+							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addImage" onclick="changeVersion(${article.GetId()})" >Bild hinzufügen</button>
 							        </c:if>
 						        </div>
 							</div>
 						</div>
 			        </fieldset>
-			        
 			        
 			        <fieldset>
 						<div class="pure-control-group">
@@ -158,7 +159,7 @@
 					        </c:choose>   
 				        </div>
 			       	</fieldset>
-			       	
+		       	</form>
 			       	<div class="w3-content w3-display-container w3slidmod" align="center">
 
 						<c:forEach items="${article.getArticlesPictures()}" var="ap">
@@ -174,7 +175,7 @@
 						</c:if>
 					
 					</div>
-				</form>
+				
 
 				
 				<script>

@@ -51,13 +51,13 @@ public class ArticleServlet extends HttpServlet {
 			ArrayList<Categorie> categories = CategorieService.GetCategories();
 			request.getSession().setAttribute("categories", categories);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		if(request.getParameter("ID") != null) {
 			try {
 				this.article = ArticleService.GetArticle(Integer.parseInt(request.getParameter("ID")));
+				this.article.SetSelectedVersion(Integer.parseInt(request.getParameter("version")));
 				request.getSession().setAttribute("updateArticle", true);
 				request.getSession().setAttribute("article", this.article);
 				request.getSession().setAttribute("availableVersions", this.article.versions.size()-1);
@@ -91,6 +91,7 @@ public class ArticleServlet extends HttpServlet {
 		} else if(request.getParameter("addImage") != null) {
 			addImage(request);
 		} else if(request.getParameter("addArticleVersion") != null) {
+			System.out.println("New Version");
 			addArticleVersion(request);
 		}
 
@@ -106,19 +107,24 @@ public class ArticleServlet extends HttpServlet {
 		this.articleVersion.sizes = new ArrayList<String>(Arrays.asList(outerArray[0].split(",")));
 		this.articleVersion.ID = this.article.ID;
 		
-		ArticleService.AddArticleVersion(articleVersion);
+		int ret = ArticleService.AddArticleVersion(articleVersion);
+		
+		System.out.println(ret);
 	}
 
 	private void addImage(HttpServletRequest request) throws IOException, ServletException {
 		Part filePart = request.getPart("articleImage");
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-	    InputStream fileContent = filePart.getInputStream();	    
+	    InputStream fileContent = filePart.getInputStream();
+	    
+	    System.out.println("fileName: " + fileName);
 	    
 	    if(!fileName.equals("")) {
 		    ArticlePicture picture = new ArticlePicture(fileName, fileContent);
 		    
 		    try {
-				ArticleService.AddPicture(picture, this.article.ID);
+				int ret = ArticleService.AddPicture(picture, this.article.ID);
+				System.out.println("return: " + ret);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
