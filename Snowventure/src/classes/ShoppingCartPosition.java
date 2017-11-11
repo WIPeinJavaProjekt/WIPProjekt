@@ -3,10 +3,14 @@ package classes;
 public class ShoppingCartPosition {
 	public Article article;
 	public int amount;
+	public String size;
+	public ArticleColor color;
 	
-	public ShoppingCartPosition(Article a, int amount) {
+	public ShoppingCartPosition(Article a, int amount, String size, ArticleColor color) {
 		this.article = a;
 		this.amount = amount;
+		this.size = size;
+		this.color = color;
 	}
 	
 	public double GetPositionPrice() {

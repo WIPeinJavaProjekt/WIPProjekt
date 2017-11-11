@@ -76,9 +76,11 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		if(currentCart == null) {
 			currentCart = new ShoppingCart();
 		}
-		ShoppingCartPosition cartPosition = new ShoppingCartPosition(this.article, Integer.parseInt(request.getParameter("amount")));
 		
-		currentCart.cartPositions.add(cartPosition);		
+		//Jacob please fix
+		//ShoppingCartPosition cartPosition = new ShoppingCartPosition(this.article, Integer.parseInt(request.getParameter("amount")));
+		
+		//currentCart.cartPositions.add(cartPosition);		
 		request.getSession().setAttribute("currentCart", currentCart);
 	}
 

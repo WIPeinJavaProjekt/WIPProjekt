@@ -92,17 +92,23 @@ public class ArticleServlet extends HttpServlet {
 			addImage(request);
 		} else if(request.getParameter("addArticleVersion") != null) {
 			System.out.println("New Version");
-			addArticleVersion(request);
+			try {
+				addArticleVersion(request);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		doGet(request, response);
 	}
 
-	private void addArticleVersion(HttpServletRequest request) {
+	private void addArticleVersion(HttpServletRequest request) throws SQLException {
 		this.articleVersion.property = request.getParameter("property");
 		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
 		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));
-		this.articleVersion.color = request.getParameter("color");
+		//Garrit bitte fixen
+		//this.articleVersion.color = request.getParameter("color");
 		String[] outerArray = request.getParameterValues("size");
 		this.articleVersion.sizes = new ArrayList<String>(Arrays.asList(outerArray[0].split(",")));
 		this.articleVersion.ID = this.article.ID;
@@ -145,7 +151,8 @@ public class ArticleServlet extends HttpServlet {
 		this.articleVersion.property = request.getParameter("property");
 		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
 		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));
-		this.articleVersion.color = request.getParameter("color");
+		//Garrit need to fix
+		//this.articleVersion.color = request.getParameter("color");
 		String[] outerArray = request.getParameterValues("size");
 		this.articleVersion.sizes = new ArrayList<String>(Arrays.asList(outerArray[0].split(",")));
 		this.articleVersion.versionid = this.article.versions.get(this.article.GetSelectedVersion()).versionid;
@@ -177,9 +184,10 @@ public class ArticleServlet extends HttpServlet {
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
 		this.article.manufacturer = request.getParameter("manufacturer");
 		this.article.acid = Integer.parseInt(request.getParameter("categories"));
-		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
-				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, 
-				request.getParameter("color"), new ArrayList<String>(Arrays.asList(outerArray[0].split(","))));
+		//Garrit please fix
+		//this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
+		//		request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, 
+		//		request.getParameter("color"), new ArrayList<String>(Arrays.asList(outerArray[0].split(","))));
 		
 		this.article.versions.add(this.articleVersion);
 		this.article.pictures.add(picture);

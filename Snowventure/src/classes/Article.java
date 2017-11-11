@@ -86,8 +86,8 @@ public class Article {
 		return versions.get(selectedversion).propertyvalue;
 	}
 	
-	public String GetColor() {
-		return versions.get(selectedversion).color;
+	public ArrayList<ArticleColor> GetColor() {
+		return versions.get(selectedversion).colors;
 	}
 	
 	public String GetId() {

@@ -7,7 +7,7 @@
 			<div id="search-container" class="searchbox">
 				<form class="pure-form" action="start" method="post">
 				    <fieldset>
-						<div class="pure-g" id="searchbar">
+						<div class="pure-g" id="filters">
 					        <div class="pure-u-1-5">
 						        <select name="categories" class="boxedinput">
 							        <c:forEach items="${categories}" var="categories">
@@ -23,107 +23,99 @@
 				        	</div>
 				        </div>
 				    </fieldset>
-				    <fieldset>
-				    
-				    <div id="filter_manufacturer">
-				    
-				    
-					<div class="dropdown"> 
-					    <div>
-					    <a href="javascript:void(0)">
-					      <span class="hida"><u>Hersteller</u></span>    
-					      <p class="multiSel"></p>  
-					    </a>
+				 
+				 	<a id="filterbtn-show" href="javascript:void(0)">Filter &#x25bc;</a>
+				    <fieldset id="filtersfield" style="display:none;">
+					    <div id="filter_manufacturer">
+					    
+					    
+						<div class="dropdown"> 
+						    <div>
+						    <a href="javascript:void(0)">
+						      <span class="hida"><u>Hersteller</u></span>    
+						      <p class="multiSel"></p>  
+						    </a>
+						    </div>
+						  
+						    <dd>
+						        <div class="mutliSelect">
+						            <ul>
+							            <c:forEach items="${manufacturers}" var="manufacturer">
+							            	<li>
+							                        <label class="control control-checkbox">
+												        ${manufacturer}
+												            <input type="checkbox" name="manufacturer" value="${manufacturer}" />
+												        <div class="control_indicator"></div>
+												    </label>
+											 </li>
+							            </c:forEach>
+						            </ul>
+						        </div>
+						    </dd>
+						</div>
+					    
+					    
 					    </div>
-					  
-					    <dd>
-					        <div class="mutliSelect">
-					            <ul>
-				                			<li>
-					                        <label class="control control-checkbox">
-										        Der Hersteller
-										            <input type="checkbox" name="manufacturer" value="Der Hersteller" />
-										        <div class="control_indicator"></div>
-										    </label>
-										    </li>
-										    <li>
-					                        <label class="control control-checkbox">
-										        Der 2.te Hersteller
-										            <input type="checkbox" name="manufacturer" value="Der 2.teHersteller" />
-										        <div class="control_indicator"></div>
-										    </label>
-										    </li>
-					            </ul>
-					        </div>
-					    </dd>
-					</div>
 				    
-				    
-				    </div>
-			    
-				    
-				   
-  
-				    	<div class="dropdown"> 
-					    <div>
-					    <a href="javascript:void(0)">
-					      <span class="hida"><u>Farbe</u></span>    
-					      <p class="multiSel"></p>  
-					    </a>
-					    </div>
-					  
-					    <dd>
-					        <div class="mutliSelect">
-					            <ul>
-					                <li>
+					    <div id="filter_color" class="dropdown"> 
+						    <div>
+						    <a href="javascript:void(0)">
+						      <span class="hida"><u>Farbe</u></span>    
+						      <p class="multiSel"></p>  
+						    </a>
+						    </div>
+						  
+						    <dd>
+						        <div class="mutliSelect">
+						            <ul>
+						            
+						            <c:forEach items="${colors}" var="color">
+						            <li>
 					                        <label class="control control-checkbox">
-										        First checkbox
-										            <input type="checkbox"  />
+										        	<div class="checkbox-colorbox" style="background-color:${color.GetHexcode()} !important;"></div> ${color.GetColorName()} 
+										            <input type="checkbox" name="color" value="weiß" />
 										        <div class="control_indicator"></div>
 										    </label>
-										    </li>
-					            </ul>
-					        </div>
-					    </dd>
-					</div>
-					
-					
-										<div class="dropdown"> 
-					    <div>
-					    <a href="javascript:void(0)">
-					      <span class="hida"><u>Größe</u></span>    
-					      <p class="multiSel"></p>  
-					    </a>
-					    </div>
-					  
-					    <dd>
-					        <div class="mutliSelect">
-					            <ul>
-					                <li>
-					                        <label class="control control-checkbox">
-										        First checkbox
-										            <input type="checkbox"  />
-										        <div class="control_indicator"></div>
-										    </label>
-										    </li>
-									 <li>
-					                        <label class="control control-checkbox">
-										        First checkbox
-										            <input type="checkbox"  />
-										        <div class="control_indicator"></div>
-										    </label>
-										    </li>	    
-										    
-					            </ul>
-					        </div>
-					    </dd>
-					</div>
-					<div style="clear:both;">
-					<br>
-					<u style="font-size: 16px;">Preis</u>
-					<span> von </span><input name="minprice" type="number" min="0" max="10000" step="1">
-				    <span> bis </span><input name="maxprice" type="number" min="0" max="10000" step="1">
-					</div>
+										</li>
+						            </c:forEach>
+						            
+						                
+						            </ul>
+						        </div>
+						    </dd>
+						</div>
+						
+						<div id="filter_size" class="dropdown"> 
+						    <div>
+						    <a href="javascript:void(0)">
+						      <span class="hida"><u>Größe</u></span>    
+						      <p class="multiSel"></p>  
+						    </a>
+						    </div>
+						  
+						    <dd>
+						        <div class="mutliSelect">
+						            <ul>
+						            	<c:forEach items="${sizes}" var="size">
+							            	<li>
+							                        <label class="control control-checkbox">
+												        ${size}
+												            <input type="checkbox" name="manufacturer" value="${size}" />
+												        <div class="control_indicator"></div>
+												    </label>
+											 </li>
+							            </c:forEach>  
+						            </ul>
+						        </div>
+						    </dd>
+						</div>
+						<div style="clear:both;">
+						<br>
+						<u style="font-size: 16px;">Preis</u>
+						<span> von </span><input name="minprice" type="number" min="0" max="10000" step="1">
+					    <span> bis </span><input name="maxprice" type="number" min="0" max="10000" step="1">
+						</div>
+					</fieldset>
 				</form>
 			</div>			
 		</div>

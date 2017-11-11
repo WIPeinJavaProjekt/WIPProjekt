@@ -1,9 +1,14 @@
+//OWN Code
+
+$("#filterbtn-show").on('click', function() {
+	  $("#filtersfield").slideToggle('fast');
+	});
 
 
+
+
+//Modified from Solution
 $(".dropdown div ").on('click',"a" , function() {
-  console.log("test");
-  console.log($(this).parent().parent());
-  console.log($(this).parent().parent().children("dd div ul"));
   $(this).parent().parent().find("dd div ul").slideToggle('fast');
 });
 

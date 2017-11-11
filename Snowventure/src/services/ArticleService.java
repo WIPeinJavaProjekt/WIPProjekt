@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import com.mysql.jdbc.PreparedStatement;
 
 import classes.Article;
+import classes.ArticleColor;
 import classes.ArticlePicture;
 import classes.ArticleVersion;
 import classes.Categorie;
@@ -69,26 +70,31 @@ public class ArticleService {
 	 * Method for adding an Articleversion
 	 * @param av the ArticleVersion
 	 * @return int value depending on success of insertion
+	 * @throws SQLException 
 	 */
-	public static int AddArticleVersion(ArticleVersion av) {		
+	public static int AddArticleVersion(ArticleVersion av) throws SQLException {		
 		Locale.setDefault(Locale.ENGLISH);		
 		String query;
 		int avid = -1;
-		query = "INSERT INTO ARTICLEVERSION(property,propertyvalue,defaultprice,aid,color) VALUES('%s','%s','%f','%d','%s')";
+		query = "INSERT INTO ARTICLEVERSION(property,propertyvalue,defaultprice,aid) VALUES('%s','%s','%f','%d')";
 		query = String.format(query,
 				av.property,
 				av.propertyvalue,
 				av.price,
-				av.ID,
-				av.color);
+				av.ID);
 		
 		avid = DatabaseConnector.createConnection().InsertQuery(query);
 		av.versionid = avid;
 		
 		int dummy = AddArticleVersionSize(av);
 		
+		for(ArticleColor c: av.colors)
+		{
+			ArticleColorService.AddArticleColorToVersion(c.acolid,av.versionid);
 		if(dummy == -1)
 			return dummy;
+		}
+		
 		
 		return avid;
 	}
@@ -157,21 +163,24 @@ public class ArticleService {
 	/**
 	 * Method for updating an Articleversion
 	 * @param av Articleversion to be updated
+	 * @throws SQLException 
 	 */
-	public static void UpdateArticleVersion(ArticleVersion av) {
+	public static void UpdateArticleVersion(ArticleVersion av) throws SQLException {
 		Locale.setDefault(Locale.ENGLISH);
 		String query;
-		query = "UPDATE ARTICLEVERSION SET property = '%s', propertyvalue = '%s', defaultprice = '%f', color = '%s' where avid ='%d'";
+		query = "UPDATE ARTICLEVERSION SET property = '%s', propertyvalue = '%s', defaultprice = '%f' where avid ='%d'";
 		
 		query = String.format(query,
 				av.property,
 				av.propertyvalue,
 				av.price,
-				av.color,
 				av.versionid);
-		
-		System.out.println(query);
-		
+		ArticleColorService.DeleteArticleColorToVersion(av.versionid);		
+		for(ArticleColor c: av.colors)
+		{
+			int dummy = ArticleColorService.AddArticleColorToVersion(c.acolid,av.versionid);
+		}
+
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
@@ -196,7 +205,7 @@ public class ArticleService {
 	public static ArrayList<ArticleVersion> GetAllArticleVersion(Article a) throws SQLException {
 		ArrayList<ArticleVersion> av = new ArrayList<ArticleVersion>();
 		
-		String query ="SELECT  avid,property,propertyvalue, defaultprice, color FROM ARTICLEVERSION WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d'";
+		String query ="SELECT  avid,property,propertyvalue, defaultprice FROM ARTICLEVERSION WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d'";
 		query = String.format(query, a.ID);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
@@ -204,7 +213,7 @@ public class ArticleService {
 		while(result.next())
 		{
 			ArrayList<String> sizes = new ArrayList<String>(GetAllArticleVersionsize(result.getInt("avid")));
-			ArticleVersion version = new ArticleVersion(result.getInt("avid"),result.getString("property"),result.getString("propertyvalue"),result.getDouble("defaultprice"),a, result.getString("color"),sizes);
+			ArticleVersion version = new ArticleVersion(result.getInt("avid"),result.getString("property"),result.getString("propertyvalue"),result.getDouble("defaultprice"),a,sizes,ArticleColorService.GetSpecificColors(result.getInt("avid")));
 			av.add(version);
 		}
 		

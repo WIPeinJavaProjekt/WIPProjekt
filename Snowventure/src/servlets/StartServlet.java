@@ -16,11 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import classes.Article;
+import classes.ArticleColor;
 import classes.ArticlePicture;
 import classes.Categorie;
 import classes.User;
+import services.ArticleColorService;
 import services.ArticleService;
 import services.CategorieService;	
+import services.ArtilceManufacturerService;
+import services.ArticleSizesService;
 
 /**
  * Start servlet implementation for the main page and the navigation
@@ -43,11 +47,32 @@ public class StartServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+		System.out.println("Rufe alle  Artikel ab");
 		
 		try {
 			ArrayList<Categorie> categories = CategorieService.GetCategories();
 			request.getSession().setAttribute("categories", categories);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			ArrayList<String> manufacturers = ArtilceManufacturerService.GetAllPossibleManufacturers();
+			System.out.println("hersteller:"+manufacturers.size());
+			request.getSession().setAttribute("manufacturers", manufacturers);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			ArrayList<String> sizes = ArticleSizesService.GetAllPossibleSizes();
+			request.getSession().setAttribute("sizes", sizes);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		try {
+			ArrayList<ArticleColor> colors = ArticleColorService.GetAllPossibleColors();
+			request.getSession().setAttribute("colors", colors);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
