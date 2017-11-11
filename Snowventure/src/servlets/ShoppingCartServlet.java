@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import classes.ShoppingCart;
 import classes.ShoppingCartPosition;
 import classes.User;
 import services.ArticleService;
@@ -28,6 +29,15 @@ public class ShoppingCartServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		ShoppingCart currentCart = (ShoppingCart) request.getSession().getAttribute("currentCart");
+		if(currentCart == null) {
+			currentCart = new ShoppingCart();
+		}
+		
+		for(ShoppingCartPosition scp: currentCart.cartPositions) {
+			System.out.println("WARENKORB Artikel: " + scp.article.GetName() + " Amount: " + scp.amount);
+		}
 		
 		if(request.getParameter("scpid")!= null && request.getParameter("amount") != null)
 		{
@@ -63,13 +73,13 @@ public class ShoppingCartServlet extends HttpServlet {
 	{
 		User user = (User)request.getSession().getAttribute("currentUser");
 		
-		if(user != null && user.shoppingcart != null && user.shoppingcart.cart != null && user.shoppingcart.cart.size() > 0)
+		if(user != null && user.shoppingcart != null && user.shoppingcart.cartPositions != null && user.shoppingcart.cartPositions.size() > 0)
 		{			
-			ShoppingCartPosition scp = user.shoppingcart.cart.get(Integer.parseInt(scpid));
+			ShoppingCartPosition scp = user.shoppingcart.cartPositions.get(Integer.parseInt(scpid));
 			
 			if(scp != null)
 			{
-				user.shoppingcart.cart.remove(scp);
+				user.shoppingcart.cartPositions.remove(scp);
 				ShoppingCartService.UpdateShopping(user);
 				request.getSession().setAttribute("currentUser", user);
 				return;
@@ -90,11 +100,11 @@ public class ShoppingCartServlet extends HttpServlet {
 		User user = (User)request.getSession().getAttribute("currentUser");
 		
 		try {
-				if(user != null && user.shoppingcart != null && user.shoppingcart.cart != null && user.shoppingcart.cart.size() > 0)
+				if(user != null && user.shoppingcart != null && user.shoppingcart.cartPositions != null && user.shoppingcart.cartPositions.size() > 0)
 				{			
-					if (newamount <= StockService.GetStock(user.shoppingcart.cart.get(Integer.parseInt(scpid)).article.versions.get(user.shoppingcart.cart.get(Integer.parseInt(scpid)).article.GetSelectedVersion())))
+					if (newamount <= StockService.GetStock(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.versions.get(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.GetSelectedVersion())))
 					{
-						ShoppingCartPosition scp = user.shoppingcart.cart.get(Integer.parseInt(scpid));
+						ShoppingCartPosition scp = user.shoppingcart.cartPositions.get(Integer.parseInt(scpid));
 						
 						if(scp != null)
 						{

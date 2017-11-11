@@ -55,7 +55,7 @@ public class OrderService {
 	private static int AddOrderDetails(ShoppingCart shoppingCart, int orid) {
 		int odid= -1;
 		
-		for(ShoppingCartPosition p: shoppingCart.cart)
+		for(ShoppingCartPosition p: shoppingCart.cartPositions)
 		{
 			odid=AddOrderDetailPosition(p,orid);
 			if(orid == -1)
@@ -277,7 +277,7 @@ public class OrderService {
 			Article a = ArticleService.GetSelectedArticle(result.getInt("avid"));
 			a.versions.get(a.GetSelectedVersion()).price = result.getDouble("assignmentprice");
 			ShoppingCartPosition p = new ShoppingCartPosition(a,result.getInt("amount"));
-			scp.cart.add(p);
+			scp.cartPositions.add(p);
 		}
 		
 		

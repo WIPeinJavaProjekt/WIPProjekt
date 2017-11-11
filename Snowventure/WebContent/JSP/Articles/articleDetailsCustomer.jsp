@@ -69,13 +69,16 @@
 				    <br>
 				    <h3>${article.GetPriceFormatted()} EUR</h3>
 				    <div class="div-align-bottom">
-					    <form>
+					    <form class="pure-form" action="articleshopping" method="post">
+					    	<div class="pure-control-group">
+					            <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge">
+					        </div>
 							<select required name="selectedVersion" class="boxedinput">
 								<c:forEach items="${article.GetAllVersions()}" var="version">
 									<option value="${article.GetAllVersions().indexOf(version)}">${article.GetAllVersions().indexOf(version)}</option>
 								</c:forEach>
 							</select>
-					    	<button class="pure-button pure-button-primary boxedinput" type="submit" name="updateArticle">IN DEN WARENKORB</button>
+					    	<button class="pure-button pure-button-primary boxedinput" type="submit" id="addToCart" name="addToCart">IN DEN WARENKORB</button>
 					    </form>
 				    </div>
 			    </div>    

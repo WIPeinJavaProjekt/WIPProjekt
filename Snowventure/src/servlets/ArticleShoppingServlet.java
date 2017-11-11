@@ -1,8 +1,5 @@
 package servlets;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -16,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import classes.Article;
 import classes.ArticleVersion;
+import classes.ShoppingCart;
+import classes.ShoppingCartPosition;
 import services.ArticleService;
 
 /**
@@ -63,8 +62,23 @@ public class ArticleShoppingServlet  extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getParameter("addToCart") != null) {
+			addArticleToCart(request, response);
+//			response.sendRedirect("articles");
+		}
 		
 		doGet(request, response);
+	}
+
+	private void addArticleToCart(HttpServletRequest request, HttpServletResponse response) {
+		ShoppingCart currentCart = (ShoppingCart) request.getSession().getAttribute("currentCart");
+		if(currentCart == null) {
+			currentCart = new ShoppingCart();
+		}
+		ShoppingCartPosition cartPosition = new ShoppingCartPosition(this.article, Integer.parseInt(request.getParameter("amount")));
+		
+		currentCart.cartPositions.add(cartPosition);		
+		request.getSession().setAttribute("currentCart", currentCart);
 	}
 
 	

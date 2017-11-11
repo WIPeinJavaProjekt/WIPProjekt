@@ -58,7 +58,7 @@ public class ShoppingCartService {
 	private static int AddShoppingCart(User u) {
 		int scpid = 1;
 		
-		for(ShoppingCartPosition p: u.shoppingcart.cart)
+		for(ShoppingCartPosition p: u.shoppingcart.cartPositions)
 		{
 			scpid = AddShoppingCartPosition(p,u.ulid);
 			if(scpid == -1) {

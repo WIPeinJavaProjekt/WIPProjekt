@@ -3,25 +3,25 @@ package classes;
 import java.util.ArrayList;
 
 public class ShoppingCart {
-	public ArrayList<ShoppingCartPosition> cart;
+	public ArrayList<ShoppingCartPosition> cartPositions;
 	
 	public ShoppingCart() {
-		cart = new ArrayList<ShoppingCartPosition>();
+		cartPositions = new ArrayList<ShoppingCartPosition>();
 	}
 	
 	public ShoppingCart(ArrayList<ShoppingCartPosition> cart) {
-		this.cart = new ArrayList<ShoppingCartPosition>(cart);
+		this.cartPositions = new ArrayList<ShoppingCartPosition>(cart);
 	}
 	
 	public ShoppingCart(ShoppingCart scp)
 	{
-		this.cart = new ArrayList<ShoppingCartPosition>(scp.cart);
+		this.cartPositions = new ArrayList<ShoppingCartPosition>(scp.cartPositions);
 	}	
 	
 	public double GetShoppingCartPrice() {
 		double amount=0;
 		
-		for(ShoppingCartPosition scp: cart)
+		for(ShoppingCartPosition scp: cartPositions)
 			amount+=scp.GetPositionPrice();
 		
 		return amount;
@@ -29,13 +29,13 @@ public class ShoppingCart {
 	
 	public ArrayList<ShoppingCartPosition> getCart()
 	{
-		return cart;
+		return cartPositions;
 	}
 	
 	public int GetArticleCount()
 	{
 		int count = 0;
-		for(ShoppingCartPosition scp : cart)
+		for(ShoppingCartPosition scp : cartPositions)
 		{
 			count += scp.amount;
 		}
