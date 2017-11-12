@@ -26,4 +26,14 @@ public class ShoppingCartPosition {
 	{
 		return amount;
 	}
+	
+	public ArticleColor getColor()
+	{
+		return color;
+	}
+	
+	public String getSize()
+	{
+		return size;
+	}
 }

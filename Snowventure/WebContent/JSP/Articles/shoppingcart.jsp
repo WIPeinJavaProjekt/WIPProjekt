@@ -31,8 +31,8 @@
 					<div class="pure-u-1-1">
 					
 					<c:choose>
-					<c:when test="${not empty currentUser && currentUser.shoppingcart != null && currentUser.shoppingcart.cart != null && currentUser.shoppingcart.cart.size() > 0}">
-						<c:forEach var="position" items="currentUser.shoppingcart.cart">
+					<c:when test="${not empty currentUser || not empty currentCart}">
+						<c:forEach var="position" items="${ not empty currentUser ? currentUser.shoppingcart.cartPositions : currentCart.cartPositions}">
 							<div class="w3-card-4" id="scp-article-card">
 								<div class="pure-u-1-5" id="sc-aimg-container">
 									<img class="article-img" src="images/${ position.article.getArticleHeadPicture().getImageId()}" alt="Artikelbild">
@@ -40,7 +40,8 @@
 						    	<div class="pure-u-1-4" id="scp-info-part">
 									<h4><b>${ position.article.GetName() }</b></h4>
 									<hr size="5">
-									<p>Variante: ${ position.article.versions.get(position.article.selectedversion).property }</p>
+									<p>Farbe: ${ position.color.GetColorName() }</p>
+									<p>Variante: ${ position.size }</p>
 								</div>
 								<div class="pure-u-1-4" id="scp-info-part">
 									<p><b>Preis</b></p>
@@ -48,12 +49,12 @@
 								</div>
 								<div class="pure-u-1-4" id="scp-info-part">
 									<p><b>Menge</b></p>
-									<select onchange="location.href='./cart?scpid=${currentUser.shoppingcart.cart.indexOf(position)}&amount=' + jQuery('#amount option:selected').val();">
+									<select onchange="location.href='./cart?scpid=${currentUser.shoppingcart.cartPositions.indexOf(position)}&amount=' + jQuery('#amount option:selected').val();">
 										<c:forEach var="counter" begin="1" end="10">
 											<option <c:if test="${ position.amount == counter }">selected</c:if> value="${counter}">${counter}</option>
 										</c:forEach>
 									</select>
-									<p><a href="cart?scpid=${ currentUser.shoppingcart.cart.indexOf(position) }&option=delete">Löschen</a></p>
+									<p><a href="cart?scpid=${ currentUser.shoppingcart.cartPositions.indexOf(position) }&option=delete">Löschen</a></p>
 								</div>
 								<hr>
 							</div>
@@ -62,7 +63,7 @@
 						<div  id="scp-article-card">
 						
 					    	<div class="pure-u-11-12" id="sc-conclusion">
-						    	<h3><b>Summe (${currentUser.shoppingcart.cart.GetArticleCount()} Artikel):  EUR ${currentUser.shoppingcart.cart.GetShoppingCartPrice()}</b></h3>
+						    	<h3><b>Summe (${currentUser.shoppingcart.cartPositions.GetArticleCount()} Artikel):  EUR ${currentUser.shoppingcart.cartPositions.GetShoppingCartPrice()}</b></h3>
 				    			<h4><input class="pure-button pure-button-primary" type="submit" value="Jetzt Bestellen"></h4>
 							</div>
 							<div class="pure-u-1-12" style="height: 15%;"></div>
@@ -88,6 +89,7 @@
 				    	<div class="pure-u-1-4" id="scp-info-part">
 							<h4><b>Dieser Artikel ist schön</b></h4>
 							<hr size="5">
+							<p>Farbe: Rot</p>
 							<p>Variante: XL</p>
 						</div>
 						<div class="pure-u-1-4" id="scp-info-part">
