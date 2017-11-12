@@ -290,11 +290,11 @@ public class ArticleService {
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
-	public static ArrayList<Article> GetAllArticlesByCategorie(Categorie c) throws SQLException, IOException{
+	public static ArrayList<Article> GetAllArticlesByCategorie(int c, String pattern) throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
-		String query = "SELECT aid, name, description, acid, manufacturer FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 acid ='%d';";
-		query = String.format(query, c.GetACID());
+		String query = "SELECT aid, name, description, acid, manufacturer FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND acid ='%d' AND name like '%"+pattern+"%';";
+		query = String.format(query, c);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		

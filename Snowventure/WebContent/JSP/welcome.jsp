@@ -36,7 +36,8 @@
 					        </legend>
 							<div class="pure-g" id="searchbar">
 						        <div class="pure-u-1-5">
-							        <select name="categories" class="boxedinput">
+							        <select name="categorie" class="boxedinput">
+							        	<option value="-1">Alle</option>
 								        <c:forEach items="${categories}" var="categories">
 							        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
 							    		</c:forEach>

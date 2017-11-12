@@ -135,6 +135,7 @@
 									    </dd>
 									</div>
 						        </div>
+						        
 						        <div class="pure-control-group">
 							        <div id="filter_size" class="dropdown"> 
 									    <div>

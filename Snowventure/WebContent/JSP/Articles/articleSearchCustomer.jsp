@@ -9,9 +9,10 @@
 				    <fieldset>
 						<div class="pure-g" id="filters">
 					        <div class="pure-u-1-5">
-						        <select name="categories" class="boxedinput">
+						        <select name="categorie" class="boxedinput">
+							        <option value="-1">Alle</option>
 							        <c:forEach items="${categories}" var="categories">
-						        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
+							        <option value="${categories.GetACID()}">${categories.GetName()}</option>
 						    		</c:forEach>
 								</select>
 							</div>
@@ -72,7 +73,7 @@
 							            	<li>
 						                        <label class="control control-checkbox">
 										        	<div class="checkbox-colorbox" style="background-color:${color.GetHexcode()} !important;"></div> ${color.GetColorName()} 
-										            <input type="checkbox" name="color" value=${color.GetAcolid()} />
+										            <input type="checkbox" name="colors" value=${color.GetAcolid()} />
 											        <div class="control_indicator"></div>
 											    </label>
 											</li>
@@ -97,7 +98,7 @@
 							            	<li>
 							                        <label class="control control-checkbox">
 												        ${size}
-												            <input type="checkbox" name="manufacturer" value="${size}" />
+												            <input type="checkbox" name="sizes" value="${size}" />
 												        <div class="control_indicator"></div>
 												    </label>
 											 </li>
@@ -109,8 +110,8 @@
 						<div style="clear:both;">
 						<br>
 						<u style="font-size: 16px;">Preis</u>
-						<span> von </span><input name="minprice" type="number" min="0" max="10000" step="1">
-					    <span> bis </span><input name="maxprice" type="number" min="0" max="10000" step="1">
+						<span> von </span><input name="minprice" type="number" min="0" max="10000" step=".01">
+					    <span> bis </span><input name="maxprice" type="number" min="0" max="10000" step=".01">
 						</div>
 					</fieldset>
 				</form>

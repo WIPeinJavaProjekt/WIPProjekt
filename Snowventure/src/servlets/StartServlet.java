@@ -22,6 +22,7 @@ import classes.Categorie;
 import classes.User;
 import classes.Utils;
 import services.ArticleColorService;
+import services.ArticleFilterService;
 import services.ArticleService;
 import services.CategorieService;	
 import services.ArtilceManufacturerService;
@@ -109,7 +110,15 @@ public class StartServlet extends HttpServlet {
 			
 			String searchPattern = request.getParameter("searchArticlePattern");
 			
-			findArticles(request, searchPattern);
+			
+			double minprice = Double.parseDouble(request.getParameter("minprice") ==null || request.getParameter("minprice") ==""? "-1":request.getParameter("minprice") );
+			double maxprice = Double.parseDouble(request.getParameter("maxprice") ==null || request.getParameter("maxprice") ==""? "-1":request.getParameter("maxprice") );
+			String[] sizes  = request.getParameterValues("sizes");
+			String[] manufacturers = request.getParameterValues("manufacturer");
+			String[] colors = request.getParameterValues("colors");
+			int category = Integer.parseInt(request.getParameter("categorie"));
+			System.out.println("category"+category);
+			findArticles(request, category,searchPattern,minprice,maxprice,sizes,manufacturers,colors);
 			
 			response.sendRedirect("articles");			
 			return;
@@ -140,11 +149,26 @@ public class StartServlet extends HttpServlet {
 	 * @param searchPattern Input search pattern to compare
 	 * @throws IOException 
 	 */
-	private void findArticles(HttpServletRequest request, String searchPattern) throws IOException {
+	private void findArticles(HttpServletRequest request,int category ,String searchPattern, double minprice, double maxprice, String[] sizes, String[] manufacturers, String[] colors) throws IOException {
 		ArrayList<Article> articles = null;
 		
 		try {
-			articles = ArticleService.GetAllArticlesByName(searchPattern);
+			if(category ==-1) {
+				articles = ArticleService.GetAllArticlesByName(searchPattern);
+			}
+			else {
+				articles = ArticleService.GetAllArticlesByCategorie(category, searchPattern);
+			}
+			articles = (ArrayList<Article>) ArticleFilterService.FilterPrice(minprice, maxprice, articles).clone();
+			System.out.println("Artikelanzahl"+articles.size());
+			if(sizes != null)
+				articles = (ArrayList<Article>) ArticleFilterService.FilterSize(sizes, articles).clone();
+			
+			if(manufacturers != null)
+				articles = (ArrayList<Article>) ArticleFilterService.FilterManufacturer(manufacturers, articles).clone();
+			
+			if(colors != null)
+				articles = (ArrayList<Article>) ArticleFilterService.FilterColor(colors, articles).clone();
 			
 			Path currentRelativePath = Paths.get("");
 			request.getSession().setAttribute("imagePath", currentRelativePath.toAbsolutePath().toString() + "\\");
