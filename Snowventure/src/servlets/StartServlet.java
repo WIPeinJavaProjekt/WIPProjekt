@@ -20,6 +20,7 @@ import classes.ArticleColor;
 import classes.ArticlePicture;
 import classes.Categorie;
 import classes.User;
+import classes.Utils;
 import services.ArticleColorService;
 import services.ArticleService;
 import services.CategorieService;	
@@ -40,6 +41,7 @@ public class StartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<Article> articles;
+		request.getSession().setAttribute("availableSizes", Utils.getAllSizes());
 		try {
 			articles = ArticleService.GetAllArticlesByName("");
 			request.getSession().setAttribute("articles", articles);

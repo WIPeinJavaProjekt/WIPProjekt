@@ -20,6 +20,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="./CSS/default.css">
 		<link rel="stylesheet" type="text/css" href="./CSS/startpageslider.css">
+		<link rel="stylesheet" type="text/css" href="./CSS/w3.css">
 		
 		<script type="text/javascript" src="/Snowventure/JS/jquery-3.2.1.min.js"></script>		
 		<script type="text/javascript" src="./JS/header.js"></script>
@@ -55,20 +56,20 @@
 					
 				    <fieldset class="pure-group">
 				    	<div class="pure-control-group">
-				            <input required class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
+				            <input  class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
 				        </div>
 				        <div class="pure-control-group">
-				            <input required class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
+				            <input  class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
 				        </div>
 				        <div class="pure-control-group">
-				        <select name="categories" class="boxedinput">
+				        <select name="category" class="boxedinput">
 						        <c:forEach items="${categories}" var="categories">
 					        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
 					    		</c:forEach>
 							</select>
 				        </div>				        
 				        <div class="pure-control-group">
-				            <textarea required class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
+				            <textarea  class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
 				            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>">${article.GetDescription()}</textarea>
 				        </div>
 				        <c:choose>
@@ -102,10 +103,64 @@
 						            <input class="boxedinput" id="propertyValue" name="propertyValue" value="${article.GetPropertyValue()}" type="text" placeholder="Wert der Eigenschaft">
 						        </div>
 						        <div class="pure-control-group">
-						            <input required class="boxedinput" id="color" name="color" value="${article.GetColor()}" type="text" placeholder="Farbe">
+						            <%-- <select class="boxedinput" required id="color" name="color" class="color">
+						            	<option value="">Bitte Farbe auswählen</option>
+										<c:forEach items="${articleColors}" var="color">
+							        		<option value="${color.GetAcolid()}">${color.GetColorName()}</option>
+							    		</c:forEach>
+									</select> --%>
+									
+									<div id="filter_color" class="dropdown"> 
+									    <div>
+									    <a href="javascript:void(0)">
+									      <span class="hida"><u>Farbe</u></span>    
+									      <p class="multiSel"></p>  
+									    </a>
+									    </div>
+									  
+									    <dd>
+									        <div class="mutliSelect">
+									            <ul>						            
+										            <c:forEach items="${articleColors}" var="color">
+										            	<li>
+									                        <label class="control control-checkbox">
+													        	<div class="checkbox-colorbox" style="background-color:${color.GetHexcode()} !important;"></div> ${color.GetColorName()} 
+													            <input type="checkbox" name="color" value="${color.GetAcolid()}" />
+														        <div class="control_indicator"></div>
+														    </label>
+														</li>
+										            </c:forEach>			            
+									            </ul>
+									        </div>
+									    </dd>
+									</div>
 						        </div>
 						        <div class="pure-control-group">
-				             		<select name="size" class="boxedinput">
+							        <div id="filter_size" class="dropdown"> 
+									    <div>
+										    <a href="javascript:void(0)">
+										      <span class="hida"><u>Größe</u></span>    
+										      <p class="multiSel"></p>  
+										    </a>
+									    </div>
+									  
+									    <dd>
+									        <div class="mutliSelect">
+									            <ul>
+									            	<c:forEach items="${availableSizes}" var="size">
+										            	<li>
+									                        <label class="control control-checkbox">
+														        ${size}
+													            <input type="checkbox" name="size" value="${size}" />
+														        <div class="control_indicator"></div>
+														    </label>
+														 </li>
+										            </c:forEach>  
+									            </ul>
+									        </div>
+									    </dd>
+									</div>
+<%-- 				             		<select name="size" class="boxedinput">
 						        		<option value="">Bitte Größe auswählen</option>
 						        		<option value="Unigröße" <c:if test="${not empty article.GetSize() && article.GetSize()=='Unigröße'}"><c:out value="selected"/></c:if>>Unigröße</option>
 								        <option value="S" <c:if test="${not empty article.GetSize() && article.GetSize()=='S'}"><c:out value="selected"/></c:if>>S</option>
@@ -125,10 +180,11 @@
 								        <option value="47" <c:if test="${not empty article.GetSize() && article.GetSize()=='47'}"><c:out value="selected"/></c:if>>47</option>
 								        <option value="48" <c:if test="${not empty article.GetSize() && article.GetSize()=='48'}"><c:out value="selected"/></c:if>>48</option>
 								        <option value="49" <c:if test="${not empty article.GetSize() && article.GetSize()=='49'}"><c:out value="selected"/></c:if>>49</option>
-									</select>
+									</select> --%>
 						        </div>
+						        <script type="text/javascript" src="./JS/dropdown.js"></script>	
 						        <div class="pure-control-group">
-						            <input required class="boxedinput" id="price" name="price" value="${article.GetPrice()}" type="number" step="0.01" placeholder="Preis">
+						            <input  class="boxedinput" id="price" name="price" value="${article.GetPrice()}" type="number" step="0.01" placeholder="Preis">
 						        </div>
 						        <div class="pure-control-group">
 						            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticleVersion">Als neue Artikelversion speichern</button>
@@ -177,26 +233,27 @@
 					</div>
 				
 
-				
-				<script>
-					var slideIndex = 1;
-					showDivs(slideIndex);
-					
-					function plusDivs(n) {
-					  showDivs(slideIndex += n);
-					}
-					
-					function showDivs(n) {
-					  var i;
-					  var x = document.getElementsByClassName("mySlides");
-					  if (n > x.length) {slideIndex = 1}    
-					  if (n < 1) {slideIndex = x.length}
-					  for (i = 0; i < x.length; i++) {
-					     x[i].style.display = "none";  
-					  }
-					  x[slideIndex-1].style.display = "block";  
-					}
-				</script>
+				<c:if test="${article.getArticlesPictures().size()>0}"> 
+					<script>
+						var slideIndex = 1;
+						showDivs(slideIndex);
+						
+						function plusDivs(n) {
+						  showDivs(slideIndex += n);
+						}
+						
+						function showDivs(n) {
+						  var i;
+						  var x = document.getElementsByClassName("mySlides");
+						  if (n > x.length) {slideIndex = 1}    
+						  if (n < 1) {slideIndex = x.length}
+						  for (i = 0; i < x.length; i++) {
+						     x[i].style.display = "none";  
+						  }
+						  x[slideIndex-1].style.display = "block";  
+						}
+					</script>
+				</c:if>
 
 				<c:if test="${not empty errorArticle}">
 					<div class="pure-g">

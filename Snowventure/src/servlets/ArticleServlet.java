@@ -17,10 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import classes.Article;
+import classes.ArticleColor;
 import classes.ArticlePicture;
 import classes.ArticleVersion;
 import classes.Categorie;
 import classes.Utils;
+import services.ArticleColorService;
 import services.ArticleService;
 import services.CategorieService;
 
@@ -33,7 +35,8 @@ public class ArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private Article article = new Article();
-	private ArticleVersion articleVersion = new ArticleVersion();	 
+	private ArticleVersion articleVersion = new ArticleVersion();
+	private ArrayList<ArticleColor> articleColors = null;
 	
     public ArticleServlet() {
         super();
@@ -45,11 +48,15 @@ public class ArticleServlet extends HttpServlet {
      */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Utils.redirectUser(request, response);
+		if(Utils.redirectUser(request, response)) {
+			return;
+		};
 
 		try {
 			ArrayList<Categorie> categories = CategorieService.GetCategories();
+			this.articleColors = ArticleColorService.GetAllPossibleColors();
 			request.getSession().setAttribute("categories", categories);
+			request.getSession().setAttribute("articleColors", this.articleColors);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -66,6 +73,7 @@ public class ArticleServlet extends HttpServlet {
 			}			
 		} else {
 			this.article = null;
+			request.getSession().setAttribute("article", this.article);
 			request.getSession().setAttribute("updateArticle", false);
 		}		
 		
@@ -91,7 +99,6 @@ public class ArticleServlet extends HttpServlet {
 		} else if(request.getParameter("addImage") != null) {
 			addImage(request);
 		} else if(request.getParameter("addArticleVersion") != null) {
-			System.out.println("New Version");
 			try {
 				addArticleVersion(request);
 			} catch (SQLException e) {
@@ -180,26 +187,31 @@ public class ArticleServlet extends HttpServlet {
 	    
 	    ArticlePicture picture = new ArticlePicture(fileName, fileContent);
 		
-	    String[] outerArray = request.getParameterValues("size");
+	    String[] color = request.getParameterValues("color");
+	    String[] sizes = request.getParameterValues("color");
+	    
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
 		this.article.manufacturer = request.getParameter("manufacturer");
-		this.article.acid = Integer.parseInt(request.getParameter("categories"));
+		this.article.acid = Integer.parseInt(request.getParameter("category"));
 		//Garrit please fix
-		//this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
-		//		request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, 
-		//		request.getParameter("color"), new ArrayList<String>(Arrays.asList(outerArray[0].split(","))));
+//		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
+//				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, 
+//				request.getParameter("color"), new ArrayList<String>(Arrays.asList(outerArray[0].split(","))));
+		
+//		this.articleVersion = new ArticleVersion(request.getParameter("selectedVersion")), request.getParameter("property"), 
+//				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, size, colors);
 		
 		this.article.versions.add(this.articleVersion);
 		this.article.pictures.add(picture);
 		
-		int ret = ArticleService.AddArticle(this.article);
-		
-		if(ret == -1) {
-			request.setAttribute("errorArticle", "Artikel wurde nicht hinzugefügt");
-		} else {
-			this.article = null;
-			request.setAttribute("successArticle", "Artikel wurde erfolgreich hinzugefügt");
-		}
+//		int ret = ArticleService.AddArticle(this.article);
+//		
+//		if(ret == -1) {
+//			request.setAttribute("errorArticle", "Artikel wurde nicht hinzugefügt");
+//		} else {
+//			this.article = null;
+//			request.setAttribute("successArticle", "Artikel wurde erfolgreich hinzugefügt");
+//		}
 	}
 
 }

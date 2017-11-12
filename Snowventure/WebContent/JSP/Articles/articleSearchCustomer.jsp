@@ -67,19 +67,16 @@
 						  
 						    <dd>
 						        <div class="mutliSelect">
-						            <ul>
-						            
-						            <c:forEach items="${colors}" var="color">
-						            <li>
-					                        <label class="control control-checkbox">
+						            <ul>						            
+							            <c:forEach items="${colors}" var="color">
+							            	<li>
+						                        <label class="control control-checkbox">
 										        	<div class="checkbox-colorbox" style="background-color:${color.GetHexcode()} !important;"></div> ${color.GetColorName()} 
 										            <input type="checkbox" name="color" value=${color.GetAcolid()} />
-										        <div class="control_indicator"></div>
-										    </label>
-										</li>
-						            </c:forEach>
-						            
-						                
+											        <div class="control_indicator"></div>
+											    </label>
+											</li>
+							            </c:forEach>			            
 						            </ul>
 						        </div>
 						    </dd>

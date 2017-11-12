@@ -1,6 +1,7 @@
 package classes;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,11 +14,36 @@ public class Utils {
 	 * @param response
 	 * @throws IOException
 	 */
-	public static void redirectUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public static boolean redirectUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		if(request.getSession().getAttribute("currentUser") == null) {
 			response.sendRedirect("start");
-			return;
+			return true;
 		}
+		return false;
+	}
+	
+	public static ArrayList<String> getAllSizes() {
+		ArrayList<String> sizes = new ArrayList<String>();
+		sizes.add("Unigröße");
+		sizes.add("S");
+		sizes.add("M");
+		sizes.add("L");
+		sizes.add("XL");
+		sizes.add("XXL");
+		sizes.add("XXXL");
+		
+		sizes.add("40");
+		sizes.add("41");
+		sizes.add("42");
+		sizes.add("43");
+		sizes.add("44");
+		sizes.add("45");
+		sizes.add("46");
+		sizes.add("47");
+		sizes.add("48");
+		sizes.add("49");
+		
+		return sizes;
 	}
 	
 	/**
