@@ -105,9 +105,7 @@ public class ArticleService {
 	 * @return int value depending on success of insertion
 	 */
 	public static int AddArticleVersionSize(ArticleVersion av) {
-		int insert = 1;
-		String query = "INSERT INTO ARTICLEVERSIONSIZE(size,avid) VALUES('%s','%s');";
-		
+		int insert = 1;		
 		
 		for(String s: av.sizes)
 		{
