@@ -38,7 +38,7 @@ public class ArticleColorService {
 	public static ArticleColor GetSpecificColor(int acolid) throws SQLException{
 		
 		
-		String query = "SELECT DISTINCT acolid, color, hexcode from ARTICLECOLOR WHERE acolid in (SELECT acolid FROM ARTICLEVERSION_TO_COLOR WHERE acolid = '%d')";
+		String query = "SELECT DISTINCT acolid, color, hexcode from ARTICLECOLOR WHERE acolid = '%d'";
 		query = String.format(query, acolid);
 		System.out.println(query);
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
