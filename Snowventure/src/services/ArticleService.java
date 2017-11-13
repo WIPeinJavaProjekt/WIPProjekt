@@ -111,6 +111,7 @@ public class ArticleService {
 		
 		for(String s: av.sizes)
 		{
+			String query = "INSERT INTO ARTICLEVERSIONSIZE(size,avid) VALUES('%s','%s');";
 			query = String.format(query, 
 					s,
 					av.versionid
@@ -281,7 +282,7 @@ public class ArticleService {
 		return articles;
 	}
 	
-	//Categorie nicht im Artikel enthalten da keine Relevanz für weitere Verarbeitung verkomplizierung für Bestellungen etc | Was passiert wenn sich Kategorie ändert? z.B. durch Umstruktuierung usw.
+	//Categorie nicht im Artikel enthalten da keine Relevanz fï¿½r weitere Verarbeitung verkomplizierung fï¿½r Bestellungen etc | Was passiert wenn sich Kategorie ï¿½ndert? z.B. durch Umstruktuierung usw.
 	
 	/**
 	 * Method for Getting all Articles with specific categorie

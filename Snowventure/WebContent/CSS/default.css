@@ -352,8 +352,7 @@ overflow:scroll;
 }
 
 .divborderleft a:link {
-	tex-decoration-line: none;
-    color: rgba(75, 75, 75, 1) !important;
+	tex-decoration-line: none ;
 }
 
 .divborderleft a:hover {
@@ -417,7 +416,7 @@ overflow:scroll;
   visibility: hidden;
 }
 .custom-file-input::before {
-  content: 'Datei auswählen';
+  content: 'Datei auswï¿½hlen';
   display: inline-block;
   background: #4F6877 !important;
   color: #fff;
