@@ -114,10 +114,22 @@ public class ArticleServlet extends HttpServlet {
 		this.articleVersion.property = request.getParameter("property");
 		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
 		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));
-		//Garrit bitte fixen
-		//this.articleVersion.color = request.getParameter("color");
-		String[] outerArray = request.getParameterValues("size");
-		this.articleVersion.sizes = new ArrayList<String>(Arrays.asList(outerArray[0].split(",")));
+		ArrayList<String> sizesArr = new ArrayList<String>();
+		ArrayList<ArticleColor> colorsArr = new ArrayList<ArticleColor>();
+		
+		String[] colors = request.getParameterValues("color");
+	    String[] sizes = request.getParameterValues("size");
+	    
+	    for(int s= 0; s< colors.length;s++) {
+	    	ArticleColor artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(colors[s]));
+			colorsArr.add(artColor);
+		}
+	    for(int s= 0; s< sizes.length;s++) {
+			sizesArr.add(sizes[s]);
+		}
+	    
+	    this.articleVersion.colors = colorsArr;
+		this.articleVersion.sizes = sizesArr;
 		this.articleVersion.ID = this.article.ID;
 		
 		int ret = ArticleService.AddArticleVersion(articleVersion);
@@ -129,8 +141,6 @@ public class ArticleServlet extends HttpServlet {
 		Part filePart = request.getPart("articleImage");
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 	    InputStream fileContent = filePart.getInputStream();
-	    
-	    System.out.println("fileName: " + fileName);
 	    
 	    if(!fileName.equals("")) {
 		    ArticlePicture picture = new ArticlePicture(fileName, fileContent);
@@ -157,11 +167,24 @@ public class ArticleServlet extends HttpServlet {
 		this.article.SetSelectedVersion(Integer.parseInt(request.getParameter("selectedVersion")));
 		this.articleVersion.property = request.getParameter("property");
 		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
-		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));
-		//Garrit need to fix
-		//this.articleVersion.color = request.getParameter("color");
-		String[] outerArray = request.getParameterValues("size");
-		this.articleVersion.sizes = new ArrayList<String>(Arrays.asList(outerArray[0].split(",")));
+		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));		
+		
+		ArrayList<String> sizesArr = new ArrayList<String>();
+		ArrayList<ArticleColor> colorsArr = new ArrayList<ArticleColor>();
+		
+		String[] colors = request.getParameterValues("color");
+	    String[] sizes = request.getParameterValues("size");
+	    
+	    for(int s= 0; s< colors.length;s++) {
+	    	ArticleColor artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(colors[s]));
+			colorsArr.add(artColor);
+		}
+	    for(int s= 0; s< sizes.length;s++) {
+			sizesArr.add(sizes[s]);
+		}
+	    
+	    this.articleVersion.colors = colorsArr;
+		this.articleVersion.sizes = sizesArr;
 		this.articleVersion.versionid = this.article.versions.get(this.article.GetSelectedVersion()).versionid;
 		this.article.manufacturer = request.getParameter("manufacturer");
 		this.article.acid = Integer.parseInt(request.getParameter("categories"));
