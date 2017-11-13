@@ -27,7 +27,7 @@ public class ShoppingCart {
 		return amount;
 	}
 	
-	public ArrayList<ShoppingCartPosition> getCart()
+	public ArrayList<ShoppingCartPosition> getCartPositions()
 	{
 		return cartPositions;
 	}

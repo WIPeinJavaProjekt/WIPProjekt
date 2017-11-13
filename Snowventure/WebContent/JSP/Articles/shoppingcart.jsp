@@ -22,7 +22,6 @@
 	<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="96x96">
 </head>
 <body>
-
 	<%@include file = "../Basic/header.jsp" %>
 	
 		<div class="pure-g">
@@ -30,31 +29,36 @@
 				
 					<div class="pure-u-1-1">
 					
-					<c:choose>
-					<c:when test="${not empty currentUser || not empty currentCart}">
-						<c:forEach var="position" items="${ not empty currentUser ? currentUser.shoppingcart.cartPositions : currentCart.cartPositions}">
+					<c:if test="${not empty currentUser}"> 
+					<c:set var="currentCart" scope="session">${ currentUser.shoppingcart }</c:set>
+					</c:if>
+							
+					<c:choose>					
+					<c:when test="${not empty currentCart && currentCart.cartPositions.size() > 0}">						
+						
+						<c:forEach var="position" items="${ currentCart.getCartPositions() }">
 							<div class="w3-card-4" id="scp-article-card">
 								<div class="pure-u-1-5" id="sc-aimg-container">
-									<img class="article-img" src="images/${ position.article.getArticleHeadPicture().getImageId()}" alt="Artikelbild">
+									<img class="article-img" src="images/${ position.article.getArticleHeadPicture().GetImageId()}" alt="Artikelbild">
 								</div>
 						    	<div class="pure-u-1-4" id="scp-info-part">
-									<h4><b>${ position.article.GetName() }</b></h4>
+									<h4><b>${ position.article.GetName() } von ${ position.article.GetManufacturer()}</b></h4>
 									<hr size="5">
 									<p>Farbe: ${ position.color.GetColorName() }</p>
 									<p>Variante: ${ position.size }</p>
 								</div>
 								<div class="pure-u-1-4" id="scp-info-part">
 									<p><b>Preis</b></p>
-									<p>${ position.article.getPrice() }</p>
+									<p>${ position.article.GetPrice() }</p>
 								</div>
 								<div class="pure-u-1-4" id="scp-info-part">
 									<p><b>Menge</b></p>
-									<select onchange="location.href='./cart?scpid=${currentUser.shoppingcart.cartPositions.indexOf(position)}&amount=' + jQuery('#amount option:selected').val();">
+									<select id="amount${currentCart.getCartPositions().indexOf(position)}" onchange="location.href='./cart?scpid=<c:choose><c:when test='${ not empty currentUser}'>${currentUser.shoppingcart.getCartPositions().indexOf(position)}</c:when><c:otherwise>${ currentCart.getCartPositions().indexOf(position) }</c:otherwise></c:choose>&amount=' + jQuery('#amount${currentCart.getCartPositions().indexOf(position)} option:selected').val();">
 										<c:forEach var="counter" begin="1" end="10">
 											<option <c:if test="${ position.amount == counter }">selected</c:if> value="${counter}">${counter}</option>
 										</c:forEach>
 									</select>
-									<p><a href="cart?scpid=${ currentUser.shoppingcart.cartPositions.indexOf(position) }&option=delete">Löschen</a></p>
+									<p><a href="cart?scpid=<c:choose><c:when test='${ not empty currentUser}'>${currentUser.shoppingcart.getCartPositions().indexOf(position)}</c:when><c:otherwise>${ currentCart.getCartPositions().indexOf(position) }</c:otherwise></c:choose>&option=delete">Löschen</a></p>
 								</div>
 								<hr>
 							</div>
@@ -63,7 +67,14 @@
 						<div  id="scp-article-card">
 						
 					    	<div class="pure-u-11-12" id="sc-conclusion">
-						    	<h3><b>Summe (${currentUser.shoppingcart.cartPositions.GetArticleCount()} Artikel):  EUR ${currentUser.shoppingcart.cartPositions.GetShoppingCartPrice()}</b></h3>
+					    	<c:choose>
+					    	<c:when test="${ not empty currentUser }">
+						    	<h3><b>Summe (${currentUser.shoppingcart.GetArticleCount()} Artikel):  EUR ${currentUser.shoppingcart.GetShoppingCartPrice()}</b></h3>
+				    		</c:when>
+				    		<c:otherwise>
+				    			<h3><b>Summe (${currentCart.GetArticleCount()} Artikel):  EUR ${currentCart.GetShoppingCartPrice()}</b></h3>
+				    		</c:otherwise>
+				    		</c:choose>
 				    			<h4><input class="pure-button pure-button-primary" type="submit" value="Jetzt Bestellen"></h4>
 							</div>
 							<div class="pure-u-1-12" style="height: 15%;"></div>
@@ -79,40 +90,6 @@
 						</div>
 					</c:otherwise>
 					</c:choose>					
-					</div>
-										
-					
-					<div  id="scp-article-card">
-						<div class="pure-u-1-5" style="float:left; max-height: 140px">
-							<img class="article-img" src="./Images/Brille_schwarz.jpg" alt="pic">
-						</div>
-				    	<div class="pure-u-1-4" id="scp-info-part">
-							<h4><b>Dieser Artikel ist schön</b></h4>
-							<hr size="5">
-							<p>Farbe: Rot</p>
-							<p>Variante: XL</p>
-						</div>
-						<div class="pure-u-1-4" id="scp-info-part">
-							<p><b>Preis</b></p>
-							<p>19,95 EUR</p>
-						</div>
-						<div class="pure-u-1-4" id="scp-info-part">
-							<p><b>Menge</b></p>
-							<select id="amount" onchange="location.href='./cart?scpid=1&amount=' + jQuery('#amount option:selected').val();">
-								<c:forEach var="counter" begin="1" end="10">
-									<option value="${counter}">${counter}</option>
-								</c:forEach>
-							</select>
-							<p><a href="cart?scpid=1&option=delete">Löschen</a></p>
-						</div>
-						<hr>
-					</div>
-					<div  id="scp-article-card">
-				    	<div class="pure-u-11-12" id="sc-conclusion">
-				    	<h3><b>Summe (1 Artikel): EUR 19,95</b></h3>
-				    	<h4><input class="pure-button pure-button-primary" type="submit" value="Jetzt Bestellen"></h4>
-						</div>
-						<div class="pure-u-1-12" style="height: 15%;"></div>
 					</div>
 			</form>		
 		</div>

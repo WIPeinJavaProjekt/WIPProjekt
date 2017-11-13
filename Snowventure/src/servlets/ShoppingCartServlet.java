@@ -38,10 +38,11 @@ public class ShoppingCartServlet extends HttpServlet {
 		for(ShoppingCartPosition scp: currentCart.cartPositions) {
 			System.out.println("WARENKORB Artikel: " + scp.article.GetName() + " Amount: " + scp.amount);
 		}
-		
+				
 		if(request.getParameter("scpid")!= null && request.getParameter("amount") != null)
 		{
-			changeSCPAmount(request.getParameter("scpid"), Integer.parseInt(request.getParameter("amount")), request);
+			String scpid = request.getParameter("scpid").toString();
+			changeSCPAmount(scpid, Integer.parseInt(request.getParameter("amount").toString()), request);
 			System.out.println("changed amount of SCP:" + request.getParameter("scpid") + "  to  " + request.getParameter("amount"));
 			response.sendRedirect(request.getContextPath() + "/cart");
 			return;		
@@ -72,6 +73,7 @@ public class ShoppingCartServlet extends HttpServlet {
 	private void deleteShoppingCartPosition(String scpid, HttpServletRequest request) throws ServletException, IOException 
 	{
 		User user = (User)request.getSession().getAttribute("currentUser");
+		ShoppingCart cart = (ShoppingCart)request.getSession().getAttribute("currentCart");
 		
 		if(user != null && user.shoppingcart != null && user.shoppingcart.cartPositions != null && user.shoppingcart.cartPositions.size() > 0)
 		{			
@@ -80,10 +82,23 @@ public class ShoppingCartServlet extends HttpServlet {
 			if(scp != null)
 			{
 				user.shoppingcart.cartPositions.remove(scp);
-				ShoppingCartService.UpdateShopping(user);
+				//ShoppingCartService.UpdateShopping(user);
 				request.getSession().setAttribute("currentUser", user);
 				return;
 			}
+		}
+		else if(cart != null && cart.cartPositions.size() > 0)
+		{
+			ShoppingCartPosition scp = cart.cartPositions.get(Integer.parseInt(scpid));
+			
+			if(scp != null)
+			{
+				cart.cartPositions.remove(scp);
+				//ShoppingCartService.UpdateShopping(user);
+				request.getSession().setAttribute("currentCart", cart);
+				return;
+			}
+
 		}
 	}
 	
@@ -98,30 +113,41 @@ public class ShoppingCartServlet extends HttpServlet {
 	private void changeSCPAmount(String scpid, int newamount,  HttpServletRequest request)throws ServletException, IOException 
 	{
 		User user = (User)request.getSession().getAttribute("currentUser");
-		
+		ShoppingCart cart = (ShoppingCart)request.getSession().getAttribute("currentCart");
+
 		try {
 				if(user != null && user.shoppingcart != null && user.shoppingcart.cartPositions != null && user.shoppingcart.cartPositions.size() > 0)
 				{			
-					if (newamount <= StockService.GetStock(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.versions.get(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.GetSelectedVersion())))
-					{
+					//if (newamount <= StockService.GetStock(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.versions.get(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.GetSelectedVersion())))
+					//{
 						ShoppingCartPosition scp = user.shoppingcart.cartPositions.get(Integer.parseInt(scpid));
 						
 						if(scp != null)
 						{
 							scp.amount = newamount;
-							ShoppingCartService.UpdateShopping(user);
+							//ShoppingCartService.UpdateShopping(user);
 							request.getSession().setAttribute("currentUser", user);
 							return;
 						}
-					}
-					else 
+					//}
+					//else 
+					//{
+						//System.out.println("out of stock - amount is higher than stock value");
+					//} 
+				}	
+				else if (cart != null)
+				{
+					ShoppingCartPosition scp = cart.cartPositions.get(Integer.parseInt(scpid));
+					if(scp != null)
 					{
-						System.out.println("out of stock - amount is higher than stock value");
-					} 
-				}					
+						scp.amount = newamount;
+						request.getSession().setAttribute("currentCart", cart);
+						return;
+					}
+				}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
