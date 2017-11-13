@@ -105,6 +105,9 @@ public class ArticleServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if(request.getParameter("back") != null) {
+			response.sendRedirect("users?page=articlesearch");
+			return;
 		}
 
 		doGet(request, response);
@@ -125,6 +128,7 @@ public class ArticleServlet extends HttpServlet {
 			colorsArr.add(artColor);
 		}
 	    for(int s= 0; s< sizes.length;s++) {
+	    	System.out.println(sizes[s]);
 			sizesArr.add(sizes[s]);
 		}
 	    
@@ -133,8 +137,6 @@ public class ArticleServlet extends HttpServlet {
 		this.articleVersion.ID = this.article.ID;
 		
 		int ret = ArticleService.AddArticleVersion(articleVersion);
-		
-		System.out.println(ret);
 	}
 
 	private void addImage(HttpServletRequest request) throws IOException, ServletException {
@@ -221,6 +223,7 @@ public class ArticleServlet extends HttpServlet {
 			colorsArr.add(artColor);
 		}
 	    for(int s= 0; s< sizes.length;s++) {
+	    	System.out.println(sizes[s]);
 			sizesArr.add(sizes[s]);
 		}
 	    

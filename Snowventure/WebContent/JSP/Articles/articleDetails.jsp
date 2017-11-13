@@ -188,7 +188,7 @@
 						            <input  class="boxedinput" id="price" name="price" value="${article.GetPrice()}" type="number" step="0.01" placeholder="Preis">
 						        </div>
 						        <div class="pure-control-group">
-						            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticleVersion">Als neue Artikelversion speichern</button>
+						            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticleVersion" onclick="changeVersion(${article.GetId()}, 'article')" >Als neue Artikelversion speichern</button>
 						        </div>
 							</div>
 							<div class="pure-u-1-2">
@@ -197,7 +197,7 @@
 						        </div>
 						        <div class="pure-control-group">
 						        	<c:if test="${updateArticle}">
-							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addImage" onclick="changeVersion(${article.GetId()})" >Bild hinzufügen</button>
+							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addImage" onclick="changeVersion(${article.GetId()}, 'article')" >Bild hinzufügen</button>
 							        </c:if>
 						        </div>
 							</div>
@@ -215,6 +215,11 @@
 						        </c:otherwise>
 					        </c:choose>   
 				        </div>
+			       	</fieldset>
+			       	<fieldset>
+						<div class="pure-control-group">
+			       			<button class="pure-button pure-button-primary boxedinput" type="submit" name="back">Zurück zur Artikelübersicht</button>
+			       		</div>
 			       	</fieldset>
 		       	</form>
 			       	<div class="w3-content w3-display-container w3slidmod" align="center">
