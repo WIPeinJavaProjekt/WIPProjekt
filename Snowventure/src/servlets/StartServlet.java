@@ -120,7 +120,7 @@ public class StartServlet extends HttpServlet {
 			System.out.println("category"+category);
 			findArticles(request, category,searchPattern,minprice,maxprice,sizes,manufacturers,colors);
 			
-			response.sendRedirect("articles");			
+			response.sendRedirect("articles");
 			return;
 			
 		} else if(request.getParameter("settings") != null) {	

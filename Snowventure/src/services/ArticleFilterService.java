@@ -71,7 +71,7 @@ public class ArticleFilterService {
 			for(int v = 0; v < newarticles.get(i).versions.size(); v++)
 				for(String si: newarticles.get(i).versions.get(v).sizes)
 					for(int s= 0; s< size.length;s++) {
-						System.out.println("Vergleiche: "+si +" mit "+size[s] );
+						System.out.println("Vergleiche: "+ si +" mit "+size[s] );
 					
 						if(si.equals( size[s]) )
 						{

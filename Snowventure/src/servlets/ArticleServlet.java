@@ -186,32 +186,39 @@ public class ArticleServlet extends HttpServlet {
 	    InputStream fileContent = filePart.getInputStream();
 	    
 	    ArticlePicture picture = new ArticlePicture(fileName, fileContent);
+	    
+	    ArrayList<String> sizesArr = new ArrayList<String>();
+		ArrayList<ArticleColor> colorsArr = new ArrayList<ArticleColor>();
 		
-	    String[] color = request.getParameterValues("color");
-	    String[] sizes = request.getParameterValues("color");
+	    String[] colors = request.getParameterValues("color");
+	    String[] sizes = request.getParameterValues("size");
+	    
+	    for(int s= 0; s< colors.length;s++) {
+	    	ArticleColor artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(colors[s]));
+			colorsArr.add(artColor);
+		}
+	    for(int s= 0; s< sizes.length;s++) {
+			sizesArr.add(sizes[s]);
+		}
 	    
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
 		this.article.manufacturer = request.getParameter("manufacturer");
 		this.article.acid = Integer.parseInt(request.getParameter("category"));
-		//Garrit please fix
-//		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
-//				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, 
-//				request.getParameter("color"), new ArrayList<String>(Arrays.asList(outerArray[0].split(","))));
 		
-//		this.articleVersion = new ArticleVersion(request.getParameter("selectedVersion")), request.getParameter("property"), 
-//				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, size, colors);
+		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
+				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, sizesArr, colorsArr);
 		
 		this.article.versions.add(this.articleVersion);
 		this.article.pictures.add(picture);
 		
-//		int ret = ArticleService.AddArticle(this.article);
-//		
-//		if(ret == -1) {
-//			request.setAttribute("errorArticle", "Artikel wurde nicht hinzugefügt");
-//		} else {
-//			this.article = null;
-//			request.setAttribute("successArticle", "Artikel wurde erfolgreich hinzugefügt");
-//		}
+		int ret = ArticleService.AddArticle(this.article);
+		
+		if(ret == -1) {
+			request.setAttribute("errorArticle", "Artikel wurde nicht hinzugefügt");
+		} else {
+			this.article = null;
+			request.setAttribute("successArticle", "Artikel wurde erfolgreich hinzugefügt");
+		}
 	}
 
 }

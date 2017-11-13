@@ -40,6 +40,7 @@ public class ArticleColorService {
 		
 		String query = "SELECT DISTINCT acolid, color, hexcode from ARTICLECOLOR WHERE acolid in (SELECT acolid FROM ARTICLEVERSION_TO_COLOR WHERE acolid = '%d')";
 		query = String.format(query, acolid);
+		System.out.println(query);
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
