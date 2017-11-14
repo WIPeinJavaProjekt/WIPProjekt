@@ -467,7 +467,6 @@ public class ArticleService {
 		statement.setBlob(2, fis);
 		statement.setInt(3, avid);
 		apid = statement.executeUpdate();
-		System.out.println(statement);
 		return apid;
 	}
 

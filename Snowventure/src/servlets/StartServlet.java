@@ -43,14 +43,6 @@ public class StartServlet extends HttpServlet {
 		
 		ArrayList<Article> articles;
 		request.getSession().setAttribute("availableSizes", Utils.getAllSizes());
-		try {
-			articles = ArticleService.GetAllArticlesByName("");
-			request.getSession().setAttribute("articles", articles);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		System.out.println("Rufe alle  Artikel ab");
 		
 		try {
 			ArrayList<Categorie> categories = CategorieService.GetCategories();
@@ -82,8 +74,6 @@ public class StartServlet extends HttpServlet {
 		
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		
-		System.out.println("Current User: " + currentUser != null ? "Kein User" : currentUser.name);
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/welcome.jsp");
 		rd.forward(request, response);
 	}
@@ -109,16 +99,8 @@ public class StartServlet extends HttpServlet {
 		} else if(request.getParameter("search") != null) {	
 			
 			String searchPattern = request.getParameter("searchArticlePattern");
-			
-			
-			double minprice = Double.parseDouble(request.getParameter("minprice") ==null || request.getParameter("minprice") ==""? "-1":request.getParameter("minprice") );
-			double maxprice = Double.parseDouble(request.getParameter("maxprice") ==null || request.getParameter("maxprice") ==""? "-1":request.getParameter("maxprice") );
-			String[] sizes  = request.getParameterValues("sizes");
-			String[] manufacturers = request.getParameterValues("manufacturer");
-			String[] colors = request.getParameterValues("colors");
 			int category = Integer.parseInt(request.getParameter("categorie"));
-			System.out.println("category"+category);
-			findArticles(request, category,searchPattern,minprice,maxprice,sizes,manufacturers,colors);
+			findArticles(request, category,searchPattern);
 			
 			response.sendRedirect("articles");
 			return;
@@ -149,7 +131,7 @@ public class StartServlet extends HttpServlet {
 	 * @param searchPattern Input search pattern to compare
 	 * @throws IOException 
 	 */
-	private void findArticles(HttpServletRequest request,int category ,String searchPattern, double minprice, double maxprice, String[] sizes, String[] manufacturers, String[] colors) throws IOException {
+	private void findArticles(HttpServletRequest request,int category ,String searchPattern) throws IOException {
 		ArrayList<Article> articles = null;
 		
 		try {
@@ -159,22 +141,12 @@ public class StartServlet extends HttpServlet {
 			else {
 				articles = ArticleService.GetAllArticlesByCategorie(category, searchPattern);
 			}
-			articles = (ArrayList<Article>) ArticleFilterService.FilterPrice(minprice, maxprice, articles).clone();
-			System.out.println("Artikelanzahl"+articles.size());
-			if(sizes != null)
-				articles = (ArrayList<Article>) ArticleFilterService.FilterSize(sizes, articles).clone();
-			
-			if(manufacturers != null)
-				articles = (ArrayList<Article>) ArticleFilterService.FilterManufacturer(manufacturers, articles).clone();
-			
-			if(colors != null)
-				articles = (ArrayList<Article>) ArticleFilterService.FilterColor(colors, articles).clone();
 			
 			Path currentRelativePath = Paths.get("");
 			request.getSession().setAttribute("imagePath", currentRelativePath.toAbsolutePath().toString() + "\\");
 			
 			for (Article a: articles) {
-				for(ArticlePicture ap: a.pictures) {
+				for(ArticlePicture ap: a.versions.get(a.GetSelectedVersion()).pictures) {
 					File file = new File("" + ap.name);
 					try {
 					   ImageIO.write((RenderedImage) ap.image, "jpg", file);  // ignore returned boolean
