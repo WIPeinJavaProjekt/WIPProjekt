@@ -56,12 +56,7 @@ public class ArticleService {
 				return dummy;
 		}
 		
-		for(ArticlePicture pic: a.pictures)
-		{
-			int dummy = AddPicture(pic, a.ID);
-			if(dummy == -1)
-				return dummy;
-		}
+
 		
 		return aid;
 	}
@@ -71,8 +66,9 @@ public class ArticleService {
 	 * @param av the ArticleVersion
 	 * @return int value depending on success of insertion
 	 * @throws SQLException 
+	 * @throws IOException 
 	 */
-	public static int AddArticleVersion(ArticleVersion av) throws SQLException {		
+	public static int AddArticleVersion(ArticleVersion av) throws SQLException, IOException {		
 		Locale.setDefault(Locale.ENGLISH);		
 		String query;
 		int avid = -1;
@@ -95,6 +91,12 @@ public class ArticleService {
 			return dummy;
 		}
 		
+		for(ArticlePicture pic: av.pictures)
+		{
+			dummy = AddPictureToArticleVersion(pic, av.versionid);
+			if(dummy == -1)
+				return dummy;
+		}
 		
 		return avid;
 	}
@@ -152,19 +154,16 @@ public class ArticleService {
 		for(ArticleVersion av: a.versions)
 			UpdateArticleVersion(av);
 		
-		DeletePicture(a.ID);
-		for(ArticlePicture pic: a.pictures)
-		{
-			int dummy = AddPicture(pic, a.ID);
-		}
+
 	}
 	
 	/**
 	 * Method for updating an Articleversion
 	 * @param av Articleversion to be updated
 	 * @throws SQLException 
+	 * @throws IOException 
 	 */
-	public static void UpdateArticleVersion(ArticleVersion av) throws SQLException {
+	public static void UpdateArticleVersion(ArticleVersion av) throws SQLException, IOException {
 		Locale.setDefault(Locale.ENGLISH);
 		String query;
 		query = "UPDATE ARTICLEVERSION SET property = '%s', propertyvalue = '%s', defaultprice = '%f' where avid ='%d'";
@@ -175,11 +174,20 @@ public class ArticleService {
 				av.price,
 				av.versionid);
 		ArticleColorService.DeleteArticleColorToVersion(av.versionid);		
+		
+		int dummy=0;
+		
 		for(ArticleColor c: av.colors)
 		{
-			int dummy = ArticleColorService.AddArticleColorToVersion(c.acolid,av.versionid);
+			dummy = ArticleColorService.AddArticleColorToVersion(c.acolid,av.versionid);
 		}
 
+		DeletePictureFromArticleVersion(av.versionid);
+		for(ArticlePicture pic: av.pictures)
+		{
+			dummy = AddPictureToArticleVersion(pic, av.versionid);
+		}
+		
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
@@ -200,8 +208,9 @@ public class ArticleService {
 	 * @param a Article
 	 * @return Arraylist of the specific Articleversions
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public static ArrayList<ArticleVersion> GetAllArticleVersion(Article a) throws SQLException {
+	public static ArrayList<ArticleVersion> GetAllArticleVersion(Article a) throws SQLException, IOException {
 		ArrayList<ArticleVersion> av = new ArrayList<ArticleVersion>();
 		
 		String query ="SELECT  avid,property,propertyvalue, defaultprice FROM ARTICLEVERSION WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d'";
@@ -213,6 +222,7 @@ public class ArticleService {
 		{
 			ArrayList<String> sizes = new ArrayList<String>(GetAllArticleVersionsize(result.getInt("avid")));
 			ArticleVersion version = new ArticleVersion(result.getInt("avid"),result.getString("property"),result.getString("propertyvalue"),result.getDouble("defaultprice"),a,sizes,ArticleColorService.GetSpecificColors(result.getInt("avid")));
+			version.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleVersionId(version.versionid).clone();
 			av.add(version);
 		}
 		
@@ -248,7 +258,7 @@ public class ArticleService {
 		{
 			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"),result.getInt("acid"),result.getString("manufacturer"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
-			a.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(a.ID).clone();
+			
 			articles.add(a);
 		}
 		
@@ -273,7 +283,6 @@ public class ArticleService {
 		{
 			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description") ,result.getInt("acid"), result.getString("manufacturer"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
-			a.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(a.ID).clone();
 			articles.add(a);
 		}
 		
@@ -301,7 +310,6 @@ public class ArticleService {
 		{
 			Article a = new Article(result.getInt("aid"),result.getString("name"),result.getString("name"),result.getInt("acid"),result.getString("manufacturer"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
-			a.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(a.ID).clone();
 			articles.add(a);
 		}
 		
@@ -328,7 +336,6 @@ public class ArticleService {
 		{
 			article = new Article(result.getInt("aid"),result.getString("name"),result.getString("description"),result.getInt("acid"),result.getString("manufacturer"));
 			article.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(article).clone();
-			article.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleId(article.ID).clone();
 		}
 		
 		return article;
@@ -404,11 +411,11 @@ public class ArticleService {
 	 * @throws IOException
 	 * @throws SQLException
 	 */
-	public static ArrayList<ArticlePicture> GetPicturesFromArticleId(int aid) throws IOException, SQLException{
+	public static ArrayList<ArticlePicture> GetPicturesFromArticleVersionId(int avid) throws IOException, SQLException{
 		ArrayList<ArticlePicture> pictures = new ArrayList<ArticlePicture>();
 		
-		String query = "SELECT aimgid,name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d';";
-		query = String.format(query, aid);
+		String query = "SELECT aimgid,name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND avid ='%d';";
+		query = String.format(query, avid);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
@@ -449,16 +456,16 @@ public class ArticleService {
 	 * @throws SQLException
 	 * @throws IOException
 	 */
-	public static int AddPicture(ArticlePicture img, int aid) throws SQLException, IOException {
+	public static int AddPictureToArticleVersion(ArticlePicture img, int avid) throws SQLException, IOException {
 		int apid =-1;
-		String query = "INSERT INTO ARTICLEIMAGE(name,image, aid) VALUES( ?, ?, ?)";
+		String query = "INSERT INTO ARTICLEIMAGE(name,image, avid) VALUES( ?, ?, ?)";
 		PreparedStatement statement = (PreparedStatement) DatabaseConnector.connect.prepareStatement(query);
 		statement.setString(1, img.name);
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		ImageIO.write((RenderedImage) img.image,"png", os); 
 		ByteArrayInputStream fis = new ByteArrayInputStream(os.toByteArray());
 		statement.setBlob(2, fis);
-		statement.setInt(3, aid);
+		statement.setInt(3, avid);
 		apid = statement.executeUpdate();
 		System.out.println(statement);
 		return apid;
@@ -468,9 +475,9 @@ public class ArticleService {
 	 * Method for deleting all Pictures from an Article
 	 * @param aid Articleid
 	 */
-	public static void DeletePicture(int aid) {
-		String query = "Delete ArticleImage WHERE aid = '%d'";
-		query = String.format(query, aid);
+	public static void DeletePictureFromArticleVersion(int avid) {
+		String query = "Delete ArticleImage WHERE avid = '%d'";
+		query = String.format(query, avid);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 }

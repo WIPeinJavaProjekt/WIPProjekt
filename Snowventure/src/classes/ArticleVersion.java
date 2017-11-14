@@ -9,6 +9,8 @@ public class ArticleVersion extends Article{
 	public double price;
 	public ArrayList<String> sizes;
 	public ArrayList<ArticleColor> colors;
+	public ArrayList<ArticlePicture> pictures = new ArrayList<ArticlePicture>();
+
 	
 	public ArticleVersion() {
 		sizes = new ArrayList<String>();
@@ -34,4 +36,18 @@ public class ArticleVersion extends Article{
 	{
 		return price;
 	}
+	
+	public ArticlePicture getArticleHeadPicture()
+	{
+		if(this.pictures.size()>0) {
+			ArticlePicture apic = this.pictures.get(0);	
+			return apic;
+		} return null;
+	}
+	
+	public ArrayList<ArticlePicture> getArticlesPictures()
+	{
+		return this.pictures;
+	}
+	
 }

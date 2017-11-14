@@ -12,7 +12,6 @@ public class Article {
 	public int acid =1;
 	public ArrayList<ArticleVersion> versions;
 	private int selectedversion;
-	public ArrayList<ArticlePicture> pictures = new ArrayList<ArticlePicture>();
 	
 	
 	public Article(){}
@@ -106,16 +105,4 @@ public class Article {
 		return this.description;
 	}
 	
-	public ArticlePicture getArticleHeadPicture()
-	{
-		if(this.pictures.size()>0) {
-			ArticlePicture apic = this.pictures.get(0);	
-			return apic;
-		} return null;
-	}
-	
-	public ArrayList<ArticlePicture> getArticlesPictures()
-	{
-		return this.pictures;
-	}
 }
