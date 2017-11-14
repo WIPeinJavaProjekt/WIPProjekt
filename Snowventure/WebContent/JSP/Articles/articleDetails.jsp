@@ -55,61 +55,64 @@
 				<form id="articleadminboxform" class="pure-form" enctype="multipart/form-data" action="article" method="post">
 					
 				    <fieldset class="pure-group">
-				    	<div class="pure-control-group">
-				            <input  class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
-				        </div>
-				        <div class="pure-control-group">
-				            <input  class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
-				        </div>
-				        <div class="pure-control-group">
-				        <select name="category" class="boxedinput">
-						        <c:forEach items="${categories}" var="categories">
-					        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
-					    		</c:forEach>
-							</select>
-				        </div>				        
-				        <div class="pure-control-group">
-				            <textarea  class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
-				            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>">${article.GetDescription()}</textarea>
-				        </div>
-				        <c:choose>
-							<c:when test="${updateArticle}">
-									<div class="boxedinput">
-										<label> Ausgewählte Version:</label><br>
-										<select required id="selectedVersion" name="selectedVersion" class="boxedinput" 
-										onchange="changeVersion(${article.GetId()}, 'article')">
-											<c:forEach items="${article.GetAllVersions()}" var="version">
-								        		<option value="${article.GetAllVersions().indexOf(version)}"<c:if test="${article.GetSelectedVersion()==article.GetAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>${article.GetAllVersions().indexOf(version)}</option>
-								    		</c:forEach>
-										</select>
-							        </div>
-							</c:when>
-							<c:otherwise>
-								<div class="pure-control-group">
-									<select required name="selectedVersion" class="boxedinput">
-							        		<option value="0">0</option>
-									</select>
-						        </div>	
-							</c:otherwise>
-						</c:choose>
-						<br>
-						
-						<div class="pure-g">
+				    	<div class="pure-g">
 							<div class="pure-u-1-2">
+						    	<div class="pure-control-group">
+						            <input  class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
+						        </div>
+						        <div class="pure-control-group">
+						            <input  class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
+						        </div>
+						        <div class="pure-control-group">
+						        <select name="category" class="boxedinput">
+								        <c:forEach items="${categories}" var="categories">
+							        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
+							    		</c:forEach>
+									</select>
+						        </div>				        
+						        <div class="pure-control-group">
+						            <textarea  class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
+						            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>">${article.GetDescription()}</textarea>
+						        </div>
+						        <c:choose>
+									<c:when test="${updateArticle}">
+											<div class="boxedinput">
+												<label> Ausgewählte Version:</label><br>
+												<select required id="selectedVersion" name="selectedVersion" class="boxedinput" 
+												onchange="changeVersion(${article.GetId()}, 'article')">
+													<c:forEach items="${article.GetAllVersions()}" var="version">
+										        		<option value="${article.GetAllVersions().indexOf(version)}"<c:if test="${article.GetSelectedVersion()==article.GetAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>${article.GetAllVersions().indexOf(version)}</option>
+										    		</c:forEach>
+												</select>
+									        </div>
+									</c:when>
+									<c:otherwise>
+										<div class="pure-control-group">
+											<select required name="selectedVersion" class="boxedinput">
+									        		<option value="0">0</option>
+											</select>
+								        </div>	
+									</c:otherwise>
+								</c:choose>
+								<br>
+							</div>
+							<div class="pure-u-1-2">
+								<div class="pure-control-group">
+						            	<input class="boxedinput custom-file-input" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
+						        </div>
+						        <div class="pure-control-group">
+						        	<c:if test="${updateArticle}">
+							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addImage" onclick="changeVersion(${article.GetId()}, 'article')" >Bild hinzufügen</button>
+							        </c:if>
+						        </div>
 								<div class="pure-control-group">
 						            <input class="boxedinput" id="property" name="property" value="${article.GetProperty()}" type="text" placeholder="Eigenschaft">
 						        </div>
 						        <div class="pure-control-group">
 						            <input class="boxedinput" id="propertyValue" name="propertyValue" value="${article.GetPropertyValue()}" type="text" placeholder="Wert der Eigenschaft">
 						        </div>
-						        <div class="pure-control-group">
-						            <%-- <select class="boxedinput" required id="color" name="color" class="color">
-						            	<option value="">Bitte Farbe auswählen</option>
-										<c:forEach items="${articleColors}" var="color">
-							        		<option value="${color.GetAcolid()}">${color.GetColorName()}</option>
-							    		</c:forEach>
-									</select> --%>
-									
+						        <br>
+						        <div class="pure-control-group">									
 									<div id="filter_color" class="dropdown"> 
 									    <div>
 									    <a href="javascript:void(0)">
@@ -135,7 +138,7 @@
 									    </dd>
 									</div>
 						        </div>
-						        
+						        <br>
 						        <div class="pure-control-group">
 							        <div id="filter_size" class="dropdown"> 
 									    <div>
@@ -161,44 +164,17 @@
 									        </div>
 									    </dd>
 									</div>
-<%-- 				             		<select name="size" class="boxedinput">
-						        		<option value="">Bitte Größe auswählen</option>
-						        		<option value="Unigröße" <c:if test="${not empty article.GetSize() && article.GetSize()=='Unigröße'}"><c:out value="selected"/></c:if>>Unigröße</option>
-								        <option value="S" <c:if test="${not empty article.GetSize() && article.GetSize()=='S'}"><c:out value="selected"/></c:if>>S</option>
-								        <option value="M" <c:if test="${not empty article.GetSize() && article.GetSize()=='M'}"><c:out value="selected"/></c:if>>M</option>
-								        <option value="L" <c:if test="${not empty article.GetSize() && article.GetSize()=='L'}"><c:out value="selected"/></c:if>>L</option>
-								        <option value="XL" <c:if test="${not empty article.GetSize() && article.GetSize()=='XL'}"><c:out value="selected"/></c:if>>XL</option>
-								        <option value="XXL" <c:if test="${not empty article.GetSize() && article.GetSize()=='XXL'}"><c:out value="selected"/></c:if>>XXL</option>
-								        <option value="XXXL" <c:if test="${not empty article.GetSize() && article.GetSize()=='XXXL'}"><c:out value="selected"/></c:if>>XXXL</option>
-								        
-								        <option value="40" <c:if test="${not empty article.GetSize() && article.GetSize()=='40'}"><c:out value="selected"/></c:if>>40</option>
-								        <option value="41" <c:if test="${not empty article.GetSize() && article.GetSize()=='41'}"><c:out value="selected"/></c:if>>41</option>
-								        <option value="42" <c:if test="${not empty article.GetSize() && article.GetSize()=='42'}"><c:out value="selected"/></c:if>>42</option>
-								        <option value="43" <c:if test="${not empty article.GetSize() && article.GetSize()=='43'}"><c:out value="selected"/></c:if>>43</option>
-								        <option value="44" <c:if test="${not empty article.GetSize() && article.GetSize()=='44'}"><c:out value="selected"/></c:if>>44</option>
-								        <option value="45" <c:if test="${not empty article.GetSize() && article.GetSize()=='45'}"><c:out value="selected"/></c:if>>45</option>
-								        <option value="46" <c:if test="${not empty article.GetSize() && article.GetSize()=='46'}"><c:out value="selected"/></c:if>>46</option>
-								        <option value="47" <c:if test="${not empty article.GetSize() && article.GetSize()=='47'}"><c:out value="selected"/></c:if>>47</option>
-								        <option value="48" <c:if test="${not empty article.GetSize() && article.GetSize()=='48'}"><c:out value="selected"/></c:if>>48</option>
-								        <option value="49" <c:if test="${not empty article.GetSize() && article.GetSize()=='49'}"><c:out value="selected"/></c:if>>49</option>
-									</select> --%>
 						        </div>
+						        <br>
 						        <script type="text/javascript" src="./JS/dropdown.js"></script>	
 						        <div class="pure-control-group">
 						            <input  class="boxedinput" id="price" name="price" value="${article.GetPrice()}" type="number" step="0.01" placeholder="Preis">
 						        </div>
 						        <div class="pure-control-group">
-						            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticleVersion" onclick="changeVersion(${article.GetId()}, 'article')" >Als neue Artikelversion speichern</button>
-						        </div>
-							</div>
-							<div class="pure-u-1-2">
-								<div class="pure-control-group">
-						            	<input class="boxedinput custom-file-input" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
-						        </div>
-						        <div class="pure-control-group">
 						        	<c:if test="${updateArticle}">
-							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addImage" onclick="changeVersion(${article.GetId()}, 'article')" >Bild hinzufügen</button>
-							        </c:if>
+						            	<button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticleVersion" 
+						            		onclick="changeVersion(${article.GetId()}, 'article')" >Als neue Artikelversion speichern</button>
+					            	</c:if>
 						        </div>
 							</div>
 						</div>
@@ -218,20 +194,20 @@
 			       	</fieldset>
 			       	<fieldset>
 						<div class="pure-control-group">
-			       			<button class="pure-button pure-button-primary boxedinput" type="submit" name="back">Zurück zur Artikelübersicht</button>
+			       			<button class="pure-button pure-button-primary" type="submit" name="back">Zurück zur Artikelübersicht</button>
 			       		</div>
 			       	</fieldset>
 		       	</form>
 			       	<div class="w3-content w3-display-container w3slidmod" align="center">
 
-						<c:forEach items="${article.getArticlesPictures()}" var="ap">
+						<c:forEach items="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures()}" var="ap">
 					   		<div class="w3-display-container mySlides ">
 								<div class="productCardimage">
 							   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.GetImageId()}" class="articlesearchimage"/>
 							   	</div>
 							</div>
 						</c:forEach>
-						<c:if test="${article.getArticlesPictures().size()>1}"> 
+						<c:if test="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures().size()>1}"> 
 							<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
 							<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
 						</c:if>
@@ -239,7 +215,7 @@
 					</div>
 				
 
-				<c:if test="${article.getArticlesPictures().size()>0}"> 
+				<c:if test="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures().size()>0}"> 
 					<script>
 						var slideIndex = 1;
 						showDivs(slideIndex);

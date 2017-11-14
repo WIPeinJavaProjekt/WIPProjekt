@@ -129,7 +129,7 @@
 				 		<div class="productCard pure-u-1-3" onclick="location.href='./articleshopping?ID=${article.GetId()}&version=${article.GetSelectedVersion()}';">
 					 		<div  style="width:100%">
 							    <div class="productCardimage">
-							    	<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${article.getArticleHeadPicture().GetImageId()}" class="articlesearchimage">
+							    	<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${article.GetAllVersions().get(article.GetSelectedVersion()).getArticleHeadPicture().GetImageId()}" class="articlesearchimage">
 							    </div>
 							    <div class="w3-container w3-center">
 									<p>

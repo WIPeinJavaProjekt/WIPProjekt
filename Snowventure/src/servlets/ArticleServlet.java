@@ -113,12 +113,18 @@ public class ArticleServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private void addArticleVersion(HttpServletRequest request) throws SQLException {
+	private void addArticleVersion(HttpServletRequest request) throws SQLException, IOException, ServletException {
 		this.articleVersion.property = request.getParameter("property");
 		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
 		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));
+		
 		ArrayList<String> sizesArr = new ArrayList<String>();
 		ArrayList<ArticleColor> colorsArr = new ArrayList<ArticleColor>();
+		
+		Part filePart = request.getPart("articleImage");
+	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+	    InputStream fileContent = filePart.getInputStream();
+		ArticlePicture picture = new ArticlePicture(fileName, fileContent);
 		
 		String[] colors = request.getParameterValues("color");
 	    String[] sizes = request.getParameterValues("size");
@@ -135,8 +141,14 @@ public class ArticleServlet extends HttpServlet {
 	    this.articleVersion.colors = colorsArr;
 		this.articleVersion.sizes = sizesArr;
 		this.articleVersion.ID = this.article.ID;
+		this.articleVersion.pictures.add(picture);
 		
-		int ret = ArticleService.AddArticleVersion(articleVersion);
+		try {
+			int ret = ArticleService.AddArticleVersion(articleVersion);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void addImage(HttpServletRequest request) throws IOException, ServletException {
@@ -144,12 +156,13 @@ public class ArticleServlet extends HttpServlet {
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 	    InputStream fileContent = filePart.getInputStream();
 	    
+	    this.article.SetSelectedVersion(Integer.parseInt(request.getParameter("selectedVersion")));
+	    
 	    if(!fileName.equals("")) {
 		    ArticlePicture picture = new ArticlePicture(fileName, fileContent);
 		    
 		    try {
-				int ret = ArticleService.AddPicture(picture, this.article.ID);
-				System.out.println("return: " + ret);
+				int ret = ArticleService.AddPictureToArticleVersion(picture, this.article.versions.get(this.article.GetSelectedVersion()).GetAvId());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -233,9 +246,9 @@ public class ArticleServlet extends HttpServlet {
 		
 		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
 				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, sizesArr, colorsArr);
-		
+		this.articleVersion.pictures.add(picture);
 		this.article.versions.add(this.articleVersion);
-		this.article.pictures.add(picture);
+		
 		
 		int ret = ArticleService.AddArticle(this.article);
 		
