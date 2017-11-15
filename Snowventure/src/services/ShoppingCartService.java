@@ -60,6 +60,9 @@ public class ShoppingCartService {
 		
 		for(ShoppingCartPosition p: u.shoppingcart.cartPositions)
 		{
+			System.out.println("Position : " + p);
+			System.out.println("User : " + u.ulid);
+
 			scpid = AddShoppingCartPosition(p,u.ulid);
 			if(scpid == -1) {
 				return scpid;

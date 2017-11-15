@@ -18,13 +18,13 @@ public class ShoppingCart {
 		this.cartPositions = new ArrayList<ShoppingCartPosition>(scp.cartPositions);
 	}	
 	
-	public double GetShoppingCartPrice() {
+	public String GetShoppingCartPrice() {
 		double amount=0;
 		
 		for(ShoppingCartPosition scp: cartPositions)
 			amount+=scp.GetPositionPrice();
-		
-		return amount;
+				
+		return String.format( "%.2f", amount );
 	}
 	
 	public ArrayList<ShoppingCartPosition> getCartPositions()

@@ -31,6 +31,8 @@ public class ShoppingCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ShoppingCart currentCart = (ShoppingCart) request.getSession().getAttribute("currentCart");
+		//User currentUser = (User) request.getSession().getAttribute("currentUser");
+
 		if(currentCart == null) {
 			currentCart = new ShoppingCart();
 		}
@@ -38,19 +40,33 @@ public class ShoppingCartServlet extends HttpServlet {
 		for(ShoppingCartPosition scp: currentCart.cartPositions) {
 			System.out.println("WARENKORB Artikel: " + scp.article.GetName() + " Amount: " + scp.amount);
 		}
-				
+		
+		/*
+		if(currentUser != null && currentCart != null && currentUser.shoppingcart.cartPositions.size() == 0)
+		{
+			currentUser.shoppingcart = currentCart;
+			request.getSession().setAttribute("currentUser", currentUser);
+		}
+		*/
+
 		if(request.getParameter("scpid")!= null && request.getParameter("amount") != null)
 		{
 			String scpid = request.getParameter("scpid").toString();
-			changeSCPAmount(scpid, Integer.parseInt(request.getParameter("amount").toString()), request);
-			System.out.println("changed amount of SCP:" + request.getParameter("scpid") + "  to  " + request.getParameter("amount"));
+			int newamount = Integer.parseInt(request.getParameter("amount").toString());
+			
+			if(newamount > 0) 
+				{changeSCPAmount(scpid, newamount, request);}
+			else 
+				{deleteShoppingCartPosition(request.getParameter("scpid"), request);}
+
+			//System.out.println("changed amount of SCP:" + currentCart.cartPositions.get(Integer.parseInt(scpid)).amount + "  to  " + request.getParameter("amount"));
 			response.sendRedirect(request.getContextPath() + "/cart");
 			return;		
 		}
 		else if(request.getParameter("scpid")!= null && request.getParameter("option") != null && request.getParameter("option").toString().equals("delete"))
 		{
 			deleteShoppingCartPosition(request.getParameter("scpid"), request);
-			System.out.println("deleted: " + request.getParameter("scpid"));
+			//System.out.println("deleted cart-position: " + request.getParameter("scpid"));
 			response.sendRedirect(request.getContextPath() + "/cart");
 			return;
 		}
@@ -72,8 +88,16 @@ public class ShoppingCartServlet extends HttpServlet {
 	 */
 	private void deleteShoppingCartPosition(String scpid, HttpServletRequest request) throws ServletException, IOException 
 	{
-		User user = (User)request.getSession().getAttribute("currentUser");
 		ShoppingCart cart = (ShoppingCart)request.getSession().getAttribute("currentCart");
+		
+		/*
+		User user = (User)request.getSession().getAttribute("currentUser");
+		
+		if(user != null && cart != null)
+		{
+			user.shoppingcart = cart;
+		}
+
 		
 		if(user != null && user.shoppingcart != null && user.shoppingcart.cartPositions != null && user.shoppingcart.cartPositions.size() > 0)
 		{			
@@ -81,20 +105,22 @@ public class ShoppingCartServlet extends HttpServlet {
 			
 			if(scp != null)
 			{
+				System.out.print("Delete Article " + scp.article.acid + " from shoppingcart.");
 				user.shoppingcart.cartPositions.remove(scp);
-				//ShoppingCartService.UpdateShopping(user);
+				ShoppingCartService.UpdateShopping(user);
 				request.getSession().setAttribute("currentUser", user);
 				return;
 			}
 		}
-		else if(cart != null && cart.cartPositions.size() > 0)
+		else 
+		*/
+		if(cart != null && cart.cartPositions.size() > 0)
 		{
 			ShoppingCartPosition scp = cart.cartPositions.get(Integer.parseInt(scpid));
 			
 			if(scp != null)
 			{
 				cart.cartPositions.remove(scp);
-				//ShoppingCartService.UpdateShopping(user);
 				request.getSession().setAttribute("currentCart", cart);
 				return;
 			}
@@ -112,30 +138,42 @@ public class ShoppingCartServlet extends HttpServlet {
 	 */
 	private void changeSCPAmount(String scpid, int newamount,  HttpServletRequest request)throws ServletException, IOException 
 	{
-		User user = (User)request.getSession().getAttribute("currentUser");
+		//User user = (User)request.getSession().getAttribute("currentUser");
 		ShoppingCart cart = (ShoppingCart)request.getSession().getAttribute("currentCart");
+		
+		/* 
+		if(user != null && cart != null)
+		{
+			user.shoppingcart = cart;
+		}
+		*/	
 
 		try {
+				/*
 				if(user != null && user.shoppingcart != null && user.shoppingcart.cartPositions != null && user.shoppingcart.cartPositions.size() > 0)
 				{			
-					//if (newamount <= StockService.GetStock(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.versions.get(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.GetSelectedVersion())))
-					//{
+					if (newamount <= StockService.GetStock(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.versions.get(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.GetSelectedVersion())))
+					{
 						ShoppingCartPosition scp = user.shoppingcart.cartPositions.get(Integer.parseInt(scpid));
 						
 						if(scp != null)
 						{
+							System.out.print("Update Article " + scp.article.acid + " amount from " + scp.amount + " to " + newamount);
 							scp.amount = newamount;
-							//ShoppingCartService.UpdateShopping(user);
+							ShoppingCartService.UpdateShopping(user);
 							request.getSession().setAttribute("currentUser", user);
 							return;
 						}
-					//}
-					//else 
-					//{
-						//System.out.println("out of stock - amount is higher than stock value");
-					//} 
+					}
+					else 
+					{
+						System.out.println("out of stock - amount is higher than stock value");
+					} 
 				}	
-				else if (cart != null)
+				else 
+				*/
+				
+				if (cart != null)
 				{
 					ShoppingCartPosition scp = cart.cartPositions.get(Integer.parseInt(scpid));
 					if(scp != null)

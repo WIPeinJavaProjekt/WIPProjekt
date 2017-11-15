@@ -76,7 +76,7 @@
 				    <div class="div-align-bottom">
 					    <form class="pure-form" action="articleshopping" method="post">
 					    	<div class="pure-control-group">
-					            <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge">
+					            <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge" min="1">
 					        </div>
 							<%-- <label> Ausgewählte Version:</label><br>
 							<select required id="selectedVersion" name="selectedVersion" class="boxedinput" 

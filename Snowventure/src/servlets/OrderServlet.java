@@ -32,7 +32,7 @@ public class OrderServlet extends HttpServlet {
 			if(OrderID != "")
 			{
 				Order order = OrderService.GetSpecificOrder(Integer.parseInt(OrderID));
-				request.getSession().setAttribute("order", order);
+				request.getSession().setAttribute("currentOrder", order);
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/JSP/Orders/orderdetails.jsp");
 				rd.forward(request, response);

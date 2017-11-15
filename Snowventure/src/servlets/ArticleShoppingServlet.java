@@ -91,9 +91,30 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		ShoppingCartPosition cartPosition = null;
 		cartPosition = new ShoppingCartPosition(this.article, Integer.parseInt(request.getParameter("amount")),request.getParameter("size"),color);
 				
-		currentCart.cartPositions.add(cartPosition);		
+		
+		if(!checkforDouble(currentCart, cartPosition, Integer.parseInt(request.getParameter("amount"))))
+		{ currentCart.cartPositions.add(cartPosition); }
 		request.getSession().setAttribute("currentCart", currentCart);
 	}
 
-	
+	private boolean checkforDouble(ShoppingCart sc, ShoppingCartPosition scPos, int amount)
+	{
+		if(sc.cartPositions.size() > 0)
+		{
+			for(ShoppingCartPosition scp : sc.cartPositions)
+			{
+				if(		scp.article.ID == scPos.article.ID 
+						&& scp.article.GetSelectedVersion() == scPos.article.GetSelectedVersion() 
+						//&& scp.size.toString().equals(scPos.size.toString())
+						//&& scp.color.acolid == scPos.color.acolid
+						)
+				{
+					scp.amount += amount;
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
 }

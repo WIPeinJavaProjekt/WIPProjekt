@@ -48,6 +48,22 @@
     	color: green;
     }
     
+    #confirm {
+    	margin-bottom: 20px;
+    	float: right;
+    }
+    
+    #order-control-div {
+    	margin-bottom: 20px; 
+    	float: right;
+    }
+    
+    #order-button {
+    	width: 45%;
+    	margin-left: 5%;
+    	float: left;
+    }
+    
     </style>
     
 </head>
@@ -55,16 +71,16 @@
 	
 	<%@include file = "../Basic/header.jsp" %> 
 	
-	<div class="contentwrapp">
 		<div class="pure-u-1-8"></div>
 		
-		<c:if test="${ not empty currentUser && not empty selectedOrder }">	
+		<c:if test="${ not empty currentUser && not empty currentOrder }">	
 			<div class="pure-u-3-4">
 				<div class="pure-u-1-1">
 					<div class="pure-u-1-1"><h1>Bestelldetails</h1></div>
+					<c:if test="${ not empty currentOrder.statuscycle.get(0) }">
 					<div class="pure-u-3-4" id="orderdetails">
-						<div class="pure-u-1-1">Bestellt am ${ selectedOrder.statuscycle.get(0).statusdate }</div>
-						<div class="pure-u-1-1">Bestellnr. ${ selectedOrder.orid }</div>
+						<div class="pure-u-1-1">Bestellt am ${ currentOrder.statuscycle.get(0).statusdate }</div>
+						<div class="pure-u-1-1">Bestellnr. ${ currentOrder.orid }</div>
 					</div>
 					<div class="pure-u-1-4" id="orderdetails">
 						<center>
@@ -72,41 +88,43 @@
 								<b>Status: 
 								<c:choose>
 									<c:when test="${ currentUser.utid == '2' }">
-										<span id="orderstatus"> ${ selectedOrder.statuscycle.get(selectedOrder.statuscycle.size()-1).description }</span>
+										<span id="orderstatus"> ${ currentOrder.statuscycle.get(currentOrder.statuscycle.size()-1).description }</span>
 									</c:when>
 									<c:otherwise>
 										<select>
 											<c:forEach var="status" items="statuslist">
-												<option <c:if test ="${ selectedOrder.statuscycle.get(selectedOrder.statuscycle.size()-1).osid == status.osid }">selected</c:if>>${ status.description }</option>
+												<option <c:if test ="${ currentOrder.statuscycle.get(currentOrder.statuscycle.size()-1).osid == status.osid }">selected</c:if>>${ status.description }</option>
 											</c:forEach>
 										</select>
 									</c:otherwise>
 								</c:choose>
 								</b>
 							</h4>
-						</center></div>
+						</center>
+					</div>
+					</c:if>
 				</div>
 				<div class="pure-u-1-1" style="height: 20px;">
 				</div>
 				<div class="pure-u-1-1">
 					<div class="pure-u-3-4" id="orderdetails">
 							<div class="pure-u-1-1"><b>Versandadresse</b></div>
-							<div class="pure-u-1-1">${ selectedOrder.name + ' ' + selectedOrder.surname }</div>
-							<div class="pure-u-1-1">${ selectedOrder.adress.street + ' ' + selectedOrder.adress.houseno}</div>
-							<div class="pure-u-1-1">${ selectedOrder.adress.postcode + ' ' + selectedOrder.adress.location}</div>
+							<div class="pure-u-1-1">${ currentOrder.name + ' ' + currentOrder.surname }</div>
+							<div class="pure-u-1-1">${ currentOrder.adress.street + ' ' + currentOrder.adress.houseno}</div>
+							<div class="pure-u-1-1">${ currentOrder.adress.postcode + ' ' + currentOrder.adress.location}</div>
 					</div>
 					<div class="pure-u-1-4">
 							<div class="pure-u-1-1"><b>Bestellübersicht</b></div>
-							<div class="pure-u-2-5">Gesamtsumme</div><div class="pure-u-3-5" id="ordervalue">EUR ${ selectedOrder.shoppingCart.GetShoppingCartPrice() }</div>
+							<div class="pure-u-2-5">Gesamtsumme</div><div class="pure-u-3-5" id="ordervalue">EUR ${ currentOrder.shoppingCart.GetShoppingCartPrice() }</div>
 					</div>
 				</div>
 				<div class="pure-u-1-1" style="height: 20px;"></div>
-				<c:forEach items="${ selectedOrder.shoppingCart.cart }" var="position">			
+				<c:forEach items="${ currentOrder.shoppingCart.cart }" var="position">			
 				<div class="pure-g" id="orderitems-div">
 					<form id="orderitem">
 						 <div  id="scp-article-card">
 							<div class="pure-u-1-5" id="sc-aimg-container">
-								<img class="article-img" src="images/${ position.article.getArticleHeadPicture().getImageId()}" alt="Artikelbild">
+								<img class="article-img" src="images/${ position.article.GetAllVersions().get(article.GetSelectedVersion()).getArticleHeadPicture().GetImageId()}" alt="Artikelbild">
 							</div>
 					    	<div class="pure-u-1-4" id="scp-info-part">
 								<h4><b>${ position.article.GetName() }</b></h4>
@@ -125,12 +143,16 @@
 						</div>
 					</form>
 				</div>	
-				</c:forEach>		
+				</c:forEach>	
+				<div class="pure-u-1-2" id="order-control-div">
+					<input id="order-button" type="submit" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput">
+					<input id="order-button" type="submit" name="processOrder" value="Bestellung abschicken" class="pure-button pure-button-primary boxedinput">
+				</div>		
 			</div>	
 		</c:if>
 		
 		
-		<c:if test="${ empty selectedOrder }">
+		<c:if test="${ empty currentOrder }">
 			<div class="pure-u-3-4">
 				<div class="pure-u-1-1">
 					<div class="pure-u-1-1"><h1>Bestelldetails</h1></div>
@@ -177,11 +199,14 @@
 							<hr>
 						</div>
 					</form>
-				</div>			
+				</div>	
+				<div class="pure-u-1-2" id="order-control-div">
+					<input id="order-button" type="submit" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput">
+					<input id="order-button" type="submit" name="processOrder" value="Bestellung abschicken" class="pure-button pure-button-primary boxedinput">
+				</div>		
 			</div>
 		</c:if>
 		<div class="pure-u-1-8"></div>
-	</div>
 	
 	<%@include file = "../Basic/footer.jsp" %>
 </body>

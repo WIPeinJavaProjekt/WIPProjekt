@@ -22,3 +22,7 @@
 #scp-article-card{
 	width: 100%;
 }
+
+#articlelink {
+	cursor: pointer;
+}
