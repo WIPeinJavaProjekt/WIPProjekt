@@ -30,14 +30,14 @@
 		    <div class="pure-u-1-2">		    
     			<div class="w3-content w3-display-container w3slidmod articleslider" align="center">
     			
-    				<c:forEach items="${article.getArticlesPictures()}" var="ap">
+    				<c:forEach items="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures()}" var="ap">
 				   		<div class="w3-display-container mySlides ">
 							<div class="productCardimage">
 						   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.GetImageId()}" class="articlesearchimage"/>
 						   	</div>
 						</div>
 					</c:forEach>
-					<c:if test="${article.getArticlesPictures().size()>1}"> 
+					<c:if test="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures().size()>1}"> 
 						<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
 						<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
 					</c:if>
@@ -66,6 +66,10 @@
 			    <div>
 				    <h2>${article.GetName()}</h2>
 				    von <b>${article.GetManufacturer()}</b> <br>
+				    
+				    Größe:
+				    
+				    
 				    in der Farbe <i>${article.GetColor()}</i>
 				    <br>
 				    <h3>${article.GetPriceFormatted()} EUR</h3>
@@ -74,13 +78,13 @@
 					    	<div class="pure-control-group">
 					            <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge">
 					        </div>
-							<label> Ausgewählte Version:</label><br>
+							<%-- <label> Ausgewählte Version:</label><br>
 							<select required id="selectedVersion" name="selectedVersion" class="boxedinput" 
 							onchange="changeVersion(${article.GetId()}, 'articleshopping')">
 								<c:forEach items="${article.GetAllVersions()}" var="version">
 					        		<option value="${article.GetAllVersions().indexOf(version)}"<c:if test="${article.GetSelectedVersion()==article.GetAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>${article.GetAllVersions().indexOf(version)}</option>
 					    		</c:forEach>
-							</select>
+							</select> --%>
 					    	<button class="pure-button pure-button-primary boxedinput" type="submit" id="addToCart" name="addToCart">IN DEN WARENKORB</button>
 					    </form>
 				    </div>

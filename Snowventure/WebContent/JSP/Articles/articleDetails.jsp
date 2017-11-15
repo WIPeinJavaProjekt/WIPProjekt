@@ -139,7 +139,7 @@
 									</div>
 						        </div>
 						        <br>
-						        <div class="pure-control-group">
+						        <%-- <div class="pure-control-group">
 							        <div id="filter_size" class="dropdown"> 
 									    <div>
 										    <a href="javascript:void(0)">
@@ -164,7 +164,8 @@
 									        </div>
 									    </dd>
 									</div>
-						        </div>
+						        </div> --%>
+						        <%@include file = "../Basic/filterSize.jsp" %>
 						        <br>
 						        <script type="text/javascript" src="./JS/dropdown.js"></script>	
 						        <div class="pure-control-group">
