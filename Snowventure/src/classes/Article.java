@@ -12,6 +12,7 @@ public class Article {
 	public int acid =1;
 	public ArrayList<ArticleVersion> versions;
 	private int selectedversion;
+	public String gender;
 	
 	
 	public Article(){}
@@ -22,7 +23,7 @@ public class Article {
 		selectedversion = 0;
 	}
 	
-	public Article(int ID, String name, String description, int acid, String manufacturer)
+	public Article(int ID, String name, String description, int acid, String manufacturer, String gender)
 	{
 		this.ID = ID;
 		this.name = name;
@@ -31,6 +32,7 @@ public class Article {
 		selectedversion = 0;
 		this.acid = acid;
 		this.manufacturer = manufacturer;
+		this.gender = gender;
 	}
 	
 	public Article(String name, String description)

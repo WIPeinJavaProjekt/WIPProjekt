@@ -37,12 +37,13 @@ public class ArticleService {
 	public static int AddArticle(Article a) throws SQLException, IOException {
 		String query;
 		int aid = -1;
-		query = "INSERT INTO ARTICLE(name,description,acid,manufacturer) VALUES('%s','%s','%d','%s')";
+		query = "INSERT INTO ARTICLE(name,description,acid,manufacturer,gender) VALUES('%s','%s','%d','%s','%s')";
 		query = String.format(query,
 				a.name,
 				a.description,
 				a.acid,
-				a.manufacturer);
+				a.manufacturer,
+				a.gender);
 		System.out.println(query);
 		aid = DatabaseConnector.createConnection().InsertQuery(query);
 		a.ID = aid;
@@ -144,9 +145,9 @@ public class ArticleService {
 	public static void UpdateArticle(Article a) throws SQLException, IOException
 	{
 		String query;
-		query = "UPDATE ARTICLE SET name ='%s', description ='%s', manufacturer = '%s', acid = '%s' where aid ='%d'";
+		query = "UPDATE ARTICLE SET name ='%s', description ='%s', manufacturer = '%s', acid = '%s', gender = '%s' where aid ='%d'";
 		
-		query = String.format(query, a.name,a.description,a.ID,a.manufacturer,a.acid);
+		query = String.format(query, a.name,a.description,a.ID,a.manufacturer,a.gender,a.acid);
 		
 		System.out.println(query);
 		
@@ -250,13 +251,13 @@ public class ArticleService {
 	public static ArrayList<Article> GetAllArticles() throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
-		String query = "SELECT aid, name, description,acid,manufacturer FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0;";
+		String query = "SELECT aid, name, description,acid,manufacturer,gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0;";
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
 		{
-			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"),result.getInt("acid"),result.getString("manufacturer"));
+			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"),result.getInt("acid"),result.getString("manufacturer"),result.getString("gender"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
 			
 			articles.add(a);
@@ -275,13 +276,13 @@ public class ArticleService {
 	public static ArrayList<Article> GetAllArticlesByName(String namepattern) throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
-		String query = "SELECT aid, name, description, acid, manufacturer FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND name like '%"+namepattern+"%';";
+		String query = "SELECT aid, name, description, acid, manufacturer,gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND name like '%"+namepattern+"%';";
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
 		{
-			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description") ,result.getInt("acid"), result.getString("manufacturer"));
+			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description") ,result.getInt("acid"), result.getString("manufacturer"),result.getString("gender"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
 			articles.add(a);
 		}
@@ -301,14 +302,14 @@ public class ArticleService {
 	public static ArrayList<Article> GetAllArticlesByCategorie(int c, String pattern) throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
-		String query = "SELECT aid, name, description, acid, manufacturer FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND acid ='%d' AND name like '%"+pattern+"%';";
+		String query = "SELECT aid, name, description, acid, manufacturer, gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND acid ='%d' AND name like '%"+pattern+"%';";
 		query = String.format(query, c);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
 		{
-			Article a = new Article(result.getInt("aid"),result.getString("name"),result.getString("name"),result.getInt("acid"),result.getString("manufacturer"));
+			Article a = new Article(result.getInt("aid"),result.getString("name"),result.getString("name"),result.getInt("acid"),result.getString("manufacturer"),result.getString("gender"));
 			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
 			articles.add(a);
 		}
@@ -325,7 +326,7 @@ public class ArticleService {
 	 */
 	public static Article GetArticle(int id) throws SQLException, IOException{
 		Article article = new Article(-1);
-		String query = "SELECT aid, name, description, acid, manufacturer  FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid='%d';";
+		String query = "SELECT aid, name, description, acid, manufacturer,gender  FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid='%d';";
 		query = String.format(query, id);
 		
 //		System.out.println(query);
@@ -334,7 +335,7 @@ public class ArticleService {
 		
 		while(result.next())
 		{
-			article = new Article(result.getInt("aid"),result.getString("name"),result.getString("description"),result.getInt("acid"),result.getString("manufacturer"));
+			article = new Article(result.getInt("aid"),result.getString("name"),result.getString("description"),result.getInt("acid"),result.getString("manufacturer"),result.getString("gender"));
 			article.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(article).clone();
 		}
 		

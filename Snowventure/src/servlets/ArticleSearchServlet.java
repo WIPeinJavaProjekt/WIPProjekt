@@ -39,6 +39,8 @@ public class ArticleSearchServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println("");
+		
 		if(request.getParameter("search") != null) {	
 			
 			String searchPattern = request.getParameter("searchArticlePattern");
@@ -50,7 +52,9 @@ public class ArticleSearchServlet extends HttpServlet {
 			String[] manufacturers = request.getParameterValues("manufacturer");
 			String[] colors = request.getParameterValues("colors");
 			int category = Integer.parseInt(request.getParameter("categorie"));
-			findArticles(request, category,searchPattern,minprice,maxprice,sizes,manufacturers,colors);
+			String[] genders = request.getParameterValues("genders");
+			System.out.println("Searching articles");
+			findArticles(request, category,searchPattern,minprice,maxprice,sizes,manufacturers,colors,genders);
 			
 		}
 		
@@ -63,26 +67,35 @@ public class ArticleSearchServlet extends HttpServlet {
 	 * @param searchPattern Input search pattern to compare
 	 * @throws IOException 
 	 */
-	private void findArticles(HttpServletRequest request,int category ,String searchPattern, double minprice, double maxprice, String[] sizes, String[] manufacturers, String[] colors) throws IOException {
+	private void findArticles(HttpServletRequest request,int category ,String searchPattern, double minprice, double maxprice, String[] sizes, String[] manufacturers, String[] colors, String[] genders) throws IOException {
+		System.out.println("Searching articles-findarticles");
+		
 		ArrayList<Article> articles = null;
 		
 		try {
 			if(category ==-1) {
-				articles = ArticleService.GetAllArticlesByName(searchPattern);
+				articles = ArticleService.GetAllArticlesByName(searchPattern == null? "" : searchPattern);
 			}
 			else {
-				articles = ArticleService.GetAllArticlesByCategorie(category, searchPattern);
+				articles = ArticleService.GetAllArticlesByCategorie(category, searchPattern  == null? "" : searchPattern);
 			}
+			
+			if(manufacturers != null)
+				articles = (ArrayList<Article>) ArticleFilterService.FilterManufacturer(manufacturers, articles).clone();
+			
+			if(genders != null)
+				articles = (ArrayList<Article>) ArticleFilterService.FilterGender(genders, articles).clone();
+			
 			articles = (ArrayList<Article>) ArticleFilterService.FilterPrice(minprice, maxprice, articles).clone();
 			System.out.println("Artikelanzahl"+articles.size());
 			if(sizes != null)
 				articles = (ArrayList<Article>) ArticleFilterService.FilterSize(sizes, articles).clone();
 			
-			if(manufacturers != null)
-				articles = (ArrayList<Article>) ArticleFilterService.FilterManufacturer(manufacturers, articles).clone();
-			
+
 			if(colors != null)
 				articles = (ArrayList<Article>) ArticleFilterService.FilterColor(colors, articles).clone();
+			
+			
 			
 			Path currentRelativePath = Paths.get("");
 			request.getSession().setAttribute("imagePath", currentRelativePath.toAbsolutePath().toString() + "\\");

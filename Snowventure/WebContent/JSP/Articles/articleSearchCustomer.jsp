@@ -5,7 +5,7 @@
 		<div class="pure-u-1-5"></div>
 		<div id="wrapper" class="pure-u-3-5">
 			<div id="search-container" class="searchbox">
-				<form class="pure-form" action="start" method="post">
+				<form class="pure-form" action="articles" method="post">
 				    <fieldset>
 						<div class="pure-g" id="filters">
 					        <div class="pure-u-1-5">
@@ -107,6 +107,46 @@
 						        </div>
 						    </dd>
 						</div>
+						<div class="pure-control-group">									
+									<div id="filter_color" class="dropdown"> 
+									    <div>
+									    <a href="javascript:void(0)">
+									      <span class="hida"><u>Geschlecht</u></span>    
+									      <p class="multiSel"></p>  
+									    </a>
+									    </div>
+									  
+									    <dd>
+									        <div class="mutliSelect">
+									            <ul>						            
+										            	<li>
+									                        <label class="control control-checkbox">
+													        	Herren 
+													            <input type="checkbox" name="genders" value="Herren" />
+														        <div class="control_indicator"></div>
+														    </label>
+														</li>	
+														<li>
+									                        <label class="control control-checkbox">
+													        	Damen 
+													            <input type="checkbox" name="genders" value="Damen" />
+														        <div class="control_indicator"></div>
+														    </label>
+														</li>		
+														<li>
+									                        <label class="control control-checkbox">
+													        	Kinder 
+													            <input type="checkbox" name="genders" value="Kinder" />
+														        <div class="control_indicator"></div>
+														    </label>
+														</li>			            
+									            </ul>
+									        </div>
+									    </dd>
+									</div>
+						        </div>						        
+						
+						
 						<div style="clear:both;">
 						<br>
 						<u style="font-size: 16px;">Preis</u>

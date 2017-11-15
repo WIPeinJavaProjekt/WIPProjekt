@@ -1,5 +1,7 @@
 package services;
 import java.util.ArrayList;
+import java.io.*;
+
 
 import classes.*;
 
@@ -114,6 +116,30 @@ public class ArticleFilterService {
 		}
 		
 		return newarticles;		
+	}
+	
+	public static ArrayList<Article> FilterGender(String[] genders, ArrayList<Article> articles){
+		ArrayList<Article> newarticles = new ArrayList<Article>(articles);
+		
+		for(int i = 0; i < newarticles.size();  )
+		{
+			boolean contained= false;			
+			
+			for(int g=0; g < genders.length;g++)
+				if(newarticles.get(i).gender.indexOf(genders[g]) != -1)
+				{
+					contained = true;
+					break;
+				}
+					
+			if(!contained)
+				newarticles.remove(i);
+			else
+				i++;	
+		}
+		
+		
+		return newarticles;	
 	}
 	
 }

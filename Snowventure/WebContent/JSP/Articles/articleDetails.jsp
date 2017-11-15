@@ -139,6 +139,45 @@
 									</div>
 						        </div>
 						        <br>
+						        <div class="pure-control-group">									
+									<div id="filter_color" class="dropdown"> 
+									    <div>
+									    <a href="javascript:void(0)">
+									      <span class="hida"><u>Geschlecht</u></span>    
+									      <p class="multiSel"></p>  
+									    </a>
+									    </div>
+									  
+									    <dd>
+									        <div class="mutliSelect">
+									            <ul>						            
+										            	<li>
+									                        <label class="control control-checkbox">
+													        	Herren 
+													            <input type="checkbox" name="genders" value="Herren" />
+														        <div class="control_indicator"></div>
+														    </label>
+														</li>	
+														<li>
+									                        <label class="control control-checkbox">
+													        	Damen 
+													            <input type="checkbox" name="genders" value="Damen" />
+														        <div class="control_indicator"></div>
+														    </label>
+														</li>		
+														<li>
+									                        <label class="control control-checkbox">
+													        	Kinder 
+													            <input type="checkbox" name="genders" value="Kinder" />
+														        <div class="control_indicator"></div>
+														    </label>
+														</li>			            
+									            </ul>
+									        </div>
+									    </dd>
+									</div>
+						        </div>						        
+						        <br>
 						        <%-- <div class="pure-control-group">
 							        <div id="filter_size" class="dropdown"> 
 									    <div>
@@ -177,6 +216,7 @@
 						            		onclick="changeVersion(${article.GetId()}, 'article')" >Als neue Artikelversion speichern</button>
 					            	</c:if>
 						        </div>
+						        
 							</div>
 						</div>
 			        </fieldset>

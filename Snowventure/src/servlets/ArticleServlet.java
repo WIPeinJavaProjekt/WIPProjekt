@@ -197,11 +197,14 @@ public class ArticleServlet extends HttpServlet {
 	    for(int s= 0; s< sizes.length;s++) {
 			sizesArr.add(sizes[s]);
 		}
+
+	    String[] gender = request.getParameterValues("genders");
 	    
 	    this.articleVersion.colors = colorsArr;
 		this.articleVersion.sizes = sizesArr;
 		this.articleVersion.versionid = this.article.versions.get(this.article.GetSelectedVersion()).versionid;
 		this.article.manufacturer = request.getParameter("manufacturer");
+		this.article.gender = Arrays.toString(gender);
 		this.article.acid = Integer.parseInt(request.getParameter("categories"));
 		this.article.versions.set(this.article.GetSelectedVersion(), this.articleVersion);
 		
@@ -240,9 +243,14 @@ public class ArticleServlet extends HttpServlet {
 			sizesArr.add(sizes[s]);
 		}
 	    
+	    String[] gender = request.getParameterValues("genders");
+	    
+	    
+	    
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
 		this.article.manufacturer = request.getParameter("manufacturer");
 		this.article.acid = Integer.parseInt(request.getParameter("category"));
+		this.article.gender = Arrays.toString(gender);
 		
 		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
 				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, sizesArr, colorsArr);
