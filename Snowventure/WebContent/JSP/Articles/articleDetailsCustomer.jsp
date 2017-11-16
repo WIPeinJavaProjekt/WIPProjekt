@@ -80,7 +80,7 @@
 						    <c:forEach items="${article.GetAllVersions()}" var="av">
 						    	<div id="selectColor" name="selectColor" onclick="customerChangeVersion(${article.GetId()}, 'articleshopping', ${article.GetAllVersions().indexOf(article.getAvByVersionId(av.GetAvId()))})" class="pure-button pure-button-active" style="background-color:${av.getColors().get(0).GetHexcode()};">
 									<div class="pure-control-group">
-								   		<p><b>${av.getColorsAsString()}</b></p>
+								   		<p><font color="${av.getColors().get(0).getBackgroundHexcode()}"><b>${av.getColorsAsString()}</b></font></p>
 								   	</div>
 							   	</div>
 							</c:forEach>				    
