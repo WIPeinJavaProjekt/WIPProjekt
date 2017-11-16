@@ -50,4 +50,18 @@ public class ArticleVersion extends Article{
 		return this.pictures;
 	}
 	
+	public String getColorsAsString() {
+		String output = "";
+		for(int i=0; i < this.colors.size(); i++) {
+			output += this.colors.get(i).GetColorName();
+			if(i<this.colors.size()-1) {
+				output += " / ";
+			}
+		}
+		return output;
+	}
+	
+	public ArrayList<ArticleColor> getColors() {
+		return this.colors;
+	}
 }

@@ -85,7 +85,9 @@ public class ArticleServlet extends HttpServlet {
 				
 		if(request.getParameter("addArticle") != null) {
 			try {
-				addArticle(request);
+				int ret = addArticle(request);
+				response.sendRedirect("article?ID=" + ret + "&version=0");
+				return;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -101,6 +103,8 @@ public class ArticleServlet extends HttpServlet {
 		} else if(request.getParameter("addArticleVersion") != null) {
 			try {
 				addArticleVersion(request);
+				response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.GetSelectedVersion());
+				return;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -220,7 +224,7 @@ public class ArticleServlet extends HttpServlet {
 	 * @throws SQLException 
 	 * @throws ServletException 
 	 */
-	private void addArticle(HttpServletRequest request) throws SQLException, IOException, ServletException {
+	private int addArticle(HttpServletRequest request) throws SQLException, IOException, ServletException {
 		
 		Part filePart = request.getPart("articleImage");
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
@@ -266,6 +270,8 @@ public class ArticleServlet extends HttpServlet {
 			this.article = null;
 			request.setAttribute("successArticle", "Artikel wurde erfolgreich hinzugefügt");
 		}
+		
+		return ret;
 	}
 
 }

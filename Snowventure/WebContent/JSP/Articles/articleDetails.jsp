@@ -64,7 +64,7 @@
 						            <input  class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
 						        </div>
 						        <div class="pure-control-group">
-						        <select name="category" class="boxedinput">
+						        	<select name="category" class="boxedinput">
 								        <c:forEach items="${categories}" var="categories">
 							        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
 							    		</c:forEach>
@@ -112,98 +112,10 @@
 						            <input class="boxedinput" id="propertyValue" name="propertyValue" value="${article.GetPropertyValue()}" type="text" placeholder="Wert der Eigenschaft">
 						        </div>
 						        <br>
-						        <div class="pure-control-group">									
-									<div id="filter_color" class="dropdown"> 
-									    <div>
-									    <a href="javascript:void(0)">
-									      <span class="hida"><u>Farbe</u></span>    
-									      <p class="multiSel"></p>  
-									    </a>
-									    </div>
-									  
-									    <dd>
-									        <div class="mutliSelect">
-									            <ul>						            
-										            <c:forEach items="${articleColors}" var="color">
-										            	<li>
-									                        <label class="control control-checkbox">
-													        	<div class="checkbox-colorbox" style="background-color:${color.GetHexcode()} !important;"></div> ${color.GetColorName()} 
-													            <input type="checkbox" name="color" value="${color.GetAcolid()}" />
-														        <div class="control_indicator"></div>
-														    </label>
-														</li>
-										            </c:forEach>			            
-									            </ul>
-									        </div>
-									    </dd>
-									</div>
-						        </div>
+						        <%@include file = "../Basic/filterColor.jsp" %>
 						        <br>
-						        <div class="pure-control-group">									
-									<div id="filter_color" class="dropdown"> 
-									    <div>
-									    <a href="javascript:void(0)">
-									      <span class="hida"><u>Geschlecht</u></span>    
-									      <p class="multiSel"></p>  
-									    </a>
-									    </div>
-									  
-									    <dd>
-									        <div class="mutliSelect">
-									            <ul>						            
-										            	<li>
-									                        <label class="control control-checkbox">
-													        	Herren 
-													            <input type="checkbox" name="genders" value="Herren" />
-														        <div class="control_indicator"></div>
-														    </label>
-														</li>	
-														<li>
-									                        <label class="control control-checkbox">
-													        	Damen 
-													            <input type="checkbox" name="genders" value="Damen" />
-														        <div class="control_indicator"></div>
-														    </label>
-														</li>		
-														<li>
-									                        <label class="control control-checkbox">
-													        	Kinder 
-													            <input type="checkbox" name="genders" value="Kinder" />
-														        <div class="control_indicator"></div>
-														    </label>
-														</li>			            
-									            </ul>
-									        </div>
-									    </dd>
-									</div>
-						        </div>						        
+						        <%@include file = "../Basic/filterGender.jsp" %>				        
 						        <br>
-						        <%-- <div class="pure-control-group">
-							        <div id="filter_size" class="dropdown"> 
-									    <div>
-										    <a href="javascript:void(0)">
-										      <span class="hida"><u>Größe</u></span>    
-										      <p class="multiSel"></p>  
-										    </a>
-									    </div>
-									  
-									    <dd>
-									        <div class="mutliSelect">
-									            <ul>
-									            	<c:forEach items="${availableSizes}" var="size">
-										            	<li>
-									                        <label class="control control-checkbox">
-														        ${size}
-													            <input type="checkbox" name="size" value="${size}" />
-														        <div class="control_indicator"></div>
-														    </label>
-														 </li>
-										            </c:forEach>  
-									            </ul>
-									        </div>
-									    </dd>
-									</div>
-						        </div> --%>
 						        <%@include file = "../Basic/filterSize.jsp" %>
 						        <br>
 						        <script type="text/javascript" src="./JS/dropdown.js"></script>	

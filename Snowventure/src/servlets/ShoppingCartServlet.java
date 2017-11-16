@@ -38,7 +38,7 @@ public class ShoppingCartServlet extends HttpServlet {
 		}
 		
 		for(ShoppingCartPosition scp: currentCart.cartPositions) {
-			System.out.println("WARENKORB Artikel: " + scp.article.GetName() + " Amount: " + scp.amount);
+			System.out.println("WARENKORB Artikel: " + scp.article.GetName() + " Amount: " + scp.amount + " Size: " + scp.size);
 		}
 		
 		/*

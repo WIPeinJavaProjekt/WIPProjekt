@@ -68,11 +68,21 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		if(request.getParameter("addToCart") != null) {
 			try {
 				addArticleToCart(request, response);
+				response.sendRedirect("articles");
+				return;
 			} catch (NumberFormatException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 //			response.sendRedirect("articles");
+		} else if(request.getParameter("selectedSize") != null) {
+			String selectedSize = request.getParameter("selectedSize");
+			request.getSession().setAttribute("selectedSize", selectedSize);
+			System.out.println(selectedSize);
+			response.sendRedirect("articleshopping?ID=" + this.article.ID + "&version=" + this.article.GetSelectedVersion());
+			return;
+		} else if(request.getParameter("selectColor") != null) {
+			
+			return;
 		}
 		
 		doGet(request, response);
@@ -87,9 +97,11 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		ArticleColor color = null;		
 		if(request.getParameter("color") != null)
 		color = ArticleColorService.GetSpecificColor(Integer.parseInt(request.getParameter("color")));
+		
+		System.out.println("Selected size: " + request.getParameter("selectedSize"));
 				
 		ShoppingCartPosition cartPosition = null;
-		cartPosition = new ShoppingCartPosition(this.article, Integer.parseInt(request.getParameter("amount")),request.getParameter("size"),color);
+		cartPosition = new ShoppingCartPosition(this.article, Integer.parseInt(request.getParameter("amount")), request.getParameter("selectedSize"), color);
 				
 		
 		if(!checkforDouble(currentCart, cartPosition, Integer.parseInt(request.getParameter("amount"))))
@@ -103,6 +115,7 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		{
 			for(ShoppingCartPosition scp : sc.cartPositions)
 			{
+				System.out.println(scp.article.GetSelectedVersion() == scPos.article.GetSelectedVersion());
 				if(		scp.article.ID == scPos.article.ID 
 						&& scp.article.GetSelectedVersion() == scPos.article.GetSelectedVersion() 
 						//&& scp.size.toString().equals(scPos.size.toString())

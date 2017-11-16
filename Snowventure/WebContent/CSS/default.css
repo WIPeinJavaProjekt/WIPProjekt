@@ -486,8 +486,8 @@ overflow:scroll;
 
 
 .div-align-bottom{
-	 height: 261.824px;
-  display: flex;	
+	 /* height: 261.824px; */
+  	display: flex;	
 }
 .div-align-bottom form{
 	align-self: flex-end;

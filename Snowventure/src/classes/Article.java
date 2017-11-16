@@ -1,7 +1,10 @@
 package classes;
 
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import services.ArticleSizesService;
 
 public class Article {
 
@@ -79,6 +82,15 @@ public class Article {
 		return versions.get(selectedversion).sizes;
 	}
 	
+	public ArrayList<String> getAllSizesFromArticle(){
+		try {
+			return ArticleSizesService.GetAllSizesFromArticle(this.ID);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public String GetProperty() {
 		return versions.get(selectedversion).property;
 	}
@@ -105,6 +117,15 @@ public class Article {
 	
 	public String GetDescription() {
 		return this.description;
+	}
+	
+	public ArticleVersion getAvByVersionId(int inputId) {
+		for(ArticleVersion av: versions) {
+			if(inputId == av.versionid) {
+				return av;
+			}
+		}
+		return null;
 	}
 	
 }

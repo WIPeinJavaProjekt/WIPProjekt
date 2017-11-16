@@ -94,9 +94,11 @@ public class ArticleService {
 		
 		for(ArticlePicture pic: av.pictures)
 		{
-			dummy = AddPictureToArticleVersion(pic, av.versionid);
-			if(dummy == -1)
-				return dummy;
+			if(pic != null) {
+				dummy = AddPictureToArticleVersion(pic, av.versionid);
+				if(dummy == -1)
+					return dummy;
+			}
 		}
 		
 		return avid;
