@@ -211,11 +211,14 @@ public class ArticleService {
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
-	public static ArrayList<ArticleVersion> GetAllArticleVersion(Article a) throws SQLException, IOException {
+	public static ArrayList<ArticleVersion> GetAllArticleVersion(Article a, int piclimit, int versionlimit) throws SQLException, IOException {
 		ArrayList<ArticleVersion> av = new ArrayList<ArticleVersion>();
 		
 		String query ="SELECT  avid,property,propertyvalue, defaultprice FROM ARTICLEVERSION WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid ='%d'";
 		query = String.format(query, a.ID);
+		
+		if(versionlimit >0)
+			query +=" limit "+ versionlimit;
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
@@ -223,7 +226,7 @@ public class ArticleService {
 		{
 			ArrayList<String> sizes = new ArrayList<String>(GetAllArticleVersionsize(result.getInt("avid")));
 			ArticleVersion version = new ArticleVersion(result.getInt("avid"),result.getString("property"),result.getString("propertyvalue"),result.getDouble("defaultprice"),a,sizes,ArticleColorService.GetSpecificColors(result.getInt("avid")));
-			version.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleVersionId(version.versionid).clone();
+			version.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleVersionId(version.versionid,piclimit).clone();
 			av.add(version);
 		}
 		
@@ -249,21 +252,11 @@ public class ArticleService {
 	 * @throws IOException 
 	 */
 	public static ArrayList<Article> GetAllArticles() throws SQLException, IOException{
-		ArrayList<Article> articles = new ArrayList<Article>();
-		
+
 		String query = "SELECT aid, name, description,acid,manufacturer,gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0;";
 		
-		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
-		while(result.next())
-		{
-			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description"),result.getInt("acid"),result.getString("manufacturer"),result.getString("gender"));
-			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
-			
-			articles.add(a);
-		}
-		
-		return articles;
+		return SearchForArticles(query,1,0);
 	}
 	
 	/**
@@ -273,25 +266,14 @@ public class ArticleService {
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
-	public static ArrayList<Article> GetAllArticlesByName(String namepattern) throws SQLException, IOException{
-		ArrayList<Article> articles = new ArrayList<Article>();
-		
+	public static ArrayList<Article> GetAllArticlesByName(String namepattern, int piclimit, int versionlimit) throws SQLException, IOException{
+
 		String query = "SELECT aid, name, description, acid, manufacturer,gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND name like '%"+namepattern+"%';";
 		
-		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
-		
-		while(result.next())
-		{
-			Article a = new Article(result.getInt("aid"), result.getString("name"), result.getString("description") ,result.getInt("acid"), result.getString("manufacturer"),result.getString("gender"));
-			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
-			articles.add(a);
-		}
-		
-		return articles;
+		return SearchForArticles(query,piclimit,versionlimit);
 	}
 	
-	//Categorie nicht im Artikel enthalten da keine Relevanz f�r weitere Verarbeitung verkomplizierung f�r Bestellungen etc | Was passiert wenn sich Kategorie �ndert? z.B. durch Umstruktuierung usw.
-	
+
 	/**
 	 * Method for Getting all Articles with specific categorie
 	 * @param c specific categories
@@ -299,23 +281,82 @@ public class ArticleService {
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
-	public static ArrayList<Article> GetAllArticlesByCategorie(int c, String pattern) throws SQLException, IOException{
-		ArrayList<Article> articles = new ArrayList<Article>();
-		
+	public static ArrayList<Article> GetAllArticlesByCategorie(int c, String pattern, int piclimit, int versionlimit) throws SQLException, IOException{
+
 		String query = "SELECT aid, name, description, acid, manufacturer, gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND acid ='%d' AND name like '%"+pattern+"%';";
 		query = String.format(query, c);
 		
+		
+		
+		return SearchForArticles(query,piclimit,versionlimit);
+	}
+	
+	
+	public static ArrayList<Article> GetAllArticlesByFilter(int c, String pattern, int piclimit, int versionlimit, String gender, String manufacturer, double minprice, double maxprice, String color, String size) throws SQLException, IOException{
+
+		
+		String query = "SELECT aid, name, description, acid, manufacturer, gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0";
+		if(c != -1)
+			query +=" AND acid="+ c;		
+		if(manufacturer != "")
+			query +=" AND INSTR('"+manufacturer+"',manufacturer)";
+		if(gender != "")
+			query +=" AND INSTR('"+gender+"',gender)";
+		
+		String subquery="";
+		if(minprice >0)
+			subquery=" AND AID IN(SELECT distinct aid from ARTICLEVERSION where defaultprice >="+minprice+"";
+		if(maxprice >0 && subquery!= "")
+			subquery+= " and defaultprice <="+maxprice+"";
+		else if(maxprice >0)
+		{
+			subquery=" AND AID IN(SELECT distinct aid from ARTICLEVERSION where defaultprice <="+maxprice+"";
+		}
+		if(subquery!="")
+		subquery +=")";
+		
+		query+= subquery;
+		
+		
+		subquery="";
+		if(color != "")
+			subquery=" AND AID IN(SELECT aid FROM ARTICLEVERSION_TO_COLOR s LEFT OUTER JOIN ARTICLEVERSION v ON s.avid = v.avid WHERE INSTR('"+color+"',acolid))";
+		query+= subquery;
+		
+		subquery="";
+		if(size != "")
+			subquery=" AND AID IN(SELECT aid FROM ARTICLEVERSIONSIZE s LEFT OUTER JOIN ARTICLEVERSION v ON  s.avid = v.avid WHERE INSTR('"+size+"',size))";
+		query+= subquery;
+		
+		
+		
+		
+		
+		System.out.println("Filter: "+subquery);
+		System.out.println("Filter: "+query);
+		
+		
+		return SearchForArticles(query,piclimit,versionlimit);
+	}
+	
+	
+	private static ArrayList<Article> SearchForArticles(String query, int piclimit, int versionlimit) throws SQLException, IOException{
+		ArrayList<Article> articles = new ArrayList<Article>();
+
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
 		{
 			Article a = new Article(result.getInt("aid"),result.getString("name"),result.getString("name"),result.getInt("acid"),result.getString("manufacturer"),result.getString("gender"));
-			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a).clone();
+			a.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(a, piclimit, versionlimit).clone();
 			articles.add(a);
 		}
 		
 		return articles;
+		
 	}
+	
+	
 	
 	/**
 	 * Method for getting a specific Article by its id
@@ -336,7 +377,7 @@ public class ArticleService {
 		while(result.next())
 		{
 			article = new Article(result.getInt("aid"),result.getString("name"),result.getString("description"),result.getInt("acid"),result.getString("manufacturer"),result.getString("gender"));
-			article.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(article).clone();
+			article.versions = (ArrayList<ArticleVersion>)GetAllArticleVersion(article,-1,-1).clone();
 		}
 		
 		return article;
@@ -412,12 +453,18 @@ public class ArticleService {
 	 * @throws IOException
 	 * @throws SQLException
 	 */
-	public static ArrayList<ArticlePicture> GetPicturesFromArticleVersionId(int avid) throws IOException, SQLException{
+	public static ArrayList<ArticlePicture> GetPicturesFromArticleVersionId(int avid, int piclimit) throws IOException, SQLException{
 		ArrayList<ArticlePicture> pictures = new ArrayList<ArticlePicture>();
 		
-		String query = "SELECT aimgid,name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND avid ='%d';";
-		query = String.format(query, avid);
 		
+		
+		String query = "SELECT aimgid,name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND avid ='%d'";
+		
+		if(piclimit >0)
+			query += " LIMIT "+piclimit;
+		
+		query = String.format(query, avid,piclimit);
+		System.out.print(query);
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())

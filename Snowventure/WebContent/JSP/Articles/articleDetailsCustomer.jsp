@@ -27,13 +27,13 @@
 		<%@include file = "../Basic/header.jsp" %> 
 	
 		<div class="pure-g articledescriptioncontainer">
-		    <div class="pure-u-1-2">		    
+		    <div class="pure-u-4-5">		    
     			<div class="w3-content w3-display-container w3slidmod articleslider" align="center">
     			
     				<c:forEach items="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures()}" var="ap">
 				   		<div class="w3-display-container mySlides ">
-							<div class="productCardimage">
-						   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.GetImageId()}" class="articlesearchimage"/>
+							<div class="productCardimage detailsearchimage">
+						   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.GetImageId()}" class="articledetailimage"/>
 						   	</div>
 						</div>
 					</c:forEach>
@@ -62,7 +62,7 @@
 					}
 				</script>		    
 		    </div>
-		    <div class="pure-u-1-2">
+		    <div class="pure-u-1-5">
 			    <div>
 				    <h2>${article.GetName()}</h2>
 				    von <b>${article.GetManufacturer()}</b> <br>

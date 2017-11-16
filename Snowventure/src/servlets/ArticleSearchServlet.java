@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
@@ -73,29 +74,26 @@ public class ArticleSearchServlet extends HttpServlet {
 		ArrayList<Article> articles = null;
 		
 		try {
-			if(category ==-1) {
-				articles = ArticleService.GetAllArticlesByName(searchPattern == null? "" : searchPattern);
-			}
-			else {
-				articles = ArticleService.GetAllArticlesByCategorie(category, searchPattern  == null? "" : searchPattern);
-			}
+			
+			String mf="";
+			String gen="";
+			String col="";
+			String si ="";
+			
+			
 			
 			if(manufacturers != null)
-				articles = (ArrayList<Article>) ArticleFilterService.FilterManufacturer(manufacturers, articles).clone();
-			
+				 mf = Arrays.toString(manufacturers);
 			if(genders != null)
-				articles = (ArrayList<Article>) ArticleFilterService.FilterGender(genders, articles).clone();
-			
-			articles = (ArrayList<Article>) ArticleFilterService.FilterPrice(minprice, maxprice, articles).clone();
-			System.out.println("Artikelanzahl"+articles.size());
+				gen = Arrays.toString(genders);
 			if(sizes != null)
-				articles = (ArrayList<Article>) ArticleFilterService.FilterSize(sizes, articles).clone();
+				si = Arrays.toString(sizes);
+			if(colors != null)
+				col = Arrays.toString(colors);
+			
+			articles = ArticleService.GetAllArticlesByFilter(category,searchPattern == null? "" : searchPattern,1,1,gen,mf,minprice,maxprice,col,si);
 			
 
-			if(colors != null)
-				articles = (ArrayList<Article>) ArticleFilterService.FilterColor(colors, articles).clone();
-			
-			
 			
 			Path currentRelativePath = Paths.get("");
 			request.getSession().setAttribute("imagePath", currentRelativePath.toAbsolutePath().toString() + "\\");

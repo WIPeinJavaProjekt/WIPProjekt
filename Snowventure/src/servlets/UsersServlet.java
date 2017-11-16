@@ -137,7 +137,7 @@ public class UsersServlet extends HttpServlet {
 		ArrayList<Article> articles = null;
 		
 		try {
-			articles = ArticleService.GetAllArticlesByName(searchArticlePattern);
+			articles = ArticleService.GetAllArticlesByName(searchArticlePattern,1,0);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -136,10 +136,10 @@ public class StartServlet extends HttpServlet {
 		
 		try {
 			if(category ==-1) {
-				articles = ArticleService.GetAllArticlesByName(searchPattern);
+				articles = ArticleService.GetAllArticlesByName(searchPattern,1,1);
 			}
 			else {
-				articles = ArticleService.GetAllArticlesByCategorie(category, searchPattern);
+				articles = ArticleService.GetAllArticlesByCategorie(category, searchPattern,1,1);
 			}
 			
 			Path currentRelativePath = Paths.get("");

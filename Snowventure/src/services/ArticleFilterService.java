@@ -7,35 +7,12 @@ import classes.*;
 
 /**
  *  Modelclass for Filtering Articlelists
- *
+ *  Obsolet auf Grund von verbesserten SELECT  
  */
 public class ArticleFilterService {
 
-	public static ArrayList<Article> FilterManufacturer(String[] manufactures, ArrayList<Article> articles){
-		ArrayList<Article> newarticles = new ArrayList<Article>(articles);
-		
-		for(int i = 0; i < newarticles.size();  )
-		{
-			boolean contained= false;
-			for(int h = 0; h < manufactures.length;h++)
-			{
-				System.out.println("Vergleiche: "+newarticles.get(i).manufacturer +" mit "+manufactures[h] );
-				if(newarticles.get(i).manufacturer.equals(manufactures[h]))
-				{
-					contained = true;
-					break;
-				}
-			}
-			System.out.println("Vergleich ist:"+contained);
-			if(!contained)
-				newarticles.remove(i);
-			else
-				i++;
-		}
-		
-		return newarticles;
-	}
 	
+
 	
 	public static ArrayList<Article> FilterColor(String[] color, ArrayList<Article> articles){
 		ArrayList<Article> newarticles = new ArrayList<Article>(articles);
@@ -60,8 +37,7 @@ public class ArticleFilterService {
 		}
 		return newarticles;
 	}
-	
-	
+
 	public static ArrayList<Article> FilterSize(String[] size, ArrayList<Article> articles){
 		ArrayList<Article> newarticles = new ArrayList<Article>(articles);
 		
@@ -141,5 +117,33 @@ public class ArticleFilterService {
 		
 		return newarticles;	
 	}
+	
+	public static ArrayList<Article> FilterManufacturer(String[] manufactures, ArrayList<Article> articles){
+		ArrayList<Article> newarticles = new ArrayList<Article>(articles);
+		
+		for(int i = 0; i < newarticles.size();  )
+		{
+			boolean contained= false;
+			for(int h = 0; h < manufactures.length;h++)
+			{
+				System.out.println("Vergleiche: "+newarticles.get(i).manufacturer +" mit "+manufactures[h] );
+				if(newarticles.get(i).manufacturer.equals(manufactures[h]))
+				{
+					contained = true;
+					break;
+				}
+			}
+			System.out.println("Vergleich ist:"+contained);
+			if(!contained)
+				newarticles.remove(i);
+			else
+				i++;
+		}
+		
+		return newarticles;
+	}
+	
+	
+	
 	
 }

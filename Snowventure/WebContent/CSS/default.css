@@ -380,12 +380,18 @@ overflow:scroll;
 }
 
 .productCardimage{
-	height:360px;
-	width:328px;
+
 	background-color:rgb(45,45,45);
 	margin: 16px 16px 0px 16px;
 	text-align: center;
 }
+
+.detailsearchimage{
+	height:720px;
+	width:656px;
+}
+
+
 .articlesearchimage {
 	max-height: 360px;
 	max-width: 328px;
@@ -393,6 +399,16 @@ overflow:scroll;
 	  vertical-align: middle;
 	  margin: 0 !Important;
 }
+
+
+.articledetailimage{
+	max-height: 720px;
+	max-width: 656px;
+	  vertical-align: middle;
+	  margin: 0 !Important;
+}
+
+
 .articleimagehelper {
 	    display: inline-block;
     height: 100%;
@@ -483,9 +499,7 @@ overflow:scroll;
 	margin-right:auto;
 }
 
-.articleslider {
-	height:360px;
-}
+
 
 
 

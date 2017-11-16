@@ -29,20 +29,20 @@ $(document).bind('click', function(e) {
   if (!$clicked.parents().hasClass("dropdown")) $(".dropdown div ul").hide();
 });
 
-$('.mutliSelect input[type="checkbox"]').on('click', function() {
-  var  title = $(this).val() + ",";
-  console.log("Title: "+title);
+/*$('.mutliSelect input[type="checkbox"]').on('click', function() {
+  //var  title = $(this).val() + ",";
+  //console.log("Title: "+title);
   
   if ($(this).is(':checked')) {
-    var html = '<span title="' + title + '">' + title + '</span>';
-    $(this).parent().parent().parent().parent().parent().parent().find('a .multiSel').append(html);
+  //  var html = '<span title="' + title + '">' + title + '</span>';
+  //  $(this).parent().parent().parent().parent().parent().parent().find('a .multiSel').append(html);
     
   } else {
-    $('span[title="' + title + '"]').remove();
+  //  $('span[title="' + title + '"]').remove();
     
 
   }
-});
+});*/
 
 
 (function($) {
