@@ -47,8 +47,8 @@
 						    	<div class="pure-u-1-4" id="scp-info-part">
 									<h4 id="articlelink" onclick="location.href='./articleshopping?ID=${ position.article.GetId() }&version=${ position.article.GetSelectedVersion()}';"><b>${ position.article.GetName() } von ${ position.article.GetManufacturer()}</b></h4>
 									<hr size="5">
-									<p>Farbe: ${ position.color.GetColorName() }</p>
-									<p>Variante: ${ position.getSize() }</p>
+									<p>Farbe: ${ position.getArticle().GetAllVersions().get(position.getArticle().GetSelectedVersion()).getColorsAsString() }</p>
+									<p>Größe: ${ position.getSize() }</p>
 								</div>
 								<div class="pure-u-1-4" id="scp-info-part">
 									<p><b>Preis</b></p>

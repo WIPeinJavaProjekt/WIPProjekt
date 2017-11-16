@@ -23,4 +23,11 @@ public class ArticleColor {
 	public String GetHexcode() {
 		return this.hexcode;
 	}
+	
+	public String getBackgroundHexcode() {
+		if(this.hexcode == "#000" || this.hexcode == "#00f") {
+			return "#fff";
+		}
+		return "#000";
+	}
 }

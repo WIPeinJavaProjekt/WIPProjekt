@@ -64,30 +64,37 @@
 		    </div>
 		    <div class="pure-u-1-2">
 			    <div>
-				    <h2>${article.GetName()}</h2>
-				    von <b>${article.GetManufacturer()}</b> <br>
-				    
-				    Größe:
-				    
-				    
-				    in der Farbe <i>${article.GetColor()}</i>
-				    <br>
-				    <h3>${article.GetPriceFormatted()} EUR</h3>
-				    <div class="div-align-bottom">
-					    <form class="pure-form" action="articleshopping" method="post">
-					    	<div class="pure-control-group">
-					            <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge" min="1">
-					        </div>
-							<%-- <label> Ausgewählte Version:</label><br>
-							<select required id="selectedVersion" name="selectedVersion" class="boxedinput" 
-							onchange="changeVersion(${article.GetId()}, 'articleshopping')">
-								<c:forEach items="${article.GetAllVersions()}" var="version">
-					        		<option value="${article.GetAllVersions().indexOf(version)}"<c:if test="${article.GetSelectedVersion()==article.GetAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>${article.GetAllVersions().indexOf(version)}</option>
-					    		</c:forEach>
-							</select> --%>
-					    	<button class="pure-button pure-button-primary boxedinput" type="submit" id="addToCart" name="addToCart">IN DEN WARENKORB</button>
-					    </form>
-				    </div>
+			    	<form class="pure-form" action="articleshopping" method="post">
+					    <h2>${article.GetName()}</h2>
+					    von <b>${article.GetManufacturer()}</b> <br>
+					    
+						    <div class="pure-control-group pure-form">
+							    <select id="selectedSize" name="selectedSize">
+							    	<option value="">Größe auswählen</option>
+							        <c:forEach items="${article.getAllSizesFromArticle()}" var="size">
+						        		<option value="${size}"<c:if test="${selectedSize==size}"><c:out value="selected"/></c:if>>${size}</option>
+						    		</c:forEach>
+								</select>
+							</div>
+					    <br>
+						    <c:forEach items="${article.GetAllVersions()}" var="av">
+						    	<div id="selectColor" name="selectColor" onclick="customerChangeVersion(${article.GetId()}, 'articleshopping', ${article.GetAllVersions().indexOf(article.getAvByVersionId(av.GetAvId()))})" class="pure-button pure-button-active" style="background-color:${av.getColors().get(0).GetHexcode()};">
+									<div class="pure-control-group">
+								   		<p><b>${av.getColorsAsString()}</b></p>
+								   	</div>
+							   	</div>
+							</c:forEach>				    
+					    <br>
+					    <h3>${article.GetPriceFormatted()} EUR</h3>
+					    <div class="div-align-bottom">
+						    	<div class="pure-control-group">
+						            <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge" min="1">
+						        </div>
+						        <div class="pure-control-group">
+						    		<button class="pure-button pure-button-primary boxedinput" type="submit" id="addToCart" name="addToCart">IN DEN WARENKORB</button>
+					    		</div>
+					    </div>
+				    </form>
 			    </div>    
 		    </div>
 		</div>
