@@ -466,7 +466,6 @@ public class ArticleService {
 			query += " LIMIT "+piclimit;
 		
 		query = String.format(query, avid,piclimit);
-		System.out.print(query);
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())

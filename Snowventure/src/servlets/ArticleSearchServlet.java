@@ -40,8 +40,6 @@ public class ArticleSearchServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("");
-		
 		if(request.getParameter("search") != null) {	
 			
 			String searchPattern = request.getParameter("searchArticlePattern");
@@ -54,7 +52,6 @@ public class ArticleSearchServlet extends HttpServlet {
 			String[] colors = request.getParameterValues("colors");
 			int category = Integer.parseInt(request.getParameter("categorie"));
 			String[] genders = request.getParameterValues("genders");
-			System.out.println("Searching articles");
 			findArticles(request, category,searchPattern,minprice,maxprice,sizes,manufacturers,colors,genders);
 			
 		}
@@ -92,8 +89,6 @@ public class ArticleSearchServlet extends HttpServlet {
 				col = Arrays.toString(colors);
 			
 			articles = ArticleService.GetAllArticlesByFilter(category,searchPattern == null? "" : searchPattern,1,1,gen,mf,minprice,maxprice,col,si);
-			
-
 			
 			Path currentRelativePath = Paths.get("");
 			request.getSession().setAttribute("imagePath", currentRelativePath.toAbsolutePath().toString() + "\\");

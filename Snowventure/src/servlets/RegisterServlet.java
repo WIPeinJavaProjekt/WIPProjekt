@@ -73,9 +73,6 @@ public class RegisterServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		System.out.println(request.getParameter("back"));
-		System.out.println(request.getParameter("submitRegister"));
-		
 		if(request.getParameter("back") != null) {
 			
 			response.sendRedirect("login");
@@ -123,31 +120,27 @@ public class RegisterServlet extends HttpServlet {
 		this.user = new User(this.sfQuestion, request.getParameter("username"), request.getParameter("password"), request.getParameter("name"),
 				request.getParameter("surname"), this.adress, request.getParameter("email"), usertype == null ? 2 : usertype.toString().equals("admin")? 1 : usertype.toString().equals("employee")? 3 : 2);
 		
-		if(password.equals(passwordRepeat)) {
-				
-			System.out.println(this.user.name);
-			System.out.println(this.user.surname);
-			System.out.println(this.user.email);
-			System.out.println(this.user.adress.postcode);
-			System.out.println(this.user.adress.street);
-			System.out.println(this.user.adress.houseno);
-			System.out.println(this.user.adress.location);
-			System.out.println(this.user.utid);
+		if(!password.equals(passwordRepeat)) {
 			
-			int result = UserService.AddUser(this.user);
-			System.out.println(result);
-			System.out.println("REGISTRATION");
-			this.user = new User();
-			this.adress = new Adress();
-			
-			return 0;
-			
-		} else {
-			System.out.println("Die Passwörter stimmen nicht überein");
-			request.setAttribute("error", "Die Passwörter stimmen nicht überein");
-			
+			request.setAttribute("error", "Die Passwörter stimmen nicht überein");			
 			return -1;
-		}
+			
+		} else
+			try {
+				if(UserService.GetUser(this.user.username) != null){
+					request.setAttribute("error", "Ein Benutzer mit dem angegebenen Namen ist bereits vorhanden!");			
+					return -1;
+				} else {
+					int result = UserService.AddUser(this.user);
+					this.user = new User();
+					this.adress = new Adress();
+					
+					return 0;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return -1;
 	}
 
 }
