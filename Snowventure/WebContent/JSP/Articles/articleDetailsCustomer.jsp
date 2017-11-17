@@ -69,7 +69,7 @@
 					    von <b>${article.GetManufacturer()}</b> <br>
 					    
 						    <div class="pure-control-group pure-form">
-							    <select id="selectedSize" name="selectedSize">
+							    <select required id="selectedSize" name="selectedSize">
 							    	<option value="">Größe auswählen</option>
 							        <c:forEach items="${article.getAllSizesFromArticle()}" var="size">
 						        		<option value="${size}"<c:if test="${selectedSize==size}"><c:out value="selected"/></c:if>>${size}</option>
@@ -86,7 +86,7 @@
 							</c:forEach>				    
 					    <br>
 					    <h3>${article.GetPriceFormatted()} EUR</h3>
-					    <div class="div-align-bottom">
+					    <div>
 						    	<div class="pure-control-group">
 						            <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge" min="1">
 						        </div>

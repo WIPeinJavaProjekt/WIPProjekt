@@ -78,10 +78,7 @@ public class StartServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 
-		
-		
 		if(request.getParameter("login") != null) {
 			
 			response.sendRedirect(request.getContextPath() + "/login");

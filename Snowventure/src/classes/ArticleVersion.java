@@ -64,4 +64,12 @@ public class ArticleVersion extends Article{
 	public ArrayList<ArticleColor> getColors() {
 		return this.colors;
 	}
+	
+	public ArrayList<String> getColorNames(){
+		ArrayList<String> colorStrings = new ArrayList<String>();
+		for(ArticleColor ac: this.colors) {
+			colorStrings.add(ac.GetColorName());
+		}
+		return colorStrings;
+	}
 }

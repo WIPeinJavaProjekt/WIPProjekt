@@ -65,9 +65,19 @@ public class ArticleServlet extends HttpServlet {
 			try {
 				this.article = ArticleService.GetArticle(Integer.parseInt(request.getParameter("ID")));
 				this.article.SetSelectedVersion(Integer.parseInt(request.getParameter("version")));
+				
+				ArrayList<String> colorStrings = this.article.versions.get(this.article.GetSelectedVersion()).getColorNames();
+				ArrayList<String> sizes = this.article.GetSize();
+				
+				System.out.println(Arrays.toString(sizes.toArray()));
+
+				request.getSession().setAttribute("colors", colorStrings);
+				request.getSession().setAttribute("sizes", sizes);
+				request.getSession().setAttribute("genders", this.article.gender);
+
 				request.getSession().setAttribute("updateArticle", true);
 				request.getSession().setAttribute("article", this.article);
-				request.getSession().setAttribute("availableVersions", this.article.versions.size()-1);
+				
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 			}			
@@ -95,6 +105,8 @@ public class ArticleServlet extends HttpServlet {
 		} else if(request.getParameter("updateArticle") != null) {
 			try {
 				updateArticle(request);
+				response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.GetSelectedVersion());
+				return;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -117,30 +129,43 @@ public class ArticleServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private void addArticleVersion(HttpServletRequest request) throws SQLException, IOException, ServletException {
+	private int addArticleVersion(HttpServletRequest request) throws SQLException, IOException, ServletException {
 		this.articleVersion.property = request.getParameter("property");
 		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
 		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));
-		
-		ArrayList<String> sizesArr = new ArrayList<String>();
-		ArrayList<ArticleColor> colorsArr = new ArrayList<ArticleColor>();
 		
 		Part filePart = request.getPart("articleImage");
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 	    InputStream fileContent = filePart.getInputStream();
 		ArticlePicture picture = new ArticlePicture(fileName, fileContent);
+	    
+	    ArrayList<String> sizesArr = new ArrayList<String>();
+		ArrayList<ArticleColor> colorsArr = new ArrayList<ArticleColor>();
 		
-		String[] colors = request.getParameterValues("color");
+	    String[] colors = request.getParameterValues("color");
 	    String[] sizes = request.getParameterValues("size");
 	    
-	    for(int s= 0; s< colors.length;s++) {
-	    	ArticleColor artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(colors[s]));
-			colorsArr.add(artColor);
-		}
-	    for(int s= 0; s< sizes.length;s++) {
-	    	System.out.println(sizes[s]);
-			sizesArr.add(sizes[s]);
-		}
+	    System.out.println(Arrays.toString(colors));
+	    System.out.println(Arrays.toString(sizes));
+	    
+	    if(colors != null) {
+		    for(int s= 0; s< colors.length;s++) {
+		    	ArticleColor artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(colors[s]));
+				colorsArr.add(artColor);
+			}
+	    } else {
+	    	request.setAttribute("errorArticle", "Bitte wählen Sie Farben für die Artikelversion aus!");
+	    	return -1;
+	    }
+	    
+	    if(sizes != null) {
+		    for(int s= 0; s< sizes.length;s++) {
+				sizesArr.add(sizes[s]);
+			}
+	    } else {
+	    	request.setAttribute("errorArticle", "Bitte wählen Sie Größen für die Artikelversion aus!");
+	    	return -1;
+	    }
 	    
 	    this.articleVersion.colors = colorsArr;
 		this.articleVersion.sizes = sizesArr;
@@ -149,10 +174,11 @@ public class ArticleServlet extends HttpServlet {
 		
 		try {
 			int ret = ArticleService.AddArticleVersion(articleVersion);
+			return ret;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return -1;
 	}
 
 	private void addImage(HttpServletRequest request) throws IOException, ServletException {
@@ -191,24 +217,36 @@ public class ArticleServlet extends HttpServlet {
 		ArrayList<String> sizesArr = new ArrayList<String>();
 		ArrayList<ArticleColor> colorsArr = new ArrayList<ArticleColor>();
 		
-		String[] colors = request.getParameterValues("color");
+	    String[] colors = request.getParameterValues("color");
 	    String[] sizes = request.getParameterValues("size");
 	    
-	    for(int s= 0; s< colors.length;s++) {
-	    	ArticleColor artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(colors[s]));
-			colorsArr.add(artColor);
-		}
-	    for(int s= 0; s< sizes.length;s++) {
-			sizesArr.add(sizes[s]);
-		}
-
-	    String[] gender = request.getParameterValues("genders");
+	    System.out.println(Arrays.toString(colors));
+	    System.out.println(Arrays.toString(sizes));
+	    
+	    if(colors != null) {
+		    for(int s= 0; s< colors.length;s++) {
+		    	ArticleColor artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(colors[s]));
+				colorsArr.add(artColor);
+			}
+	    } else {
+	    	request.setAttribute("errorArticle", "Bitte wählen Sie Farben für die Artikelversion aus!");
+	    	return;
+	    }
+	    
+	    if(sizes != null) {
+		    for(int s= 0; s< sizes.length;s++) {
+				sizesArr.add(sizes[s]);
+			}
+	    } else {
+	    	request.setAttribute("errorArticle", "Bitte wählen Sie Größen für die Artikelversion aus!");
+	    	return;
+	    }
 	    
 	    this.articleVersion.colors = colorsArr;
 		this.articleVersion.sizes = sizesArr;
 		this.articleVersion.versionid = this.article.versions.get(this.article.GetSelectedVersion()).versionid;
 		this.article.manufacturer = request.getParameter("manufacturer");
-		this.article.gender = Arrays.toString(gender);
+		this.article.gender = Arrays.toString(request.getParameterValues("genders"));
 		this.article.acid = Integer.parseInt(request.getParameter("categories"));
 		this.article.versions.set(this.article.GetSelectedVersion(), this.articleVersion);
 		
@@ -238,23 +276,32 @@ public class ArticleServlet extends HttpServlet {
 	    String[] colors = request.getParameterValues("color");
 	    String[] sizes = request.getParameterValues("size");
 	    
-	    for(int s= 0; s< colors.length;s++) {
-	    	ArticleColor artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(colors[s]));
-			colorsArr.add(artColor);
-		}
-	    for(int s= 0; s< sizes.length;s++) {
-	    	System.out.println(sizes[s]);
-			sizesArr.add(sizes[s]);
-		}
+	    System.out.println(Arrays.toString(colors));
+	    System.out.println(Arrays.toString(sizes));
 	    
-	    String[] gender = request.getParameterValues("genders");
+	    if(colors != null) {
+		    for(int s= 0; s< colors.length;s++) {
+		    	ArticleColor artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(colors[s]));
+				colorsArr.add(artColor);
+			}
+	    } else {
+	    	request.setAttribute("errorArticle", "Bitte wählen Sie Farben für die Artikelversion aus!");
+	    	return -1;
+	    }
 	    
-	    
+	    if(sizes != null) {
+		    for(int s= 0; s< sizes.length;s++) {
+				sizesArr.add(sizes[s]);
+			}
+	    } else {
+	    	request.setAttribute("errorArticle", "Bitte wählen Sie Größen für die Artikelversion aus!");
+	    	return -1;
+	    }
 	    
 		this.article = new Article(request.getParameter("articleName"), request.getParameter("articleDescription"));
 		this.article.manufacturer = request.getParameter("manufacturer");
 		this.article.acid = Integer.parseInt(request.getParameter("category"));
-		this.article.gender = Arrays.toString(gender);
+		this.article.gender = Arrays.toString(request.getParameterValues("genders"));
 		
 		this.articleVersion = new ArticleVersion(Integer.parseInt(request.getParameter("selectedVersion")), request.getParameter("property"), 
 				request.getParameter("propertyValue"), Double.parseDouble(request.getParameter("price")), this.article, sizesArr, colorsArr);
@@ -269,8 +316,7 @@ public class ArticleServlet extends HttpServlet {
 		} else {
 			this.article = null;
 			request.setAttribute("successArticle", "Artikel wurde erfolgreich hinzugefügt");
-		}
-		
+		}		
 		return ret;
 	}
 
