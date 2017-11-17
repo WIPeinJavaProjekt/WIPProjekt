@@ -82,7 +82,7 @@ header .pure-menu-link{
     border: 0;
     height: 122px;
     min-width: 150px;
-    padding: 23px 0px 0px 0px !important;
+    padding: 23px 0px 0px 0px ;
     font-size: 20px;
     font-family: Georgia, serif !important;
 }
@@ -113,10 +113,14 @@ header .pure-menu-link{
 }
 
 .headerbtn:hover, .headerbtn:focus, .headerbtn:focus {
-	background-color: rgb(235, 232, 226);
+	background-color: rgb(235, 232, 226) !important;
 	border-bottom: 6px solid rgb(75,75,75);
 }
 
+
+#responsiveheader{
+	display:none;
+}
 
 header div {
     vertical-align: middle !important;
@@ -475,14 +479,6 @@ overflow:scroll;
 
 
 
-@media (max-width: 720px){
-	.pure-u-3-5{
-		width:100% !Important;
-	}
-	.pure-u-1-5{
-		width:0% !Important;
-	}
-}
 
 
 .div-align-bottom{

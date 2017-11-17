@@ -1,7 +1,7 @@
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <div class="pure-g">
-<div class="pure-u-1-5"></div>
-<div class="pure-u-3-5">
+<div class="pure-u-1-5 sizezero"></div>
+<div class="pure-u-3-5 fullwidth">
 	<form class="pure-form pure-form-stacked" id="mydata-form" action="users?page=mydata" method="post">
 	    <fieldset>
 	        
@@ -13,42 +13,42 @@
 	            
 		            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 		                <label for="first-name">Vorname</label>
-		                <input id="first-name" name="name" class="pure-u-23-24" type="text" value="${currentUser.name}" required>
+		                <input id="first-name" name="name" class="pure-u-24-24" type="text" value="${currentUser.name}" required>
 		            </div>
 		
 		            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 		                <label for="last-name">Nachname</label>
-		                <input id="last-name" name="surname" class="pure-u-23-24" type="text" value="${currentUser.surname}" required>
+		                <input id="last-name" name="surname" class="pure-u-24-24" type="text" value="${currentUser.surname}" required>
 		            </div>
 		
 		            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 		                <label for="email">E-Mail</label>
-		                <input id="email" name="email" class="pure-u-23-24" type="email" value="${currentUser.email}" required>
+		                <input id="email" name="email" class="pure-u-24-24" type="email" value="${currentUser.email}" required>
 		            </div>			 
 				
 					<div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 		                <label for="street">Straße</label>
-		                <input id="street" name="street" class="pure-u-23-24" type="text" value="${currentUser.adress.getStreet()}" required>
+		                <input id="street" name="street" class="pure-u-24-24" type="text" value="${currentUser.adress.getStreet()}" required>
 		            </div>
 		
 					<div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 		                <label for="houseno">Hausnummer</label>
-		                <input id="houseno" name="houseno" class="pure-u-23-24" type="text" value="${currentUser.adress.getHouseno()}" required>
+		                <input id="houseno" name="houseno" class="pure-u-24-24" type="text" value="${currentUser.adress.getHouseno()}" required>
 		            </div>
 		
 		            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 		                <label for="location">Stadt</label>
-		                <input id="location" name="location" class="pure-u-23-24" type="text" value="${currentUser.adress.getLocation()}" required>
+		                <input id="location" name="location" class="pure-u-24-24" type="text" value="${currentUser.adress.getLocation()}" required>
 		            </div>
 		            
 		            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
 		                <label for="postcode">PLZ</label>
-		                <input id="postcode" name="postcode" class="pure-u-23-24" type="text" value="${currentUser.adress.postcode}" required>
+		                <input id="postcode" name="postcode" class="pure-u-24-24" type="text" value="${currentUser.adress.postcode}" required>
 		            </div>			
 					<c:if test="${currentUser.utid == '1'}">
 		            <div class="pure-u-1 pure-u-md-1-3">
 		                <label for="state">Nutzertyp</label>
-		                <select id="state" name="state" class="pure-input-1-2" required>
+		                <select id="state" name="state" class=" boxedinput" required >
 		                    <option value="customer" <c:if test="${currentUser.utid=='2'}"><c:out value="selected"/></c:if>>Kunde</option>
 		                    <option value="employee" <c:if test="${currentUser.utid=='3'}"><c:out value="selected"/></c:if>>Mitarbeiter</option>
 		                    <option value="admin" <c:if test="${currentUser.utid=='1'}"><c:out value="selected"/></c:if>>Admin</option>
@@ -57,7 +57,7 @@
 		            </c:if>
 	        </div>
 	
-	        <button type="submit" name="update-data" class="pure-button pure-button-primary">Änderung speichern</button>
+	        <button type="submit" name="update-data" class="pure-button pure-button-primary boxedinput">Änderung speichern</button>
 	    </fieldset>
 	</form>
 	
@@ -72,20 +72,20 @@
 	            
 	            <div class="pure-u-1 pure-u-md-1-3">
 		            <label for="password">Aktuelles Passwort</label>
-		            <input id="password" name="password" type="password">
+		            <input id="password" name="password" type="password" class="boxedinput">
 		        </div>
 		        
 		        <div class="pure-u-1 pure-u-md-1-3">
 		            <label for="new-password">Neues Passwort</label>
-		            <input id="new-password" name="new-password" type="password">
+		            <input id="new-password" name="new-password" type="password" class="boxedinput">
 		        </div>
 		        
 		        <div class="pure-u-1 pure-u-md-1-3">
 		            <label for="new-passwordRepeat">Neues Passwort wiederholen</label>
-		            <input id="new-passwordRepeat" name="new-passwordRepeat" type="password">
+		            <input id="new-passwordRepeat" name="new-passwordRepeat" type="password" class="boxedinput">
 		        </div>
 		        
-		        <button type="submit" name="update-password" class="pure-button pure-button-primary">Änderung speichern</button>
+		        <button type="submit" name="update-password" class="pure-button pure-button-primary boxedinput">Änderung speichern</button>
 	    	</div>
 	    </fieldset>
 	</form>
@@ -118,11 +118,11 @@
 		            <input class="boxedinput" id="safetyAnswer" name="safetyAnswer" type="text" value="${currentUser.squestion.getAnswer()}" required placeholder="Antwort">
 		        </div>
 		        
-		        <button type="submit" name="update-squestion" class="pure-button pure-button-primary">Änderung speichern</button>
+		        <button type="submit" name="update-squestion" class="pure-button pure-button-primary boxedinput">Änderung speichern</button>
 	    	</div>
 	    </fieldset>
 	</form>
 	</div>
-<div class="pure-u-1-5"></div>
+<div class="pure-u-1-5 sizezero"></div>
 </div>
     

@@ -1,11 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="./CSS/w3.css">
-
+<link rel="stylesheet" type="text/css" href="./CSS/default_reps.css">
 	
 <header>
 <form class="pure-form" action="start" method="post">
 	<div class="pure-g">
-		<div class="pure-u-1-5">
+		<div class="pure-u-1-5 sizezero">
 			
 			<!--  
 			<c:if test="${currentUser == null}">
@@ -22,8 +22,10 @@
 			
 		
 				
-				<div class="pure-u-3-5" align="left">
-				<div class="pure-menu pure-menu-horizontal">
+				<div class="pure-u-3-5 fullwidth" align="left">
+				<div align="right" id="responsiveheader"><a id="toghead" href="javascript:void(0)"><i class="fa fa-bars fa-3x" aria-hidden="true"></i></a></div>
+				
+				<div class="pure-menu pure-menu-horizontal" id="headermenu">
 					
 						<ul class="pure-menu-list">
 								<li class="pure-menu-item">
@@ -40,7 +42,7 @@
 								        
 								            <button type="submit" name="settings" class="headerbtn pure-menu-link">KONTO</button>
 								            <ul class="pure-menu-children">
-								                <li class="pure-menu-item"><button type="submit" name="logout" class="second-headerbtn pure-menu-link">(ABMELDEN)</button></li>
+								                <li class="pure-menu-item"><button type="submit" name="logout" class="second-headerbtn pure-menu-link">ABMELDEN</button></li>
 								            </ul>
 								        </li>
 								        </c:if>
@@ -64,7 +66,7 @@
 		
 	
 
-   			<div class="pure-u-1-5">
+   			<div class="pure-u-1-5 sizezero">
 		    	
 	    	</div>
    	</div>
@@ -72,3 +74,5 @@
 		
    	<!-- <div style="height:2px; width:100%; background-color:rgba(75,75,75,0.1);"></div> -->
 </header>
+
+<script type="text/javascript" src="./JS/responsive.js"></script>

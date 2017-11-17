@@ -5,8 +5,6 @@ $("#filterbtn-show").on('click', function() {
 	});
 
 
-
-
 //Modified from Solution
 $(".dropdown div ").on('click',"a" , function() {
   $(this).parent().parent().find("dd div ul").slideToggle('fast');

@@ -26,8 +26,8 @@
 			
 		<div class="contentwrapp" id ="searchbox">
 			<div class="pure-g" id ="banner">
-			<div class="pure-u-1-5"></div>
-			<div id="wrapper" class="pure-u-3-5">
+			<div class="pure-u-1-5 sizezero"></div>
+			<div id="wrapper" class="pure-u-3-5 fullwidth">
 				<div id="search-container" class="searchbox">
 					<form class="pure-form" action="start" method="post">
 					    <fieldset>
@@ -55,10 +55,10 @@
 				</div>
 				
 			</div>
-			<div class="pure-u-1-5"></div>
+			<div class="pure-u-1-5 sizezero"></div>
 			</div>
 		</div>
-		<div id="articlearea">
+		<div id="slider">
 			<%@include file = "./Basic/slider.jsp" %>
 		</div>	
 		<%@include file = "./Basic/footer.jsp" %>

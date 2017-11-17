@@ -19,9 +19,9 @@
 		
 		<div class="pure-g" id="loginbox">
 			
-			<div class="pure-u-1-5"></div>
+			<div class="pure-u-1-5 sizezero"></div>
 
-			<div class="pure-u-3-5">
+			<div class="pure-u-3-5 fullwidth">
 				<h1>Anmelden</h1>
 
 				<form class="pure-form" action ="login" method="post">
@@ -50,7 +50,7 @@
 				</form>
 			</div>
 			
-			<div class="pure-u-1-5"></div>
+			<div class="pure-u-1-5 sizezero"></div>
 		</div>
 		<%@include file = "../Basic/footer.jsp" %>
 	</body>
