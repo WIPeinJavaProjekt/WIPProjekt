@@ -21,9 +21,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import classes.Article;
+import classes.ArticleColor;
 import classes.ArticlePicture;
+import classes.Categorie;
+import services.ArticleColorService;
 import services.ArticleFilterService;
 import services.ArticleService;
+import services.ArticleSizesService;
+import services.ArtilceManufacturerService;
+import services.CategorieService;
 
 @WebServlet("/articles")
 public class ArticleSearchServlet extends HttpServlet {
@@ -34,6 +40,22 @@ public class ArticleSearchServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try {
+			ArrayList<Categorie> categories = CategorieService.GetCategories();
+			ArrayList<String> manufacturers = ArtilceManufacturerService.GetAllPossibleManufacturers();
+			ArrayList<String> sizes = ArticleSizesService.GetAllPossibleSizes();
+			ArrayList<ArticleColor> colors = ArticleColorService.GetAllPossibleColors();
+			
+			request.getSession().setAttribute("articleColors", colors);
+			request.getSession().setAttribute("availableSizes", sizes);
+			request.getSession().setAttribute("availableManufacturers", manufacturers);
+			request.getSession().setAttribute("categories", categories);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/Articles/articleSearchResults.jsp");
 		rd.forward(request, response);
 	}
@@ -42,18 +64,23 @@ public class ArticleSearchServlet extends HttpServlet {
 		
 		if(request.getParameter("search") != null) {	
 			
-			String searchPattern = request.getParameter("searchArticlePattern");
-			
+			String searchPattern = request.getParameter("searchArticlePattern");			
 			
 			double minprice = Double.parseDouble(request.getParameter("minprice") ==null || request.getParameter("minprice") ==""? "-1":request.getParameter("minprice") );
 			double maxprice = Double.parseDouble(request.getParameter("maxprice") ==null || request.getParameter("maxprice") ==""? "-1":request.getParameter("maxprice") );
-			String[] sizes  = request.getParameterValues("sizes");
+			String[] colors = request.getParameterValues("color");
+		    String[] sizes = request.getParameterValues("size");
 			String[] manufacturers = request.getParameterValues("manufacturer");
-			String[] colors = request.getParameterValues("colors");
 			int category = Integer.parseInt(request.getParameter("categorie"));
 			String[] genders = request.getParameterValues("genders");
-			findArticles(request, category,searchPattern,minprice,maxprice,sizes,manufacturers,colors,genders);
 			
+			request.getSession().setAttribute("colors", colors);
+			request.getSession().setAttribute("sizes", sizes);
+			request.getSession().setAttribute("manufacturers", manufacturers);
+			request.getSession().setAttribute("genders", genders);
+			request.getSession().setAttribute("selectedCategory", category);
+			
+			findArticles(request, category,searchPattern,minprice,maxprice,sizes,manufacturers,colors,genders);			
 		}
 		
 		doGet(request, response);

@@ -69,8 +69,6 @@ public class ArticleServlet extends HttpServlet {
 				ArrayList<String> colorStrings = this.article.versions.get(this.article.GetSelectedVersion()).getColorNames();
 				ArrayList<String> sizes = this.article.GetSize();
 				
-				System.out.println(Arrays.toString(sizes.toArray()));
-
 				request.getSession().setAttribute("colors", colorStrings);
 				request.getSession().setAttribute("sizes", sizes);
 				request.getSession().setAttribute("genders", this.article.gender);
@@ -144,9 +142,6 @@ public class ArticleServlet extends HttpServlet {
 		
 	    String[] colors = request.getParameterValues("color");
 	    String[] sizes = request.getParameterValues("size");
-	    
-	    System.out.println(Arrays.toString(colors));
-	    System.out.println(Arrays.toString(sizes));
 	    
 	    if(colors != null) {
 		    for(int s= 0; s< colors.length;s++) {

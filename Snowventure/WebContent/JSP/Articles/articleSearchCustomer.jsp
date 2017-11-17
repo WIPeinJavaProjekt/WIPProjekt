@@ -12,7 +12,7 @@
 						        <select name="categorie" class="boxedinput">
 							        <option value="-1">Alle</option>
 							        <c:forEach items="${categories}" var="categories">
-							        <option value="${categories.GetACID()}">${categories.GetName()}</option>
+							        	<option value="${categories.GetACID()}"<c:if test="${selectedCategory.equals(categories.GetACID())}"><c:out value="selected"/></c:if>>${categories.GetName()}</option>
 						    		</c:forEach>
 								</select>
 							</div>
@@ -27,6 +27,7 @@
 				 
 				 	<a id="filterbtn-show" href="javascript:void(0)">Filter &#x25bc;</a>
 				    <fieldset id="filtersfield" style="display:none;">
+				    
 					    <%@include file = "../Basic/filterManufacturer.jsp" %>
 						<%@include file = "../Basic/filterColor.jsp" %>
 				        <%@include file = "../Basic/filterSize.jsp" %>
