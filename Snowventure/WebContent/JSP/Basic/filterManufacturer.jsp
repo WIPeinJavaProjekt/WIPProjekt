@@ -10,7 +10,7 @@
 	    <dd>
 	        <div class="mutliSelect">
 	            <ul>
-		            <c:forEach items="${manufacturers}" var="manufacturer">
+		            <c:forEach items="${availableManufacturers}" var="manufacturer">
 		            	<li>
 	                        <label class="control control-checkbox">
 						        ${manufacturer}

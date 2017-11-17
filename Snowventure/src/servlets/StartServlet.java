@@ -46,28 +46,14 @@ public class StartServlet extends HttpServlet {
 		
 		try {
 			ArrayList<Categorie> categories = CategorieService.GetCategories();
-			request.getSession().setAttribute("categories", categories);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		try {
 			ArrayList<String> manufacturers = ArtilceManufacturerService.GetAllPossibleManufacturers();
-			System.out.println("hersteller:"+manufacturers.size());
-			request.getSession().setAttribute("manufacturers", manufacturers);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		try {
 			ArrayList<String> sizes = ArticleSizesService.GetAllPossibleSizes();
-			request.getSession().setAttribute("sizes", sizes);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
-		try {
 			ArrayList<ArticleColor> colors = ArticleColorService.GetAllPossibleColors();
-			request.getSession().setAttribute("colors", colors);
+			
+			request.getSession().setAttribute("articleColors", colors);
+			request.getSession().setAttribute("availableSizes", sizes);
+			request.getSession().setAttribute("availableManufacturers", manufacturers);
+			request.getSession().setAttribute("categories", categories);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

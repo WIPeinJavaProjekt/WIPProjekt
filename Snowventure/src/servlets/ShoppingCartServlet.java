@@ -52,14 +52,18 @@ public class ShoppingCartServlet extends HttpServlet {
 		if(request.getParameter("scpid")!= null && request.getParameter("amount") != null)
 		{
 			String scpid = request.getParameter("scpid").toString();
-			int newamount = Integer.parseInt(request.getParameter("amount").toString());
+			String amount = request.getParameter("amount").toString();
 			
+			if(isIntegerValue(amount))
+			{
+			int newamount = Integer.parseInt(amount);
+		
 			if(newamount > 0) 
 				{changeSCPAmount(scpid, newamount, request);}
 			else 
-				{deleteShoppingCartPosition(request.getParameter("scpid"), request);}
-
-			//System.out.println("changed amount of SCP:" + currentCart.cartPositions.get(Integer.parseInt(scpid)).amount + "  to  " + request.getParameter("amount"));
+				{deleteShoppingCartPosition(request.getParameter("scpid"), request);}			
+			//System.out.println("changed amount of SCP:" + currentCart.cartPositions.get(Integer.parseInt(scpid)).amount + "  to  " + amount);
+			}
 			response.sendRedirect(request.getContextPath() + "/cart");
 			return;		
 		}
@@ -190,4 +194,25 @@ public class ShoppingCartServlet extends HttpServlet {
 		}
 	}
 	
+	
+	/**
+	 * Method for checking if the given string is convertable into an integer value.
+	 * @param value String
+	 * @return isInt boolean
+	 */
+	private boolean isIntegerValue(String value)
+	{
+		boolean isInt = true;
+		
+		try
+		{
+			Integer.parseInt(value);
+		}
+		catch (NumberFormatException ex) 
+		{
+		    isInt = false;
+		}
+		
+		return isInt;
+	}
 }
