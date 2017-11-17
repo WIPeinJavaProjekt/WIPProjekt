@@ -137,4 +137,39 @@
 		width: 100% !important;
 	}
 	
+	/*USERSEARCH*/
+	
+	.pure-table{
+	margin-right: 0;
+	margin-left: 0;
+	margin-bottom: 0;
+	width: 100%;
+	}
+	
+	.pure-table td {
+	overflow-x:scroll;
+	}
+	
+	
+	#filters{
+	width: 100%;
+	}
+	
+	#filtersfield{
+	min-width: 100%;
+	}
+	
+	#articleresultcontainer{
+	padding-left:0;
+	padding-right:0;
+	padding-top:6px;
+	}
+	
+	.productCard{
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+	margin-top: 2px;
+	}
+	
 }

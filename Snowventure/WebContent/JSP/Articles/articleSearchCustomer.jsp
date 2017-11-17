@@ -2,8 +2,8 @@
 <link rel="stylesheet" type="text/css" href="./CSS/w3.css">
 
 	<div class="pure-g" id ="searchfilter">
-		<div class="pure-u-1-5"></div>
-		<div id="wrapper" class="pure-u-3-5">
+		<div class="pure-u-1-5 sizezero"></div>
+		<div id="wrapper" class="pure-u-3-5 fullwidth">
 			<div id="search-container" class="searchbox">
 				<form class="pure-form" action="articles" method="post">
 				    <fieldset>
@@ -43,7 +43,7 @@
 				</form>
 			</div>			
 		</div>
-		<div class="pure-u-1-5"></div>
+		<div class="pure-u-1-5 sizezero"></div>
 	</div>
 
 <center>

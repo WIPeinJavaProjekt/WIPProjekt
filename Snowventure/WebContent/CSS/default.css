@@ -87,6 +87,11 @@ header .pure-menu-link{
     font-family: Georgia, serif !important;
 }
 
+header .pure-menu-link{
+	padding: 23px 0px 0px 0px !important;
+	color: rgb(75, 75, 75) !important;
+}
+
 #titlemessage{
 	font-family: Georgia, serif !important;
 }

@@ -4,16 +4,16 @@
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <div class="pure-g" id ="account-searchbox">
-	<div class="pure-u-1-5"></div>
-	<div id="wrapper" class="pure-u-3-5">
+	<div class="pure-u-1-5 sizezero"></div>
+	<div id="wrapper" class="pure-u-3-5 fullwidth">
 		<div id="search-container" class="searchbox">
 			<form class="pure-form" action="users?page=usersearch" method="POST">
 			    <fieldset>
 			        <legend>
 			        <h3>Nutzersuche</h3>
 			        </legend>
-					<div class="pure-g">
-				        <div class="pure-u-1-5">
+					<div class="pure-g" id="searchbar">
+				        <div class="pure-u-1-5" >
 					        <select name="categories" class="boxedinput">
 					        <c:set var="cat" value="${category}"/>
 					          <option value="all" <c:if test="cat eq 'all'">selected</c:if>>Alle</option>
@@ -34,17 +34,17 @@
 		</div>
 		<div>
 			<form class="add-new-user-form" action="register" method="GET">
-				<div class="pure-u-1-5" id="add-new-user">
+				<div class="pure-u-1-5 fullwidth" id="add-new-user">
 			        <button type="submit" name="new-user" class="pure-button pure-button-primary boxedinput" style="width=20%">Nutzer anlegen</button>
 			    </div>
 			</form>		
 		</div>			
 	</div>
-	<div class="pure-u-1-5"></div>
+	<div class="pure-u-1-5 sizezero"></div>
 </div>
 
 <div class="search-results">
-	<div class="pure-u-1-5"></div>
+	<div class="pure-u-1-5 sizezero"></div>
 	<c:if test="${ not empty userlist }">
 		<table class="pure-table pure-table-horizontal">
 		    <thead>
@@ -84,7 +84,7 @@
 			<p class="error">Es wurde keine Suchergebnisse gefunden.</p>
 		</form>	
 	</c:if>
-	<div class="pure-u-1-5"></div>	
+	<div class="pure-u-1-5 sizezero"></div>	
 </div>
 
 <div class="user-info">
