@@ -75,7 +75,7 @@
 									</c:choose>
 									
 									<!--<p><a href="cart?scpid=<c:choose><c:when test='${ not empty currentUser}'>${currentUser.shoppingcart.getCartPositions().indexOf(position)}</c:when><c:otherwise>${ currentCart.getCartPositions().indexOf(position) }</c:otherwise></c:choose>&option=delete">Löschen</a></p>-->
-									<p><a href="cart?scpid=${ currentCart.getCartPositions().indexOf(position) }&option=delete">Löschen</a></p>
+									<p><a href="cart?scpid=${ currentCart.getCartPositions().indexOf(position) }&option=delete"><i class="fa fa-trash fa-1g" aria-hidden="true"></i></a></p>
 								</div>
 								<hr>
 							</div>
