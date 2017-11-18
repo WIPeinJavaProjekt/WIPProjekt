@@ -24,6 +24,7 @@ import classes.Article;
 import classes.ArticleColor;
 import classes.ArticlePicture;
 import classes.Categorie;
+import classes.Utils;
 import services.ArticleColorService;
 import services.ArticleFilterService;
 import services.ArticleService;
@@ -52,6 +53,13 @@ public class ArticleSearchServlet extends HttpServlet {
 			request.getSession().setAttribute("availableManufacturers", manufacturers);
 			request.getSession().setAttribute("categories", categories);
 			
+			String[] sessionManufacturer = request.getParameterValues("manufacturers");
+			if(sessionManufacturer!= null) {
+				System.out.println(Arrays.toString(sessionManufacturer));
+				System.out.println(sessionManufacturer.length);
+			} else {
+				System.out.println("Man Is null");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -74,11 +82,17 @@ public class ArticleSearchServlet extends HttpServlet {
 			int category = Integer.parseInt(request.getParameter("categorie"));
 			String[] genders = request.getParameterValues("genders");
 			
-			request.getSession().setAttribute("colors", colors);
+			ArrayList<String> colorsArr = Utils.colorArraytoArrayList(colors);
+			ArrayList<String> manufacturersArr = Utils.stringArraytoArrayList(manufacturers);
+			ArrayList<String> gendersArr = Utils.stringArraytoArrayList(genders);
+			
+			request.getSession().setAttribute("colors", colorsArr);
 			request.getSession().setAttribute("sizes", sizes);
-			request.getSession().setAttribute("manufacturers", manufacturers);
-			request.getSession().setAttribute("genders", genders);
+			request.getSession().setAttribute("manufacturers", manufacturersArr);
+			request.getSession().setAttribute("genders", gendersArr);
 			request.getSession().setAttribute("selectedCategory", category);
+			request.getSession().setAttribute("minprice", minprice);
+			request.getSession().setAttribute("maxprice", maxprice);
 			
 			findArticles(request, category,searchPattern,minprice,maxprice,sizes,manufacturers,colors,genders);			
 		}

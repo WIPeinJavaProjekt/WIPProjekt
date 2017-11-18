@@ -14,7 +14,8 @@
 		            <c:forEach items="${articleColors}" var="color">
 		            	<li>
 	                        <label class="control control-checkbox">
-					        	<div class="checkbox-colorbox" style="background-color:${color.GetHexcode()} !important;"></div> ${color.GetColorName()}
+					        	<div class="checkbox-colorbox" style="background-color:${color.GetHexcode()} !important;"></div> 
+					        		${color.GetColorName()}
 					        		<c:choose>
 						        		<c:when test="${fn:contains(colors, color.GetColorName())}">
 						        			<input type="checkbox" name="color" checked value="${color.GetAcolid()}" />

@@ -1,10 +1,13 @@
 package classes;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import services.ArticleColorService;
 
 public class Utils {
 	
@@ -61,4 +64,32 @@ public class Utils {
 		System.out.println("Size: " + a.GetSize());
 	}
 	
+	public static ArrayList<String> colorArraytoArrayList(String[] inputArray) {
+		ArrayList<String> outputArray = new ArrayList<String>();
+		if(inputArray != null) {
+		    for(int s= 0; s< inputArray.length;s++) {
+		    	ArticleColor artColor = null;
+				try {
+					artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(inputArray[s]));
+				} catch (NumberFormatException | SQLException e) {
+					e.printStackTrace();
+				}
+				if(artColor!=null) {
+					outputArray.add(artColor.GetColorName());
+				}
+			}
+	    }
+		return outputArray;
+	}
+	
+	
+	public static ArrayList<String> stringArraytoArrayList(String[] inputArray) {
+		ArrayList<String> outputArray = new ArrayList<String>();
+		if(inputArray != null) {
+			for(int s= 0; s< inputArray.length;s++) {
+				outputArray.add(inputArray[s]);
+			}
+		}
+		return outputArray;
+	}
 }

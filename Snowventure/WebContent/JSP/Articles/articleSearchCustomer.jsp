@@ -36,8 +36,8 @@
 						<div style="clear:both;">
 						<br>
 						<u style="font-size: 16px;">Preis</u>
-						<span> von </span><input name="minprice" type="number" min="0" max="10000" step=".01">
-					    <span> bis </span><input name="maxprice" type="number" min="0" max="10000" step=".01">
+						<span> von </span><input name="minprice" value="${minprice}" type="number" min="0" max="10000" step=".01">
+					    <span> bis </span><input name="maxprice" value="${maxprice}" type="number" min="0" max="10000" step=".01">
 						</div>
 					</fieldset>
 				</form>
