@@ -25,7 +25,7 @@
 	<%@include file = "../Basic/header.jsp" %>
 	
 		<div class="pure-g">
-			<form action="cart" method="post" style="width:100%">
+			<form class=" textbox" action="cart" method="post" style="width:100%">
 				
 					<div class="pure-u-1-1">
 															

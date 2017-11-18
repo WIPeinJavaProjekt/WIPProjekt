@@ -53,7 +53,7 @@
 					</c:otherwise>
 				</c:choose>
 			
-				<form id="articleadminboxform" class="pure-form" enctype="multipart/form-data" action="article" method="post">
+				<form id="articleadminboxform" class="pure-form  textbox" enctype="multipart/form-data" action="article" method="post">
 					
 				    <fieldset class="pure-group">
 				    	<div class="pure-g">

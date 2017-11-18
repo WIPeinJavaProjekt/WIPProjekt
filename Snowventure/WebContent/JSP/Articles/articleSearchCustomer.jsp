@@ -5,7 +5,7 @@
 		<div class="pure-u-1-5 sizezero"></div>
 		<div id="wrapper" class="pure-u-3-5 fullwidth">
 			<div id="search-container" class="searchbox">
-				<form class="pure-form" action="articles" method="post">
+				<form class="pure-form  textbox" action="articles" method="post">
 				    <fieldset>
 						<div class="pure-g" id="filters">
 					        <div class="pure-u-1-5">
@@ -41,14 +41,14 @@
 						<c:if test="${minprice>0 }">
 							<input name="minprice" value="${minprice}" type="number" min="0" max="10000" step=".01">
 					    </c:if>
-					    <c:if test="${minprice== 0 || minprice == null}">
+					    <c:if test="${minprice<= 0 || minprice == null}">
 					    	<input name="minprice"  type="number" min="0" max="10000" step=".01">
 					    </c:if>
 					    <span> bis </span>
 					    <c:if test="${maxprice >0 }">
 					    	<input name="maxprice" value="${maxprice}" type="number" min="0" max="10000" step=".01">
 					    </c:if>
-					    <c:if test="${maxprice== 0 || maxprice == null}">
+					    <c:if test="${maxprice<= 0 || maxprice == null}">
 					    	<input name="maxprice" type="number"  min="0" max="10000" step=".01">
 					    </c:if>
 						</div>

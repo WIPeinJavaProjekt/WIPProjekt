@@ -32,7 +32,7 @@
 	
 		<%@include file = "../Basic/header.jsp" %>
 	
-		<div class="pure-g" id="loginbox">
+		<div class="pure-g  textbox" id="loginbox">
 		
 			<div class="pure-u-1-5 sizezero"></div>
 			<div class="pure-u-3-5 fullwidth">

@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<form class="pure-form" 
+<form class="pure-form  textbox" 
 	<c:choose>
 		<c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">
             action="users"

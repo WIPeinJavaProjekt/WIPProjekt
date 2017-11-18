@@ -63,7 +63,7 @@
 					}
 				</script>		    
 		    </div>
-		    <div class="pure-u-1-5 fullwidth">
+		    <div class="pure-u-1-5 fullwidth  textbox">
 			    <div>
 			    	<form class="pure-form" action="articleshopping" method="post">
 					    <h2>${article.GetName()}</h2>
@@ -100,7 +100,7 @@
 		    </div>
 		</div>
 		<div style="height:2px; width:100%; background-color:rgb(75,75,75); margin-top: 5px;"></div>
-		<div class="articledescriptioncontainer">
+		<div class="articledescriptioncontainer  textbox">
 			<h2>Beschreibung</h2>
 			${article.GetDescription()}		
 		</div>

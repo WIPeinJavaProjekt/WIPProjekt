@@ -2,7 +2,7 @@
 <div class="pure-g">
 <div class="pure-u-1-5 sizezero"></div>
 <div class="pure-u-3-5 fullwidth">
-	<form class="pure-form pure-form-stacked" id="mydata-form" action="users?page=mydata" method="post">
+	<form class="pure-form pure-form-stacked  textbox" id="mydata-form" action="users?page=mydata" method="post">
 	    <fieldset>
 	        
 	        <legend>
@@ -61,7 +61,7 @@
 	    </fieldset>
 	</form>
 	
-	<form class="pure-form pure-form-stacked security-form" action="users?page=mydata" method="post">
+	<form class="pure-form pure-form-stacked security-form  textbox" action="users?page=mydata" method="post">
 	<fieldset>
 	    
 	    	<legend>
@@ -96,7 +96,7 @@
 		</form>
 	</c:if>
 	
-	<form class="pure-form pure-form-stacked security-form" action="users?page=mydata" method="post">
+	<form class="pure-form pure-form-stacked security-form  textbox" action="users?page=mydata" method="post">
 	<fieldset>
 	    
 	    	<legend>
