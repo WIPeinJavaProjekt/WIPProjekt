@@ -29,13 +29,7 @@
 			<form action="cart" method="post" style="width:100%">
 				
 					<div class="pure-u-1-1">
-					
-					<!--  
-					<c:if test="${not empty currentUser}"> 
-					<c:set var="currentCart" scope="session" value="${ currentUser.getShoppingcart() }"/>
-					</c:if>
-					-->	
-					
+															
 					<c:choose>					
 					<c:when test="${not empty currentCart && currentCart.getCartPositions().size() > 0}">						
 						
