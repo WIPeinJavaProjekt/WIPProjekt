@@ -1,12 +1,28 @@
-@media (max-device-width: 930px)
+@media (max-width: 1200px), (max-device-width:1200px)
 {
+	body{
+	min-width: 360px;
+	}
+	
 	/*HEADER*/
 	#responsiveheader{
 	display:block;}
 	
+	.responsiveheaderimg::before { 
+    background: url('./../Images/brand_small.png');
+        background-size: 228px 36px;
+    display: inline-block;
+    width: 228px; 
+    height: 36px;
+    content:"";
+    position: absolute;
+    left:2px;
+    top: 3px;
+	}
 	.sizezero{
 	width:0;
 	}
+	
 	
 	header {
 		border-bottom: 6px solid rgb(75,75,75);
@@ -121,12 +137,10 @@
 	width: 100%;
 	}
 	
-	/*LOGIN FEHLER!!!*/
+	/*LOGIN*/
 	#loginbox{
 	width: 100%;
 	}
-	
-	
 	/*MY DATA*/
 	#mydata-form, .security-form{
 	margin-right: 15px;
@@ -170,6 +184,17 @@
 	margin-left: auto;
 	display: block;
 	margin-top: 2px;
+	}
+	
+	
+	/*Articledetailcustomer*/
+	
+	.detailsearchimage, .articledetailimage{
+	max-width:100%;
+	height: auto;
+	}
+	.mySlides .productCardimage {
+	margin: 0px;
 	}
 	
 }

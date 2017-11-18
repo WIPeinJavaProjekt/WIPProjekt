@@ -4,6 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<title>Snowventure - ${article.GetName()}</title>
 		
 		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
@@ -27,7 +28,7 @@
 		<%@include file = "../Basic/header.jsp" %> 
 	
 		<div class="pure-g articledescriptioncontainer">
-		    <div class="pure-u-4-5">		    
+		    <div class="pure-u-4-5 fullwidth">		    
     			<div class="w3-content w3-display-container w3slidmod articleslider" align="center">
     			
     				<c:forEach items="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures()}" var="ap">
@@ -62,7 +63,7 @@
 					}
 				</script>		    
 		    </div>
-		    <div class="pure-u-1-5">
+		    <div class="pure-u-1-5 fullwidth">
 			    <div>
 			    	<form class="pure-form" action="articleshopping" method="post">
 					    <h2>${article.GetName()}</h2>

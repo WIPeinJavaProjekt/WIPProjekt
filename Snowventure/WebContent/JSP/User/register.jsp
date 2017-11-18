@@ -6,7 +6,7 @@
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<c:choose>
 			<c:when test="${currentUser.utid == '1'}">
 				<title>Neuer Nutzer</title>
@@ -34,8 +34,8 @@
 	
 		<div class="pure-g" id="loginbox">
 		
-			<div class="pure-u-1-5"></div>
-			<div class="pure-u-3-5">
+			<div class="pure-u-1-5 sizezero"></div>
+			<div class="pure-u-3-5 fullwidth">
 				<c:choose>
 					<c:when test="${currentUser.utid == '1'}">
 						<h1>Neuen Nutzer anlegen</h1>
@@ -48,7 +48,7 @@
 				<%@include file = "userinfo.jsp" %>
 				
 				<div class="pure-g">
-					<div class ="pure-u-1-2 leftdiv">
+					<div class ="pure-u-1-2 leftdiv fullwidth">
 					<c:if test="${empty currentUser}">
 						<form class="pure-form pure-form-aligned" action="register" method="post">
 							<div class="pure-control-group">
@@ -64,7 +64,7 @@
 						</form>
 					</c:if>		
 					</div>
-					<div class ="pure-u-1-2"></div>
+					<div class ="pure-u-1-2 fullwidth"></div>
 				</div>
 				<c:if test="${not empty error}">
 					<form class="pure-form pure-form-aligned" action="register" method="get">
@@ -73,7 +73,7 @@
 				</c:if>
 		   
 			</div>
-			<div class="pure-u-1-5"></div>
+			<div class="pure-u-1-5 sizezero"></div>
 		</div>
 		
 		<%@include file = "../Basic/footer.jsp" %>

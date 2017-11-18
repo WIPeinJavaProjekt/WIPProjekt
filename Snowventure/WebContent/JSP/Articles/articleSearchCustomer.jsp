@@ -36,9 +36,23 @@
 						<div style="clear:both;">
 						<br>
 						<u style="font-size: 16px;">Preis</u>
-						<span> von </span><input name="minprice" value="${minprice}" type="number" min="0" max="10000" step=".01">
-					    <span> bis </span><input name="maxprice" value="${maxprice}" type="number" min="0" max="10000" step=".01">
+						
+						<span> von </span>
+						<c:if test="${minprice>0 }">
+							<input name="minprice" value="${minprice}" type="number" min="0" max="10000" step=".01">
+					    </c:if>
+					    <c:if test="${minprice== 0 || minprice == null}">
+					    	<input name="minprice"  type="number" min="0" max="10000" step=".01">
+					    </c:if>
+					    <span> bis </span>
+					    <c:if test="${maxprice >0 }">
+					    	<input name="maxprice" value="${maxprice}" type="number" min="0" max="10000" step=".01">
+					    </c:if>
+					    <c:if test="${maxprice== 0 || maxprice == null}">
+					    	<input name="maxprice" type="number"  min="0" max="10000" step=".01">
+					    </c:if>
 						</div>
+						
 					</fieldset>
 				</form>
 			</div>			

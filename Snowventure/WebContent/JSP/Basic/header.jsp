@@ -23,7 +23,13 @@
 		
 				
 				<div class="pure-u-3-5 fullwidth" align="left">
-				<div align="right" id="responsiveheader"><a id="toghead" href="javascript:void(0)"><i class="fa fa-bars fa-3x" aria-hidden="true"></i></a></div>
+				
+					<div  align="right" id="responsiveheader" class="responsiveheaderimg">
+						<div style="cursor: pointer; height:45px; width: 250px; position: absolute;" onclick="window.location='start';" ></div>
+						
+						<a id="toghead" href="javascript:void(0)"><i class="fa fa-bars fa-3x" aria-hidden="true"></i></a>
+					</div>
+				
 				
 				<div class="pure-menu pure-menu-horizontal" id="headermenu">
 					

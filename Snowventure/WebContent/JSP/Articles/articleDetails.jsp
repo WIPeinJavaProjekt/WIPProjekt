@@ -7,7 +7,7 @@
 		<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 		
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<c:choose>
 			<c:when test="${updateArticle}">
 				<title>Artikel bearbeiten</title>
@@ -42,8 +42,8 @@
 	
 		<div class="pure-g" id="articleadminbox">
 		
-			<div class="pure-u-1-5"></div>
-			<div class="pure-u-3-5">			
+			<div class="pure-u-1-5 sizezero"></div>
+			<div class="pure-u-3-5 fullwidth">			
 				<c:choose>
 					<c:when test="${updateArticle}">
 						<h1>Artikel bearbeiten</h1>
@@ -57,7 +57,7 @@
 					
 				    <fieldset class="pure-group">
 				    	<div class="pure-g">
-							<div class="pure-u-1-2">
+							<div class="pure-u-1-2 fullwidth">
 						    	<div class="pure-control-group">
 						            <input  class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
 						        </div>
@@ -97,7 +97,7 @@
 								</c:choose>
 								<br>
 							</div>
-							<div class="pure-u-1-2">
+							<div class="pure-u-1-2 fullwidth">
 								<div class="pure-control-group">
 						            	<input class="boxedinput custom-file-input" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
 						        </div>
@@ -152,7 +152,7 @@
 			       		</div>
 			       	</fieldset>
 		       	</form>
-			       	<div class="w3-content w3-display-container w3slidmod" align="center">
+			       	<div class="w3-content w3-display-container w3slidmod fullwidth" align="center">
 
 						<c:forEach items="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures()}" var="ap">
 					   		<div class="w3-display-container mySlides ">
@@ -193,7 +193,7 @@
 
 				<c:if test="${not empty errorArticle}">
 					<div class="pure-g">
-					    <div class ="pure-u-1-2">
+					    <div class ="pure-u-1-2 fullwidth">
 							<form class="pure-form pure-form-aligned" action="article" method="get">
 									<p class="error">${errorArticle}</p>
 							</form>
@@ -202,7 +202,7 @@
 				</c:if>
 				<c:if test="${not empty successArticle}">
 					<div class="pure-g">
-					    <div class ="pure-u-1-2">
+					    <div class ="pure-u-1-2 fullwidth">
 							<form class="pure-form pure-form-aligned" action="article" method="get">
 									<p class="success">${successArticle}</p>
 							</form>
@@ -211,7 +211,7 @@
 				</c:if>
 		   
 			</div>
-			<div class="pure-u-1-5"></div>
+			<div class="pure-u-1-5 sizezero"></div>
 		</div>
 		
 		<%@include file = "../Basic/footer.jsp" %>

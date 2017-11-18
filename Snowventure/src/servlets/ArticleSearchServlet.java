@@ -74,8 +74,8 @@ public class ArticleSearchServlet extends HttpServlet {
 			
 			String searchPattern = request.getParameter("searchArticlePattern");			
 			
-			double minprice = Double.parseDouble(request.getParameter("minprice") ==null || request.getParameter("minprice") ==""? "-1":request.getParameter("minprice") );
-			double maxprice = Double.parseDouble(request.getParameter("maxprice") ==null || request.getParameter("maxprice") ==""? "-1":request.getParameter("maxprice") );
+			double minprice = Double.parseDouble(request.getParameter("minprice") ==null || request.getParameter("minprice") ==""? "0":request.getParameter("minprice") );
+			double maxprice = Double.parseDouble(request.getParameter("maxprice") ==null || request.getParameter("maxprice") ==""? "0":request.getParameter("maxprice") );
 			String[] colors = request.getParameterValues("color");
 		    String[] sizes = request.getParameterValues("size");
 			String[] manufacturers = request.getParameterValues("manufacturer");

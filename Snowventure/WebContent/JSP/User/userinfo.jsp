@@ -18,7 +18,7 @@ method="post">
     </c:if>
     
     <div class="pure-g">
-	    <div class ="pure-u-1-2 leftdiv">
+	    <div class ="pure-u-1-2 leftdiv fullwidth">
 		    <fieldset class="pure-group">
 		    	<label>Name</label>
 		    	<c:if test="${selectedUser == null || empty currentUser}">
@@ -38,7 +38,7 @@ method="post">
 	        </fieldset>
 	            
        	</div> 
-       	<div class ="pure-u-1-2"> 
+       	<div class ="pure-u-1-2 fullwidth"> 
 	        <fieldset class="pure-group rightdiv">
 	        	<label>Passwort</label>				
 		        <div class="pure-control-group">
@@ -57,7 +57,7 @@ method="post">
 	</div>
 				
 	<div class="pure-g">
-	    <div class ="pure-u-1-2 leftdiv">
+	    <div class ="pure-u-1-2 leftdiv fullwidth">
 		   	<fieldset class="pure-group"> 
 	       		<label>Anschrift</label>
 		        <div class="pure-control-group">
@@ -99,7 +99,7 @@ method="post">
 		        </div>
 	       	</fieldset>
 		</div>
-		<div class ="pure-u-1-2 rightdiv">
+		<div class ="pure-u-1-2 rightdiv fullwidth">
 			<fieldset class="pure-group">
 	        	<label>Sicherheitsfrage</label>			        
 		        <div class="pure-control-group">
