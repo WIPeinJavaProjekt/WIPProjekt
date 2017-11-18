@@ -19,6 +19,7 @@ import classes.Article;
 import classes.ArticleColor;
 import classes.ArticlePicture;
 import classes.Categorie;
+import classes.ShoppingCart;
 import classes.User;
 import classes.Utils;
 import services.ArticleColorService;

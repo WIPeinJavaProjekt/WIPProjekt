@@ -34,6 +34,7 @@ public class ShoppingCartServlet extends HttpServlet {
 		//User currentUser = (User) request.getSession().getAttribute("currentUser");
 
 		if(currentCart == null) {
+			System.out.println("Cart is Null");
 			currentCart = new ShoppingCart();
 		}
 		

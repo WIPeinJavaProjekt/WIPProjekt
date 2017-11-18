@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import classes.ShoppingCart;
 import classes.User;
 import services.LoginService;
 import services.UserService;
@@ -69,16 +70,14 @@ public class LoginServlet extends HttpServlet {
 		
 		if(LoginService.authenticate(userId, password)) {
 			
-			HttpSession session = request.getSession();
 			User user = new User();
 			try {
 				user = UserService.GetUser(userId);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-	        session.setAttribute("currentUser", user);
-	        response.sendRedirect("start");
-	        
+			request.getSession().setAttribute("currentUser", user);
+	        response.sendRedirect("start");	        
 	        return true;
 		} else {
 			//TODO: Error
