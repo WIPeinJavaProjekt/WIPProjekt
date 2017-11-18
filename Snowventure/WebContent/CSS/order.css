@@ -1,0 +1,52 @@
+#orderitem {
+  	width:100%; 
+  	border-style: outset; 
+  	border-color: gainsboro;
+}
+
+#orderitems-div {
+	margin-bottom: 20px;
+}
+
+#orderdetails {
+	float: left;
+}
+
+#orderreceiptadr{
+	float: left;
+}
+
+#orderpaymentmethod{
+	float: left;
+}
+
+#ordervaluesum {
+    text-align: right;
+	font-weight: bold;
+	border-top: solid;
+}
+
+#orderstatus {
+	color: green;
+}
+
+#confirm {
+	margin-bottom: 20px;
+	float: right;
+}
+
+#order-control-div {
+	margin-bottom: 20px; 
+	float: right;
+}
+
+#order-button {
+	width: 45%;
+	margin-left: 5%;
+	float: left;
+}
+
+#ordervaluedescription {
+	font-weight: bold;
+	border-top: solid;
+}

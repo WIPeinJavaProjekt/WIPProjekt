@@ -99,7 +99,7 @@
 				    			<h3><b>Summe (${currentCart.GetArticleCount()} Artikel):  EUR ${currentCart.GetShoppingCartPrice()}</b></h3>
 				    			<h4>
 				    				<input class="pure-button pure-button-primary" type="button" value="Weitershoppen" onclick="location.href='./articles'">
-				    				<input class="pure-button pure-button-primary" type="submit" value="Jetzt Bestellen">
+				    				<input class="pure-button pure-button-primary" type="button" value="Jetzt Bestellen" onclick="location.href='./order?neworder=true'">
 				    			</h4>
 							</div>
 							<div class="pure-u-1-12" style="height: 15%;"></div>

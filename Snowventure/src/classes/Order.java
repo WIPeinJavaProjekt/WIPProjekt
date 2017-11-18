@@ -38,4 +38,45 @@ public class Order {
 		this.email = email;
 		this.ulid = ulid;
 	}
+	
+	public ArrayList<OrderStatus> getStatuscycle()
+	{
+		return statuscycle;
+	}
+	
+	public ShoppingCart getShoppingCart()
+	{
+		return shoppingCart;
+	}
+	
+	public Adress getAdress() 
+	{
+		return adress;
+	}
+	
+	public int getOrid()
+	{
+		return orid;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public String getSurname()
+	{
+		return surname;
+	}
+	
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public int getUlid()
+	{
+		return ulid;
+	}
+
 }

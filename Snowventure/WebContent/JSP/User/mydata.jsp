@@ -11,37 +11,37 @@
 	       		
 	        <div class="pure-g">
 	            
-		            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
+		            <div id="mydata-item name" class="pure-u-1 pure-u-md-1-3">
 		                <label for="first-name">Vorname</label>
 		                <input id="first-name" name="name" class="pure-u-24-24" type="text" value="${currentUser.name}" required>
 		            </div>
 		
-		            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
+		            <div id="mydata-item last-name" class="pure-u-1 pure-u-md-1-3">
 		                <label for="last-name">Nachname</label>
 		                <input id="last-name" name="surname" class="pure-u-24-24" type="text" value="${currentUser.surname}" required>
 		            </div>
 		
-		            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
+		            <div id="mydata-item email" class="pure-u-1 pure-u-md-1-3">
 		                <label for="email">E-Mail</label>
 		                <input id="email" name="email" class="pure-u-24-24" type="email" value="${currentUser.email}" required>
 		            </div>			 
 				
-					<div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
+					<div id="mydata-item street" class="pure-u-1 pure-u-md-1-3">
 		                <label for="street">Straﬂe</label>
 		                <input id="street" name="street" class="pure-u-24-24" type="text" value="${currentUser.adress.getStreet()}" required>
 		            </div>
 		
-					<div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
+					<div id="mydata-item houseno" class="pure-u-1 pure-u-md-1-3">
 		                <label for="houseno">Hausnummer</label>
 		                <input id="houseno" name="houseno" class="pure-u-24-24" type="text" value="${currentUser.adress.getHouseno()}" required>
 		            </div>
 		
-		            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
+		            <div id="mydata-item location" class="pure-u-1 pure-u-md-1-3">
 		                <label for="location">Stadt</label>
 		                <input id="location" name="location" class="pure-u-24-24" type="text" value="${currentUser.adress.getLocation()}" required>
 		            </div>
 		            
-		            <div id="mydata-item" class="pure-u-1 pure-u-md-1-3">
+		            <div id="mydata-item postcode" class="pure-u-1 pure-u-md-1-3">
 		                <label for="postcode">PLZ</label>
 		                <input id="postcode" name="postcode" class="pure-u-24-24" type="text" value="${currentUser.adress.postcode}" required>
 		            </div>			

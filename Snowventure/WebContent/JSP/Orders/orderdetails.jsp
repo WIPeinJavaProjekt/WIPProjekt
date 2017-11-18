@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="./CSS/default.css">
 	<link rel="stylesheet" type="text/css" href="./CSS/shoppingcart.css">
+	<link rel="stylesheet" type="text/css" href="./CSS/order.css">
 	<link rel="stylesheet" type="text/css" href="./CSS/startpageslider.css">
 	
 	<script type="text/javascript" src="/Snowventure/JS/jquery-3.2.1.min.js"></script>		
@@ -24,47 +25,6 @@
 	<script src="./JS/jquery-3.2.1.min.js"></script>
     <script src="./JS/header.js"></script>
     
-    <style>
-    
-    #orderitem {
-    	width:100%; 
-    	border-style: outset; 
-    	border-color: gainsboro;
-    }
-    
-    #orderitems-div {
-    	margin-bottom: 20px;
-    }
-    
-    #orderdetails {
-    	float: left;
-    }
-    
-    #ordervalue {
-    	text-align: right;
-    }
-    
-    #orderstatus {
-    	color: green;
-    }
-    
-    #confirm {
-    	margin-bottom: 20px;
-    	float: right;
-    }
-    
-    #order-control-div {
-    	margin-bottom: 20px; 
-    	float: right;
-    }
-    
-    #order-button {
-    	width: 45%;
-    	margin-left: 5%;
-    	float: left;
-    }
-    
-    </style>
     
 </head>
 <body>
@@ -76,8 +36,8 @@
 		<c:if test="${ not empty currentUser && not empty currentOrder }">	
 			<div class="pure-u-3-4">
 				<div class="pure-u-1-1">
-					<div class="pure-u-1-1"><h1>Bestelldetails</h1></div>
-					<c:if test="${ not empty currentOrder.statuscycle.get(0) }">
+					<div class="pure-u-1-1"><h1>Bestelldetails <c:if test="${ currentOrder.statuscycle.size() <= 1 }">prüfen</c:if></h1></div>
+					<c:if test="${ currentOrder.statuscycle.size() > 1 }">
 					<div class="pure-u-3-4" id="orderdetails">
 						<div class="pure-u-1-1">Bestellt am ${ currentOrder.statuscycle.get(0).statusdate }</div>
 						<div class="pure-u-1-1">Bestellnr. ${ currentOrder.orid }</div>
@@ -93,7 +53,7 @@
 									<c:otherwise>
 										<select>
 											<c:forEach var="status" items="statuslist">
-												<option <c:if test ="${ currentOrder.statuscycle.get(currentOrder.statuscycle.size()-1).osid == status.osid }">selected</c:if>>${ status.description }</option>
+												<option <c:if test ="${ currentOrder.statuscycle.get(currentOrder.statuscycle.size()-1).description eq status.description }">selected</c:if>>${ status.description }</option>
 											</c:forEach>
 										</select>
 									</c:otherwise>
@@ -107,19 +67,32 @@
 				<div class="pure-u-1-1" style="height: 20px;">
 				</div>
 				<div class="pure-u-1-1">
-					<div class="pure-u-3-4" id="orderdetails">
-							<div class="pure-u-1-1"><b>Versandadresse</b></div>
-							<div class="pure-u-1-1">${ currentOrder.name + ' ' + currentOrder.surname }</div>
-							<div class="pure-u-1-1">${ currentOrder.adress.street + ' ' + currentOrder.adress.houseno}</div>
-							<div class="pure-u-1-1">${ currentOrder.adress.postcode + ' ' + currentOrder.adress.location}</div>
+					<div class="pure-u-1-4" id="orderdetails">
+							<div class="pure-u-1-1"><b>Versandadresse</b><c:if test="${ currentOrder.statuscycle.size() == 1 }"> <a style="font-size: 12px;" href="#">Ändern</a></c:if></div>
+							<div class="pure-u-1-1">${ currentOrder.name} ${ currentOrder.surname }</div>
+							<div class="pure-u-1-1">${ currentOrder.adress.street} ${ currentOrder.adress.houseno}</div>
+							<div class="pure-u-1-1">${ currentOrder.adress.postcode} ${ currentOrder.adress.location}</div>
+					</div>
+					<div class="pure-u-1-4" id="orderreceiptadr">
+							<div class="pure-u-1-1"><b>Rechnungsadresse</b></div>
+							<div class="pure-u-1-1">Identisch mit Lieferadresse</div>
+							<br>
+							<div class="pure-u-1-1"><b>Versandart</b></div>
+							<div class="pure-u-1-1">DHL Standardversand</div>
+					</div>
+					<div class="pure-u-1-4" id="orderpaymentmethod">
+							<div class="pure-u-1-1"><b>Zahlungsart</b></div>
+							<div class="pure-u-1-1">Auf Rechnung</div>
 					</div>
 					<div class="pure-u-1-4">
 							<div class="pure-u-1-1"><b>Bestellübersicht</b></div>
-							<div class="pure-u-2-5">Gesamtsumme</div><div class="pure-u-3-5" id="ordervalue">EUR ${ currentOrder.shoppingCart.GetShoppingCartPrice() }</div>
+							<div class="pure-u-2-5">Artikel</div><div class="pure-u-3-5" style="text-align: right">EUR ${ currentOrder.shoppingCart.GetShoppingCartPrice() }</div>
+							<div class="pure-u-2-5">Versand/Verpackung</div><div class="pure-u-3-5" style="text-align: right">EUR 0,00</div>
+							<div class="pure-u-2-5"  id="ordervaluedescription">Gesamtsumme</div><div class="pure-u-3-5" id="ordervaluesum">EUR ${ currentOrder.shoppingCart.GetShoppingCartPrice() }</div>
 					</div>
 				</div>
 				<div class="pure-u-1-1" style="height: 20px;"></div>
-				<c:forEach items="${ currentOrder.shoppingCart.cart }" var="position">			
+				<c:forEach items="${ currentOrder.shoppingCart.cartPositions }" var="position">			
 				<div class="pure-g" id="orderitems-div">
 					<form id="orderitem">
 						 <div  id="scp-article-card">
@@ -129,11 +102,12 @@
 					    	<div class="pure-u-1-4" id="scp-info-part">
 								<h4><b>${ position.article.GetName() }</b></h4>
 								<hr size="5">
-								<p>Variante: ${ position.article.versions.get(position.article.selectedversion).property }</p>
+								<p>Farbe: ${ position.getArticle().GetAllVersions().get(position.getArticle().GetSelectedVersion()).getColorsAsString() }</p>
+								<p>Variante: ${ position.size }</p>
 							</div>
 							<div class="pure-u-1-4" id="scp-info-part">
 								<p><b>Preis</b></p>
-								<p>${ position.article.versions.get(position.article.selectedversion).price } EUR</p>
+								<p>${ position.article.GetAllVersions().get(position.article.GetSelectedVersion()).price } EUR</p>
 							</div>
 							<div class="pure-u-1-4" id="scp-info-part">
 								<p><b>Menge</b></p>
@@ -144,9 +118,9 @@
 					</form>
 				</div>	
 				</c:forEach>	
-				<div class="pure-u-1-2" id="order-control-div">
-					<input id="order-button" type="submit" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput">
-					<input id="order-button" type="submit" name="processOrder" value="Bestellung abschicken" class="pure-button pure-button-primary boxedinput">
+				<div class="pure-u-5-8" id="order-control-div">
+					<input id="order-button" type="button" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput" onclick="location.href='./cart'">
+					<input id="order-button" type="button" name="processOrder" value="Jetzt kaufen (verbindlich)" class="pure-button pure-button-primary boxedinput">
 				</div>		
 			</div>	
 		</c:if>
@@ -165,15 +139,26 @@
 				<div class="pure-u-1-1" style="height: 20px;">
 				</div>
 				<div class="pure-u-1-1">
-					<div class="pure-u-3-4" style="float:left;">
-							<div class="pure-u-1-1"><b>Versandadresse</b></div>
+					<div class="pure-u-1-4" id="orderdetails">
+							<div class="pure-u-1-1"><b>Versandadresse</b> <a style="font-size: 12px;" href="#">Ändern</a></div>
 							<div class="pure-u-1-1">Jacob Markus</div>
 							<div class="pure-u-1-1">Dorfstr. 3</div>
 							<div class="pure-u-1-1">23923 Retelsdorf</div>
 					</div>
+					<div class="pure-u-1-4" id="orderreceiptadr">
+							<div class="pure-u-1-1"><b>Rechnungsadresse</b></div>
+							<div class="pure-u-1-1">Identisch mit Lieferadresse</div>
+					</div>
+					<div class="pure-u-1-4" id="orderpaymentmethod">
+							<div class="pure-u-1-1"><b>Zahlungsart</b></div>
+							<div class="pure-u-1-1">Auf Rechnung</div>
+					</div>
+					
 					<div class="pure-u-1-4">
 							<div class="pure-u-1-1"><b>Bestellübersicht</b></div>
-							<div class="pure-u-2-5">Gesamtsumme</div><div class="pure-u-3-5" style="text-align: right">EUR 19,95</div>
+							<div class="pure-u-2-5">Artikel</div><div class="pure-u-3-5" style="text-align: right">EUR 19,95</div>
+							<div class="pure-u-2-5">Versand (DHL)</div><div class="pure-u-3-5" style="text-align: right">EUR 0,00</div>
+							<div class="pure-u-2-5" id="ordervaluedescription">Gesamtsumme</div><div class="pure-u-3-5" id="ordervaluesum" style="text-align: right">EUR 19,95</div>
 					</div>
 				</div>
 				<div class="pure-u-1-1" style="height: 20px;"></div>
@@ -201,7 +186,7 @@
 					</form>
 				</div>	
 				<div class="pure-u-1-2" id="order-control-div">
-					<input id="order-button" type="submit" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput">
+					<input id="order-button" type="button" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput" onclick="location.href='./cart'">
 					<input id="order-button" type="submit" name="processOrder" value="Bestellung abschicken" class="pure-button pure-button-primary boxedinput">
 				</div>		
 			</div>
