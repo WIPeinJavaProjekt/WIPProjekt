@@ -111,7 +111,7 @@
 				<c:forEach items="${ currentOrder.shoppingCart.cartPositions }" var="position">			
 				<div class="pure-g" id="orderitems-div">
 					<form id="orderitem">
-						 <div  id="scp-article-card">
+						 <div  id="scp-article-card" class="w3-card-4">
 							<div class="pure-u-1-5" id="sc-aimg-container">
 								<img class="article-img" src="images/${ position.article.GetAllVersions().get(article.GetSelectedVersion()).getArticleHeadPicture().GetImageId()}" alt="Artikelbild">
 							</div>
