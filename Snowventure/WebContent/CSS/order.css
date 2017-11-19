@@ -38,7 +38,7 @@
 	float: right;
 }
 
-#order-button {
+.order-button {
 	width: 45%;
 	margin-left: 5%;
 	float: left;

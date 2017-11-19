@@ -29,8 +29,8 @@
 <body>
 	
 	<%@include file = "../Basic/header.jsp" %> 
-	
-		<div class="pure-u-1-8"></div>
+	<div class="pure-g content-container textbox">
+		<div class="pure-u-1-8 sizezero"></div>
 		
 		<div id="change-delivery-adr">
 			<div id="popup-delivery-adr">
@@ -50,7 +50,7 @@
 		</div>
 		
 		<c:if test="${ not empty currentUser && not empty currentOrder }">	
-			<div class="pure-u-3-4">
+			<div class="pure-u-3-4 fullwidth">
 				<div class="pure-u-1-1">
 					<div class="pure-u-1-1"><h1>Bestelldetails <c:if test="${ currentOrder.statuscycle.size() <= 1 }">prüfen</c:if></h1></div>
 					<c:if test="${ currentOrder.statuscycle.size() > 1 }">
@@ -83,24 +83,24 @@
 				<div class="pure-u-1-1" style="height: 20px;">
 				</div>
 				<div class="pure-u-1-1">
-					<div class="pure-u-1-4" id="orderdetails">
+					<div class="pure-u-1-4  fullwidth" id="orderdetails">
 							<div class="pure-u-1-1"><b>Versandadresse</b><c:if test="${ currentOrder.statuscycle.size() == 1 }"> <a style="font-size: 12px;" href="#" onclick="div_show()">Ändern</a></c:if></div>
 							<div class="pure-u-1-1">${ currentOrder.name} ${ currentOrder.surname }</div>
 							<div class="pure-u-1-1">${ currentOrder.adress.street} ${ currentOrder.adress.houseno}</div>
 							<div class="pure-u-1-1">${ currentOrder.adress.postcode} ${ currentOrder.adress.location}</div>
 					</div>
-					<div class="pure-u-1-4" id="orderreceiptadr">
+					<div class="pure-u-1-4  fullwidth" id="orderreceiptadr">
 							<div class="pure-u-1-1"><b>Rechnungsadresse</b></div>
 							<div class="pure-u-1-1">Identisch mit Lieferadresse</div>
 							<br>
 							<div class="pure-u-1-1"><b>Versandart</b></div>
 							<div class="pure-u-1-1">DHL Standardversand</div>
 					</div>
-					<div class="pure-u-1-4" id="orderpaymentmethod">
+					<div class="pure-u-1-4  fullwidth" id="orderpaymentmethod">
 							<div class="pure-u-1-1"><b>Zahlungsart</b></div>
 							<div class="pure-u-1-1">Auf Rechnung</div>
 					</div>
-					<div class="pure-u-1-4">
+					<div class="pure-u-1-4  fullwidth">
 							<div class="pure-u-1-1"><b>Bestellübersicht</b></div>
 							<div class="pure-u-2-5">Artikel</div><div class="pure-u-3-5" style="text-align: right">EUR ${ currentOrder.shoppingCart.GetShoppingCartPrice() }</div>
 							<div class="pure-u-2-5">Versand/Verpackung</div><div class="pure-u-3-5" style="text-align: right">EUR 0,00</div>
@@ -134,9 +134,9 @@
 					</form>
 				</div>	
 				</c:forEach>	
-				<div class="pure-u-5-8" id="order-control-div">
-					<input id="order-button" type="button" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput" onclick="location.href='./cart'">
-					<input id="order-button" type="button" name="processOrder" value="Jetzt kaufen (verbindlich)" class="pure-button pure-button-primary boxedinput" onclick="location.href='./order?processOrder=true'">
+				<div class="pure-u-5-8   fullwidth" id="order-control-div">
+					<input  type="button" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput order-button boxedinput" onclick="location.href='./cart'">
+					<input  type="button" name="processOrder" value="Jetzt kaufen (verbindlich)" class="pure-button pure-button-primary boxedinput order-button" onclick="location.href='./order?processOrder=true'">
 				</div>		
 			</div>	
 		</c:if>
@@ -207,8 +207,8 @@
 				</div>		
 			</div>
 		</c:if>
-		<div class="pure-u-1-8"></div>
-	
+		<div class="pure-u-1-8 sizezero"></div>
+	</div>
 	<%@include file = "../Basic/footer.jsp" %>
 </body>
 </html>

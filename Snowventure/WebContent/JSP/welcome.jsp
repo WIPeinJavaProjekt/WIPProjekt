@@ -59,7 +59,44 @@
 		</div>
 		<div id="slider">
 			<%@include file = "./Basic/slider.jsp" %>
-		</div>	
+		</div>
+		
+		
+		<div class="pure-g" id="advertisingstrip">
+   			<div class="pure-u-1-3"><p align="center"><i class="fa fa-globe fa-2x" aria-hidden="true"></i><br>Umweltfreundliche Verpackung</p></div>
+    		<div class="pure-u-1-3"><p align="center"><i class="fa fa-compass fa-2x" aria-hidden="true"></i><br>Europaweiter Versand</p></div>
+    		<div class="pure-u-1-3"><p align="center"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i><br>24h Lieferung</p></div>
+		</div>
+		
+		
+		<div id="history">
+		<div align="center" id="historyheader"><h2>ÜBER SNOWVENTURE</h2></div>
+		
+		<div class="pure-g historyblock">
+	    <div class="pure-u-1-2 fullwidth"><img src="./Images/alpinehouse.jpg" alt="Webereibild" class="historypic"></div>
+	    <div class="pure-u-1-2 fullwidth textbox">
+	    <h3>Das Unternehmen</h3>
+	    
+	    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+		Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.   
+		Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse</p></div>
+		</div>
+
+		<div class="pure-g historyblock">
+	    <div class="pure-u-1-2 fullwidth textbox">
+	    <h3>Qualität zahlt sich aus</h3>
+	    
+	    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+		Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.   
+		Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse</p></div>
+		<div class="pure-u-1-2 fullwidth"><img src="./Images/weaving_glasses.jpg" alt="Alpines Haus" class="historypic"></div>
+		</div>
+		
+	    
+		</div>
+		
+		
+			
 		<%@include file = "./Basic/footer.jsp" %>
 	</body>
 

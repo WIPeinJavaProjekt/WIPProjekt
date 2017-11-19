@@ -42,7 +42,7 @@
 					</div>
 								
 								</li>
-			    				<li class="pure-menu-item"><button type="submit" name="cart" class="headerbtn">ÜBER UNS</button></li>
+			    				<li class="pure-menu-item"><a href="start#history"><div class="headerbtn" id="aboutlink" ><span>ÜBER UNS</span></div></a></li>
 								        <c:if test="${currentUser != null}">
 								        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
 								        

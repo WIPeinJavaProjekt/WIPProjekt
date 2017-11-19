@@ -5,7 +5,7 @@
 	}
 	
 	.textbox{
-	padding:5px;
+	padding:10px;
 	}
 	
 	/*HEADER*/
@@ -89,6 +89,13 @@
 	border-bottom: 0px;
 	}
 	
+	#aboutlink{
+	display:block;
+	}
+	#aboutlink span{
+		line-height: 2.5;
+	}
+	
 	
 	/*FOOTER*/
 	footer .pure-u-1-3{
@@ -134,7 +141,8 @@
 	}
 	
 	#banner{
-		padding-bottom: 75px;
+		padding-top: 14px;
+		padding-bottom: 12px;
 	}
 	
 	.fullwidth{
@@ -201,4 +209,12 @@
 	margin: 0px;
 	}
 	
+	
+	/*Order*/
+	.order-button{
+	margin-left:0;
+	margin-right:2.5%;
+	margin-top: 1%;
+	width:100%;
+	}
 }
