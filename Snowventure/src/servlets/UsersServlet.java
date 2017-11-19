@@ -58,10 +58,10 @@ public class UsersServlet extends HttpServlet {
 				
 				return;
 			}
-			else if((user.utid == 1 || user.utid == 3) && request.getParameter("searchOrders") != null) 
+			else if(user != null && request.getParameter("searchOrders") != null) 
 			{
-				findOrders(request);
-				
+				findOrders(request, user);
+					
 				response.sendRedirect("users?page=ordersearch");
 				
 				return;
@@ -347,26 +347,37 @@ public class UsersServlet extends HttpServlet {
 	
 	
 	/**
-	 * Returns orders matching the search-pattern to the request
-	 * @param request
+	 * Returns orders matching the search-pattern to the request and are accessible by the role of the user 
+	 * @param request HttpServletRequest
+	 * @param user User
 	 * @throws IOException 
 	 */
-	private void findOrders(HttpServletRequest request) throws IOException 
+	private void findOrders(HttpServletRequest request, User user) throws IOException 
 	{		
 		String searchOrderIDPattern = request.getParameter("searchOrderIDPattern");
 
 		ArrayList<Order> orders = new ArrayList<Order>();
 		
 		try {
-			if(searchOrderIDPattern != null && searchOrderIDPattern != "") 
+			if((user.utid == 1 || user.utid == 3) && searchOrderIDPattern != null && searchOrderIDPattern != "") 
 			{
 				Order order = OrderService.GetSpecificOrder(Integer.parseInt(searchOrderIDPattern));
 				if (order != null) 
 				{ orders.add(order);}
 			}
-			else 
+			else if(user.utid == 2 && searchOrderIDPattern != null && searchOrderIDPattern != "")
+			{
+				Order order = OrderService.GetSpecificOrder(Integer.parseInt(searchOrderIDPattern));
+				if (order != null && order.ulid == user.ulid) 
+				{ orders.add(order);}
+			}
+			else if(user.utid == 1 || user.utid == 3)
 			{
 				orders = OrderService.GetAllOrders();
+			}
+			else if(user.utid == 2)
+			{
+				orders = OrderService.GetAllOrders(user.ulid);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
