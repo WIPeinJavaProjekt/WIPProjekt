@@ -59,10 +59,15 @@
 		 	<c:forEach var="order" items="${orders}">
 				<div>
 					<hr>
-					<div class="pure-g" onclick="location.href='./order?ID=${order.getOrid()}';">
+					<div class="pure-g">
 					    <div class="pure-u-1-4"><p><b>${order.getOrid()}</b></p></div>
 					    <div class="pure-u-1-4"><p>${order.statuscycle.get(order.statuscycle.size()-1).description}</p></div>
 					    <div class="pure-u-1-4"><p>${order.statuscycle.get(order.statuscycle.size()-1).statusdate}</p></div>
+					    <div class="pure-u-1-4">
+					    	<p>
+					    		<i class="fa fa-search" style ="cursor: pointer;" onclick="location.href='./order?ID=${order.getOrid()}';"></i>
+							</p>
+						</div>
 					</div>
 				</div>
 			</c:forEach>
