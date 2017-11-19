@@ -25,7 +25,7 @@
 	<%@include file = "../Basic/header.jsp" %>
 	
 		<div class="pure-g content-container">
-			<form class="" action="cart" method="post" style="width:100%">
+			<form class=" textbox" action="cart" method="post" style="width:100%">
 				
 					<div class="pure-u-1-1">
 															
@@ -91,8 +91,8 @@
 				    		
 				    			<h3><b>Summe (${currentCart.GetArticleCount()} Artikel):  EUR ${currentCart.GetShoppingCartPrice()}</b></h3>
 				    			<h4>
-				    				<input class="pure-button pure-button-primary" type="button" value="Weitershoppen" onclick="location.href='./articles'">
-				    				<input class="pure-button pure-button-primary" type="button" value="Jetzt Bestellen" onclick="location.href='./order?neworder=true'">
+				    				<input id="scp-button-1" class="pure-button pure-button-primary" type="button" value="Weitershoppen" onclick="location.href='./articles'">
+				    				<input id="scp-button-2" class="pure-button pure-button-primary" type="button" value="Jetzt Bestellen" onclick="location.href='./order?neworder=true'">
 				    			</h4>
 							</div>
 							<div class="pure-u-1-12" style="height: 15%;"></div>

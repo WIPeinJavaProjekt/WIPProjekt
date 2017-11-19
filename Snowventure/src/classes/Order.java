@@ -19,7 +19,7 @@ public class Order {
 		adress = a;
 		shoppingCart = scp;
 		statuscycle= new  ArrayList<OrderStatus>();
-		statuscycle.add(new OrderStatus(new Date(),"Posted"));
+		//statuscycle.add(new OrderStatus(new Date(),"Posted"));
 		this.orid = orid;
 		this.name = name;
 		this.surname = surname;

@@ -95,8 +95,8 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		}
 		
 		ArticleColor color = null;		
-		if(request.getParameter("color") != null)
-		color = ArticleColorService.GetSpecificColor(Integer.parseInt(request.getParameter("color")));
+		if(request.getParameter("selectColor") != null)
+		color = ArticleColorService.GetSpecificColor(Integer.parseInt(request.getParameter("selectColor")));
 		
 		System.out.println("Selected size: " + request.getParameter("selectedSize"));
 				
@@ -114,12 +114,10 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		if(sc.cartPositions.size() > 0)
 		{
 			for(ShoppingCartPosition scp : sc.cartPositions)
-			{
-				System.out.println(scp.article.GetSelectedVersion() == scPos.article.GetSelectedVersion());
+			{						
 				if(		scp.article.ID == scPos.article.ID 
 						&& scp.article.GetSelectedVersion() == scPos.article.GetSelectedVersion() 
-						//&& scp.size.toString().equals(scPos.size.toString())
-						//&& scp.color.acolid == scPos.color.acolid
+						&& scp.size.toString().equals(scPos.size.toString())
 						)
 				{
 					scp.amount += amount;

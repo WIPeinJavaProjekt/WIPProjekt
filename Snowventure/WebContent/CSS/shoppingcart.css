@@ -26,3 +26,7 @@
 #articlelink {
 	cursor: pointer;
 }
+
+#scp-button-1, #scp-button-2{
+	margin-top: 15px;
+}

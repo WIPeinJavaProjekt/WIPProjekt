@@ -74,8 +74,9 @@ public class OrderService {
 	 */		
 	private static int AddOrderDetailPosition(ShoppingCartPosition p, int orid) {
 		int id= -1;
-		String query = "INSERT INTO ASSIGNMENTDETAILS(orid,avid,ASSIGNMENTPRICE,amount,acolid, size) VALUES('%d','%d','%f','%d', '%d', '%s');";
-		query = String.format(query,orid,p.article.versions.get(p.article.GetSelectedVersion()).versionid,p.amount,p.color.acolid,p.size);
+		String query = "INSERT INTO ASSIGNMENTDETAILS(orid,avid,ASSIGNMENTPRICE,amount,acolid) VALUES('%d','%d','%f','%d', '%d')";
+
+		query = String.format(query,orid,p.article.versions.get(p.article.GetSelectedVersion()).versionid, p.GetPositionPrice(), p.amount, p.article.versions.get(p.article.GetSelectedVersion()).colors.get(0).acolid);
 		id = DatabaseConnector.createConnection().InsertQuery(query);
 		return id;
 	}

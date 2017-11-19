@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -67,7 +68,9 @@ public class OrderServlet extends HttpServlet {
 			{
 				System.out.println("Order process started");
 				
-				//int orderid = OrderService.AddOrder(currentOrder);
+				currentOrder.statuscycle.add(new OrderStatus(new Date(),"Gesendet"));
+				
+				OrderService.AddOrder(currentOrder);
 				
 				request.getSession().removeAttribute("currentCart");
 				request.getSession().removeAttribute("currentOrder");
