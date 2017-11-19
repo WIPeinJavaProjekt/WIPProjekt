@@ -13,6 +13,7 @@ function scalediv(){
 	$('#articleresultcontainer').css("min-height",$( window ).height()-392);
 	$('#articleadminbox').css("min-height",$( window ).height()-$('#brandimg').height()-300);
 	$('content-container').css("min-height",$( window ).height()-800>450?$( window ).height()-800>450 :450);
+	$('.startslider-btn').css("width", $('.startslider').width()<1250? 38 : ($('.startslider').width()-1250)/2);
 	$('body').show();
 	//var paddingarticle = (($( window ).width()-(parseInt($( window ).width()/360)-1)*4)%360)/2;
 	//$('#articleresultcontainer').css("padding-left",paddingarticle < 1 ? 180 + $( window ).width()*0.2 : paddingarticle +$( window ).width()*0.2);

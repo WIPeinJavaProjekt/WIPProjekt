@@ -1,24 +1,18 @@
 
 
 
-<div class="w3-content w3-display-container w3slidmod" style="max-width:100%;" align="center">
+<div class="w3-content w3-display-container w3slidmod startslider" style="max-width:100%;" align="center">
 
 <div class="w3-display-container mySlides">
    <img  class="sliderimage" src="./Images/skityp.jpg"/>
-  <div class="w3-display-topleft slidertext" >
-    <h1>
-    Finde neue Rucksäcke <br>
-    für dein nächstes Abenteuer
-    </h1>
-  </div>
 </div>
 
 <div class="w3-display-container mySlides">
    <img  class="sliderimage" src="./Images/mountain.jpg"/>
-
 </div>
-<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
-<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+
+<button class="w3-display-left startslider-btn" onclick="plusDivs(-1)"><h1>&#10094;</h1></button>
+<button class="w3-display-right startslider-btn" onclick="plusDivs(1)"><h1>&#10095;</h1></button>
 
 </div>
 <script>
