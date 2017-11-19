@@ -5,7 +5,7 @@
 		<div class="pure-u-1-5 sizezero"></div>
 		<div id="wrapper" class="pure-u-3-5 fullwidth">
 			<div id="search-container" class="searchbox">
-				<form class="pure-form  textbox" action="articles" method="post">
+				<form class="pure-form textbox" action="articles" method="post">
 				    <fieldset>
 						<div class="pure-g" id="filters">
 					        <div class="pure-u-1-5">
