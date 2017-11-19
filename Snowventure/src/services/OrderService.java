@@ -35,6 +35,8 @@ public class OrderService {
 				);
 		oid = DatabaseConnector.createConnection().InsertQuery(query);
 		
+		System.out.println("Neue OrderID: " + oid);
+		
 		if(oid == -1)
 			return oid;
 		
@@ -110,9 +112,9 @@ public class OrderService {
 	private static int AddOrderStatus(OrderStatus os, int orid) {
 		int osid= -1;
 		
-		String query ="INSERT INTO ASSIGNMENTSTATUS(status,statusday) VALUES('%s','%s')";
+		String query ="INSERT INTO ASSIGNMENTSTATUS(status,statusday, orid) VALUES('%s','%s', '%d')";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-		query = String.format(query, os.description, sdf.format(os.statusdate));
+		query = String.format(query, os.description, sdf.format(os.statusdate), orid);
 		
 		osid = DatabaseConnector.createConnection().InsertQuery(query);
 		
