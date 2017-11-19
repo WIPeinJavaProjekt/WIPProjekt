@@ -75,7 +75,9 @@ public class OrderServlet extends HttpServlet {
 				request.getSession().removeAttribute("currentCart");
 				request.getSession().removeAttribute("currentOrder");
 				
-				response.sendRedirect("users?page=ordersearch");
+				RequestDispatcher rd = request.getRequestDispatcher("/JSP/Orders/orderConfirmation.jsp");
+				rd.forward(request, response);
+				return;
 			}
 			else if(currentOrder != null 
 					&& (currentUser.utid == 1 || currentUser.utid == 3)
