@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import classes.Adress;
 import classes.Order;
 import classes.OrderStatus;
 import classes.ShoppingCart;
@@ -51,7 +52,7 @@ public class OrderServlet extends HttpServlet {
 			}
 			else if(request.getParameter("neworder") != null && currentCart != null)
 			{
-				Order neworder = new Order(currentUser.adress, currentCart, '0', currentUser.name, currentUser.surname, currentUser.email, currentUser.ulid);
+				Order neworder = new Order(new Adress(currentUser.adress.location, currentUser.adress.houseno, currentUser.adress.postcode, currentUser.adress.street), currentCart, '0', currentUser.name, currentUser.surname, currentUser.email, currentUser.ulid);
 				
 				System.out.println("order in process");
 				
