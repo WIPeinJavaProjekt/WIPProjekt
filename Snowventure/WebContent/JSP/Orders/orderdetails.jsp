@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="/Snowventure/JS/jquery-3.2.1.min.js"></script>		
 	<script type="text/javascript" src="./JS/header.js"></script>
 	<script type="text/javascript" src="./JS/displayImage.js"></script>
+	<script type="text/javascript" src="./JS/newOrderAdress.js"></script>
 	
 	<link rel="shortcut icon" href="/favicon.ico">
 	<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="32x32">
@@ -24,14 +25,29 @@
 	
 	<script src="./JS/jquery-3.2.1.min.js"></script>
     <script src="./JS/header.js"></script>
-    
-    
 </head>
 <body>
 	
 	<%@include file = "../Basic/header.jsp" %> 
 	
 		<div class="pure-u-1-8"></div>
+		
+		<div id="change-delivery-adr">
+			<div id="popup-delivery-adr">
+				<form action="order?neworder=true" id="delivery-adr-form" method="post" name="delivery-adr-form">
+					<i id="close" class="fa fa-close fa-1g" aria-hidden="true" onclick ="div_hide()"></i>
+					<h4>Neue Versandadresse</h4>
+					<hr>
+					<input required id="name" name="name" placeholder="Vorname" type="text">
+					<input required id="surename" name="surename" placeholder="Nachname" type="text">
+					<input required id="street" name="street" placeholder="Straße" type="text">
+					<input required id="houseno" name="houseno" placeholder="Hausnummer" type="text">
+					<input required id="postcode" name="postcode" placeholder="PLZ" type="text">
+					<input required id="location" name="location" placeholder="Ort" type="text">
+					<input class="pure-button pure-button-primary" name="delivery-adr-submit" type="submit" id="delivery-adr-submit" value="Speichern">
+				</form>
+			</div>
+		</div>
 		
 		<c:if test="${ not empty currentUser && not empty currentOrder }">	
 			<div class="pure-u-3-4">
@@ -68,7 +84,7 @@
 				</div>
 				<div class="pure-u-1-1">
 					<div class="pure-u-1-4" id="orderdetails">
-							<div class="pure-u-1-1"><b>Versandadresse</b><c:if test="${ currentOrder.statuscycle.size() == 1 }"> <a style="font-size: 12px;" href="#">Ändern</a></c:if></div>
+							<div class="pure-u-1-1"><b>Versandadresse</b><c:if test="${ currentOrder.statuscycle.size() == 1 }"> <a style="font-size: 12px;" href="#" onclick="div_show()">Ändern</a></c:if></div>
 							<div class="pure-u-1-1">${ currentOrder.name} ${ currentOrder.surname }</div>
 							<div class="pure-u-1-1">${ currentOrder.adress.street} ${ currentOrder.adress.houseno}</div>
 							<div class="pure-u-1-1">${ currentOrder.adress.postcode} ${ currentOrder.adress.location}</div>
@@ -100,7 +116,7 @@
 								<img class="article-img" src="images/${ position.article.GetAllVersions().get(article.GetSelectedVersion()).getArticleHeadPicture().GetImageId()}" alt="Artikelbild">
 							</div>
 					    	<div class="pure-u-1-4" id="scp-info-part">
-								<h4><b>${ position.article.GetName() }</b></h4>
+								<h4><b>${ position.article.GetName() } von ${ position.article.GetManufacturer()}</b></h4>
 								<hr size="5">
 								<p>Farbe: ${ position.getArticle().GetAllVersions().get(position.getArticle().GetSelectedVersion()).getColorsAsString() }</p>
 								<p>Variante: ${ position.size }</p>
@@ -120,7 +136,7 @@
 				</c:forEach>	
 				<div class="pure-u-5-8" id="order-control-div">
 					<input id="order-button" type="button" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput" onclick="location.href='./cart'">
-					<input id="order-button" type="button" name="processOrder" value="Jetzt kaufen (verbindlich)" class="pure-button pure-button-primary boxedinput">
+					<input id="order-button" type="button" name="processOrder" value="Jetzt kaufen (verbindlich)" class="pure-button pure-button-primary boxedinput" onclick="location.href='./order?processOrder=true'">
 				</div>		
 			</div>	
 		</c:if>

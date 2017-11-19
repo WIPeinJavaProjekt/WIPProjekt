@@ -26,7 +26,7 @@
 
 <center>
 	<div class="search-results">	
-		<c:if test="${ not empty orders }">
+		<c:if test="${ not empty orders && currentUser.utid == 1 || not empty orders && currentUser.utid == 3}">
 			<div class="pure-g">
 			    <div class="pure-u-1-5"><p><b>Bestellnummer</b></p></div>
 			    <div class="pure-u-1-5"><p><b>Name</b></p></div>
@@ -47,6 +47,23 @@
 					    		<i class="fa fa-trash" aria-hidden="true"></i>
 					    	</p>
 					    </div>				  
+					</div>
+				</div>
+			</c:forEach>
+		</c:if>
+		<c:if test="${ not empty orders && currentUser.utid == 2 }">
+			<div class="pure-g">
+			    <div class="pure-u-1-4"><p><b>Bestellnummer</b></p></div>
+			    <div class="pure-u-1-4"><p><b>Bestellstatus</b></p></div>
+			    <div class="pure-u-1-4"><p><b>Bestelldatum</b></p></div>    
+			</div>
+		 	<c:forEach var="order" items="${orders}">
+				<div>
+					<hr>
+					<div class="pure-g" onclick="location.href='./order?ID=${order.GetId()}';">
+					    <div class="pure-u-1-4"><p><b>${order.GetId()}</b></p></div>
+					    <div class="pure-u-1-4"><p>${order.statuscycle.get(order.statuscycle.size()-1).description}</p></div>
+					    <div class="pure-u-1-4"><p>${order.statuscycle.get(order.statuscycle.size()-1).statusdate}</p></div>
 					</div>
 				</div>
 			</c:forEach>
