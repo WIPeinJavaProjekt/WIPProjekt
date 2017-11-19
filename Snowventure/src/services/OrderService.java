@@ -1,9 +1,11 @@
 package services;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
 
 import classes.*;
 
@@ -40,9 +42,16 @@ public class OrderService {
 		if(oid == -1)
 			return oid;
 		
+		int dummy=-1;
 		
-		oid =AddOrderDetails(o.shoppingCart,oid);
-		oid =AddOrderStatuscycle(o.statuscycle,oid);
+		dummy =AddOrderDetails(o.shoppingCart,oid);
+		if(dummy ==-1)
+			return dummy;
+		
+		dummy =AddOrderStatuscycle(o.statuscycle,oid);
+		
+		if(dummy ==-1)
+			return dummy;
 		
 		return oid;
 	}
@@ -56,11 +65,11 @@ public class OrderService {
 	 */	
 	private static int AddOrderDetails(ShoppingCart shoppingCart, int orid) {
 		int odid= -1;
-		
+		System.out.println("RUFE EINFÜGEN AUF");
 		for(ShoppingCartPosition p: shoppingCart.cartPositions)
 		{
 			odid=AddOrderDetailPosition(p,orid);
-			if(orid == -1)
+			if(odid == -1)
 				return odid;
 		}
 			
@@ -75,11 +84,13 @@ public class OrderService {
 	 * @throws SQLException
 	 */		
 	private static int AddOrderDetailPosition(ShoppingCartPosition p, int orid) {
+		Locale.setDefault(Locale.ENGLISH);		
 		int id= -1;
-		String query = "INSERT INTO ASSIGNMENTDETAILS(orid,avid,ASSIGNMENTPRICE,amount,acolid) VALUES('%d','%d','%f','%d', '%d')";
+		String query = "INSERT INTO ASSIGNMENTDETAILS(orid,avid,ASSIGNMENTPRICE,amount,acolid,size) VALUES('%d','%d','%f','%d', '%d','%s')";
 
-		query = String.format(query,orid,p.article.versions.get(p.article.GetSelectedVersion()).versionid, p.GetPositionPrice(), p.amount, p.article.versions.get(p.article.GetSelectedVersion()).colors.get(0).acolid);
+		query = String.format(query,orid,p.article.versions.get(p.article.GetSelectedVersion()).versionid, p.GetPositionPrice(), p.amount, p.article.versions.get(p.article.GetSelectedVersion()).colors.get(0).acolid,p.size);
 		id = DatabaseConnector.createConnection().InsertQuery(query);
+		System.out.println("ARTIKEL EINGEFÜGT: " +query);
 		return id;
 	}
 	
@@ -193,8 +204,9 @@ public class OrderService {
 	 * @param ulid Userloginid
 	 * @return Arraylist with all Orders of the Userloginid
 	 * @throws SQLException
+	 * @throws IOException 
 	 */	
-	public static ArrayList<Order> GetAllOrders(int ulid) throws SQLException
+	public static ArrayList<Order> GetAllOrders(int ulid) throws SQLException, IOException
 	{
 		ArrayList<Order> orders = new ArrayList<Order>();
 		String query = "SELECT ulid, orid, name, surname, email, postcode, street, streetno, city FROM ASSIGNMENT WHERE ulid ='%d'";
@@ -205,7 +217,7 @@ public class OrderService {
 		while(result.next())
 		{
 			
-			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("code"), result.getString("streetno"));
+			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("postcode"), result.getString("streetno"));
 			o = new Order(a, GetShoppingCartFromOrder(result.getInt("orid")),GetOrderStatuscycle(result.getInt("orid")),result.getInt("orid"), result.getString("name"), result.getString("surname"), result.getString("email"), result.getInt("ulid"));
 			orders.add(o);
 		}
@@ -217,8 +229,9 @@ public class OrderService {
 	 * Method for getting all available Orders
 	 * @return Arraylist with all Orders
 	 * @throws SQLException
+	 * @throws IOException 
 	 */	
-	public static ArrayList<Order> GetAllOrders() throws SQLException
+	public static ArrayList<Order> GetAllOrders() throws SQLException, IOException
 	{
 		ArrayList<Order> orders = new ArrayList<Order>();
 		String query = "SELECT ulid, orid, name, surname, email, postcode, street, streetno, city FROM ASSIGNMENT";
@@ -228,7 +241,7 @@ public class OrderService {
 		while(result.next())
 		{
 			
-			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("code"), result.getString("streetno"));
+			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("postcode"), result.getString("streetno"));
 			o = new Order(a, GetShoppingCartFromOrder(result.getInt("orid")),GetOrderStatuscycle(result.getInt("orid")),result.getInt("orid"), result.getString("name"), result.getString("surname"), result.getString("email"), result.getInt("ulid"));
 			orders.add(o);
 		}
@@ -241,8 +254,9 @@ public class OrderService {
 	 * @param orid Orderid
 	 * @return the specific Order
 	 * @throws SQLException
+	 * @throws IOException 
 	 */		
-	public static Order GetSpecificOrder(int orid) throws SQLException 
+	public static Order GetSpecificOrder(int orid) throws SQLException, IOException 
 	{
 		String query = "SELECT ulid, orid, name, surname, email, postcode, street, streetno, city FROM ASSIGNMENT WHERE orid ='%d'";
 		query = String.format(query, orid);
@@ -252,7 +266,7 @@ public class OrderService {
 		while(result.next())
 		{
 			
-			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("code"), result.getString("streetno"));
+			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("postcode"), result.getString("streetno"));
 			o = new Order(a, GetShoppingCartFromOrder(orid),GetOrderStatuscycle(orid),orid, result.getString("name"), result.getString("surname"), result.getString("email"), result.getInt("ulid"));
 			return o;
 		}
@@ -266,18 +280,20 @@ public class OrderService {
 	 * @param orid Orderid
 	 * @return the specific shoppingcart
 	 * @throws SQLException
+	 * @throws IOException 
 	 */	
-	private static ShoppingCart GetShoppingCartFromOrder(int orid) throws SQLException
+	private static ShoppingCart GetShoppingCartFromOrder(int orid) throws SQLException, IOException
 	{
 		String query ="SELECT odid,avid,assignmentprice,amount,acolid,size from ASSIGNMENTDETAILS WHERE orid='%d'";
 		query = String.format(query, orid);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
-		
+		System.out.println(query);
 		ShoppingCart scp = new ShoppingCart();
 		while(result.next())
 		{
 			Article a = ArticleService.GetSelectedArticle(result.getInt("avid"));
+			System.out.println("PrepedArticlein Order"+a.ID);
 			a.versions.get(a.GetSelectedVersion()).price = result.getDouble("assignmentprice");
 			ShoppingCartPosition p = new ShoppingCartPosition(a,result.getInt("amount"),result.getString("size"), ArticleColorService.GetSpecificColor(result.getInt("acolid")));
 			scp.cartPositions.add(p);

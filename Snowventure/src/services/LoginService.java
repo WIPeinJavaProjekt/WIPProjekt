@@ -1,5 +1,6 @@
 package services;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import classes.User;
@@ -11,8 +12,9 @@ public class LoginService {
 	 * @param userId
 	 * @param password
 	 * @return boolean value
+	 * @throws IOException 
 	 */
-	public static boolean authenticate(String userId, String password) {
+	public static boolean authenticate(String userId, String password) throws IOException {
 		if(password != null && !password.equals("")){
 			User user = new User();
 			try {

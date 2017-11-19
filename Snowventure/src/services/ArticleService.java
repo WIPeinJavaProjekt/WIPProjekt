@@ -395,8 +395,8 @@ public class ArticleService {
 	 */
 	public static Article GetSelectedArticle(ArticleVersion av) throws SQLException, IOException {
 		Article article = new Article( GetArticle(av.ID));
-		
-		return PrepSelectedArticle(av.versionid,article);
+		article = PrepSelectedArticle(av.versionid,article);
+		return article;
 	}
 	
 	/**
@@ -404,11 +404,16 @@ public class ArticleService {
 	 * @param avid selected version id
 	 * @return Article the specific Article and selected version
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public static Article GetSelectedArticle(int avid) throws SQLException{
-		Article article = new Article( GetArticleIdFromAvid(avid));
-		
-		return PrepSelectedArticle(avid,article);
+	public static Article GetSelectedArticle(int avid) throws SQLException, IOException{
+		System.out.println("Suche nach AVID: "+avid);
+		Article article = GetArticle( GetArticleIdFromAvid(avid));
+		System.out.println("Ausgewählterartikel: "+article.ID);
+		System.out.println("Vor der Prep");
+		article = PrepSelectedArticle(avid,article);
+		System.out.println("Artikel sollte jetzt prepared sein");
+		return article;
 	}
 
 	/**
@@ -420,10 +425,18 @@ public class ArticleService {
 	private static int GetArticleIdFromAvid(int avid) throws SQLException{
 		int aid = -1;
 		
-		String query = "SELECT TOP 1 aid from articleversion where TechIsActive = 1 AND TechIsDeleted = 0 avid='%d'";
+		String query = "SELECT aid from ARTICLEVERSION where TechIsActive = 1 AND TechIsDeleted = 0 AND avid=%d LIMIT 1";
 		query = String.format(query, avid);
-		aid = DatabaseConnector.createConnection().InsertQuery(query);
 		
+		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
+		
+		while(result.next())
+		{
+			aid = result.getInt("aid");
+		}
+		
+		
+		System.out.println("Aushewählte AID: "+aid);
 		return aid;
 	}
 	
@@ -435,8 +448,11 @@ public class ArticleService {
 	 * @throws SQLException
 	 */
 	private static Article PrepSelectedArticle(int avid, Article a) {
+		System.out.println("Anzahl der versionen:"+ a.versions.size());
+		
 		for(int i = 0; i< a.versions.size(); i++)
 		{
+			System.out.println("Versionsvergleich "+ a.versions.get(i).versionid + " == "+ avid);
 			if(a.versions.get(i).versionid == avid)
 			{
 				a.SetSelectedVersion(i);

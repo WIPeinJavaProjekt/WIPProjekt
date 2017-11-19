@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="pure-g" id ="account-searchbox">
+<div class="pure-g " id ="account-searchbox">
 	<div class="pure-u-1-5 sizezero"></div>
 	<div id="wrapper" class="pure-u-3-5 fullwidth">
 		<div id="search-container" class="searchbox">
@@ -37,13 +37,13 @@
 				<div>
 					<hr>
 					<div class="pure-g" >
-					    <div class="pure-u-1-5"><p><b>${order.GetId()}</b></p></div>
-					    <div class="pure-u-1-5"><p>${order.GetName() + ' ' + order.GetSurname()}</p></div>
+					    <div class="pure-u-1-5"><p><b>${order.getOrid()}</b></p></div>
+					    <div class="pure-u-1-5"><p>${order.getName() }  ${ order.getSurname()}</p></div>
 					    <div class="pure-u-1-5"><p>${order.statuscycle.get(order.statuscycle.size()-1).description}</p></div>
 					    <div class="pure-u-1-5"><p>${order.statuscycle.get(order.statuscycle.size()-1).statusdate}</p></div>
 					    <div class="pure-u-1-5">
 					    	<p>
-					    		<i class="fa fa-pencil" style ="cursor: pointer;" onclick="location.href='./order?ID=${order.GetId()}';"></i>
+					    		<i class="fa fa-pencil" style ="cursor: pointer;" onclick="location.href='./order?ID=${order.getOrid()}';"></i>
 					    		<i class="fa fa-trash" aria-hidden="true"></i>
 					    	</p>
 					    </div>				  
@@ -60,8 +60,8 @@
 		 	<c:forEach var="order" items="${orders}">
 				<div>
 					<hr>
-					<div class="pure-g" onclick="location.href='./order?ID=${order.GetId()}';">
-					    <div class="pure-u-1-4"><p><b>${order.GetId()}</b></p></div>
+					<div class="pure-g" onclick="location.href='./order?ID=${order.getOrid()}';">
+					    <div class="pure-u-1-4"><p><b>${order.getOrid()}</b></p></div>
 					    <div class="pure-u-1-4"><p>${order.statuscycle.get(order.statuscycle.size()-1).description}</p></div>
 					    <div class="pure-u-1-4"><p>${order.statuscycle.get(order.statuscycle.size()-1).statusdate}</p></div>
 					</div>

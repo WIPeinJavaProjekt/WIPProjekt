@@ -1,4 +1,5 @@
 package services;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -51,8 +52,9 @@ public class UserService {
 	 * @param pattern Searchvalue
 	 * @return ArrayList of Users
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public static ArrayList<User> GetUsers(String pattern) throws SQLException
+	public static ArrayList<User> GetUsers(String pattern) throws SQLException, IOException
 	{
 		ArrayList<User> users = new ArrayList<User>();
 		String query;
@@ -101,8 +103,9 @@ public class UserService {
 	 * @param pattern Input value to search the User
 	 * @return Returns specific User
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public static User GetUser(String pattern) throws SQLException
+	public static User GetUser(String pattern) throws SQLException, IOException
 	{
 		User user = null;
 		String query;

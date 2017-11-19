@@ -157,7 +157,7 @@ public class UsersServlet extends HttpServlet {
 	 * 
 	 * The "changePassword"-method checks whether the given password is correct for this specific user and can be updated to the new password.
 	 */
-	private void changePassword(HttpServletRequest request)
+	private void changePassword(HttpServletRequest request) throws IOException
 	{
 		String old_password = request.getParameter("password");
 		String new_password = request.getParameter("new-password");

@@ -1,4 +1,5 @@
 package services;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,8 +27,9 @@ public class ShoppingCartService {
 	 * @param u User 
 	 * @return Shoppingcart from the User
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public static ShoppingCart GetShoppingCart(User u) throws SQLException {
+	public static ShoppingCart GetShoppingCart(User u) throws SQLException, IOException {
 		String query ="SELECT avid,ulid,amount,acolid,size from SHOPPINGCART WHERE ulid='%d'";
 		query = String.format(query, u.ulid);
 		ShoppingCart scp = new ShoppingCart(GetShoppingCartfromQuery(query));
@@ -40,8 +42,9 @@ public class ShoppingCartService {
 	 * @param ulid Userloginid
 	 * @return Shoppingcart from the Userloginid
 	 * @throws SQLException
+	 * @throws IOException 
 	 */	
-	public static ShoppingCart GetShoppingCart(int ulid) throws SQLException {
+	public static ShoppingCart GetShoppingCart(int ulid) throws SQLException, IOException {
 		String query ="SELECT avid,ulid,amount,acolid, size from SHOPPINGCART WHERE ulid='%d'";
 		query = String.format(query, ulid);
 		ShoppingCart scp = new ShoppingCart(GetShoppingCartfromQuery(query));
@@ -93,8 +96,9 @@ public class ShoppingCartService {
 	 * @param ulid the Userloginid belongs to the position
 	 * @return Arraylist of ShoppingCartpositions
 	 * @throws SQLException
+	 * @throws IOException 
 	 */		
-	private static ArrayList<ShoppingCartPosition> GetShoppingCartfromQuery(String query) throws SQLException {
+	private static ArrayList<ShoppingCartPosition> GetShoppingCartfromQuery(String query) throws SQLException, IOException {
 		ArrayList<ShoppingCartPosition> scp = new ArrayList<ShoppingCartPosition>();
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
