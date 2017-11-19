@@ -41,8 +41,8 @@ public class OrderServlet extends HttpServlet {
 		{
 			try {
 			
-			String OrderID = request.getParameter("ID");
-
+			String OrderID = request.getParameter("ID");						
+			
 			if(OrderID != null && OrderID.toString() != "")
 			{
 				Order order = OrderService.GetSpecificOrder(Integer.parseInt(OrderID));
@@ -76,6 +76,28 @@ public class OrderServlet extends HttpServlet {
 				request.getSession().removeAttribute("currentOrder");
 				
 				response.sendRedirect("users?page=ordersearch");
+			}
+			else if(currentOrder != null 
+					&& (currentUser.utid == 1 || currentUser.utid == 3)
+					&& request.getParameter("saveorder") != null 
+					&& request.getParameter("saveorder").toString().equals("true") 
+					&& request.getParameter("newstatus") != null
+					&& !request.getParameter("newstatus").toString().equals("")
+					&& !request.getParameter("newstatus").toString().equals("Gesendet")
+					&& !request.getParameter("newstatus").toString().equals(currentOrder.statuscycle.get(currentOrder.statuscycle.size()-1).description.toString())
+					)
+			{
+				OrderStatus newstatus = new OrderStatus(new Date(), request.getParameter("newstatus").toString());
+				currentOrder.statuscycle.add(newstatus);
+				
+				System.out.println("This could be update order: " + currentOrder.orid);
+				System.out.println("New status: " + newstatus.description + " " + newstatus.statusdate );
+				
+				OrderService.DeleteOrderStatuscycle(currentOrder.orid);
+				OrderService.AddOrderStatuscycle(currentOrder.statuscycle, currentOrder.orid);
+				
+				response.sendRedirect("order?ID=" + currentOrder.orid);
+				return;
 			}
 			else 
 			{

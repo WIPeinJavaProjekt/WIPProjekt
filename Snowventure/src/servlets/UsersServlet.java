@@ -356,6 +356,8 @@ public class UsersServlet extends HttpServlet {
 	{		
 		String searchOrderIDPattern = request.getParameter("searchOrderIDPattern");
 
+		ArrayList<OrderStatus> statusList = getStatusList();
+				
 		ArrayList<Order> orders = new ArrayList<Order>();
 		
 		try {
@@ -389,6 +391,29 @@ public class UsersServlet extends HttpServlet {
 			request.getSession().setAttribute("noOrderFound", false);
 		}
 		
-		request.getSession().setAttribute("orders", orders);		
+		request.getSession().setAttribute("orders", orders);	
+		request.getSession().setAttribute("statusList", statusList);		
+	}
+	
+	
+	/**
+	 * Returns list of possible status of an order 
+	 * @return statusList ArrayList<OrderStatus>
+	 */
+	private ArrayList<OrderStatus> getStatusList()
+	{
+		OrderStatus send = new OrderStatus(null, "Gesendet");
+		OrderStatus inprocess = new OrderStatus(null, "In Bearbeitung");
+		OrderStatus ondelivery = new OrderStatus(null, "In Zustellung");
+		OrderStatus finished = new OrderStatus(null, "Abgeschlossen");
+		
+		ArrayList<OrderStatus> statusList = new ArrayList<OrderStatus>();
+		
+		statusList.add(send);
+		statusList.add(inprocess);
+		statusList.add(ondelivery);
+		statusList.add(finished);
+		
+		return statusList;
 	}
 }

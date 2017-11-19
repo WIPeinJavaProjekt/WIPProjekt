@@ -44,7 +44,6 @@
 					    <div class="pure-u-1-5">
 					    	<p>
 					    		<i class="fa fa-pencil" style ="cursor: pointer;" onclick="location.href='./order?ID=${order.getOrid()}';"></i>
-					    		<i class="fa fa-trash" aria-hidden="true"></i>
 					    	</p>
 					    </div>				  
 					</div>

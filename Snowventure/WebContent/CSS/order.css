@@ -87,3 +87,8 @@ div#popup-delivery-adr {
 	margin-top: 10px;
 	width: 100%;
 }
+
+#savestatus{
+	color: green;	
+	cursor: pointer;
+}

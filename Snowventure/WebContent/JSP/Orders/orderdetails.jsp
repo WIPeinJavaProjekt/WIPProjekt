@@ -68,15 +68,17 @@
 										<span id="orderstatus"> ${ currentOrder.statuscycle.get(currentOrder.statuscycle.size()-1).description }</span>
 									</c:when>
 									<c:otherwise>
-										<select>
-											<c:forEach var="status" items="statuslist">
-												<option <c:if test ="${ currentOrder.statuscycle.get(currentOrder.statuscycle.size()-1).description eq status.description }">selected</c:if>>${ status.description }</option>
+										<select id="chooseStatus" name="chooseStatus">
+											<c:forEach var="status" items="${ statusList }">
+												<option <c:if test ="${ currentOrder.statuscycle.get(currentOrder.statuscycle.size()-1).description eq status.description }">selected</c:if> value="${ status.description }">${ status.description }</option>
 											</c:forEach>
 										</select>
+										<i id="savestatus" class="fa fa-save fa-1g" aria-hidden="true" onclick ="location.href='./order?saveorder=true&newstatus='+ jQuery('#chooseStatus option:selected').val();"></i>
 									</c:otherwise>
 								</c:choose>
 								</b>
 							</h4>
+							<p>Letzte Änderung: ${ currentOrder.statuscycle.get(currentOrder.statuscycle.size()-1).statusdate }</p>
 						</center>
 					</div>
 					</c:if>
@@ -136,8 +138,15 @@
 				</div>	
 				</c:forEach>	
 				<div class="pure-u-5-8 fullwidth" id="order-control-div">
-					<input type="button" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput order-button" onclick="location.href='./cart'">
-					<input type="button" name="processOrder" value="Jetzt kaufen (verbindlich)" class="pure-button pure-button-primary boxedinput order-button" onclick="location.href='./order?processOrder=true'">
+					<c:choose>
+						<c:when test="${ currentOrder.statuscycle.size() < 1 }"> 
+							<input type="button" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput order-button" onclick="location.href='./cart'">
+						</c:when>
+						<c:otherwise>
+							<input type="button" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput order-button" onclick="location.href='./users?page=ordersearch'">
+						</c:otherwise>
+					</c:choose>
+					<c:if test="${ currentOrder.statuscycle.size() < 1 }"><input type="button" name="processOrder" value="Jetzt kaufen (verbindlich)" class="pure-button pure-button-primary boxedinput order-button" onclick="location.href='./order?processOrder=true'"></c:if>
 				</div>		
 			</div>	
 		</c:if>

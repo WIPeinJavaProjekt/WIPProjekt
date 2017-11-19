@@ -101,7 +101,7 @@ public class OrderService {
 	 * @return positiv in case of success, negativ in case of an error
 	 * @throws SQLException
 	 */	
-	private static int AddOrderStatuscycle(ArrayList<OrderStatus> statuscycle, int orid) {
+	public static int AddOrderStatuscycle(ArrayList<OrderStatus> statuscycle, int orid) {
 		int osid= -1;
 		for(OrderStatus os: statuscycle)
 		{
@@ -164,7 +164,7 @@ public class OrderService {
 	 * @param orid the depending orderid
 	 * @return positiv in case of success, negativ in case of an error
 	 */	
-	private static void DeleteOrderStatuscycle(int orid)
+	public static void DeleteOrderStatuscycle(int orid)
 	{
 		String query = "DELETE ASSIGNMENTSTATUS WHERE orid = '%d'";
 		query = String.format(query, orid);
@@ -241,7 +241,7 @@ public class OrderService {
 		while(result.next())
 		{
 			
-			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("postcode"), result.getString("streetno"));
+			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("postcode"), result.getString("street"));
 			o = new Order(a, GetShoppingCartFromOrder(result.getInt("orid")),GetOrderStatuscycle(result.getInt("orid")),result.getInt("orid"), result.getString("name"), result.getString("surname"), result.getString("email"), result.getInt("ulid"));
 			orders.add(o);
 		}
@@ -266,7 +266,7 @@ public class OrderService {
 		while(result.next())
 		{
 			
-			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("postcode"), result.getString("streetno"));
+			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("postcode"), result.getString("street"));
 			o = new Order(a, GetShoppingCartFromOrder(orid),GetOrderStatuscycle(orid),orid, result.getString("name"), result.getString("surname"), result.getString("email"), result.getInt("ulid"));
 			return o;
 		}
@@ -319,7 +319,7 @@ public class OrderService {
 		
 		while(result.next())
 		{
-			OrderStatus os = new OrderStatus(result.getDate("statusday"),result.getString("status"));
+			OrderStatus os = new OrderStatus(result.getTimestamp("statusday"),result.getString("status"));
 			statuslist.add(os);
 		}
 		
