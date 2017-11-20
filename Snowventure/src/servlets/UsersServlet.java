@@ -203,7 +203,7 @@ public class UsersServlet extends HttpServlet {
 		
 		try 
 		{
-			userlist = UserService.GetUsers(request.getParameter("user-info"));
+			userlist = UserService.GetUsers(request.getParameter("user-info"), Integer.parseInt(request.getParameter("categories").toString()));
 		} 
 		catch (SQLException e) 
 		{

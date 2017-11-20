@@ -16,10 +16,10 @@
 				        <div class="pure-u-1-5" >
 					        <select name="categories" class="boxedinput">
 					        <c:set var="cat" value="${category}"/>
-					          <option value="all" <c:if test="cat eq 'all'">selected</c:if>>Alle</option>
-							  <option value="customer" <c:if test="cat eq 'customer'">selected</c:if>>Kunde</option>
-							  <option value="employee" <c:if test="cat eq 'employee'">selected</c:if>>Mitarbeiter</option>
-							  <option value="admin" <c:if test="cat eq 'admin'">selected</c:if>>Admin</option>
+					          <option value="-1" <c:if test="cat eq 'all'">selected</c:if>>Alle</option>
+							  <option value="2" <c:if test="cat eq 'customer'">selected</c:if>>Kunde</option>
+							  <option value="3" <c:if test="cat eq 'employee'">selected</c:if>>Mitarbeiter</option>
+							  <option value="1" <c:if test="cat eq 'admin'">selected</c:if>>Admin</option>
 							</select>
 						</div>
 				        <div class="pure-u-3-5">

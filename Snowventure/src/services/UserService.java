@@ -50,11 +50,12 @@ public class UserService {
 	/**
 	 * Returns all users where login matches the given pattern
 	 * @param pattern Searchvalue
+	 * @param utid UsertypeID
 	 * @return ArrayList of Users
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
-	public static ArrayList<User> GetUsers(String pattern) throws SQLException, IOException
+	public static ArrayList<User> GetUsers(String pattern, int utid) throws SQLException, IOException
 	{
 		ArrayList<User> users = new ArrayList<User>();
 		String query;
@@ -68,8 +69,9 @@ public class UserService {
 				" FROM USERDATA a "+
 				" left join USERLOGIN b ON a.udid = b.udid"+
 				" left join SAFETYQUESTION s ON s.sqid = b.sqid"+
-				" WHERE b.login like '%"+pattern+"%' "+
-				" AND a.TechIsActive = 1 AND a.TechIsDeleted = 0 "+
+				" WHERE b.login like '%"+pattern+"%' ";
+				if ( utid != -1) query += " AND b.utid = "+utid+" ";
+				query += " AND a.TechIsActive = 1 AND a.TechIsDeleted = 0 "+
 				" AND b.TechIsActive = 1 AND b.TechIsDeleted = 0 "+
 				" AND s.TechIsActive = 1 AND s.TechIsDeleted = 0 "+
 				" ORDER BY b.login";
