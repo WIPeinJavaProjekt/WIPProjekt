@@ -49,45 +49,6 @@
 	border-top: solid;
 }
 
-#change-delivery-adr {
-	width:100%;
-	height:100%;
-	opacity:.95;
-	top:0;
-	left:0;
-	display:none;
-	position:fixed;
-	background-color:#313131;
-	overflow:auto
-}
-i#close {
-	position:absolute;
-	right:-14px;
-	top:-14px;
-	cursor:pointer;
-	color: #FFF;
-}
-div#popup-delivery-adr {
-	position:absolute;
-	left:50%;
-	top:17%;
-	margin-left:-202px;
-	font-family:'Raleway',sans-serif
-}
-#delivery-adr-form {
-	max-width:300px;
-	min-width:250px;
-	padding:10px 50px;
-	border:2px solid gray;
-	border-radius:10px;
-	background-color:#fff
-}
-
-#delivery-adr-submit{
-	margin-top: 10px;
-	width: 100%;
-}
-
 #savestatus{
 	color: green;	
 	cursor: pointer;

@@ -33,9 +33,9 @@
 	<div class="pure-g content-container textbox">
 		<div class="pure-u-1-8 sizezero"></div>
 		
-		<div id="change-delivery-adr">
-			<div id="popup-delivery-adr">
-				<form action="order?neworder=true" id="delivery-adr-form" method="post" name="delivery-adr-form">
+		<div id="popup-div">
+			<div id="popup-div-content">
+				<form action="order?neworder=true" id="popup-div-form" method="post" name="delivery-adr-form">
 					<i id="close" class="fa fa-close fa-1g" aria-hidden="true" onclick ="div_hide()"></i>
 					<h4>Neue Versandadresse</h4>
 					<hr>
@@ -45,7 +45,7 @@
 					<input required id="houseno" name="houseno" placeholder="Hausnummer" type="text">
 					<input required id="postcode" name="postcode" placeholder="PLZ" type="text">
 					<input required id="location" name="location" placeholder="Ort" type="text">
-					<input class="pure-button pure-button-primary" name="delivery-adr-submit" type="submit" id="delivery-adr-submit" value="Speichern">
+					<input class="pure-button pure-button-primary" name="delivery-adr-submit" type="submit" id="popup-submit" value="Speichern">
 				</form>
 			</div>
 		</div>

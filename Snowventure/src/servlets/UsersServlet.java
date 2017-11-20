@@ -123,6 +123,14 @@ public class UsersServlet extends HttpServlet {
 			response.sendRedirect("users?page=userinfo&selectedUser=" + selectedUser.username );
 			return;
 		}
+		else if(request.getParameter("deleteUserByUser") != null)
+		{
+			//Logic to deactivate user
+			
+			request.getSession().removeAttribute("currentUser");
+			response.sendRedirect("start");
+			return;
+		}
 				
 		doGet(request, response);
 	}

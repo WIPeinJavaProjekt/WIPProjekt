@@ -53,7 +53,7 @@
 		<c:if test="${ not empty orders && currentUser.utid == 2 }">
 			<div class="pure-g">
 			    <div class="pure-u-1-4"><p><b>Bestellnummer</b></p></div>
-			    <div class="pure-u-1-4"><p><b>Bestellstatus</b></p></div>
+			    <div class="pure-u-1-4"><p><b>Status</b></p></div>
 			    <div class="pure-u-1-4"><p><b>Bestelldatum</b></p></div>    
 			</div>
 		 	<c:forEach var="order" items="${orders}">

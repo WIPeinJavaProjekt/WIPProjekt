@@ -285,6 +285,44 @@ footer .pure-u-1-3 {
 }
 
 
+#popup-div {
+	width:100%;
+	height:100%;
+	opacity:.95;
+	top:0;
+	left:0;
+	display:none;
+	position:fixed;
+	background-color:#313131;
+	overflow:auto
+}
+i#close {
+	position:absolute;
+	right:-14px;
+	top:-14px;
+	cursor:pointer;
+	color: #FFF;
+}
+div#popup-div-content {
+	position:absolute;
+	left:50%;
+	top:17%;
+	margin-left:-202px;
+	font-family:'Raleway',sans-serif
+}
+#popup-div-form {
+	max-width:300px;
+	min-width:250px;
+	padding:10px 50px;
+	border:2px solid gray;
+	border-radius:10px;
+	background-color:#fff
+}
+
+#popup-submit{
+	margin-top: 10px;
+	width: 100%;
+}
 
 
 .pure-form input[type="checkbox"]{

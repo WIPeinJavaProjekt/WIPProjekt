@@ -2,6 +2,23 @@
 <div class="pure-g">
 <div class="pure-u-1-5 sizezero"></div>
 <div class="pure-u-3-5 fullwidth">
+
+	<div id="popup-div">
+		<div id="popup-div-content">
+			<form id="popup-div-form" name="delete-user-form" action="users" method="POST">
+				<i id="close" class="fa fa-close fa-1g" aria-hidden="true" onclick ="div_hide()"></i>
+				<h4>Nutzerkonto löschen</h4>
+				<hr>
+				<center>
+				<p>Wollen Sie wirklich Ihr Nutzerkonto löschen?</p>
+				<p>Bei Fortsetzung dieses Vorgangs gehen alle mit Ihrem Konto in Verbindung stehenden Daten für Sie verloren. Aus betriebsbedingten Gründen bleiben Ihre Daten auf unbestimmte Zeit in unserem System erhalten.</p>
+				<p>Um fortzufahren klicken Sie auf "Unwiederruflich löschen".</p>
+				<input class="pure-button pure-button-primary" name="deleteUserByUser" type="submit" id="popup-submit" value="Unwiederruflich löschen">
+				</center>
+			</form>
+		</div>
+	</div>
+
 	<form class="pure-form pure-form-stacked  textbox" id="mydata-form" action="users?page=mydata" method="post">
 	    <fieldset>
 	        
@@ -121,6 +138,14 @@
 		        <button type="submit" name="update-squestion" class="pure-button pure-button-primary boxedinput">Änderung speichern</button>
 	    	</div>
 	    </fieldset>
+	</form>
+	<form class="pure-form pure-form-stacked security-form  textbox">
+		<fieldset>
+			<legend>
+	    		<h3>Mein Nutzerkonto löschen</h3>
+	    	</legend>
+			<button type="button" name="delete-user" class="pure-button pure-button-primary boxedinput" onclick="div_show()">Nutzerkonto löschen</button>
+		</fieldset>
 	</form>
 	</div>
 <div class="pure-u-1-5 sizezero"></div>

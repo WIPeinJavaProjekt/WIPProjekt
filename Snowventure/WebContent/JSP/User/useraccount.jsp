@@ -17,6 +17,7 @@
 		
 		<script src="/Snowventure/JS/jquery-3.2.1.min.js"></script>		
 		<script type="text/javascript" src="./JS/header.js"></script>
+		<script type="text/javascript" src="./JS/newOrderAdress.js"></script>
 		
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="icon" type="image/png" href="./Images/favicon.png" sizes="32x32">
