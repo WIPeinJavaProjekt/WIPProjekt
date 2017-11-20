@@ -296,12 +296,14 @@ public class ArticleService {
 		
 		String query = "SELECT aid, name, description, acid, manufacturer, gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0";
 		if(c != -1)
-			query +=" AND acid="+ c;		
+			query +=" AND acid="+ c;	
+		if(pattern != "")
+			query +=" AND name like '%"+pattern+"%'";
 		if(manufacturer != "")
 			query +=" AND INSTR('"+manufacturer+"',manufacturer)";
 		if(gender != "")
 			query +=" AND INSTR('"+gender+"',gender)";
-		
+			
 		String subquery="";
 		if(minprice >0)
 			subquery=" AND AID IN(SELECT distinct aid from ARTICLEVERSION where defaultprice >="+minprice+"";
