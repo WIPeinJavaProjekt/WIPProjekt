@@ -285,11 +285,8 @@ public class ArticleService {
 	 */
 	public static ArrayList<Article> GetAllArticlesByCategorie(int c, String pattern, int piclimit, int versionlimit) throws SQLException, IOException{
 
-		String query = "SELECT aid, name, description, acid, manufacturer, gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND acid ='%d' AND name like '%"+pattern+"%';";
-		query = String.format(query, c);
-		
-		
-		
+		String query = "SELECT aid, name, description, acid, manufacturer, gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND acid ='"+c+"' AND name like '%"+pattern+"%';";
+
 		return SearchForArticles(query,piclimit,versionlimit);
 	}
 	

@@ -134,10 +134,17 @@ public class UsersServlet extends HttpServlet {
 	 */
 	private void findArticles(HttpServletRequest request) throws IOException {
 		String searchArticlePattern = request.getParameter("searchArticlePattern");
+		int category = Integer.parseInt(request.getParameter("categories").toString());
+		
 		ArrayList<Article> articles = null;
 		
 		try {
-			articles = ArticleService.GetAllArticlesByName(searchArticlePattern,1,0);
+			if(category == -1) {
+				articles = ArticleService.GetAllArticlesByName(searchArticlePattern,1,0);
+			}
+			else {
+				articles = ArticleService.GetAllArticlesByCategorie(category, searchArticlePattern,1,0);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
