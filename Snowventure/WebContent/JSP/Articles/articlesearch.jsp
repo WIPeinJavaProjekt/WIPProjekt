@@ -41,14 +41,13 @@
 </div>
 
 <center>
-
-	<div class="pure-g">
-	    <div class="pure-u-1-4"><p><b>Artikelnummer</b></p></div>
-	    <div class="pure-u-1-4"><p><b>Hersteller</b></p></div>
-	    <div class="pure-u-1-4"><p><b>Bezeichnung</b></p></div>
-	</div>
 	<div class="search-results">	
 		<c:if test="${ not empty articles }">
+			<div class="pure-g">
+			    <div class="pure-u-1-4"><p><b>Artikelnummer</b></p></div>
+			    <div class="pure-u-1-4"><p><b>Hersteller</b></p></div>
+			    <div class="pure-u-1-4"><p><b>Bezeichnung</b></p></div>
+			</div>
 		 	<c:forEach var="article" items="${articles}">
 				<div >
 				<hr>
