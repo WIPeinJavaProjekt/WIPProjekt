@@ -7,6 +7,8 @@ public class User {
 	public int ulid;
 	public int utid;
 	public int udid;
+	public int techisactive;
+	public int techisdeleted;
 	public Safetyquestion squestion;
 	public String username;
 	public String password;
@@ -43,7 +45,7 @@ public class User {
 		this.utid = utid;
 	}
 	
-	public User(Safetyquestion question, String username, String password, String name, String surname, Adress adress, String email, int utid, int ulid)
+	public User(Safetyquestion question, String username, String password, String name, String surname, Adress adress, String email, int utid, int ulid, int TechIsActive, int TechIsDeleted)
 	{
 		this.squestion = question;
 		this.username = username;
@@ -54,6 +56,8 @@ public class User {
 		this.adress = adress;
 		this.utid = utid;
 		this.ulid = ulid;
+		this.techisactive = TechIsActive;
+		this.techisdeleted = TechIsDeleted;
 	}
 
 	
@@ -109,5 +113,15 @@ public class User {
 	public ShoppingCart getShoppingcart()
 	{
 		return this.shoppingcart;
+	}
+	
+	public int getTechisactive()
+	{
+		return this.techisactive;
+	}
+	
+	public int getTechisdeleted()
+	{
+		return this.techisdeleted;
 	}
 }

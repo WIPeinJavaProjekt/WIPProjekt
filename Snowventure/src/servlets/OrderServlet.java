@@ -68,7 +68,7 @@ public class OrderServlet extends HttpServlet {
 			{
 				System.out.println("Order process started");
 				
-				currentOrder.statuscycle.add(new OrderStatus(new Date(),"Gesendet"));
+				currentOrder.statuscycle.add(new OrderStatus(new Date(),"Neu"));
 				
 				OrderService.AddOrder(currentOrder);
 				
@@ -85,7 +85,7 @@ public class OrderServlet extends HttpServlet {
 					&& request.getParameter("saveorder").toString().equals("true") 
 					&& request.getParameter("newstatus") != null
 					&& !request.getParameter("newstatus").toString().equals("")
-					&& !request.getParameter("newstatus").toString().equals("Gesendet")
+					&& !request.getParameter("newstatus").toString().equals("Neu")
 					&& !request.getParameter("newstatus").toString().equals(currentOrder.statuscycle.get(currentOrder.statuscycle.size()-1).description.toString())
 					)
 			{

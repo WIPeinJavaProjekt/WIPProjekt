@@ -114,6 +114,14 @@ method="post">
 		            <input class="boxedinput" id="safetyAnswer" name="safetyAnswer" type="text"  <c:if test="${not empty currentUser && selectedUser != null}">value="${ selectedUser.squestion.getAnswer() }"</c:if> required placeholder="Antwort">
 		        </div>
 	        </fieldset>
+	        <c:if test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">
+	        <fieldset class="pure-group">
+	        	<label>Nutzerstatus</label>			        
+		        <div class="pure-control-group">
+					<input style="margin-left: 10px" type="checkbox" name="user-status" id="user-status" <c:if test="${selectedUser.techisactive == 1}">checked</c:if>>	aktiv</input>
+		        </div>
+	        </fieldset>
+	        </c:if>
 		</div>
 	</div>
 </form>

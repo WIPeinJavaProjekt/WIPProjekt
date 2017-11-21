@@ -118,14 +118,18 @@ public class UsersServlet extends HttpServlet {
 		}
 		else if(request.getParameter("updateSelection") != null)
 		{
-			User selectedUser = (User)request.getSession().getAttribute("selectedUser");			
+			User selectedUser = (User)request.getSession().getAttribute("selectedUser");
+
 			updateSelectedUser(selectedUser, request);
 			response.sendRedirect("users?page=userinfo&selectedUser=" + selectedUser.username );
 			return;
 		}
 		else if(request.getParameter("deleteUserByUser") != null)
 		{
-			//Logic to deactivate user
+			user.techisactive = 0;
+			user.techisdeleted = 1;
+			
+			UserService.UpdateUser(user);
 			
 			request.getSession().removeAttribute("currentUser");
 			response.sendRedirect("start");
@@ -333,6 +337,7 @@ public class UsersServlet extends HttpServlet {
 		
 		request.getSession().removeAttribute("error");
 		
+		//Validate and set the new password of the selected user
 		if(password != "" && passwordrepeat != "" && password.equals(passwordrepeat))
 		{
 			user.password = request.getParameter("password").toString();
@@ -349,9 +354,24 @@ public class UsersServlet extends HttpServlet {
 		user.surname = request.getParameter("surname");
 		user.name = request.getParameter("name");			
 
+		//Check if the usertype of the selected user was changed
 		if(usertype != null && usertype != "")
 		{
 			user.utid = usertype.equals("admin")? 1 : usertype.equals("employee")? 3 : 2;
+		}
+				
+		//Check if the status of the selected user was changed
+		if(request.getParameter("user-status") == null && user.techisactive == 1)
+		{
+			user.techisactive = 0;
+			user.techisdeleted = 1;
+			System.out.println("deactivate user");
+		}
+		else if(request.getParameter("user-status") != null && request.getParameter("user-status").toString().equals("on") && user.techisactive == 0)
+		{			
+			user.techisactive = 1;
+			user.techisdeleted = 0;
+			System.out.println("activate user");
 		}
 		
 		UserService.UpdateUser(user);	
@@ -417,7 +437,7 @@ public class UsersServlet extends HttpServlet {
 	 */
 	private ArrayList<OrderStatus> getStatusList()
 	{
-		OrderStatus send = new OrderStatus(null, "Gesendet");
+		OrderStatus send = new OrderStatus(null, "Neu");
 		OrderStatus inprocess = new OrderStatus(null, "In Bearbeitung");
 		OrderStatus ondelivery = new OrderStatus(null, "In Zustellung");
 		OrderStatus finished = new OrderStatus(null, "Abgeschlossen");

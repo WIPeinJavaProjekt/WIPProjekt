@@ -65,15 +65,15 @@ public class UserService {
 				"a.postcode, a.street,"+
 				"a.streetno, a.city, a.phone,"+
 				"b.login, b.password, b.safetyanswer,"+
-				"s.sqid, s.SafetyQuestion"+
+				"s.sqid, s.SafetyQuestion, b.TechIsActive, b.TechIsDeleted"+
 				" FROM USERDATA a "+
 				" left join USERLOGIN b ON a.udid = b.udid"+
 				" left join SAFETYQUESTION s ON s.sqid = b.sqid"+
 				" WHERE b.login like '%"+pattern+"%' ";
 				if ( utid != -1) query += " AND b.utid = "+utid+" ";
-				query += " AND a.TechIsActive = 1 AND a.TechIsDeleted = 0 "+
-				" AND b.TechIsActive = 1 AND b.TechIsDeleted = 0 "+
-				" AND s.TechIsActive = 1 AND s.TechIsDeleted = 0 "+
+				//query += " AND a.TechIsActive = 1 AND a.TechIsDeleted = 0 "+
+				//" AND b.TechIsActive = 1 AND b.TechIsDeleted = 0 "+
+				query += " AND s.TechIsActive = 1 AND s.TechIsDeleted = 0 "+
 				" ORDER BY b.login";
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
@@ -89,7 +89,9 @@ public class UserService {
 					a,
 					result.getString("email"),
 					result.getInt("utid"),
-					result.getInt("ulid")
+					result.getInt("ulid"),
+					result.getInt("TechIsActive"),
+					result.getInt("TechIsDeleted")
 					);
 			u.orders = new ArrayList<Order>(OrderService.GetAllOrders(u.ulid));
 			u.shoppingcart = new ShoppingCart(ShoppingCartService.GetShoppingCart(u));
@@ -117,7 +119,7 @@ public class UserService {
 				"a.postcode, a.street,"+
 				"a.streetno, a.city, a.phone,"+
 				"b.login, b.password, b.safetyanswer,"+
-				"s.sqid, s.SafetyQuestion"+
+				"s.sqid, s.SafetyQuestion, b.TechIsActive, b.TechIsDeleted"+
 				" FROM USERDATA a "+
 				" left join USERLOGIN b ON a.udid = b.udid"+
 				" left join SAFETYQUESTION s ON s.sqid = b.sqid"+
@@ -138,7 +140,9 @@ public class UserService {
 					a,
 					result.getString("email"),
 					result.getInt("utid"),
-					result.getInt("ulid")
+					result.getInt("ulid"),
+					result.getInt("TechIsActive"),
+					result.getInt("TechIsDeleted")
 					);
 			user = u;
 			user.orders = new ArrayList<Order>(OrderService.GetAllOrders(u.ulid));
@@ -153,7 +157,7 @@ public class UserService {
 	  * @param user
 	  */
 	public static void UpdateUser(User user) {
-		String query = "UPDATE USERDATA SET name='%s', surname ='%s', email ='%s', postcode='%s',street='%s',city='%s', phone='%s',streetno='%s'"
+		String query = "UPDATE USERDATA SET name='%s', surname ='%s', email ='%s', postcode='%s',street='%s',city='%s', phone='%s',streetno='%s', TechIsActive=%d, TechIsDeleted=%d"
 				+ " WHERE udid in (SELECT udid from USERLOGIN where ulid = '%d')";
 		query = String.format(query,
 				user.name,
@@ -164,6 +168,8 @@ public class UserService {
 				user.adress.location,
 				"1337",
 				user.adress.houseno,
+				user.techisactive,
+				user.techisdeleted,
 				user.ulid
 				);
 		
@@ -171,12 +177,14 @@ public class UserService {
 
 		DatabaseConnector.createConnection().UpdateQuery(query);
 				
-		query = "UPDATE USERLOGIN SET login ='%s', password='%s', safetyanswer='%s', sqid= '%d' where ulid ='%d'";
+		query = "UPDATE USERLOGIN SET login ='%s', password='%s', safetyanswer='%s', sqid= '%d', TechIsActive=%d, TechIsDeleted=%d where ulid =%d";
 		query = String.format(query, 
 				user.username,
 				user.password,
 				user.squestion.getAnswer(),
 				user.squestion.sqid,
+				user.techisactive,
+				user.techisdeleted,
 				user.ulid
 				);
 		
