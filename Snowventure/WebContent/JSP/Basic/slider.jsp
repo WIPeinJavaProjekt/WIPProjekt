@@ -17,20 +17,34 @@
 </div>
 <script>
 var slideIndex = 1;
+var clickcounter = 0;
 showDivs(slideIndex);
 
 function plusDivs(n) {
-  showDivs(slideIndex += n);
+	if(clickcounter <1){
+		  clickcounter++;
+	showDivs(slideIndex += n);
+	  setTimeout(function(){},2000);  
+	clickcounter--;
+	  }
 }
 
 function showDivs(n) {
-  var i;
+   var i;
+  
   var x = document.getElementsByClassName("mySlides");
+  
   if (n > x.length) {slideIndex = 1}    
   if (n < 1) {slideIndex = x.length}
   for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";  
+	  
+	  $(x[slideIndex-1]).fadeOut(500);
+	  x[i].style.display = "none";
   }
-  x[slideIndex-1].style.display = "block";  
+  //x[slideIndex-1].style.display = "block";
+  $(x[slideIndex-1]).fadeIn(1500);
 }
+
+
+
 </script>

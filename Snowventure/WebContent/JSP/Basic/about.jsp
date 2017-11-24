@@ -19,7 +19,7 @@
 	</head>
 	<body>
 		<%@include file = "header.jsp" %>
-		<div class="pure-g">
+		<div class="pure-g content-container">
 			<div class="pure-u-1-5"></div>
 			<div class="pure-u-3-5">
 			

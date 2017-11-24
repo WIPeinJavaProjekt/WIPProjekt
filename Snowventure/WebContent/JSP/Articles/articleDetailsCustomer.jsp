@@ -26,7 +26,7 @@
 	</head>
 	<body>	
 		<%@include file = "../Basic/header.jsp" %> 
-	
+		<div class="content-container">
 		<div class="pure-g articledescriptioncontainer">
 		    <div class="pure-u-4-5 fullwidth">		    
     			<div class="w3-content w3-display-container w3slidmod articleslider" align="center">
@@ -104,7 +104,7 @@
 			<h2>Beschreibung</h2>
 			${article.GetDescription()}		
 		</div>
-		
+		</div>
 		<%@include file = "../Basic/footer.jsp" %>
 	</body>
 </html>
