@@ -28,7 +28,8 @@
 		<%@include file = "../Basic/header.jsp" %> 
 		<div class="content-container">
 		<div class="pure-g articledescriptioncontainer">
-		    <div class="pure-u-1-1 fullwidth">		    
+		    <div class="pure-u-1-1 fullwidth">		
+		     
     			<div class="w3-content w3-display-container w3slidmod articleslider" align="center">
     			
     				<c:forEach items="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures()}" var="ap">

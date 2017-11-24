@@ -228,9 +228,13 @@ public class ArticleService {
 		{
 			ArrayList<String> sizes = new ArrayList<String>(GetAllArticleVersionsize(result.getInt("avid")));
 			ArticleVersion version = new ArticleVersion(result.getInt("avid"),result.getString("property"),result.getString("propertyvalue"),result.getDouble("defaultprice"),a,sizes,ArticleColorService.GetSpecificColors(result.getInt("avid")));
+			System.out.println("Kriege Version: "+ System.currentTimeMillis());
 			version.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleVersionId(version.versionid,piclimit).clone();
+			System.out.println("Kriege Version+Bild: "+ System.currentTimeMillis());
 			av.add(version);
 		}
+		
+		System.out.println("Kriege alle Articleversionen: "+ System.currentTimeMillis());
 		
 		return av;
 	}
@@ -329,9 +333,7 @@ public class ArticleService {
 			subquery=" AND AID IN(SELECT aid FROM ARTICLEVERSIONSIZE s LEFT OUTER JOIN ARTICLEVERSION v ON  s.avid = v.avid WHERE INSTR('"+size+"',size))";
 		query+= subquery;
 		
-		
-		
-		
+	
 		
 		System.out.println("Filter: "+subquery);
 		System.out.println("Filter: "+query);

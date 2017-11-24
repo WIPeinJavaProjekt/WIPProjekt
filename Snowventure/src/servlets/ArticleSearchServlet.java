@@ -128,13 +128,14 @@ public class ArticleSearchServlet extends HttpServlet {
 				si = Arrays.toString(sizes);
 			if(colors != null)
 				col = Arrays.toString(colors);
-			
+			System.out.println("Suche Starten: "+ System.currentTimeMillis());
 			articles = ArticleService.GetAllArticlesByFilter(category,searchPattern == null? "" : searchPattern,1,1,gen,mf,minprice,maxprice,col,si);
-			
+			System.out.println("Suche beendet: "+System.currentTimeMillis());
 			Path currentRelativePath = Paths.get("");
+			System.out.println(currentRelativePath.toAbsolutePath().toString());
 			request.getSession().setAttribute("imagePath", currentRelativePath.toAbsolutePath().toString() + "\\");
 			
-			for (Article a: articles) {
+			/*for (Article a: articles) {
 				for(ArticlePicture ap: a.versions.get(a.GetSelectedVersion()).pictures) {
 					File file = new File("" + ap.name);
 					try {
@@ -143,8 +144,8 @@ public class ArticleSearchServlet extends HttpServlet {
 					 System.out.println("Write error for " + file.getPath() + ": " + e.getMessage());
 					}
 				}
-			}
-			
+			}*/
+			System.out.println("Bilder angezeigt: "+System.currentTimeMillis());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

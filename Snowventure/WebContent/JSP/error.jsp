@@ -23,10 +23,10 @@
 		
 		<%@include file = "./Basic/header.jsp" %>		
 			
-		<div class="contentwrapp" id ="searchbox">
+		<div>
 			<div class="pure-g" id ="banner">
 			<div class="pure-u-1-5"></div>
-			<div id="wrapper" class="pure-u-3-5">
+			<div class="pure-u-3-5">
 				<center>
 					<img src="./Images/Error_image.jpg"/>
 					<h1>Ein Fehler ist aufgetreten!</h1>

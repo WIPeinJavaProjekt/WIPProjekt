@@ -24,6 +24,7 @@
 		<%@include file = "./Basic/header.jsp" %>		
 			
 		<div class="contentwrapp" id ="searchbox">
+		
 			<div class="pure-g" id ="banner">
 			<div class="pure-u-1-5 sizezero"></div>
 			<div id="wrapper" class="pure-u-3-5 fullwidth">

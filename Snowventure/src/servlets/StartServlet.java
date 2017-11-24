@@ -126,10 +126,10 @@ public class StartServlet extends HttpServlet {
 				articles = ArticleService.GetAllArticlesByCategorie(category, searchPattern,1,1);
 			}
 			
-			Path currentRelativePath = Paths.get("");
-			request.getSession().setAttribute("imagePath", currentRelativePath.toAbsolutePath().toString() + "\\");
-			
-			for (Article a: articles) {
+			//Path currentRelativePath = Paths.get("");
+			//request.getSession().setAttribute("imagePath", currentRelativePath.toAbsolutePath().toString() + "\\");
+			//System.out.println(currentRelativePath.toAbsolutePath().toString());
+			/*for (Article a: articles) {
 				for(ArticlePicture ap: a.versions.get(a.GetSelectedVersion()).pictures) {
 					File file = new File("" + ap.name);
 					try {
@@ -138,7 +138,7 @@ public class StartServlet extends HttpServlet {
 					 System.out.println("Write error for " + file.getPath() + ": " + e.getMessage());
 					}
 				}
-			}
+			}*/
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

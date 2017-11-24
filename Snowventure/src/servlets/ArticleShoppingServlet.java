@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -57,7 +59,6 @@ public class ArticleShoppingServlet  extends HttpServlet {
 			request.setAttribute("article", this.article);
 			request.setAttribute("availableVersions", this.article.versions.size()-1);
 		}
-				
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/JSP/Articles/articleDetailsCustomer.jsp");
 		rd.forward(request, response);
