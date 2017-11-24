@@ -619,11 +619,14 @@ overflow:scroll;
 }
 
 .content-container{
-	padding-top:5%;
+	padding-top:2%;
 	padding-bottom:8%;
 	background-color: rgb(250,249,246);
 }
 
+.versionchoice{
+	border: 2px solid black;
+}
 
 
 

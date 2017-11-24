@@ -28,7 +28,7 @@
 		<%@include file = "../Basic/header.jsp" %> 
 		<div class="content-container">
 		<div class="pure-g articledescriptioncontainer">
-		    <div class="pure-u-4-5 fullwidth">		    
+		    <div class="pure-u-1-1 fullwidth">		    
     			<div class="w3-content w3-display-container w3slidmod articleslider" align="center">
     			
     				<c:forEach items="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures()}" var="ap">
@@ -63,7 +63,7 @@
 					}
 				</script>		    
 		    </div>
-		    <div class="pure-u-1-5 fullwidth  textbox">
+		    <div class="pure-u-1-1 fullwidth  textbox">
 			    <div>
 			    	<form class="pure-form" action="articleshopping" method="post">
 					    <h2>${article.GetName()}</h2>
@@ -78,15 +78,19 @@
 								</select>
 							</div>
 					    <br>
+					    Version wählen <br>
 						    <c:forEach items="${article.GetAllVersions()}" var="av">
-						    	<div id="selectColor" name="selectColor" onclick="customerChangeVersion(${article.GetId()}, 'articleshopping', ${article.GetAllVersions().indexOf(article.getAvByVersionId(av.GetAvId()))})" class="pure-button pure-button-active" style="background-color:${av.getColors().get(0).GetHexcode()};">
+						    	
+						    	<div id="selectColor" name="selectColor" onclick="customerChangeVersion(${article.GetId()}, 'articleshopping', ${article.GetAllVersions().indexOf(article.getAvByVersionId(av.GetAvId()))})" class="pure-button  <c:if test="${av.GetAvId() == article.GetAllVersions().get(article.GetSelectedVersion()).GetAvId()}">
+						    	 versionchoice 
+						    	</c:if>" style="background-color:${av.getColors().get(0).GetHexcode()};">
 									<div class="pure-control-group">
 								   		<p><font color="${av.getColors().get(0).getBackgroundHexcode()}"><b>${av.getColorsAsString()}</b></font></p>
 								   	</div>
 							   	</div>
 							</c:forEach>				    
 					    <br>
-					    <h3>${article.GetPriceFormatted()} EUR</h3>
+					    <h3>Preis ${article.GetPriceFormatted()} EUR</h3>
 					    <div>
 						    	<div class="pure-control-group">
 						            <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge" min="1">
