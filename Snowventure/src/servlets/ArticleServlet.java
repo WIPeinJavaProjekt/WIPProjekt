@@ -110,6 +110,8 @@ public class ArticleServlet extends HttpServlet {
 			}
 		} else if(request.getParameter("addImage") != null) {
 			addImage(request);
+			response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.GetSelectedVersion());
+			return;
 		} else if(request.getParameter("addArticleVersion") != null) {
 			try {
 				addArticleVersion(request);
@@ -128,6 +130,7 @@ public class ArticleServlet extends HttpServlet {
 	}
 
 	private int addArticleVersion(HttpServletRequest request) throws SQLException, IOException, ServletException {
+		this.articleVersion = new ArticleVersion();
 		this.articleVersion.property = request.getParameter("property");
 		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
 		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));

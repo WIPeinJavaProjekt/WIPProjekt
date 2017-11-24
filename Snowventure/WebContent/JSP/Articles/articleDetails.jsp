@@ -59,10 +59,10 @@
 				    	<div class="pure-g">
 							<div class="pure-u-1-2 fullwidth">
 						    	<div class="pure-control-group">
-						            <input  class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
+						            <input required class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
 						        </div>
 						        <div class="pure-control-group">
-						            <input  class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
+						            <input required class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
 						        </div>
 						        <div class="pure-control-group">
 						        	<select name="category" class="boxedinput">
@@ -72,7 +72,7 @@
 									</select>
 						        </div>				        
 						        <div class="pure-control-group">
-						            <textarea  class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
+						            <textarea required class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
 						            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>">${article.GetDescription()}</textarea>
 						        </div>
 						        <c:choose>
@@ -99,7 +99,7 @@
 							</div>
 							<div class="pure-u-1-2 fullwidth">
 								<div class="pure-control-group">
-						            	<input class="boxedinput custom-file-input" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
+						            	<input required class="boxedinput custom-file-input" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
 						        </div>
 						        <div class="pure-control-group">
 						        	<c:if test="${updateArticle}">
@@ -121,7 +121,7 @@
 						        <br>
 						        <script type="text/javascript" src="./JS/dropdown.js"></script>	
 						        <div class="pure-control-group">
-						            <input  class="boxedinput" id="price" name="price" value="${article.GetPrice()}" type="number" step="0.01" placeholder="Preis">
+						            <input required class="boxedinput" id="price" name="price" value="${article.GetPrice()}" type="number" step="0.01" placeholder="Preis">
 						        </div>
 						        <div class="pure-control-group">
 						        	<c:if test="${updateArticle}">
