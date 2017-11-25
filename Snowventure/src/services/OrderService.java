@@ -120,7 +120,7 @@ public class OrderService {
 	 * @return positiv in case of success, negativ in case of an error
 	 * @throws SQLException
 	 */	
-	private static int AddOrderStatus(OrderStatus os, int orid) {
+	public static int AddOrderStatus(OrderStatus os, int orid) {
 		int osid= -1;
 		
 		String query ="INSERT INTO ASSIGNMENTSTATUS(status,statusday, orid) VALUES('%s','%s', '%d')";
@@ -154,7 +154,7 @@ public class OrderService {
 	 */	
 	private static void DeleteOrderDetailPosition(int orid)
 	{
-		String query = "DELETE ASSIGNMENTDETAILS WHERE orid = '%d'";
+		String query = "DELETE ASSIGNMENTDETAILS WHERE orid = %d";
 		query = String.format(query, orid);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
@@ -166,8 +166,9 @@ public class OrderService {
 	 */	
 	public static void DeleteOrderStatuscycle(int orid)
 	{
-		String query = "DELETE ASSIGNMENTSTATUS WHERE orid = '%d'";
+		String query = "DELETE ASSIGNMENTSTATUS WHERE orid = %d";
 		query = String.format(query, orid);
+		
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	

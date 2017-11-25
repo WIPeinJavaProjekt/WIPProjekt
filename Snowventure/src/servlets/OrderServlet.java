@@ -46,10 +46,14 @@ public class OrderServlet extends HttpServlet {
 			if(OrderID != null && OrderID.toString() != "")
 			{
 				Order order = OrderService.GetSpecificOrder(Integer.parseInt(OrderID));
-				request.getSession().setAttribute("currentOrder", order);
+				if(order != null && (order.ulid == currentUser.ulid || (currentUser.utid == 1 || currentUser.utid == 3)))
+				{
+					request.getSession().setAttribute("currentOrder", order);
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/JSP/Orders/orderdetails.jsp");
-				rd.forward(request, response);
+					RequestDispatcher rd = request.getRequestDispatcher("/JSP/Orders/orderdetails.jsp");
+					rd.forward(request, response);
+					return;
+				}
 			}
 			else if(request.getParameter("neworder") != null && currentCart != null)
 			{
@@ -63,6 +67,7 @@ public class OrderServlet extends HttpServlet {
 
 				RequestDispatcher rd = request.getRequestDispatcher("/JSP/Orders/orderdetails.jsp");
 				rd.forward(request, response);
+				return;
 			}
 			else if(request.getParameter("processOrder") != null && currentOrder != null && request.getParameter("processOrder").toString().equals("true"))
 			{
@@ -92,25 +97,23 @@ public class OrderServlet extends HttpServlet {
 				OrderStatus newstatus = new OrderStatus(new Date(), request.getParameter("newstatus").toString());
 				currentOrder.statuscycle.add(newstatus);
 				
-				System.out.println("This could be update order: " + currentOrder.orid);
-				System.out.println("New status: " + newstatus.description + " " + newstatus.statusdate );
+				System.out.println("OrderID: " + currentOrder.orid + "	- New status: " + newstatus.description + " " + newstatus.statusdate );
 				
-				OrderService.DeleteOrderStatuscycle(currentOrder.orid);
-				OrderService.AddOrderStatuscycle(currentOrder.statuscycle, currentOrder.orid);
+				OrderService.AddOrderStatus(currentOrder.statuscycle.get(currentOrder.statuscycle.size()-1), currentOrder.orid);
 				
 				response.sendRedirect("order?ID=" + currentOrder.orid);
 				return;
 			}
-			else 
-			{
-				response.sendRedirect("users?page=ordersearch");
-			}
+			
+			response.sendRedirect("users?page=ordersearch");
 			
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			
+			response.sendRedirect("users?page=ordersearch");
 		}
 		else 
 		{
