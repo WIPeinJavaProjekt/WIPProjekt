@@ -33,13 +33,14 @@
 		    <div class="pure-u-1-3">
 			    <div class="divrowone">
 			    <h3>ZAHLUNGSARTEN</h3>
-				    
+				   <img src="./Images/footer/paypal.jpg" width="100px" height="auto"> 
 		    	</div>
 		    </div>
 		    <div class="pure-u-1-3">
 		    	<div class="divborderleft">
-			    	<h3>VERSANDARTEN</h3><br>
-			    
+			    	<h3>VERSANDARTEN</h3>
+			    	<img src="./Images/footer/dhl.png" width="100px" height="auto"><br><br>
+			    	<img src="./Images/footer/hermes.jpg" width="100px" height="auto">
 			    </div>
 		    </div>
 		    <div class="pure-u-1-3">
