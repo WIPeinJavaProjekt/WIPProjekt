@@ -83,6 +83,7 @@
 												onchange="changeVersion(${article.GetId()}, 'article')">
 													<c:forEach items="${article.GetAllVersions()}" var="version">
 										        		<option value="${article.GetAllVersions().indexOf(version)}"<c:if test="${article.GetSelectedVersion()==article.GetAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>${article.GetAllVersions().indexOf(version)}</option>
+										  
 										    		</c:forEach>
 												</select>
 									        </div>

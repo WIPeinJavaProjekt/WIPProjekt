@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<form class="pure-form  textbox" 
+<form class="pure-form  textbox selecteduserbox" 
 	<c:choose>
 		<c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">
             action="users"
@@ -127,7 +127,7 @@ method="post">
 </form>
 
 <c:if test="${not empty currentUser && selectedUser != null}">
-	<div class="pure-g">
+	<div class="pure-g selecteduserbox" style="padding-bottom:5%;">
 		<div class ="pure-u-1-2 leftdiv">
 			<form action="users" method="post">
 				<button class="pure-button pure-button-primary boxedinput" type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>

@@ -10,7 +10,7 @@ function scalediv(){
 	$('#loginbox').css("min-height",$( window ).height()-$('#brandimg').height()-300 > 350? $( window ).height()-$('#brandimg').height()-300 : 350);
 	console.log(window.innerWidth);
 	console.log($(window).width());
-	$('#articleresultcontainer').css("min-height",$( window ).height()-392);
+	$('#articleresultcontainer').css("min-height",$( window ).height()-300);
 	$('#articleadminbox').css("min-height",$( window ).height()-$('#brandimg').height()-300);
 	$('content-container').css("min-height",$( window ).height()-800>450?$( window ).height()-800>450 :450);
 	$('.startslider-btn').css("width", $('.startslider').width()<1250? 38 : ($('.startslider').width()-1250)/2);

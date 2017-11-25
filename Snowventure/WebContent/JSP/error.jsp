@@ -28,7 +28,7 @@
 			<div class="pure-u-1-5"></div>
 			<div class="pure-u-3-5">
 				<center>
-					<img src="./Images/Error_image.jpg"/>
+					<h1><i class="fa fa-exclamation-triangle fa-5x" aria-hidden="true"></i></h1>
 					<h1>Ein Fehler ist aufgetreten!</h1>
 				</center>
 			</div>
