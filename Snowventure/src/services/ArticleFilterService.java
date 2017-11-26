@@ -24,7 +24,7 @@ public class ArticleFilterService {
 			for(int v = 0; v < newarticles.get(i).versions.size(); v++)
 				for(ArticleColor col: newarticles.get(i).versions.get(v).colors)
 					for(int c= 0; c< color.length;c++)
-						if(col.GetAcolid() == Integer.parseInt(color[c]) )
+						if(col.getAcolid() == Integer.parseInt(color[c]) )
 						{
 							contained = true;
 							break;

@@ -5,7 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<title>Snowventure - ${article.GetName()}</title>
+		<title>Snowventure - ${article.getName()}</title>
 		
 		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -32,14 +32,14 @@
 		     
     			<div class="w3-content w3-display-container w3slidmod articleslider" align="center">
     			
-    				<c:forEach items="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures()}" var="ap">
+    				<c:forEach items="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures()}" var="ap">
 				   		<div class="w3-display-container mySlides ">
 							<div class="productCardimage detailsearchimage">
-						   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.GetImageId()}" class="articledetailimage"/>
+						   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.getImageId()}" class="articledetailimage"/>
 						   	</div>
 						</div>
 					</c:forEach>
-					<c:if test="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures().size()>1}"> 
+					<c:if test="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures().size()>1}"> 
 						<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
 						<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
 					</c:if>
@@ -67,8 +67,8 @@
 		    <div class="pure-u-1-1 fullwidth  textbox">
 			    <div>
 			    	<form class="pure-form" action="articleshopping" method="post">
-					    <h2>${article.GetName()}</h2>
-					    von <b>${article.GetManufacturer()}</b> <br>
+					    <h2>${article.getName()}</h2>
+					    von <b>${article.getManufacturer()}</b> <br>
 					    
 						    <div class="pure-control-group pure-form">
 							    <select required id="selectedSize" name="selectedSize">
@@ -80,18 +80,18 @@
 							</div>
 					    <br>
 					    Version wählen <br>
-						    <c:forEach items="${article.GetAllVersions()}" var="av">
+						    <c:forEach items="${article.getAllVersions()}" var="av">
 						    	
-						    	<div id="selectColor" name="selectColor" onclick="customerChangeVersion(${article.GetId()}, 'articleshopping', ${article.GetAllVersions().indexOf(article.getAvByVersionId(av.GetAvId()))})" class="pure-button  <c:if test="${av.GetAvId() == article.GetAllVersions().get(article.GetSelectedVersion()).GetAvId()}">
+						    	<div id="selectColor" name="selectColor" onclick="customerChangeVersion(${article.getId()}, 'articleshopping', ${article.getAllVersions().indexOf(article.getAvByVersionId(av.getAvId()))})" class="pure-button  <c:if test="${av.getAvId() == article.getAllVersions().get(article.getSelectedVersion()).getAvId()}">
 						    	 versionchoice 
-						    	</c:if>" style="background-color:${av.getColors().get(0).GetHexcode()};">
+						    	</c:if>" style="background-color:${av.getColors().get(0).getHexcode()};">
 									<div class="pure-control-group">
 								   		<p><font color="${av.getColors().get(0).getBackgroundHexcode()}"><b>${av.getColorsAsString()}</b></font></p>
 								   	</div>
 							   	</div>
 							</c:forEach>				    
 					    <br>
-					    <h3>Preis ${article.GetPriceFormatted()} EUR</h3>
+					    <h3>Preis ${article.getPriceFormatted()} EUR</h3>
 					    <div>
 						    	<div class="pure-control-group">
 						            <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge" min="1">
@@ -107,7 +107,7 @@
 		<div style="height:2px; width:100%; background-color:rgb(75,75,75); margin-top: 5px;"></div>
 		<div class="articledescriptioncontainer  textbox">
 			<h2>Beschreibung</h2>
-			${article.GetDescription()}		
+			${article.getDescription()}		
 		</div>
 		</div>
 		<%@include file = "../Basic/footer.jsp" %>

@@ -64,10 +64,10 @@ public class ArticleServlet extends HttpServlet {
 		if(request.getParameter("ID") != null) {
 			try {
 				this.article = ArticleService.GetArticle(Integer.parseInt(request.getParameter("ID")));
-				this.article.SetSelectedVersion(Integer.parseInt(request.getParameter("version")));
+				this.article.setSelectedVersion(Integer.parseInt(request.getParameter("version")));
 				
-				ArrayList<String> colorStrings = this.article.versions.get(this.article.GetSelectedVersion()).getColorNames();
-				ArrayList<String> sizes = this.article.GetSize();
+				ArrayList<String> colorStrings = this.article.versions.get(this.article.getSelectedVersion()).getColorNames();
+				ArrayList<String> sizes = this.article.getSize();
 				
 				request.getSession().setAttribute("colors", colorStrings);
 				request.getSession().setAttribute("sizes", sizes);
@@ -103,19 +103,19 @@ public class ArticleServlet extends HttpServlet {
 		} else if(request.getParameter("updateArticle") != null) {
 			try {
 				updateArticle(request);
-				response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.GetSelectedVersion());
+				response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.getSelectedVersion());
 				return;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		} else if(request.getParameter("addImage") != null) {
 			addImage(request);
-			response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.GetSelectedVersion());
+			response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.getSelectedVersion());
 			return;
 		} else if(request.getParameter("addArticleVersion") != null) {
 			try {
 				addArticleVersion(request);
-				response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.GetSelectedVersion());
+				response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.getSelectedVersion());
 				return;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -184,13 +184,13 @@ public class ArticleServlet extends HttpServlet {
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 	    InputStream fileContent = filePart.getInputStream();
 	    
-	    this.article.SetSelectedVersion(Integer.parseInt(request.getParameter("selectedVersion")));
+	    this.article.setSelectedVersion(Integer.parseInt(request.getParameter("selectedVersion")));
 	    
 	    if(!fileName.equals("")) {
 		    ArticlePicture picture = new ArticlePicture(fileName, fileContent);
 		    
 		    try {
-				int ret = ArticleService.AddPictureToArticleVersion(picture, this.article.versions.get(this.article.GetSelectedVersion()).GetAvId());
+				int ret = ArticleService.AddPictureToArticleVersion(picture, this.article.versions.get(this.article.getSelectedVersion()).getAvId());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -207,7 +207,7 @@ public class ArticleServlet extends HttpServlet {
 		
 		this.article.name = request.getParameter("articleName");
 		this.article.description = request.getParameter("articleDescription");
-		this.article.SetSelectedVersion(Integer.parseInt(request.getParameter("selectedVersion")));
+		this.article.setSelectedVersion(Integer.parseInt(request.getParameter("selectedVersion")));
 		this.articleVersion.property = request.getParameter("property");
 		this.articleVersion.propertyvalue = request.getParameter("propertyValue");
 		this.articleVersion.price = Double.parseDouble(request.getParameter("price"));		
@@ -242,11 +242,11 @@ public class ArticleServlet extends HttpServlet {
 	    
 	    this.articleVersion.colors = colorsArr;
 		this.articleVersion.sizes = sizesArr;
-		this.articleVersion.versionid = this.article.versions.get(this.article.GetSelectedVersion()).versionid;
+		this.articleVersion.versionid = this.article.versions.get(this.article.getSelectedVersion()).versionid;
 		this.article.manufacturer = request.getParameter("manufacturer");
 		this.article.gender = Arrays.toString(request.getParameterValues("genders"));
 		this.article.acid = Integer.parseInt(request.getParameter("categories"));
-		this.article.versions.set(this.article.GetSelectedVersion(), this.articleVersion);
+		this.article.versions.set(this.article.getSelectedVersion(), this.articleVersion);
 		
 		ArticleService.UpdateArticle(this.article);
 		

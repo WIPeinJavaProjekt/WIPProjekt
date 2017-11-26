@@ -18,11 +18,11 @@ public class ShoppingCart {
 		this.cartPositions = new ArrayList<ShoppingCartPosition>(scp.cartPositions);
 	}	
 	
-	public String GetShoppingCartPrice() {
+	public String getShoppingCartPrice() {
 		double amount=0;
 		
 		for(ShoppingCartPosition scp: cartPositions)
-			amount+=scp.GetPositionPrice();
+			amount+=scp.getPositionPrice();
 				
 		return String.format( "%.2f", amount );
 	}
@@ -32,7 +32,7 @@ public class ShoppingCart {
 		return cartPositions;
 	}
 	
-	public int GetArticleCount()
+	public int getArticleCount()
 	{
 		int count = 0;
 		for(ShoppingCartPosition scp : cartPositions)
@@ -42,7 +42,7 @@ public class ShoppingCart {
 		return count;
 	}
 	
-	public int GetCountShoppingCartPosition()
+	public int getCountShoppingCartPosition()
 	{
 		return cartPositions.size();
 	}

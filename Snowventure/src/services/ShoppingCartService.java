@@ -85,7 +85,7 @@ public class ShoppingCartService {
 	private static int AddShoppingCartPosition(ShoppingCartPosition position, int ulid) {
 		int pid = -1;
 		String query ="INSERT INTO SHOPPINGCART(avid,ulid,amount,acolid, size) VALUES(%d,%d,%d,'%d',%s);";
-		query = String.format(query, position.article.versions.get(position.article.GetSelectedVersion()).versionid, ulid, position.amount,position.color.acolid,position.size);
+		query = String.format(query, position.article.versions.get(position.article.getSelectedVersion()).versionid, ulid, position.amount,position.color.acolid,position.size);
 		pid = DatabaseConnector.createConnection().InsertQuery(query);
 		return pid;
 	}

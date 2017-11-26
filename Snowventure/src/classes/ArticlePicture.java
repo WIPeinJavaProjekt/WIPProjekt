@@ -35,7 +35,7 @@ public class ArticlePicture {
 		return this.name;
 	}
 
-	public String GetImageId() {
+	public String getImageId() {
 		return Integer.toString(this.imageId);
 	}
 	

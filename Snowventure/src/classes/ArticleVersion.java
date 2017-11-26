@@ -28,7 +28,7 @@ public class ArticleVersion extends Article{
 		this.colors = new ArrayList<ArticleColor>(colors);
 	}
 	
-	public int GetAvId() {
+	public int getAvId() {
 		return versionid;
 	}
 	
@@ -53,7 +53,7 @@ public class ArticleVersion extends Article{
 	public String getColorsAsString() {
 		String output = "";
 		for(int i=0; i < this.colors.size(); i++) {
-			output += this.colors.get(i).GetColorName();
+			output += this.colors.get(i).getColorName();
 			if(i<this.colors.size()-1) {
 				output += " / ";
 			}
@@ -68,7 +68,7 @@ public class ArticleVersion extends Article{
 	public ArrayList<String> getColorNames(){
 		ArrayList<String> colorStrings = new ArrayList<String>();
 		for(ArticleColor ac: this.colors) {
-			colorStrings.add(ac.GetColorName());
+			colorStrings.add(ac.getColorName());
 		}
 		return colorStrings;
 	}

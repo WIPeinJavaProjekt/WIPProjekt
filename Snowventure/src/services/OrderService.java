@@ -88,7 +88,7 @@ public class OrderService {
 		int id= -1;
 		String query = "INSERT INTO ASSIGNMENTDETAILS(orid,avid,ASSIGNMENTPRICE,amount,acolid,size) VALUES('%d','%d','%f','%d', '%d','%s')";
 
-		query = String.format(query,orid,p.article.versions.get(p.article.GetSelectedVersion()).versionid, p.GetPositionPrice(), p.amount, p.article.versions.get(p.article.GetSelectedVersion()).colors.get(0).acolid,p.size);
+		query = String.format(query,orid,p.article.versions.get(p.article.getSelectedVersion()).versionid, p.getPositionPrice(), p.amount, p.article.versions.get(p.article.getSelectedVersion()).colors.get(0).acolid,p.size);
 		id = DatabaseConnector.createConnection().InsertQuery(query);
 		System.out.println("ARTIKEL EINGEFÜGT: " +query);
 		return id;
@@ -295,7 +295,7 @@ public class OrderService {
 		{
 			Article a = ArticleService.GetSelectedArticle(result.getInt("avid"));
 			System.out.println("PrepedArticlein Order"+a.ID);
-			a.versions.get(a.GetSelectedVersion()).price = result.getDouble("assignmentprice");
+			a.versions.get(a.getSelectedVersion()).price = result.getDouble("assignmentprice");
 			ShoppingCartPosition p = new ShoppingCartPosition(a,result.getInt("amount"),result.getString("size"), ArticleColorService.GetSpecificColor(result.getInt("acolid")));
 			scp.cartPositions.add(p);
 		}

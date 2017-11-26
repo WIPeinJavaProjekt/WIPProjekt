@@ -28,19 +28,19 @@
 	<div class="search-results">	
 		<c:if test="${ not empty orders && currentUser.utid == 1 || not empty orders && currentUser.utid == 3}">
 			<div class="pure-g">
-			    <div class="pure-u-1-5"><p><b>Bestellnummer</b></p></div>
-			    <div class="pure-u-1-5"><p><b>Name</b></p></div>
-			    <div class="pure-u-1-5"><p><b>Bestellstatus</b></p></div>
-			    <div class="pure-u-1-5"><p><b>Datum</b></p></div>    
+			    <div class="pure-u-1-5 textbox"><p><b>Bestellnr.</b></p></div>
+			    <div class="pure-u-1-5 textbox"><p><b>Name</b></p></div>
+			    <div class="pure-u-1-5 textbox"><p><b>Status</b></p></div>
+			    <div class="pure-u-1-5 textbox"><p><b>Datum</b></p></div>    
 			</div>
 		 	<c:forEach var="order" items="${orders}">
 				<div>
 					<hr>
 					<div class="pure-g" >
-					    <div class="pure-u-1-5"><p><b>${order.getOrid()}</b></p></div>
-					    <div class="pure-u-1-5"><p>${order.getName() }  ${ order.getSurname()}</p></div>
-					    <div class="pure-u-1-5"><p>${order.statuscycle.get(order.statuscycle.size()-1).description}</p></div>
-					    <div class="pure-u-1-5"><p>${order.statuscycle.get(order.statuscycle.size()-1).statusdate}</p></div>
+					    <div class="pure-u-1-5 overflowhider"><p><b>${order.getOrid()}</b></p></div>
+					    <div class="pure-u-1-5 overflowhider"><p>${order.getName() }  ${ order.getSurname()}</p></div>
+					    <div class="pure-u-1-5 overflowhider"><p>${order.statuscycle.get(order.statuscycle.size()-1).description}</p></div>
+					    <div class="pure-u-1-5 overflowhider"><p>${order.statuscycle.get(order.statuscycle.size()-1).statusdate}</p></div>
 					    <div class="pure-u-1-5">
 					    	<p>
 					    		<i class="fa fa-pencil" style ="cursor: pointer;" onclick="location.href='./order?ID=${order.getOrid()}';"></i>
@@ -52,18 +52,18 @@
 		</c:if>
 		<c:if test="${ not empty orders && currentUser.utid == 2 }">
 			<div class="pure-g">
-			    <div class="pure-u-1-4"><p><b>Bestellnummer</b></p></div>
-			    <div class="pure-u-1-4"><p><b>Status</b></p></div>
-			    <div class="pure-u-1-4"><p><b>Bestelldatum</b></p></div>    
+			    <div class="pure-u-1-4 textbox"><p><b>Bestellnummer</b></p></div>
+			    <div class="pure-u-1-4 textbox"><p><b>Status</b></p></div>
+			    <div class="pure-u-1-4 textbox"><p><b>Bestelldatum</b></p></div>    
 			</div>
 		 	<c:forEach var="order" items="${orders}">
 				<div>
 					<hr>
 					<div class="pure-g">
-					    <div class="pure-u-1-4"><p><b>${order.getOrid()}</b></p></div>
-					    <div class="pure-u-1-4"><p>${order.statuscycle.get(order.statuscycle.size()-1).description}</p></div>
-					    <div class="pure-u-1-4"><p>${order.statuscycle.get(order.statuscycle.size()-1).statusdate}</p></div>
-					    <div class="pure-u-1-4">
+					    <div class="pure-u-1-4 overflowhider"><p><b>${order.getOrid()}</b></p></div>
+					    <div class="pure-u-1-4 overflowhider"><p>${order.statuscycle.get(order.statuscycle.size()-1).description}</p></div>
+					    <div class="pure-u-1-4 overflowhider"><p>${order.statuscycle.get(order.statuscycle.size()-1).statusdate}</p></div>
+					    <div class="pure-u-1-4 overflowhider">
 					    	<p>
 					    		<i class="fa fa-search" style ="cursor: pointer;" onclick="location.href='./order?ID=${order.getOrid()}';"></i>
 							</p>

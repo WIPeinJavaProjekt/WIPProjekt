@@ -45,7 +45,7 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		if(request.getParameter("ID") != null) {
 			try {
 				this.article = ArticleService.GetArticle(Integer.parseInt(request.getParameter("ID")));
-				this.article.SetSelectedVersion(Integer.parseInt(request.getParameter("version")));
+				this.article.setSelectedVersion(Integer.parseInt(request.getParameter("version")));
 				
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
@@ -79,7 +79,7 @@ public class ArticleShoppingServlet  extends HttpServlet {
 			String selectedSize = request.getParameter("selectedSize");
 			request.getSession().setAttribute("selectedSize", selectedSize);
 			System.out.println(selectedSize);
-			response.sendRedirect("articleshopping?ID=" + this.article.ID + "&version=" + this.article.GetSelectedVersion());
+			response.sendRedirect("articleshopping?ID=" + this.article.ID + "&version=" + this.article.getSelectedVersion());
 			return;
 		} else if(request.getParameter("selectColor") != null) {
 			
@@ -117,7 +117,7 @@ public class ArticleShoppingServlet  extends HttpServlet {
 			for(ShoppingCartPosition scp : sc.cartPositions)
 			{						
 				if(		scp.article.ID == scPos.article.ID 
-						&& scp.article.GetSelectedVersion() == scPos.article.GetSelectedVersion() 
+						&& scp.article.getSelectedVersion() == scPos.article.getSelectedVersion() 
 						&& scp.size.toString().equals(scPos.size.toString())
 						)
 				{

@@ -59,30 +59,30 @@
 				    	<div class="pure-g">
 							<div class="pure-u-1-2 fullwidth">
 						    	<div class="pure-control-group">
-						            <input required class="boxedinput" id="articleName"  name="articleName" value="${article.GetName()}" type="text" placeholder="Artikelbezeichnung">
+						            <input required class="boxedinput" id="articleName"  name="articleName" value="${article.getName()}" type="text" placeholder="Artikelbezeichnung">
 						        </div>
 						        <div class="pure-control-group">
-						            <input required class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.GetManufacturer()}" type="text" placeholder="Hersteller">
+						            <input required class="boxedinput" id="manufacturer"  name="manufacturer" value="${article.getManufacturer()}" type="text" placeholder="Hersteller">
 						        </div>
 						        <div class="pure-control-group">
 						        	<select name="category" class="boxedinput">
 								        <c:forEach items="${categories}" var="categories">
-							        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
+							        		<option value="${categories.getACID()}">${categories.getName()}</option>
 							    		</c:forEach>
 									</select>
 						        </div>				        
 						        <div class="pure-control-group">
-						            <textarea required class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.GetDescription()}" type="text" 
-						            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>">${article.GetDescription()}</textarea>
+						            <textarea required class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.getDescription()}" type="text" 
+						            	placeholder="Artikelbeschreibung <h1>HTML möglich</h1>">${article.getDescription()}</textarea>
 						        </div>
 						        <c:choose>
 									<c:when test="${updateArticle}">
 											<div class="boxedinput">
 												<label> Ausgewählte Version:</label><br>
 												<select required id="selectedVersion" name="selectedVersion" class="boxedinput" 
-												onchange="changeVersion(${article.GetId()}, 'article')">
-													<c:forEach items="${article.GetAllVersions()}" var="version">
-										        		<option value="${article.GetAllVersions().indexOf(version)}"<c:if test="${article.GetSelectedVersion()==article.GetAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>${article.GetAllVersions().indexOf(version)}</option>
+												onchange="changeVersion(${article.getId()}, 'article')">
+													<c:forEach items="${article.getAllVersions()}" var="version">
+										        		<option value="${article.getAllVersions().indexOf(version)}"<c:if test="${article.getSelectedVersion()==article.getAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>${article.getAllVersions().indexOf(version)}</option>
 										  
 										    		</c:forEach>
 												</select>
@@ -104,14 +104,14 @@
 						        </div>
 						        <div class="pure-control-group">
 						        	<c:if test="${updateArticle}">
-							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addImage" onclick="changeVersion(${article.GetId()}, 'article')" >Bild hinzufügen</button>
+							            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addImage" onclick="changeVersion(${article.getId()}, 'article')" >Bild hinzufügen</button>
 							        </c:if>
 						        </div>
 								<div class="pure-control-group">
-						            <input class="boxedinput" id="property" name="property" value="${article.GetProperty()}" type="text" placeholder="Eigenschaft">
+						            <input class="boxedinput" id="property" name="property" value="${article.getProperty()}" type="text" placeholder="Eigenschaft">
 						        </div>
 						        <div class="pure-control-group">
-						            <input class="boxedinput" id="propertyValue" name="propertyValue" value="${article.GetPropertyValue()}" type="text" placeholder="Wert der Eigenschaft">
+						            <input class="boxedinput" id="propertyValue" name="propertyValue" value="${article.getPropertyValue()}" type="text" placeholder="Wert der Eigenschaft">
 						        </div>
 						        <br>
 						        <%@include file = "../Basic/filterColor.jsp" %>
@@ -122,12 +122,12 @@
 						        <br>
 						        <script type="text/javascript" src="./JS/dropdown.js"></script>	
 						        <div class="pure-control-group">
-						            <input required class="boxedinput" id="price" name="price" value="${article.GetPrice()}" type="number" step="0.01" placeholder="Preis">
+						            <input required class="boxedinput" id="price" name="price" value="${article.getPrice()}" type="number" step="0.01" placeholder="Preis">
 						        </div>
 						        <div class="pure-control-group">
 						        	<c:if test="${updateArticle}">
 						            	<button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticleVersion" 
-						            		onclick="changeVersion(${article.GetId()}, 'article')" >Als neue Artikelversion speichern</button>
+						            		onclick="changeVersion(${article.getId()}, 'article')" >Als neue Artikelversion speichern</button>
 					            	</c:if>
 						        </div>
 						        
@@ -155,14 +155,14 @@
 		       	</form>
 			       	<div class="w3-content w3-display-container w3slidmod fullwidth" align="center">
 
-						<c:forEach items="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures()}" var="ap">
+						<c:forEach items="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures()}" var="ap">
 					   		<div class="w3-display-container mySlides ">
 								<div class="productCardimage">
-							   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.GetImageId()}" class="articlesearchimage"/>
+							   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.getImageId()}" class="articlesearchimage"/>
 							   	</div>
 							</div>
 						</c:forEach>
-						<c:if test="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures().size()>1}"> 
+						<c:if test="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures().size()>1}"> 
 							<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
 							<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
 						</c:if>
@@ -170,7 +170,7 @@
 					</div>
 				
 
-				<c:if test="${article.GetAllVersions().get(article.GetSelectedVersion()).getArticlesPictures().size()>0}"> 
+				<c:if test="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures().size()>0}"> 
 					<script>
 						var slideIndex = 1;
 						showDivs(slideIndex);

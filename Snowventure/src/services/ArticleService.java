@@ -456,7 +456,7 @@ public class ArticleService {
 			System.out.println("Versionsvergleich "+ a.versions.get(i).versionid + " == "+ avid);
 			if(a.versions.get(i).versionid == avid)
 			{
-				a.SetSelectedVersion(i);
+				a.setSelectedVersion(i);
 				return a;
 			}
 			

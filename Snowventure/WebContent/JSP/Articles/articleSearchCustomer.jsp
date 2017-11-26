@@ -12,7 +12,7 @@
 						        <select name="categorie" class="boxedinput">
 							        <option value="-1">Alle</option>
 							        <c:forEach items="${categories}" var="categories">
-							        	<option value="${categories.GetACID()}"<c:if test="${selectedCategory.equals(categories.GetACID())}"><c:out value="selected"/></c:if>>${categories.GetName()}</option>
+							        	<option value="${categories.getACID()}"<c:if test="${selectedCategory.equals(categories.getACID())}"><c:out value="selected"/></c:if>>${categories.getName()}</option>
 						    		</c:forEach>
 								</select>
 							</div>
@@ -68,16 +68,16 @@
 			
 			
 			 	<c:forEach var="article" items="${articles}">
-				 		<div style="display:none;" class="productCard pure-u-1-3" onclick="location.href='./articleshopping?ID=${article.GetId()}&version=${article.GetSelectedVersion()}';">
+				 		<div style="display:none;" class="productCard pure-u-1-3" onclick="location.href='./articleshopping?ID=${article.getId()}&version=${article.getSelectedVersion()}';">
 					 		<div  style="width:100%">
 							    <div class="productCardimage">
-							    	<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${article.GetAllVersions().get(article.GetSelectedVersion()).getArticleHeadPicture().GetImageId()}" class="articlesearchimage">
+							    	<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${article.getAllVersions().get(article.getSelectedVersion()).getArticleHeadPicture().getImageId()}" class="articlesearchimage">
 							    </div>
 							    <div class="w3-container w3-center">
 									<p>
-									<b>${article.GetManufacturer()}</b> - ${article.GetName()}</p>
+									<b>${article.getManufacturer()}</b> - ${article.getName()}</p>
 									<div style="height:1px; width:100%; background-color:rgb(75,75,75);"></div>
-									<p>${article.GetPriceFormatted()} EUR <br></p>
+									<p>${article.getPriceFormatted()} EUR <br></p>
 						    	</div>
 						  	</div>
 						</div>	

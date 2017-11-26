@@ -35,17 +35,17 @@
 						<c:forEach var="position" items="${ currentCart.getCartPositions() }">
 							<div class="w3-card-4" id="scp-article-card">
 								<div class="pure-u-1-5" id="sc-aimg-container">
-									<img class="article-img" src="images/${ position.article.GetAllVersions().get(position.article.GetSelectedVersion()).getArticleHeadPicture().GetImageId()}" alt="Artikelbild">
+									<img class="article-img" src="images/${ position.article.getAllVersions().get(position.article.getSelectedVersion()).getArticleHeadPicture().getImageId()}" alt="Artikelbild">
 								</div>
 						    	<div class="pure-u-1-4" id="scp-info-part">
-									<h4 id="articlelink" onclick="location.href='./articleshopping?ID=${ position.article.GetId() }&version=${ position.article.GetSelectedVersion()}';"><b>${ position.article.GetName() } von ${ position.article.GetManufacturer()}</b></h4>
+									<h4 id="articlelink" onclick="location.href='./articleshopping?ID=${ position.article.getId() }&version=${ position.article.getSelectedVersion()}';"><b>${ position.article.getName() } von ${ position.article.getManufacturer()}</b></h4>
 									<hr size="5">
-									<p>Farbe: ${ position.getArticle().GetAllVersions().get(position.getArticle().GetSelectedVersion()).getColorsAsString() }</p>
+									<p>Farbe: ${ position.getArticle().getAllVersions().get(position.getArticle().getSelectedVersion()).getColorsAsString() }</p>
 									<p>Größe: ${ position.getSize() }</p>
 								</div>
 								<div class="pure-u-1-4" id="scp-info-part">
 									<p><b>Preis</b></p>
-									<p>EUR ${ position.article.GetPrice() }</p>
+									<p>EUR ${ position.article.getPrice() }</p>
 								</div>
 								<div class="pure-u-1-4" id="scp-info-part">
 									<p><b>Menge</b></p>
@@ -81,15 +81,15 @@
 						    	<!--
 						    	<c:choose>
 						    	<c:when test="${ not empty currentUser }">
-							    	<h3><b>Summe (${currentUser.shoppingcart.GetArticleCount()} Artikel):  EUR ${currentUser.shoppingcart.GetShoppingCartPrice()}</b></h3>
+							    	<h3><b>Summe (${currentUser.shoppingcart.getArticleCount()} Artikel):  EUR ${currentUser.shoppingcart.getShoppingCartPrice()}</b></h3>
 					    		</c:when>
 					    		<c:otherwise>
-					    			<h3><b>Summe (${currentCart.GetArticleCount()} Artikel):  EUR ${currentCart.GetShoppingCartPrice()}</b></h3>
+					    			<h3><b>Summe (${currentCart.getArticleCount()} Artikel):  EUR ${currentCart.getShoppingCartPrice()}</b></h3>
 					    		</c:otherwise>
 					    		</c:choose>
 					    		-->
 				    		
-				    			<h3><b>Summe (${currentCart.GetArticleCount()} Artikel):  EUR ${currentCart.GetShoppingCartPrice()}</b></h3>
+				    			<h3><b>Summe (${currentCart.getArticleCount()} Artikel):  EUR ${currentCart.getShoppingCartPrice()}</b></h3>
 				    			<h4>
 				    				<input id="scp-button-1" class="pure-button pure-button-primary" type="button" value="Weitershoppen" onclick="location.href='./articles'">
 				    				<input id="scp-button-2" class="pure-button pure-button-primary" type="button" value="Jetzt Bestellen" onclick="location.href='./order?neworder=true'">

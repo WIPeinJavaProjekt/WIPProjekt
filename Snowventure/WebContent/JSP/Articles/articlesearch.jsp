@@ -15,7 +15,7 @@
 					        <select name="categories" class="boxedinput">
 					        	<option value="-1">Alle</option>
 						        <c:forEach items="${categories}" var="categories">
-					        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
+					        		<option value="${categories.getACID()}">${categories.getName()}</option>
 					    		</c:forEach>
 							</select>
 						</div>
@@ -52,12 +52,12 @@
 				<div >
 				<hr>
 				<div class="pure-g" >
-				    <div class="pure-u-1-4"><p><b>${article.GetId()}</b></p></div>
-				    <div class="pure-u-1-4"><p>${article.GetManufacturer()}</p></div>
-				    <div class="pure-u-1-4"><p>${article.GetName()}</p></div>
+				    <div class="pure-u-1-4"><p><b>${article.getId()}</b></p></div>
+				    <div class="pure-u-1-4"><p>${article.getManufacturer()}</p></div>
+				    <div class="pure-u-1-4"><p>${article.getName()}</p></div>
 				    <div class="pure-u-1-4">
 				    	<p>
-				    		<i class="fa fa-pencil fa-1g" style ="cursor: pointer;" onclick="location.href='./article?ID=${article.GetId()}&version=${article.GetSelectedVersion()}';"></i>
+				    		<i class="fa fa-pencil fa-1g" style ="cursor: pointer;" onclick="location.href='./article?ID=${article.getId()}&version=${article.getSelectedVersion()}';"></i>
 				  
 				    	</p>
 				    </div>				  

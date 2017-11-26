@@ -58,10 +58,10 @@ public class Utils {
 		System.out.println("Artikel-ID:" + a.ID);
 		System.out.println("Name: " + a.name);
 		System.out.println("Beschreibung: " + a.description);
-		System.out.println("Preis: " + a.GetPrice());
-		System.out.println("Selected Version: " + a.GetSelectedVersion());
-		System.out.println("Color: " + a.GetColor());
-		System.out.println("Size: " + a.GetSize());
+		System.out.println("Preis: " + a.getPrice());
+		System.out.println("Selected Version: " + a.getSelectedVersion());
+		System.out.println("Color: " + a.getColor());
+		System.out.println("Size: " + a.getSize());
 	}
 	
 	public static ArrayList<String> colorArraytoArrayList(String[] inputArray) {
@@ -75,7 +75,7 @@ public class Utils {
 					e.printStackTrace();
 				}
 				if(artColor!=null) {
-					outputArray.add(artColor.GetColorName());
+					outputArray.add(artColor.getColorName());
 				}
 			}
 	    }

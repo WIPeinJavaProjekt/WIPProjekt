@@ -612,8 +612,6 @@ overflow:scroll;
 }
 
 
-
-
 .w3-card-4, .w3-hover-shadow:hover {
 	box-shadow: none !important;
 }
@@ -628,6 +626,45 @@ overflow:scroll;
 	border: 2px solid black;
 }
 
+.overflowhider{
+	overflow: scroll;
+	padding-right: 5px;
+	
+}
+
+
+.overflowhider p {
+    -ms-overflow-style: none;  // IE 10+
+    overflow: -moz-scrollbars-none;  // Firefox
+    padding-right: 5px;	
+    
+}
+.overflowhider::-webkit-scrollbar p { 
+    display: none;  // Safari and Chrome
+}
+
+
+.overflowhider  {
+    -ms-overflow-style: none;  // IE 10+
+    overflow: -moz-scrollbars-none;  // Firefox
+}
+.overflowhider::-webkit-scrollbar  { 
+    display: none;  // Safari and Chrome
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*FREMDER QUELLCODE z.T. angepasst für Farben, Spacing etc.*/
 
 
 /*https://codepen.io/anon/pen/gXgexq*/
@@ -713,6 +750,12 @@ overflow:scroll;
 .dropdown div ul li a:hover {
   background-color: #fff;
 }
+
+
+
+
+
+
 
 
 /*http://doodlenerd.com/html-control/css-checkbox-generator? */

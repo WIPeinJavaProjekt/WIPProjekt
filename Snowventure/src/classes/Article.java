@@ -55,30 +55,30 @@ public class Article {
 		this.selectedversion = a.selectedversion;
 	}
 	
-	public ArrayList<ArticleVersion> GetAllVersions() {
+	public ArrayList<ArticleVersion> getAllVersions() {
 		return this.versions;
 	}
 	
 	
-	public int GetSelectedVersion() {
+	public int getSelectedVersion() {
 		return selectedversion;
 	}
 	
-	public void SetSelectedVersion(int s) {
+	public void setSelectedVersion(int s) {
 		if(s>= 0&& s< versions.size())
 			selectedversion = s;
 	}
 	
-	public double GetPrice() {
+	public double getPrice() {
 		return versions.get(selectedversion).price;
 	}
 	
-	public String GetPriceFormatted() {
+	public String getPriceFormatted() {
 		DecimalFormat f = new DecimalFormat("#.00"); 
-		return f.format(GetPrice()).replace(".", ",");
+		return f.format(getPrice()).replace(".", ",");
 	}
 	
-	public ArrayList<String> GetSize() {
+	public ArrayList<String> getSize() {
 		return versions.get(selectedversion).sizes;
 	}
 	
@@ -91,31 +91,31 @@ public class Article {
 		return null;
 	}
 	
-	public String GetProperty() {
+	public String getProperty() {
 		return versions.get(selectedversion).property;
 	}
 	
-	public String GetPropertyValue() {
+	public String getPropertyValue() {
 		return versions.get(selectedversion).propertyvalue;
 	}
 	
-	public ArrayList<ArticleColor> GetColor() {
+	public ArrayList<ArticleColor> getColor() {
 		return versions.get(selectedversion).colors;
 	}
 	
-	public String GetId() {
+	public String getId() {
 		return Integer.toString(this.ID);
 	}
 	
-	public String GetName() {
+	public String getName() {
 		return this.name;
 	}
 	
-	public String GetManufacturer() {
+	public String getManufacturer() {
 		return this.manufacturer;
 	}
 	
-	public String GetDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 	

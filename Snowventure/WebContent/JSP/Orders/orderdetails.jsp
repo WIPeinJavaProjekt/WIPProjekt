@@ -88,25 +88,25 @@
 				<div class="pure-u-1-1">
 					<div class="pure-u-1-4 fullwidth" id="orderdetails">
 							<div class="pure-u-1-1"><b>Versandadresse</b><c:if test="${ currentOrder.statuscycle.size() == 0 }"> <a style="font-size: 12px;" href="#" onclick="div_show()">Ändern</a></c:if></div>
-							<div class="pure-u-1-1">${ currentOrder.name} ${ currentOrder.surname }</div>
-							<div class="pure-u-1-1">${ currentOrder.adress.street} ${ currentOrder.adress.houseno}</div>
-							<div class="pure-u-1-1">${ currentOrder.adress.postcode} ${ currentOrder.adress.location}</div>
+							<div class="pure-u-1-1 orderdetailsvalue">${ currentOrder.name} ${ currentOrder.surname }</div>
+							<div class="pure-u-1-1 orderdetailsvalue">${ currentOrder.adress.street} ${ currentOrder.adress.houseno}</div>
+							<div class="pure-u-1-1 orderdetailsvalue">${ currentOrder.adress.postcode} ${ currentOrder.adress.location}</div>
 					</div>
 					<div class="pure-u-1-4 fullwidth" id="orderreceiptadr">
 							<div class="pure-u-1-1"><b>Rechnungsadresse</b></div>
-							<div class="pure-u-1-1">Identisch mit Lieferadresse</div>
+							<div class="pure-u-1-1 orderdetailsvalue">Identisch mit Lieferadresse</div>
 							<br>
 							<div class="pure-u-1-1"><b>Versandart</b></div>
-							<div class="pure-u-1-1">DHL Standardversand</div>
+							<div class="pure-u-1-1 orderdetailsvalue">DHL Standardversand</div>
 					</div>
 					<div class="pure-u-1-4 fullwidth" id="orderpaymentmethod">
 							<div class="pure-u-1-1"><b>Zahlungsart</b></div>
-							<div class="pure-u-1-1">Auf Rechnung</div>
+							<div class="pure-u-1-1 orderdetailsvalue">Auf Rechnung</div>
 					</div>
 					<div class="pure-u-1-4 fullwidth">
 							<div class="pure-u-1-1"><b>Bestellübersicht</b></div>
-							<div class="pure-u-2-5">Artikel</div><div class="pure-u-3-5" style="text-align: right">EUR ${ currentOrder.shoppingCart.GetShoppingCartPrice() }</div>
-							<div class="pure-u-2-5">Versand/Verpackung</div><div class="pure-u-3-5" style="text-align: right">EUR 0,00</div>
+							<div class="pure-u-2-5 orderdetailsvalue">Artikel</div><div class="pure-u-3-5" style="text-align: right">EUR ${ currentOrder.shoppingCart.GetShoppingCartPrice() }</div>
+							<div class="pure-u-2-5 orderdetailsvalue">Versand/Verpackung</div><div class="pure-u-3-5" style="text-align: right">EUR 0,00</div>
 							<div class="pure-u-2-5"  id="ordervaluedescription">Gesamtsumme</div><div class="pure-u-3-5" id="ordervaluesum">EUR ${ currentOrder.shoppingCart.GetShoppingCartPrice() }</div>
 					</div>
 				</div>

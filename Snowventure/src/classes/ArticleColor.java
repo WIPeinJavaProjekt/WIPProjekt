@@ -12,15 +12,15 @@ public class ArticleColor {
 		this.hexcode = hexcode;
 	}
 	
-	public int GetAcolid() {
+	public int getAcolid() {
 		return this.acolid;
 	}
 	
-	public String GetColorName() {
+	public String getColorName() {
 		return this.color;
 	}
 	
-	public String GetHexcode() {
+	public String getHexcode() {
 		return this.hexcode;
 	}
 	

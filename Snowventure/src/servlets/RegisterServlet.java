@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import classes.Adress;
 import classes.Safetyquestion;
 import classes.User;
-import classes.Users;
 import services.*;
 
 /**

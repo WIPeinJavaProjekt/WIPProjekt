@@ -39,7 +39,7 @@
 							        <select name="categorie" class="boxedinput">
 							        	<option value="-1">Alle</option>
 								        <c:forEach items="${categories}" var="categories">
-							        		<option value="${categories.GetACID()}">${categories.GetName()}</option>
+							        		<option value="${categories.getACID()}">${categories.getName()}</option>
 							    		</c:forEach>
 									</select>
 								</div>

@@ -57,7 +57,7 @@
 					 	</c:if>     
 				        <li class="pure-menu-item">
 					        <button type="submit" name="cart" class="headerbtn">WARENKORB 
-					        	<c:if test="${currentCart != null && currentCart.GetCountShoppingCartPosition() != 0 }">(${currentCart.GetCountShoppingCartPosition()})</c:if>
+					        	<c:if test="${currentCart != null && currentCart.getCountShoppingCartPosition() != 0 }">(${currentCart.getCountShoppingCartPosition()})</c:if>
 					        </button>
 				        </li>
 					</ul>

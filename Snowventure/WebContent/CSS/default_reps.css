@@ -217,4 +217,9 @@
 	margin-top: 1%;
 	width:100%;
 	}
+	
+	.orderdetailsvalue{
+	padding-top: 2px;
+	padding-left: 15px;
+	}
 }

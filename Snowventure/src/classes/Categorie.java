@@ -9,12 +9,12 @@ public class Categorie {
 		this.name = name;
 	}
 	
-	public int GetACID()
+	public int getACID()
 	{
 		return acid;
 	}
 	
-	public String GetName()
+	public String getName()
 	{
 		return name;
 	}

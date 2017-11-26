@@ -13,8 +13,8 @@ public class ShoppingCartPosition {
 		this.color = color;
 	}
 	
-	public double GetPositionPrice() {
-		return article.versions.get(article.GetSelectedVersion()).price * amount;
+	public double getPositionPrice() {
+		return article.versions.get(article.getSelectedVersion()).price * amount;
 	}
 	
 	public Article getArticle()
