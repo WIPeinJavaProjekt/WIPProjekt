@@ -32,6 +32,11 @@ import services.ArticleSizesService;
 /**
  * Start servlet implementation for the main page and the navigation
  */
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 @WebServlet("/start")
 public class StartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

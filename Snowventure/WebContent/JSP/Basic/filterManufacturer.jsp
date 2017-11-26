@@ -1,3 +1,7 @@
+<!-- 
+Beschreibung: Filter für Hersteller
+Ansprechpartner: Fabian Meise
+ -->
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <div id="filter_manufacturer">
 	<div class="dropdown"> 

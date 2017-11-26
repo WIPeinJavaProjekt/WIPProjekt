@@ -1,3 +1,8 @@
+/**
+ * Beschreibung: CSS für notwendige Responsivität
+ * @author Ansprechpartner Fabian Meise
+ *
+ */
 @media (max-width: 1200px), (max-device-width:1200px)
 {
 	body{

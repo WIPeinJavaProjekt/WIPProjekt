@@ -20,7 +20,11 @@ import services.*;
 /**
  * Servlet für die Bearbeitung und Rückgabe von Nutzern
  */
-
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 @WebServlet("/users")
 public class UsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

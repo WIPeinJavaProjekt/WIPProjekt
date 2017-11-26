@@ -20,6 +20,11 @@ import services.*;
 /**
  * Servlet implementation for registration
  */
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

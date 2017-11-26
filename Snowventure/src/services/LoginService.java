@@ -5,6 +5,11 @@ import java.sql.SQLException;
 
 import classes.User;
 
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class LoginService {
 
 	/**

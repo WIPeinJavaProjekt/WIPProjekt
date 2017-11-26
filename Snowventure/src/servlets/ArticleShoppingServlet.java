@@ -24,6 +24,11 @@ import services.ArticleService;
 /**
  * Servlet implementation class ArticleServlet
  */
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 @WebServlet("/articleshopping")
 @MultipartConfig
 public class ArticleShoppingServlet  extends HttpServlet {

@@ -1,3 +1,7 @@
+<!-- 
+Beschreibung: Filter für Farben
+Ansprechpartner: Fabian Meise
+ -->
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <div class="pure-control-group">									
 	<div id="filter_color" class="dropdown"> 

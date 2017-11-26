@@ -19,6 +19,11 @@ import classes.Article;
 import classes.ArticlePicture;
 import services.ArticleService;
 
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 @WebServlet("/images/*")
 public class ImageServlet extends HttpServlet {
 

@@ -10,6 +10,11 @@ import classes.*;
  * Modelclass for shoppingcart administration
  * 
 **/
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class ShoppingCartService {
 
 	

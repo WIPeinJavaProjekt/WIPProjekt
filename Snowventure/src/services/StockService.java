@@ -8,6 +8,11 @@ import classes.*;
  * Modelclass for Stock administration
  * 
 **/
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class StockService {
 	
 	/**

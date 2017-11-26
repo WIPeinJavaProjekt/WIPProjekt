@@ -1,3 +1,8 @@
+/**
+ * Beschreibung: 
+ * @author Ansprechpartner 
+ *
+ */
 function readURL(input) {
 	console.log(input);
     if (input.files && input.files[0]) {

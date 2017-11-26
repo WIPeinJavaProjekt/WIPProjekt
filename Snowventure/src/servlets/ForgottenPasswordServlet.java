@@ -16,6 +16,11 @@ import services.UserService;
 /**
  * Servlet zum Zurücksetzen des Passwortes eines Nutzers
  */
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 @WebServlet("/forgottenPassword")
 public class ForgottenPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

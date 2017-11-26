@@ -3,6 +3,11 @@ package classes;
 import java.time.LocalDateTime;
 import java.util.*;
 
+/**
+ * Beschreibung: Fachklasse für die Abbildung einer Bestellung
+ * @author Ansprechpartner Fabian Meise
+ *
+ */
 public class Order {
 
 	public int orid;
@@ -14,7 +19,16 @@ public class Order {
 	public String surname;
 	public String email;
 	
-	
+	/**
+	 * Konstruktor
+	 * @param a Lieferadresse
+	 * @param scp Warenkorb
+	 * @param orid Bestelltid
+	 * @param name Nachname
+	 * @param surname Vorname
+	 * @param email Lieferemail
+	 * @param ulid zugehöriger Loginaccountid
+	 */
 	public Order(Adress a, ShoppingCart scp, int orid, String name, String surname, String email, int ulid) {
 		adress = a;
 		shoppingCart = scp;
@@ -27,6 +41,17 @@ public class Order {
 		this.ulid = ulid;
 	}
 	
+	/**
+	 * Konstruktor
+	 * @param a Lieferadresse
+	 * @param scp Warenkorb
+	 * @param statuscycle Statushistorie
+	 * @param orid Bestelltid
+	 * @param name Nachname
+	 * @param surname Vorname
+	 * @param email Lieferemail
+	 * @param ulid zugehöriger Loginaccountid
+	 */
 	public Order (Adress a, ShoppingCart scp, ArrayList<OrderStatus> statuscycle, int orid, String name, String surname, String email, int ulid) {
 		adress = a;
 		shoppingCart = scp;

@@ -9,6 +9,11 @@ import classes.*;
  * Modelclass for user administration
  * 
 **/
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class UserService {	
 	
 	/**

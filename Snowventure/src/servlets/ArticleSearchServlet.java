@@ -32,6 +32,11 @@ import services.ArticleSizesService;
 import services.ArtilceManufacturerService;
 import services.CategorieService;
 
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 @WebServlet("/articles")
 public class ArticleSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

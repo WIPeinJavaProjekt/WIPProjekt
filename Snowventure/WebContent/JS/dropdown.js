@@ -1,11 +1,15 @@
-//OWN Code
+/**
+ * Beschreibung: Methoden für das Bedienen der Filter Dropdowns
+ * @author Ansprechpartner Fabian Meise
+ *
+ */
 
 $("#filterbtn-show").on('click', function() {
 	  $("#filtersfield").slideToggle('fast');
 	});
 
 
-//Modified from Solution
+
 $(".dropdown div ").on('click',"a" , function() {
   $(this).parent().parent().find("dd div ul").slideToggle('fast');
 });
@@ -27,20 +31,7 @@ $(document).bind('click', function(e) {
   if (!$clicked.parents().hasClass("dropdown")) $(".dropdown div ul").hide();
 });
 
-/*$('.mutliSelect input[type="checkbox"]').on('click', function() {
-  //var  title = $(this).val() + ",";
-  //console.log("Title: "+title);
-  
-  if ($(this).is(':checked')) {
-  //  var html = '<span title="' + title + '">' + title + '</span>';
-  //  $(this).parent().parent().parent().parent().parent().parent().find('a .multiSel').append(html);
-    
-  } else {
-  //  $('span[title="' + title + '"]').remove();
-    
 
-  }
-});*/
 
 
 (function($) {

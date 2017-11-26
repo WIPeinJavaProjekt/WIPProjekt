@@ -1,4 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 
+Beschreibung: Übersicht um ein fremdes Nutzerkonto zu bearbeiten
+Ansprechpartner: Jacob Markus
+ -->
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <form class="pure-form  textbox selecteduserbox" 
 	<c:choose>

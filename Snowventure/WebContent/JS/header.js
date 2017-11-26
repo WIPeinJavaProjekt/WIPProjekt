@@ -1,3 +1,8 @@
+/**
+ * Beschreibung: Diverse automatische Skalierungen
+ * @author Ansprechpartner Fabian Meise
+ *
+ */
 window.onresize= function(){scalediv();};
 window.onload= function(){scalediv();};
 $(document).ready(function() {scalediv();});

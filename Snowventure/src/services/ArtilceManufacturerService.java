@@ -10,6 +10,11 @@ import classes.*;
  * Modelclass for Article Manufacturers
  * 
 **/
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class ArtilceManufacturerService {
 	public static ArrayList<String> GetAllPossibleManufacturers() throws SQLException{
 		ArrayList<String> sizes = new ArrayList<String>();

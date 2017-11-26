@@ -10,6 +10,11 @@ import classes.*;
  * Modelclass for Article Colors
  * 
 **/
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class ArticleColorService {
 	
 	public static ArrayList<ArticleColor> GetAllPossibleColors() throws SQLException{

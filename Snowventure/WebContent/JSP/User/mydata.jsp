@@ -1,3 +1,7 @@
+<!-- 
+Beschreibung: 
+Ansprechpartner:
+ -->
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <div class="pure-g">
 <div class="pure-u-1-5 sizezero"></div>

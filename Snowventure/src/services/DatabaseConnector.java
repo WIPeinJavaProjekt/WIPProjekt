@@ -9,7 +9,11 @@ import java.sql.Statement;
 /**
  * Class to Connect to the Database
  */
-
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class DatabaseConnector {
 	private static String dbHost = "meiserv.de"; // hostname
 	private static String dbPort = "3306";      // Port -- default: 3306

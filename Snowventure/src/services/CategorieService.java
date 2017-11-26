@@ -10,6 +10,11 @@ import classes.*;
  * Modelclass for categorie administration
  * 
 **/
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class CategorieService {
 	
 	/**

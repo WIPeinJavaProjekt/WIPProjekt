@@ -10,6 +10,11 @@ import classes.*;
  * Modelclass for Safetyquestion Administration
  * 
 **/
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class SafetyquestionService {
 	
 	/**

@@ -2,6 +2,11 @@ package classes;
 
 import java.util.ArrayList;
 
+/**
+ * Beschreibung: Fachklasse für die Abbildung eines Nutzers
+ * @author Ansprechpartner Fabian Meise
+ *
+ */
 public class User {
 
 	public int ulid;
@@ -19,9 +24,22 @@ public class User {
 	public ArrayList<Order> orders;
 	public ShoppingCart shoppingcart;
 	
+	/**
+	 * Leerer Konstruktor
+	 */
 	public User()
 	{}
 	
+	/**
+	 * Konstruktor
+	 * @param username Nutzername
+	 * @param password Password
+	 * @param name Nachname
+	 * @param surname Vorname
+	 * @param adress Adresse
+	 * @param email 
+	 * @param utid Nutzertyp
+	 */
 	public User(String username, String password, String name, String surname, Adress adress, String email, int utid)
 	{
 		this.username = username;
@@ -33,6 +51,17 @@ public class User {
 		this.utid = utid;
 	}
 	
+	/**
+	 * Konstruktor
+	 * @param question Sicherheitsfrage
+	 * @param username Nutzername
+	 * @param password Password
+	 * @param name Nachname
+	 * @param surname Vorname
+	 * @param adress Adresse
+	 * @param email 
+	 * @param utid Nutzertyp
+	 */
 	public User(Safetyquestion question, String username, String password, String name, String surname, Adress adress, String email, int utid)
 	{
 		this.squestion = question;
@@ -45,6 +74,20 @@ public class User {
 		this.utid = utid;
 	}
 	
+	
+	/**
+	 * Konstruktor
+	 * @param question Sicherheitsfrage
+	 * @param username Nutzername
+	 * @param password Password
+	 * @param name Nachname
+	 * @param surname Vorname
+	 * @param adress Adresse
+	 * @param email 
+	 * @param utid Nutzertyp
+	 * @param TechIsActive Account aktiv
+	 * @param TechIsDeleted Account deaktiviert
+	 */
 	public User(Safetyquestion question, String username, String password, String name, String surname, Adress adress, String email, int utid, int ulid, int TechIsActive, int TechIsDeleted)
 	{
 		this.squestion = question;

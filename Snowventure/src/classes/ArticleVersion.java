@@ -2,6 +2,11 @@ package classes;
 
 import java.util.ArrayList;
 
+/**
+ * Beschreibung: Fachklasse für die Abbildung einer Artikelversion
+ * @author Ansprechpartner Fabian Meise
+ *
+ */
 public class ArticleVersion extends Article{
 	public int versionid;
 	public String property;
@@ -11,12 +16,24 @@ public class ArticleVersion extends Article{
 	public ArrayList<ArticleColor> colors;
 	public ArrayList<ArticlePicture> pictures = new ArrayList<ArticlePicture>();
 
-	
+	/**
+	 * leerer Konstruktor
+	 */
 	public ArticleVersion() {
 		sizes = new ArrayList<String>();
 		colors = new ArrayList<ArticleColor>();
 	};
 	
+	/**
+	 * Konstruktor
+	 * @param versionid Versionsid
+	 * @param property frei belegbares Eigenschaftsfeld
+	 * @param propertyvalue Wert für frei belegbares Eigenschaftsfeld
+	 * @param price Preis
+	 * @param a Artikel der Version
+	 * @param size Größen
+	 * @param colors Farben
+	 */
 	public ArticleVersion(int versionid, String property,String propertyvalue, double price, Article a, ArrayList<String> size, ArrayList<ArticleColor> colors)
 	{
 		super(a);
@@ -50,6 +67,10 @@ public class ArticleVersion extends Article{
 		return this.pictures;
 	}
 	
+	/**
+	 * Erhalte alle Farben des Artikels /-Getrennt
+	 * @return Alle Farben /-Getrennt
+	 */
 	public String getColorsAsString() {
 		String output = "";
 		for(int i=0; i < this.colors.size(); i++) {
@@ -65,6 +86,10 @@ public class ArticleVersion extends Article{
 		return this.colors;
 	}
 	
+	/**
+	 * Erhalte alle Farbnamen als String ArrayList
+	 * @return ArrayList<String>
+	 */
 	public ArrayList<String> getColorNames(){
 		ArrayList<String> colorStrings = new ArrayList<String>();
 		for(ArticleColor ac: this.colors) {

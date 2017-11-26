@@ -10,6 +10,11 @@ import classes.*;
  * Modelclass for Articleversionsizes
  * 
 **/
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class ArticleSizesService {
 	public static ArrayList<String> GetAllPossibleSizes() throws SQLException{
 		ArrayList<String> sizes = new ArrayList<String>();

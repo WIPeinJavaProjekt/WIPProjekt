@@ -1,4 +1,7 @@
-
+<!-- 
+Beschreibung: Footer jeder Seite
+Ansprechpartner: Fabian Meise
+ -->
 <footer>
 	<div id="firstfooterline" >
 	    <div class="pure-g">

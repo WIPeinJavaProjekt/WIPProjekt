@@ -1,3 +1,7 @@
+<!-- 
+Beschreibung: Nutzersuche
+Ansprechpartner: Jacob Markus
+ -->
 <%@page import="classes.*"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>   

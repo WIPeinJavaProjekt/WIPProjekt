@@ -22,6 +22,11 @@ import services.OrderService;
 /**
  * Servlet zur Anzeige und Bearbeitung von Bestellungen
  */
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 @WebServlet("/order")
 public class OrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

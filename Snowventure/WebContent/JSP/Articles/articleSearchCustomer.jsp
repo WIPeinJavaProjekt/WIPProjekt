@@ -1,3 +1,7 @@
+<!-- 
+Beschreibung: Artikelsuche für Kunden Filter + Ergebnis
+Ansprechpartner: Garrit Kniepkamp
+ -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="./CSS/w3.css">
 

@@ -1,4 +1,7 @@
-
+<!-- 
+Beschreibung: Slider für Startseite
+Ansprechpartner: Fabian Meise
+ -->
 
 
 <div class="w3-content w3-display-container w3slidmod startslider" style="max-width:100%;" align="center">

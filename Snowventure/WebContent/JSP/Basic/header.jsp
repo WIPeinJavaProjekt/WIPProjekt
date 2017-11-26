@@ -1,3 +1,7 @@
+<!-- 
+Beschreibung: Header jeder Seite
+Ansprechpartner: Fabian Meise
+ -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="./CSS/w3.css">
 <link rel="stylesheet" type="text/css" href="./CSS/default_reps.css">

@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 import services.ArticleSizesService;
 
+/**
+ * Beschreibung: Fachklasse für die Abbildung eines Artikels
+ * @author Ansprechpartner Fabian Meise
+ *
+ */
 public class Article {
 
 	public int ID;
@@ -17,15 +22,29 @@ public class Article {
 	private int selectedversion;
 	public String gender;
 	
-	
+	/**
+	 * Leerer Konstruktor
+	 */
 	public Article(){}
 	
+	/**
+	 * Konstruktor
+	 * @param ID Artikelid
+	 */
 	public Article(int ID)
 	{
 		this.ID = ID;
 		selectedversion = 0;
 	}
-	
+	/**
+	 * Konstruktor
+	 * @param ID Artikelid
+	 * @param name Artikelname
+	 * @param description Artikelbeschreibung
+	 * @param acid Artikelkategorieid
+	 * @param manufacturer Hersteller 
+	 * @param gender Geschlecht
+	 */
 	public Article(int ID, String name, String description, int acid, String manufacturer, String gender)
 	{
 		this.ID = ID;
@@ -38,6 +57,11 @@ public class Article {
 		this.gender = gender;
 	}
 	
+	/**
+	 * Konstruktor
+	 * @param name Artikelname
+	 * @param description Artikelbeschreibung
+	 */
 	public Article(String name, String description)
 	{
 		this.name = name;
@@ -46,6 +70,11 @@ public class Article {
 		selectedversion = 0;
 	}
 	
+	
+	/**
+	 * Konstruktor
+	 * @param a ein anderer Artikel
+	 */
 	public Article(Article a)
 	{
 		this.ID = a.ID;
@@ -73,6 +102,10 @@ public class Article {
 		return versions.get(selectedversion).price;
 	}
 	
+	/**
+	 * Methode um Preis in dotted Formatierung anzuzeigen
+	 * @return Formatierten Preis
+	 */
 	public String getPriceFormatted() {
 		DecimalFormat f = new DecimalFormat("#.00"); 
 		return f.format(getPrice()).replace(".", ",");
@@ -81,6 +114,7 @@ public class Article {
 	public ArrayList<String> getSize() {
 		return versions.get(selectedversion).sizes;
 	}
+	
 	
 	public ArrayList<String> getAllSizesFromArticle(){
 		try {
@@ -119,6 +153,11 @@ public class Article {
 		return this.description;
 	}
 	
+	/**
+	 * Erhalte Artikelversion anhand einer Versionsid
+	 * @param inputId Versionsid
+	 * @return Artikelversion
+	 */
 	public ArticleVersion getAvByVersionId(int inputId) {
 		for(ArticleVersion av: versions) {
 			if(inputId == av.versionid) {

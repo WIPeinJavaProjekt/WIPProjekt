@@ -25,6 +25,11 @@ import classes.Categorie;
  * Modelclass for article administration
  * 
 **/
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class ArticleService {
 	
 	/**

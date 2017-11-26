@@ -9,6 +9,11 @@ import classes.*;
  *  Modelclass for Filtering Articlelists
  *  Obsolet auf Grund von verbesserten SELECT  
  */
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class ArticleFilterService {
 
 	

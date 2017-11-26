@@ -13,6 +13,11 @@ import classes.*;
  * Modelclass for order administration
  * 
 **/
+/**
+ * Beschreibung:
+ * @author Ansprechpartner
+ *
+ */
 public class OrderService {
 	
 	//Email für info per mail bzw services die per mail ausgeliefert werden per telefon geht ja schlecht...

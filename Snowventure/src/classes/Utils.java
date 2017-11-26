@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import services.ArticleColorService;
 
+/**
+ * Beschreibung: Klasse für diverse Testaufrufe, Hilfsmethoden
+ * @author Ansprechpartner
+ *
+ */
 public class Utils {
 	
 	/**

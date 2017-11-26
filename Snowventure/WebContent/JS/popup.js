@@ -1,3 +1,8 @@
+/**
+ * Beschreibung: 
+ * @author Ansprechpartner 
+ *
+ */
 //Function To Display Popup
 function div_show() {
 	document.getElementById('popup-div').style.display = "block";

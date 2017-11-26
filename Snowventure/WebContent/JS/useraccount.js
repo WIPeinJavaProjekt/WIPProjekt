@@ -1,7 +1,11 @@
 /**
  * Function to add an html object from another JSP-file having the same name as the given value of parameter page of the url.
  */
-
+/**
+ * Beschreibung: 
+ * @author Ansprechpartner 
+ *
+ */
 					
 // example_link to work with: example.com?param1=name&param2=&id=6		
 $.urlParam = function(name){

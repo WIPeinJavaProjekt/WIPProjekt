@@ -1,3 +1,7 @@
+<!-- 
+Beschreibung: Filter für Geschlecht
+Ansprechpartner: Garrit Kniepkamp, Fabian Meise
+ -->
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <div class="pure-control-group">									
 	<div id="filter_gender" class="dropdown"> 
