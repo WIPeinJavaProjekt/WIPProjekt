@@ -26,16 +26,16 @@ import classes.Categorie;
  * 
 **/
 /**
- * Beschreibung:
+ * Beschreibung: Modelklasse zur Administration von Artikeln
  * @author Ansprechpartner
  *
  */
 public class ArticleService {
 	
 	/**
-	 * Method for adding an Article
-	 * @param a the Article
-	 * @return int value depending on success of insertion
+	 * Füge einen Arikel hinzu
+	 * @param a der Artikel
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
 	 * @throws IOException 
 	 * @throws SQLException 
 	 */
@@ -68,9 +68,9 @@ public class ArticleService {
 	}
 	
 	/**
-	 * Method for adding an Articleversion
-	 * @param av the ArticleVersion
-	 * @return int value depending on success of insertion
+	 * Füge eine Artikelversion hinzu
+	 * @param av die Artikelversion
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
 	 * @throws SQLException 
 	 * @throws IOException 
 	 */
@@ -110,9 +110,9 @@ public class ArticleService {
 	}
 	
 	/**
-	 * Method for adding an ArticleversionSize
-	 * @param av the ArticleVersion
-	 * @return int value depending on success of insertion
+	 * Füge alle Artikelgrößen eines Artikels hinzu
+	 * @param av die Artikelversion
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
 	 */
 	public static int AddArticleVersionSize(ArticleVersion av) {
 		int insert = 1;		
@@ -133,8 +133,8 @@ public class ArticleService {
 	}
 	
 	/**
-	 * Helper Method for deleting All AVSizes of a specific articleversion
-	 * @param avid
+	 * Hilfsmethode zum Löschen aller bestehenden Artikelgrößen einer Version
+	 * @param Artikelversion
 	 */
 	private static void DeleteArticleVersionSize(int avid)
 	{
@@ -144,8 +144,8 @@ public class ArticleService {
 	}
 	
 	/**
-	 * Method for updating an Article
-	 * @param a Article to be updated
+	 * Aktualisiere einen Artikel
+	 * @param der zu aktualisierende Artikel
 	 * @throws IOException 
 	 * @throws SQLException 
 	 */
@@ -166,8 +166,8 @@ public class ArticleService {
 	}
 	
 	/**
-	 * Method for updating an Articleversion
-	 * @param av Articleversion to be updated
+	 * Aktualisiere eine Artikelversion
+	 * @param die zu aktualisierende Artikelversion
 	 * @throws SQLException 
 	 * @throws IOException 
 	 */
@@ -202,7 +202,7 @@ public class ArticleService {
 	
 	
 	/**
-	 * Method for UpdatingArticleVersionsizes
+	 * Aktualisiere alle Größen einer Artikelversion
 	 * @param av
 	 */
 	public static void UpdateArticleVersionSize(ArticleVersion av) {
@@ -212,9 +212,9 @@ public class ArticleService {
 	
 	
 	/**
-	 * Method for getting all Articleversions of an Article
-	 * @param a Article
-	 * @return Arraylist of the specific Articleversions
+	 * Erhalte alle Versionen eines Artikels
+	 * @param der zugehörige Artikel
+	 * @return Arraylist aller Versionen
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
@@ -244,6 +244,12 @@ public class ArticleService {
 		return av;
 	}
 	
+	/**
+	 * Erhalte alle auswählbaren größen einer Artikelversion
+	 * @param Artikelversion
+	 * @return Arraylist aller Größen
+	 * @throws SQLException
+	 */
 	public static ArrayList<String> GetAllArticleVersionsize(int avid) throws SQLException{
 		ArrayList<String> sizes = new ArrayList<String>();
 		String query = "SELECT size from ARTICLEVERSIONSIZE Where avid ='%d'";
@@ -257,8 +263,8 @@ public class ArticleService {
 	}
 	
 	/**
-	 * Method for getting all Articles
-	 * @return Arraylist of all Articles
+	 * Erhalte alle Artikel
+	 * @return Arraylist aller Artikel
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
@@ -271,26 +277,31 @@ public class ArticleService {
 	}
 	
 	/**
-	 * Method for getting all Articles with specific name
-	 * @param namepattern compare String
-	 * @return Arraylist with specific Articles
+	 * Erhalte alle Artikel anhand des Namensvergleich
+	 * @param pattern der Namensvergleich
+	 * @param piclimit Anzahl der geladenen Bilder pro Version
+	 * @param versionlimit Anzahl der geladenen Versionen
+	 * @return ArrayList aller bedingungserfüllenden Artikel
 	 * @throws SQLException
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public static ArrayList<Article> GetAllArticlesByName(String namepattern, int piclimit, int versionlimit) throws SQLException, IOException{
+	public static ArrayList<Article> GetAllArticlesByName(String pattern, int piclimit, int versionlimit) throws SQLException, IOException{
 
-		String query = "SELECT aid, name, description, acid, manufacturer,gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND name like '%"+namepattern+"%';";
+		String query = "SELECT aid, name, description, acid, manufacturer,gender FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND name like '%"+pattern+"%';";
 		
 		return SearchForArticles(query,piclimit,versionlimit);
 	}
 	
 
 	/**
-	 * Method for Getting all Articles with specific categorie
-	 * @param c specific categories
-	 * @return Arraylist with specific Articles
+	 * Erhalte alle Artikel anhand von Name und Kategorie
+	 * @param c Kategorie
+	 * @param pattern der Namensvergleich
+	 * @param piclimit Anzahl der geladenen Bilder pro Version
+	 * @param versionlimit Anzahl der geladenen Versionen
+	 * @return ArrayList aller bedingungserfüllenden Artikel
 	 * @throws SQLException
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static ArrayList<Article> GetAllArticlesByCategorie(int c, String pattern, int piclimit, int versionlimit) throws SQLException, IOException{
 
@@ -300,6 +311,22 @@ public class ArticleService {
 	}
 	
 	
+	/**
+	 * Erhalte alle Artikel anhand der Filterkriterien
+	 * @param c Kategorie
+	 * @param pattern der Namensvergleich
+	 * @param piclimit Anzahl der geladenen Bilder pro Version
+	 * @param versionlimit Anzahl der geladenen Versionen
+	 * @param gender gewähltes Geschlecht 
+	 * @param manufacturer gewählter Hersteller
+	 * @param minprice Mindestpreis
+	 * @param maxprice Maximalpreis
+	 * @param color gewählte Farben
+	 * @param size gewählte Größen
+	 * @return ArrayList aller bedingungserfüllenden Artikel
+	 * @throws SQLException
+	 * @throws IOException
+	 */
 	public static ArrayList<Article> GetAllArticlesByFilter(int c, String pattern, int piclimit, int versionlimit, String gender, String manufacturer, double minprice, double maxprice, String color, String size) throws SQLException, IOException{
 
 		
@@ -347,7 +374,15 @@ public class ArticleService {
 		return SearchForArticles(query,piclimit,versionlimit);
 	}
 	
-	
+	/**
+	 * Hilfsmethode zum Suchen von Artikeln
+	 * @param query auszuführendes SELECT
+	 * @param piclimit Anzahl der geladenen Bilder pro Version
+	 * @param versionlimit Anzahl der geladenen Versionen
+	 * @return Artikel aus allen Datensätzen des SELECTS
+	 * @throws SQLException
+	 * @throws IOException
+	 */
 	private static ArrayList<Article> SearchForArticles(String query, int piclimit, int versionlimit) throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
 
@@ -367,9 +402,9 @@ public class ArticleService {
 	
 	
 	/**
-	 * Method for getting a specific Article by its id
-	 * @param id Articleid
-	 * @return Article the specific Article
+	 * Erhalte Artikel anhand der ID
+	 * @param Artikelid
+	 * @return den spezifischen Artikel
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
@@ -393,9 +428,9 @@ public class ArticleService {
 	
 	
 	/**
-	 * Method for getting a specific Article by its id and selected version
-	 * @param av the selected version
-	 * @return Article the specific Article
+	 * Erhalte Artikel anhand der Artikelversion
+	 * @param ausgewählte Artikelversion
+	 * @return den spezifischen Artikel
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
@@ -406,9 +441,9 @@ public class ArticleService {
 	}
 	
 	/**
-	 * Method for getting a specific Article by its id and selected version
-	 * @param avid selected version id
-	 * @return Article the specific Article and selected version
+	 * Erhalte Artikel anhand der Artikelversion
+	 * @param ausgewählte Artikelversionsid
+	 * @return den spezifischen Artikel
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
@@ -423,9 +458,9 @@ public class ArticleService {
 	}
 
 	/**
-	 * Helper Method for getting a specific Articleid by its Articleversionid
-	 * @param avid selected version id
-	 * @return int id of the article
+	 * Erhalte Artikelid anhand der Artikelversionsid
+	 * @param avid Artikelversionsid
+	 * @return Artikelid
 	 * @throws SQLException
 	 */
 	private static int GetArticleIdFromAvid(int avid) throws SQLException{
@@ -447,11 +482,10 @@ public class ArticleService {
 	}
 	
 	/**
-	 * Helper Method to prepare a selected Article
-	 * @param avid id of the selected version
-	 * @param a Article to be prepared
-	 * @return Article the specific Article and set selected version
-	 * @throws SQLException
+	 * Wähle die Version eines Artikels aus
+	 * @param auszuwählende Versions (ID)
+	 * @param der zu modifizerende Artikel
+	 * @return modifizerter Artikel
 	 */
 	private static Article PrepSelectedArticle(int avid, Article a) {
 		System.out.println("Anzahl der versionen:"+ a.versions.size());
@@ -471,9 +505,10 @@ public class ArticleService {
 	}
 	
 	/**
-	 * Method for getting all ArticlePictures from a specific Articleid
-	 * @param aid Articleid
-	 * @return Arraylist of all ArticlePictures
+	 * Erhalte Bilder einer Artikelversion
+	 * @param avid Artikelversionsid
+	 * @param piclimit Anzahl der Bilder
+	 * @return ArrayList aller Artikelbilder
 	 * @throws IOException
 	 * @throws SQLException
 	 */
@@ -502,6 +537,13 @@ public class ArticleService {
 		return pictures;
 	}
 	
+	/**
+	 * Erhalte ein Bild anhand einer Bildid
+	 * @param imgId Bildid
+	 * @return Artikelbild
+	 * @throws IOException
+	 * @throws SQLException
+	 */
 	public static ArticlePicture GetPictureFromPictureId(int imgId) throws IOException, SQLException{
 		
 		String query = "SELECT name,image FROM ARTICLEIMAGE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aimgid ='%d';";
@@ -521,9 +563,10 @@ public class ArticleService {
 	}
 	
 	/**
-	 * Method for adding a ArticlePicture
-	 * @param img
-	 * @return int value depending on success of insertion
+	 * Füge ein Artikelbild der DB hinzu
+	 * @param img Bild
+	 * @param avid Artikelversion
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
 	 * @throws SQLException
 	 * @throws IOException
 	 */
@@ -542,12 +585,23 @@ public class ArticleService {
 	}
 
 	/**
-	 * Method for deleting all Pictures from an Article
-	 * @param aid Articleid
+	 * Lösche alle Bilder einer Artikelversion
+	 * @param avid Artikelversionsid
 	 */
 	public static void DeletePictureFromArticleVersion(int avid) {
 		String query = "Delete ArticleImage WHERE avid = '%d'";
 		query = String.format(query, avid);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
+	
+	/**
+	 * Lösche ein Bild einer Artikelversion
+	 * @param avid Artikelversionsid
+	 * @param imgid zulöschende Bildid
+	 */
+	public static void DeletePictureFromArticleVersion(int avid, int imgid) {
+		String query = "Delete ArticleImage WHERE avid = '%d' and aimgid ='%d'";
+		query = String.format(query, avid, imgid);
+		DatabaseConnector.createConnection().UpdateQuery(query);
+	}	
 }

@@ -7,20 +7,16 @@ import classes.*;
 
 
 /**
- * Modelclass for shoppingcart administration
- * 
-**/
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Modelklasse für Warenkorbadministration
+ * @author Ansprechpartner Fabian Meise
  *
  */
 public class ShoppingCartService {
 
 	
 	/**
-	 * Update Shoppingcart by deleting and adding alls items
-	 * @param u User, who owns the shoppingcart
+	 * Aktualisiere den aktuellen Warenkorb eines Nutzers
+	 * @param u Nutzer
 	 */
 	public static void UpdateShopping(User u) {
 		DeleteShoppingCartPositions(u);
@@ -28,11 +24,11 @@ public class ShoppingCartService {
 	}
 	
 	/**
-	 * Get Shoppingcart from User
-	 * @param u User 
-	 * @return Shoppingcart from the User
+	 * Erhalte bestehenden Warenkorb eines Nutzers
+	 * @param u Nutzer
+	 * @return Warenkorb
 	 * @throws SQLException
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static ShoppingCart GetShoppingCart(User u) throws SQLException, IOException {
 		String query ="SELECT avid,ulid,amount,acolid,size from SHOPPINGCART WHERE ulid='%d'";
@@ -43,12 +39,12 @@ public class ShoppingCartService {
 	}
 	
 	/**
-	 * Get Shoppingcart from Userid
-	 * @param ulid Userloginid
-	 * @return Shoppingcart from the Userloginid
+	 * Erhalte bestehenden Warenkorb anhand des Nutzerlogins
+	 * @param ulid Nutzerid
+	 * @return Warenkorb
 	 * @throws SQLException
-	 * @throws IOException 
-	 */	
+	 * @throws IOException
+	 */
 	public static ShoppingCart GetShoppingCart(int ulid) throws SQLException, IOException {
 		String query ="SELECT avid,ulid,amount,acolid, size from SHOPPINGCART WHERE ulid='%d'";
 		query = String.format(query, ulid);
@@ -58,11 +54,10 @@ public class ShoppingCartService {
 	}
 
 	/**
-	 * Helper Method for Updating the Shoppingcart
-	 * @param u User, who owns the shoppingcart
-	 * @return positiv in case of success, negativ in case of an error
-	 * @throws SQLException
-	 */	
+	 * Füge Warenkorb eines Nutzers ein	
+	 * @param u Nutzer
+	 * @return
+	 */
 	private static int AddShoppingCart(User u) {
 		int scpid = 1;
 		
@@ -81,12 +76,11 @@ public class ShoppingCartService {
 	}
 	
 	/**
-	 * Helper Method for Adding a shoppingcartposition
-	 * @param position Shoppingcartposition of the Article to be added
-	 * @param ulid the Userloginid belongs to the position
-	 * @return positiv in case of success, negativ in case of an error
-	 * @throws SQLException
-	 */	
+	 * Füge eine Warenkorbposition ein
+	 * @param position Warenkorbposition
+	 * @param ulid Nutzerloginid
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
+	 */
 	private static int AddShoppingCartPosition(ShoppingCartPosition position, int ulid) {
 		int pid = -1;
 		String query ="INSERT INTO SHOPPINGCART(avid,ulid,amount,acolid, size) VALUES(%d,%d,%d,'%d',%s);";
@@ -96,13 +90,12 @@ public class ShoppingCartService {
 	}
 	
 	/**
-	 * Helper Method for Selection all Shoppingcartpositions
-	 * @param position Shoppingcartposition of the Article to be added
-	 * @param ulid the Userloginid belongs to the position
-	 * @return Arraylist of ShoppingCartpositions
+	 * Erhalte Warenkorb anhand eines SELECTs	
+	 * @param SELECT
+	 * @return ArrayList mit Warenkorbpositionen
 	 * @throws SQLException
-	 * @throws IOException 
-	 */		
+	 * @throws IOException
+	 */
 	private static ArrayList<ShoppingCartPosition> GetShoppingCartfromQuery(String query) throws SQLException, IOException {
 		ArrayList<ShoppingCartPosition> scp = new ArrayList<ShoppingCartPosition>();
 		
@@ -117,9 +110,9 @@ public class ShoppingCartService {
 	}
 	
 	/**
-	 * Helper Method for Deleting all Shoppingcartpositions from a specific user
-	 * @param u User, whose shoppingcartpositions should be deleted 
-	 */	
+	 * Hilfsmethode zum Löschen eines bestehenden Warenkorbs eines Nutzers
+	 * @param Nutzer
+	 */
 	private static void DeleteShoppingCartPositions(User u) {
 		String query ="DELETE SHOPPINGCART WHERE ulid = '%d';";
 		query = String.format(query, u.ulid);

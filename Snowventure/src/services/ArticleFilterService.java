@@ -6,18 +6,13 @@ import java.io.*;
 import classes.*;
 
 /**
- *  Modelclass for Filtering Articlelists
- *  Obsolet auf Grund von verbesserten SELECT  
- */
-/**
- * Beschreibung:
- * @author Ansprechpartner
- *
+ * Beschreibung: Modelklasse zum Filtern von Artikellisten
+ * @author Ansprechpartner Fabian Meise
+ * Nicht mehr aktiv genutzt, da das equivalente SELECT optimiert wurde
  */
 public class ArticleFilterService {
 
 	
-
 	
 	public static ArrayList<Article> FilterColor(String[] color, ArrayList<Article> articles){
 		ArrayList<Article> newarticles = new ArrayList<Article>(articles);

@@ -7,19 +7,15 @@ import java.util.List;
 import classes.*;
 
 /**
- * Modelclass for categorie administration
- * 
-**/
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Modelklasse füür Artikelkategorien
+ * @author Ansprechpartner Fabian Meise
  *
  */
 public class CategorieService {
 	
 	/**
-	 * Method for getting all Categories
-	 * @return Arraylist with all Categories
+	 * Erhalte alle auswählbaren Kategorien
+	 * @return Arraylist alle Kategorien
 	 * @throws SQLException
 	 */
 	public static ArrayList<Categorie> GetCategories() throws SQLException

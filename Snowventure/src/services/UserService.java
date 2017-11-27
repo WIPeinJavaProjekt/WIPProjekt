@@ -6,20 +6,16 @@ import java.util.ArrayList;
 import classes.*;
 
 /**
- * Modelclass for user administration
- * 
-**/
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Modelclass for user administration
+ * @author Ansprechpartner Fabian Meise
  *
  */
 public class UserService {	
 	
 	/**
-	 * Add a new User into the database.
-	 * @param user New user, that should be added to database
-	 * @return int value depending on success of insertion
+	 * Füge neuen Nutzer hinzu
+	 * @param user hinzuzufügender Nutzer
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
 	 */
 	public static int AddUser(User user) {
 		String query;
@@ -53,10 +49,10 @@ public class UserService {
 	}
 	
 	/**
-	 * Returns all users where login matches the given pattern
-	 * @param pattern Searchvalue
-	 * @param utid UsertypeID
-	 * @return ArrayList of Users
+	 * Erhalte alle Nutzer anhand des Loginnamens
+	 * @param pattern Suchwert
+	 * @param utid Nutzertyp
+	 * @return ArrayList der zutreffenden Nutzer
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
@@ -108,9 +104,9 @@ public class UserService {
 	}
 	
 	/**
-	 * Method to get a User matching the pattern
-	 * @param pattern Input value to search the User
-	 * @return Returns specific User
+	 * Erhalte einen Nutzer anhand des Namens
+	 * @param pattern Suchwert
+	 * @return spezifischer Nutzer
 	 * @throws SQLException
 	 * @throws IOException 
 	 */
@@ -158,8 +154,8 @@ public class UserService {
 	}
 	
 	 /**
-	  * Method to Update User-data
-	  * @param user
+	  * Aktualisere Nutzerdaten
+	  * @param zu aktualierender Nutzer
 	  */
 	public static void UpdateUser(User user) {
 		String query = "UPDATE USERDATA SET name='%s', surname ='%s', email ='%s', postcode='%s',street='%s',city='%s', phone='%s',streetno='%s', TechIsActive=%d, TechIsDeleted=%d"
@@ -199,9 +195,9 @@ public class UserService {
 	}
 	
 	/**
-	 * Method to update the userrights
-	 * @param user
-	 * @param rightnum
+	 * Aktualisere Nutzerrechte
+	 * @param user zu aktualisierender Nutzer
+	 * @param rightnum neues Nutzerrecht
 	 */
 	public static void UpdateUserRights(User user, int rightnum)
 	{

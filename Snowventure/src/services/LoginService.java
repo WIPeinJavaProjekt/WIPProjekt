@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import classes.User;
 
 /**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Modelklasse für die Nutzeranmeldung
+ * @author Ansprechpartner Garrit Kniepkamp
  *
  */
 public class LoginService {

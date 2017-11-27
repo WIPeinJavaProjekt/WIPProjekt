@@ -7,19 +7,15 @@ import java.util.List;
 import classes.*;
 
 /**
- * Modelclass for Safetyquestion Administration
- * 
-**/
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Modelklasse für Sicherheitsfragen
+ * @author Ansprechpartner Fabian Meise
  *
  */
 public class SafetyquestionService {
 	
 	/**
-	 * Returns all Safetyquestions
-	 * @return ArrayList of Safetyquestions
+	 * Erhalte alle Sicherheitsfragen
+	 * @return ArrayList mit allen Sicherheitsfragen
 	 * @throws SQLException
 	 */
 	public static ArrayList<Safetyquestion> GetSafetyquestion() throws SQLException

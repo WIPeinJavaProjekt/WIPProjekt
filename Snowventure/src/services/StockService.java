@@ -5,27 +5,24 @@ import java.util.ArrayList;
 import classes.*;
 
 /**
- * Modelclass for Stock administration
- * 
-**/
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Modelklasse für Lageradministration
+ * @author Ansprechpartner Fabian Meise
  *
  */
 public class StockService {
 	
 	/**
-	 * Get Stock from an ArticleVersion
-	 * @param a ArticleVersion
-	 * @return amount of the submitted article
+	 * Erhalte Lagerbestand einer Artikelversion 
+	 * @param a Artikelversion
+	 * @param size gewählte Größe
+	 * @return int Lagerbestand
 	 * @throws SQLException
 	 */
-	public static int GetStock(ArticleVersion a) throws SQLException {
+	public static int GetStock(ArticleVersion a, String size) throws SQLException {
 		int amount = 0;
 		String query;
-		query = "SELECT amount FROM STOCK WHERE avid='%d'";
-		query = String.format(query,a.versionid);
+		query = "SELECT amount FROM STOCK WHERE avid='%d' AND size='%s'";
+		query = String.format(query,a.versionid,size);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		while(result.next())
@@ -38,13 +35,14 @@ public class StockService {
 	
 	
 	/**
-	 * Update the Stock of an Article
-	 * @param a ArticleVersion, which 
-	 * @param amount Amount of ArticleVersions added to the Stock, negative value for removal
+	 * Aktualisere Lagerbestand
+	 * @param a zu aktualisierende Artikelversion 
+	 * @param size gewählte Größe
+	 * @param amount hinzufügender Lagerbestand - für Abzug
 	 * @throws SQLException
 	 */
-	public void UpdateStock(ArticleVersion a, int amount) throws SQLException {
-		int newamount = GetStock(a) - Math.abs(amount);
+	public void UpdateStock(ArticleVersion a,String size, int amount) throws SQLException {
+		int newamount = GetStock(a,size) + amount;
 		if(newamount >=0 )
 		{
 			String query = "UPDATE STOCK SET amount = '%d' WHERE avid = '%d'";

@@ -7,15 +7,17 @@ import java.util.List;
 import classes.*;
 
 /**
- * Modelclass for Articleversionsizes
- * 
-**/
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Modelklasse für Artikelgrößen
+ * @author Ansprechpartner Fabian Meise
  *
  */
 public class ArticleSizesService {
+	
+	/**
+	 * Erhalte alle auswählbaren Größen
+	 * @return Alle auswählbaren Größen
+	 * @throws SQLException
+	 */
 	public static ArrayList<String> GetAllPossibleSizes() throws SQLException{
 		ArrayList<String> sizes = new ArrayList<String>();
 		
@@ -29,6 +31,12 @@ public class ArticleSizesService {
 		return sizes;
 	}
 	
+	/**
+	 * Erhalte alle Auswählbaren Größen eines Artikels
+	 * @param aid Artikel
+	 * @return ArrayList aller auswählbaren Größen
+	 * @throws SQLException
+	 */
 	public static ArrayList<String> GetAllSizesFromArticle(int aid) throws SQLException{
 		ArrayList<String> sizes = new ArrayList<String>();
 		

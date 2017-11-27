@@ -7,15 +7,16 @@ import java.util.List;
 import classes.*;
 
 /**
- * Modelclass for Article Manufacturers
- * 
-**/
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Modelklasse für Artikelhersteller
+ * @author Ansprechpartner Fabian Meise
  *
  */
 public class ArtilceManufacturerService {
+	/**
+	 * Erhalte alle auswählbaren Hersteller
+	 * @return ArrayList aller auswählbaren Hersteller
+	 * @throws SQLException
+	 */
 	public static ArrayList<String> GetAllPossibleManufacturers() throws SQLException{
 		ArrayList<String> sizes = new ArrayList<String>();
 		

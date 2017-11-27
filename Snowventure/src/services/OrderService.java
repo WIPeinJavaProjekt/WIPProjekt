@@ -10,21 +10,16 @@ import java.util.Locale;
 import classes.*;
 
 /**
- * Modelclass for order administration
- * 
-**/
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Modelklasse für Bestelladministration
+ * @author Ansprechpartner Fabian Meise
  *
  */
 public class OrderService {
 	
-	//Email für info per mail bzw services die per mail ausgeliefert werden per telefon geht ja schlecht...
 	/**
-	 * Add an Order
-	 * @param o the Order
-	 * @return int value depending on success of insertion
+	 * Füge eine Bestellung hinzu
+	 * @param o Bestellung
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
 	 */
 	public static int AddOrder(Order o){
 		int oid= -1;
@@ -62,12 +57,11 @@ public class OrderService {
 	}
 	
 	/**
-	 * Helper Method for Adding a Orderdetails
-	 * @param shoppingcart shoppingcart, which includes the articles ordered
-	 * @param orid the depending orderid
-	 * @return positiv in case of success, negativ in case of an error
-	 * @throws SQLException
-	 */	
+	 * Hilfsmethode zum Hinzufügen von Bestelldetails
+	 * @param Warenkorb
+	 * @param Bestellid
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
+	 */
 	private static int AddOrderDetails(ShoppingCart shoppingCart, int orid) {
 		int odid= -1;
 		System.out.println("RUFE EINFÜGEN AUF");
@@ -82,12 +76,11 @@ public class OrderService {
 	}
 	
 	/**
-	 * Helper Method for Adding a Shoppingcartpositions from an order
-	 * @param shoppingcart shoppingcart, which includes the articles ordered
-	 * @param orid the depending orderid
-	 * @return positiv in case of success, negativ in case of an error
-	 * @throws SQLException
-	 */		
+	 * Hilfsmethode zum Hinzufügen der Warenkorbpositionen	
+	 * @param p Warenkorbposition
+	 * @param orid Bestellid
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
+	 */
 	private static int AddOrderDetailPosition(ShoppingCartPosition p, int orid) {
 		Locale.setDefault(Locale.ENGLISH);		
 		int id= -1;
@@ -100,14 +93,14 @@ public class OrderService {
 	}
 	
 	/**
-	 * Helper Method for Adding the status life cycle of the order
-	 * @param statuscycle Arraylist contain all order status
-	 * @param orid the depending orderid
-	 * @return positiv in case of success, negativ in case of an error
-	 * @throws SQLException
-	 */	
+	 * Hilfsmethode zum Hinzufügen der Bestellhistorie
+	 * @param statuscycle Bestellhistorie
+	 * @param orid Bestellid
+	 * @return
+	 */
 	public static int AddOrderStatuscycle(ArrayList<OrderStatus> statuscycle, int orid) {
 		int osid= -1;
+		DeleteOrderStatuscycle(orid);
 		for(OrderStatus os: statuscycle)
 		{
 			osid = AddOrderStatus(os,orid);
@@ -119,12 +112,11 @@ public class OrderService {
 	}	
 	
 	/**
-	 * Helper Method for Adding an OrderStatus
-	 * @param os one Orderstatus
-	 * @param orid the depending orderid
-	 * @return positiv in case of success, negativ in case of an error
-	 * @throws SQLException
-	 */	
+	 * Hilfsmethode zum Einfügen eines Bestellstatus
+	 * @param os Bestellstatus
+	 * @param orid Bestellid
+	 * @return
+	 */
 	public static int AddOrderStatus(OrderStatus os, int orid) {
 		int osid= -1;
 		
@@ -139,10 +131,9 @@ public class OrderService {
 	
 	
 	/**
-	 * Method for Deleting an Order by its Orderid
-	 * @param orid the depending orderid
-	 * @return positiv in case of success, negativ in case of an error
-	 */	
+	 * Lösche eine Bestellung
+	 * @param orid Bestellid
+	 */
 	public static void DeleteOrder(int orid)
 	{
 		DeleteOrderDetailPosition(orid);
@@ -153,10 +144,9 @@ public class OrderService {
 	}
 	
 	/**
-	 * Helper Method for Deleting the Orderpositions by its Orderid
-	 * @param orid the depending orderid
-	 * @return positiv in case of success, negativ in case of an error
-	 */	
+	 * Lösche alle Bestellpositionen einer Bestellung
+	 * @param orid Bestellid
+	 */
 	private static void DeleteOrderDetailPosition(int orid)
 	{
 		String query = "DELETE ASSIGNMENTDETAILS WHERE orid = %d";
@@ -165,10 +155,9 @@ public class OrderService {
 	}
 
 	/**
-	 * Helper Method for Deleting the Order life cycle by its Orderid
-	 * @param orid the depending orderid
-	 * @return positiv in case of success, negativ in case of an error
-	 */	
+	 * Lösche alle Bestellstati einer Bestellung
+	 * @param orid Bestellid
+	 */
 	public static void DeleteOrderStatuscycle(int orid)
 	{
 		String query = "DELETE ASSIGNMENTSTATUS WHERE orid = %d";
@@ -179,11 +168,10 @@ public class OrderService {
 	
 	
 	/**
-	 * Method for updating an Order
-	 * @param o the depending order
-	 */	
+	 * Aktualisiere eine Bestellung
+	 * @param o Bestellung
+	 */
 	public static void UpdateOrder(Order o) {
-		//update order 
 		
 		DeleteOrderDetailPosition(o.orid);
 		DeleteOrderStatuscycle(o.orid);
@@ -206,12 +194,12 @@ public class OrderService {
 	}
 	
 	/**
-	 * Method for getting all Orders from a specific Orderid
-	 * @param ulid Userloginid
-	 * @return Arraylist with all Orders of the Userloginid
+	 * Erhalte alle Bestellung eines Nutzers
+	 * @param ulid Nutzerloginid
+	 * @return ArrayList aller bestellungen
 	 * @throws SQLException
-	 * @throws IOException 
-	 */	
+	 * @throws IOException
+	 */
 	public static ArrayList<Order> GetAllOrders(int ulid) throws SQLException, IOException
 	{
 		ArrayList<Order> orders = new ArrayList<Order>();
@@ -232,11 +220,11 @@ public class OrderService {
 	
 	
 	/**
-	 * Method for getting all available Orders
-	 * @return Arraylist with all Orders
+	 * Erhalte alle Bestellungen
+	 * @return ArrayList aller Bestellungen
 	 * @throws SQLException
-	 * @throws IOException 
-	 */	
+	 * @throws IOException
+	 */
 	public static ArrayList<Order> GetAllOrders() throws SQLException, IOException
 	{
 		ArrayList<Order> orders = new ArrayList<Order>();
@@ -256,12 +244,12 @@ public class OrderService {
 	
 	
 	/**
-	 * Method for getting a specific Order 
-	 * @param orid Orderid
-	 * @return the specific Order
+	 * Erhalte eine bestimmte Bestellung anhand der Bestellid
+	 * @param orid Bestellid
+	 * @return Bestellung
 	 * @throws SQLException
-	 * @throws IOException 
-	 */		
+	 * @throws IOException
+	 */
 	public static Order GetSpecificOrder(int orid) throws SQLException, IOException 
 	{
 		String query = "SELECT ulid, orid, name, surname, email, postcode, street, streetno, city FROM ASSIGNMENT WHERE orid ='%d'";
@@ -282,12 +270,12 @@ public class OrderService {
 	
 	
 	/**
-	 * Helper Method for getting the Shoppingcart from a specific Order 
-	 * @param orid Orderid
-	 * @return the specific shoppingcart
+	 * Erhalte alle Bestellpositionen einer Bestellung
+	 * @param orid Bestellid
+	 * @return Warenkorb
 	 * @throws SQLException
-	 * @throws IOException 
-	 */	
+	 * @throws IOException
+	 */
 	private static ShoppingCart GetShoppingCartFromOrder(int orid) throws SQLException, IOException
 	{
 		String query ="SELECT odid,avid,assignmentprice,amount,acolid,size from ASSIGNMENTDETAILS WHERE orid='%d'";
@@ -310,11 +298,11 @@ public class OrderService {
 	}
 	
 	/**
-	 * Helper Method for getting the status life cycle from a specific Order 
-	 * @param orid Orderid
-	 * @return the specific Arraylist containing the different state
+	 * Erhalte alle Bestellstatus (Historie) einer Bestellung
+	 * @param orid Bestellid
+	 * @return ArrayList der Bestellstatus (Historie)
 	 * @throws SQLException
-	 */	
+	 */
 	private static ArrayList<OrderStatus> GetOrderStatuscycle(int orid) throws SQLException{
 		ArrayList<OrderStatus> statuslist = new ArrayList<OrderStatus>();
 		

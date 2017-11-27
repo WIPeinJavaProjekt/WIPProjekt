@@ -7,11 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Class to Connect to the Database
- */
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Klasse zum Herstellen der Datenbankverbindung
+ * @author Ansprechpartner Fabian Meise
  *
  */
 public class DatabaseConnector {
@@ -26,7 +23,7 @@ public class DatabaseConnector {
     private static DatabaseConnector databaseconnection = null; //global connector
 	
     /**
-     * Method for connecting to the database
+     * Herstellen der Datenbankverbindung
      */
     private DatabaseConnector()
     {
@@ -56,7 +53,7 @@ public class DatabaseConnector {
     }
     
     /**
-     * Method to create the DatabaseConnector
+     * Erstelle den DatabaseConnector
      * @return DatabaseConnector
      */
 	public static DatabaseConnector createConnection() {
@@ -66,9 +63,9 @@ public class DatabaseConnector {
 	}
 	   
 	/**
-	 * Method for an Insertquery 
-	 * @param query Insertquery
-	 * @return int value depending on success of insertion
+	 * Führe INSERT aus
+	 * @param INSERT
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
 	 */
 	public int InsertQuery(String query) {
 		
@@ -90,9 +87,9 @@ public class DatabaseConnector {
 	}
 	
 	/**
-	 * Method for a Selectquery
-	 * @param query Selectquery
-	 * @return Resultset containing the Result of the Select
+	 * Führe SELECT aus
+	 * @param SELECT
+	 * @return Resultset welches das Ergebnis des SELECTs enthält
 	 */
 	public ResultSet SelectQuery(String query) {
 		if(this.connect != null)
@@ -109,8 +106,8 @@ public class DatabaseConnector {
 	}
 	
 	/**
-	 * Method for an updatequery
-	 * @param query Updatequery
+	 * Führe UPDATE aus
+	 * @param UPDATE
 	 */
 	public void UpdateQuery(String query) {
 		System.out.println("Im using the update");
@@ -126,7 +123,7 @@ public class DatabaseConnector {
 	
 	
 	/**
-	 * Method for closing the Databaseconnection
+	 * Schließe Datenbankverbindung
 	 * @throws SQLException
 	 */
 	public static void CloseConnection() throws SQLException {
