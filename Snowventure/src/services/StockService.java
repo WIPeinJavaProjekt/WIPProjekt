@@ -41,13 +41,13 @@ public class StockService {
 	 * @param amount hinzufügender Lagerbestand - für Abzug
 	 * @throws SQLException
 	 */
-	public void UpdateStock(ArticleVersion a,String size, int amount) throws SQLException {
+	public void UpdateStock(ArticleVersion a, String size, int amount) throws SQLException {
 		int newamount = GetStock(a,size) + amount;
 		if(newamount >=0 )
 		{
 			String query = "UPDATE STOCK SET amount = '%d' WHERE avid = '%d'";
 			query = String.format(query,newamount,a.versionid);
-			DatabaseConnector.createConnection().UpdateQuery(query);			
+			DatabaseConnector.createConnection().UpdateQuery(query);
 		}
 	}
 	
