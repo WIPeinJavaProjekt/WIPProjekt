@@ -528,7 +528,7 @@ overflow:scroll;
   visibility: hidden;
 }
 .custom-file-input::before {
-  content: 'Datei auswï¿½hlen';
+  content: 'Datei auswählen';
   display: inline-block;
   background: #4F6877 !important;
   color: #fff;

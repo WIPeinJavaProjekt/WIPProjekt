@@ -42,7 +42,7 @@ Ansprechpartner: Garrit Kniepkamp, Jacob Markus
 				         <div class="pure-controls">
 				            <button class="loginfield pure-button pure-button-primary boxedinput" type="submit" name="login" class="pure-button pure-button-primary">Anmelden</button>
 				         </div>
-			          </fieldset>  
+			          </fieldset>
 				</form>
 				
 				<a name="passwordforgotten" href="forgottenPassword?param=login">Passwort vergessen?</a> 
@@ -53,9 +53,15 @@ Ansprechpartner: Garrit Kniepkamp, Jacob Markus
 			            <button class="loginfield-2 pure-button pure-button-primary" type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>
 		          <!--    </fieldset>  -->
 				</form>
+				<c:if test="${not empty errorLogin}">
+					<form class="pure-form pure-form-aligned" action="login" method="get">
+							<p class="error">${errorLogin}</p>
+					</form>
+				</c:if>
 			</div>
 			
-			<div class="pure-u-1-5 sizezero"></div>
+			<div class="pure-u-1-5 sizezero">
+			</div>
 		</div>
 		<%@include file = "../Basic/footer.jsp" %>
 	</body>

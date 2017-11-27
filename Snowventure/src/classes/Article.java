@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import services.ArticleSizesService;
+import services.StockService;
 
 /**
  * Beschreibung: Fachklasse für die Abbildung eines Artikels
@@ -93,6 +94,11 @@ public class Article {
 		return selectedversion;
 	}
 	
+	public ArticleVersion getSelectedArticleVersion() {
+		ArticleVersion av = this.getAllVersions().get(getSelectedVersion());
+		return av;
+	}
+	
 	public void setSelectedVersion(int s) {
 		if(s>= 0&& s< versions.size())
 			selectedversion = s;
@@ -167,4 +173,15 @@ public class Article {
 		return null;
 	}
 	
+	public String getStock(String size) {
+		int stock;
+		try {
+			stock = StockService.GetStock(this.getAllVersions().get(this.getSelectedVersion()), size);
+			return Integer.toString(stock);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "n.V.";
+	}
 }

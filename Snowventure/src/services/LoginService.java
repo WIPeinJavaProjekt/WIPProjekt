@@ -24,10 +24,12 @@ public class LoginService {
 			User user = new User();
 			try {
 				user = UserService.GetUser(userId);
+				if(user == null) {
+					return false;
+				}
 				if(user.password.equals(password) && user.techisactive == 1) {
 					return true;
 				}
-				System.out.println("Wrong  PW / User deactived");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

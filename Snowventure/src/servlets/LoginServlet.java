@@ -82,11 +82,11 @@ public class LoginServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			request.getSession().setAttribute("currentUser", user);
-	        response.sendRedirect("start");	        
+			request.getSession().removeAttribute("errorLogin");
+	        response.sendRedirect("start");  
 	        return true;
 		} else {
-			//TODO: Error
-			System.out.println("User nicht in DB / PW falsch");
+			request.getSession().setAttribute("errorLogin", "Der User existiert nicht oder das Passwort ist nicht korrekt!");
 			return false;
 		}
 	}

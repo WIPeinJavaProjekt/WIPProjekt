@@ -25,6 +25,7 @@ import classes.Utils;
 import services.ArticleColorService;
 import services.ArticleService;
 import services.CategorieService;
+import services.StockService;
 
 /**
  * Servlet implementation class ArticleServlet
@@ -126,7 +127,21 @@ public class ArticleServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if(request.getParameter("back") != null) {
+		} else if(request.getParameter("changeStock") != null) {
+			
+			for(String size: this.article.getSize()) {
+				System.out.println("Stock for " + size + " is: " + request.getParameter(size));
+				try {
+					StockService.UpdateStock(this.article.getSelectedArticleVersion(), size, Integer.parseInt(request.getParameter(size)));
+				} catch (NumberFormatException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.getSelectedVersion());
+			return;
+		}  else if(request.getParameter("back") != null) {
 			response.sendRedirect("users?page=articlesearch");
 			return;
 		}
@@ -278,9 +293,6 @@ public class ArticleServlet extends HttpServlet {
 		
 	    String[] colors = request.getParameterValues("color");
 	    String[] sizes = request.getParameterValues("size");
-	    
-	    System.out.println(Arrays.toString(colors));
-	    System.out.println(Arrays.toString(sizes));
 	    
 	    if(colors != null) {
 		    for(int s= 0; s< colors.length;s++) {

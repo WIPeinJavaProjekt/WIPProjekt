@@ -60,10 +60,7 @@ public class ArticleSearchServlet extends HttpServlet {
 			
 			String[] sessionManufacturer = request.getParameterValues("manufacturers");
 			if(sessionManufacturer!= null) {
-				System.out.println(Arrays.toString(sessionManufacturer));
-				System.out.println(sessionManufacturer.length);
 			} else {
-				System.out.println("Man Is null");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -112,7 +109,6 @@ public class ArticleSearchServlet extends HttpServlet {
 	 * @throws IOException 
 	 */
 	private void findArticles(HttpServletRequest request,int category ,String searchPattern, double minprice, double maxprice, String[] sizes, String[] manufacturers, String[] colors, String[] genders) throws IOException {
-		System.out.println("Searching articles-findarticles");
 		
 		ArrayList<Article> articles = null;
 		

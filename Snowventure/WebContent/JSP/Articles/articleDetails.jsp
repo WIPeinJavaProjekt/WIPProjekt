@@ -104,7 +104,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
 							</div>
 							<div class="pure-u-1-2 fullwidth">
 								<div class="pure-control-group">
-						            	<input required class="boxedinput custom-file-input" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
+						            	<input class="boxedinput custom-file-input" type="file" id="articleImage" name="articleImage" onchange="readURL(this);">
 						        </div>
 						        <div class="pure-control-group">
 						        	<c:if test="${updateArticle}">
@@ -134,7 +134,32 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
 						            		onclick="changeVersion(${article.getId()}, 'article')" >Als neue Artikelversion speichern</button>
 					            	</c:if>
 						        </div>
-						        
+						        <br>
+						        <div class="pure-control-group">
+						            	<div>Lagerbestand für Unigröße: 
+							            	<input class="" id="Unigröße" name="Unigröße" value="${article.getStock('Unigröße')}" type="number" step="1" placeholder="Lagerbestand">
+					            		</div>
+					            		<div>Lagerbestand für S: 
+							            	<input class="" id="S" name="S" value="${article.getStock('S')}" type="number" step="1" placeholder="Lagerbestand">
+					            		</div>
+					            		<div>Lagerbestand für M: 
+							            	<input class="" id="M" name="M" value="${article.getStock('M')}" type="number" step="1" placeholder="Lagerbestand">
+					            		</div>
+					            		<div>Lagerbestand für L: 
+							            	<input class="" id="L" name="L" value="${article.getStock('L')}" type="number" step="1" placeholder="Lagerbestand">
+					            		</div>
+					            		<div>Lagerbestand für XL: 
+							            	<input class="" id="XL" name="XL" value="${article.getStock('XL')}" type="number" step="1" placeholder="Lagerbestand">
+					            		</div>
+					            		<div>Lagerbestand für XXL: 
+							            	<input class="" id="XXL" name="XXL" value="${article.getStock('XXL')}" type="number" step="1" placeholder="Lagerbestand">
+					            		</div>
+					            		<div>Lagerbestand für XXXL: 
+							            	<input class="" id="XXXL" name="XXXL" value="${article.getStock('XXXL')}" type="number" step="1" placeholder="Lagerbestand">
+					            		</div>
+						            <button class="pure-button pure-button-primary" type="submit" name="changeStock"
+						            			onclick="changeVersion(${article.getId()}, 'article')" >Lagerbestände ändern</button>
+						        </div>
 							</div>
 						</div>
 			        </fieldset>

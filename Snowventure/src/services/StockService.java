@@ -41,7 +41,7 @@ public class StockService {
 	 * @param amount hinzufügender Lagerbestand - für Abzug
 	 * @throws SQLException
 	 */
-	public void UpdateStock(ArticleVersion a, String size, int amount) throws SQLException {
+	public static void UpdateStock(ArticleVersion a, String size, int amount) throws SQLException {
 		int newamount = GetStock(a,size) + amount;
 		if(newamount >=0 )
 		{
