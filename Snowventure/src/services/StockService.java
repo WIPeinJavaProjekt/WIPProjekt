@@ -51,4 +51,20 @@ public class StockService {
 		}
 	}
 	
+	/**
+	 * Füge Lagerbestand hinzu
+	 * @param a Articleversion
+	 * @param size Größe
+	 * @param amount Menge
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
+	 */
+	public static int AddStock(ArticleVersion a, String size, int amount)
+	{
+		String query ="INSERT INTO STOCK(avid,size,amount) VALUES(%d,'%s',%d)";
+		query = String.format(query,a.versionid,size,amount);
+		return DatabaseConnector.createConnection().InsertQuery(query);
+	}
+	
+	
+	
 }

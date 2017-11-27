@@ -127,6 +127,9 @@ public class ArticleService {
 			insert = DatabaseConnector.createConnection().InsertQuery(query);
 			if(insert == -1)
 				return -1;
+			insert = StockService.AddStock(av, s,0);
+			if(insert == -1)
+				return -1;
 		}
 		
 		return insert;
