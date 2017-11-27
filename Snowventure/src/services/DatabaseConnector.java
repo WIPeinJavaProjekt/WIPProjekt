@@ -110,7 +110,6 @@ public class DatabaseConnector {
 	 * @param UPDATE
 	 */
 	public void UpdateQuery(String query) {
-		System.out.println("Im using the update");
 		if(this.connect != null)
 			try {
 				Statement statement = this.connect.createStatement();

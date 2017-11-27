@@ -42,11 +42,11 @@ public class StockService {
 	 * @throws SQLException
 	 */
 	public static void UpdateStock(ArticleVersion a, String size, int amount) throws SQLException {
-		int newamount = GetStock(a,size) + amount;
-		if(newamount >=0 )
+		if(amount >=0 )
 		{
-			String query = "UPDATE STOCK SET amount = '%d' WHERE avid = '%d'";
-			query = String.format(query,newamount,a.versionid);
+			String query = "UPDATE STOCK SET amount = '%d' WHERE avid = '%d' AND size='%s'";			
+			query = String.format(query,amount,a.versionid, size);
+			System.out.println(query);
 			DatabaseConnector.createConnection().UpdateQuery(query);
 		}
 	}

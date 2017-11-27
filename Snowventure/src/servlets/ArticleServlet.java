@@ -130,7 +130,6 @@ public class ArticleServlet extends HttpServlet {
 		} else if(request.getParameter("changeStock") != null) {
 			
 			for(String size: this.article.getSize()) {
-				System.out.println("Stock for " + size + " is: " + request.getParameter(size));
 				try {
 					StockService.UpdateStock(this.article.getSelectedArticleVersion(), size, Integer.parseInt(request.getParameter(size)));
 				} catch (NumberFormatException | SQLException e) {
