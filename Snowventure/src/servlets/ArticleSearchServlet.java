@@ -1,19 +1,13 @@
 package servlets;
 
-import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,19 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import classes.Article;
 import classes.ArticleColor;
-import classes.ArticlePicture;
 import classes.Categorie;
 import classes.Utils;
 import services.ArticleColorService;
-import services.ArticleFilterService;
 import services.ArticleService;
 import services.ArticleSizesService;
 import services.ArtilceManufacturerService;
 import services.CategorieService;
 
 /**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Servlet Suchen und Anzeigen von Artikeln
+ * @author Garrit Kniepkamp, Fabian Meise
  *
  */
 @WebServlet("/articles")
@@ -103,7 +95,7 @@ public class ArticleSearchServlet extends HttpServlet {
 	}
 	
 	/**
-	 * Returns articles matching the search-pattern to the request
+	 * Gibt alle Artikel zurück, die den eingegebenen Filterkriterien entsprechen
 	 * @param request
 	 * @param searchPattern Input search pattern to compare
 	 * @throws IOException 

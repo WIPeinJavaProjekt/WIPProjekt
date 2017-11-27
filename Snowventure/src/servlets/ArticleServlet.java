@@ -31,8 +31,8 @@ import services.StockService;
  * Servlet implementation class ArticleServlet
  */
 /**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Servlet zum Hinzufügen/Ändern von Artikeln. Aufgrund der URL wird unterschieden, ob ein neuer Artikel angelegt wird, oder ob ein bestehender Artikel geändert werden soll (ID ist in der URL angegeben).
+ * @author Garrit Kniepkamp
  *
  */
 @WebServlet("/article")
@@ -47,11 +47,7 @@ public class ArticleServlet extends HttpServlet {
     public ArticleServlet() {
         super();
     }
-
-    /**
-     * Checks the URL whether a new Article should be added or an existing article should be modified
-     * Depending on the case, an article gets loaded or not
-     */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(Utils.redirectUser(request, response)) {
@@ -105,7 +101,6 @@ public class ArticleServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
 		} else if(request.getParameter("updateArticle") != null) {
 			try {
 				updateArticle(request);
@@ -148,6 +143,14 @@ public class ArticleServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	/**
+	 * Eine neue Artikelversion wird zu einem bestehenden Artikel hinzugefügt.
+	 * @param request
+	 * @return int Artikelversion id (-1, falls ein Fehler aufgetreten ist)
+	 * @throws SQLException
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	private int addArticleVersion(HttpServletRequest request) throws SQLException, IOException, ServletException {
 		this.articleVersion = new ArticleVersion();
 		this.articleVersion.property = request.getParameter("property");
@@ -198,6 +201,12 @@ public class ArticleServlet extends HttpServlet {
 		return -1;
 	}
 
+	/**
+	 * Fügt ein neues Bild zu einer Artikelversion hinzu.
+	 * @param request
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	private void addImage(HttpServletRequest request) throws IOException, ServletException {
 		Part filePart = request.getPart("articleImage");
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
@@ -217,7 +226,7 @@ public class ArticleServlet extends HttpServlet {
 	}
 
 	/**
-	 * Updating the selected article in the database
+	 * Bearbeiten eines bestehenden Artikels und updaten des Datenbanksatzes
 	 * @param request
 	 * @throws IOException 
 	 * @throws SQLException 
@@ -236,9 +245,6 @@ public class ArticleServlet extends HttpServlet {
 		
 	    String[] colors = request.getParameterValues("color");
 	    String[] sizes = request.getParameterValues("size");
-	    
-	    System.out.println(Arrays.toString(colors));
-	    System.out.println(Arrays.toString(sizes));
 	    
 	    if(colors != null) {
 		    for(int s= 0; s< colors.length;s++) {
@@ -273,7 +279,7 @@ public class ArticleServlet extends HttpServlet {
 	}
 
 	/**
-	 * Adding the article into the Database and setting success or error message
+	 * Hinzufügen eines neuen Artikels.
 	 * @param request
 	 * @throws IOException 
 	 * @throws SQLException 

@@ -22,17 +22,13 @@ import services.UserService;
  */
 
 /**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Servlet für den Login eines Nutzers.
+ * @author Garrit Kniepkamp
  *
  */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	public LoginServlet() {
-        super();
-    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -67,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 	 * @return Returns a boolean value
 	 * @throws IOException
 	 * 
-	 * The "login"-method checks whether the user is in the database and can be logged in.
+	 * Überprüft, ob der Benutzer in der Datenbank existiert und ob das eingegebene Passwort korrekt ist. Ist beides der Fall, so wird der Nutzer eingeloggt.
 	 */
 	public boolean login(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String userId = request.getParameter("userId");

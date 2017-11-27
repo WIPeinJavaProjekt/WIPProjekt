@@ -25,8 +25,8 @@ import services.ArticleService;
  * Servlet implementation class ArticleServlet
  */
 /**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Servlet zum hinzufügen eines Artikels in den Warenkorb
+ * @author Garrit Kniepkamp, Jacob Markus
  *
  */
 @WebServlet("/articleshopping")
@@ -41,10 +41,6 @@ public class ArticleShoppingServlet  extends HttpServlet {
         super();
     }
 
-    /**
-     * Checks the URL whether a new Article should be added or an existing article should be modified
-     * Depending on the case, an article gets loaded or not
-     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("ID") != null) {
@@ -94,6 +90,14 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		doGet(request, response);
 	}
 
+	/**
+	 * Methode zum Hinzufügen eines Artikels in den Warenkorb. Es wird kontrolliert, ob die gleiche Artikelversion bereits im Warenkorb vorhanden ist.
+	 * @see checkForDouble
+	 * @param request
+	 * @param response
+	 * @throws NumberFormatException
+	 * @throws SQLException
+	 */
 	private void addArticleToCart(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, SQLException {
 		ShoppingCart currentCart = (ShoppingCart) request.getSession().getAttribute("currentCart");
 		if(currentCart == null) {
@@ -103,18 +107,23 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		ArticleColor color = null;		
 		if(request.getParameter("selectColor") != null)
 		color = ArticleColorService.GetSpecificColor(Integer.parseInt(request.getParameter("selectColor")));
-		
-		System.out.println("Selected size: " + request.getParameter("selectedSize"));
 				
 		ShoppingCartPosition cartPosition = null;
 		cartPosition = new ShoppingCartPosition(this.article, Integer.parseInt(request.getParameter("amount")), request.getParameter("selectedSize"), color);
 				
-		
 		if(!checkforDouble(currentCart, cartPosition, Integer.parseInt(request.getParameter("amount"))))
 		{ currentCart.cartPositions.add(cartPosition); }
 		request.getSession().setAttribute("currentCart", currentCart);
 	}
 
+	/**
+	 * Die Methode kontrolliert, ob ein Artikel bereits im Warenkorb vorhanden ist. Ist dies der Fall, so wird nur die Anzahl des Artikels geändert, 
+	 * andernfalls wird der Artikel dem Warenkorb hinzugefügt.
+	 * @param sc ShoppingCart to compare with
+	 * @param scPos CartPosition, which should be added
+	 * @param amount
+	 * @return boolean
+	 */
 	private boolean checkforDouble(ShoppingCart sc, ShoppingCartPosition scPos, int amount)
 	{
 		if(sc.cartPositions.size() > 0)

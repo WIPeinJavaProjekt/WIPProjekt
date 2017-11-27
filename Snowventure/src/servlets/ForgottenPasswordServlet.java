@@ -14,11 +14,8 @@ import classes.User;
 import services.UserService;
 
 /**
- * Servlet zum Zurücksetzen des Passwortes eines Nutzers
- */
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Dieses Servlet behandelt das Zurücksetzen des Passwortes für den Nutzer.
+ * @author Garrit Kniepkamp, Jacob Markus
  *
  */
 @WebServlet("/forgottenPassword")
@@ -83,7 +80,8 @@ public class ForgottenPasswordServlet extends HttpServlet {
 	 * @return Returns a boolean value
 	 * @throws IOException
 	 * 
-	 * The "changePassword"-method checks whether the given passwords are equal and resets the password value of the given user.
+	 * Die "changePassword"-Methode kontrolliert, ob das gewünschte neue Passwort zwei mal gleich eingegeben wurde 
+	 * und setzt das Passwort dann als aktuelles Passwort für den Nutzer in der Datenbank.
 	 */
 	private boolean changePassword(HttpServletRequest request, HttpServletResponse response) throws IOException 
 	{
@@ -116,7 +114,7 @@ public class ForgottenPasswordServlet extends HttpServlet {
 	 * @param response HttpServletResponse
 	 * @throws IOException
 	 * 
-	 * The "removeResetAttributes"-method removes all attributes that are necessary to reset the users password.
+	 * Die "removeResetAttributes"-Methode löscht alle nicht mehr benötigten Attribute aus der Session.
 	 */
 	private void removeResetAttributes(HttpServletRequest request, HttpServletResponse response) throws IOException
 	{

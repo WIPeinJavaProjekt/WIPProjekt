@@ -1,5 +1,5 @@
 <!-- 
-Beschreibung: Artikelsuche für Mitarbeiter, Admin
+Beschreibung: Artikelsuche für Mitarbeiter und Admins
 Ansprechpartner: Garrit Kniepkamp
  -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

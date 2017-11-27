@@ -34,7 +34,7 @@ import services.ArticleSizesService;
  */
 /**
  * Beschreibung:
- * @author Ansprechpartner
+ * @author Garrit Kniepkamp, Fabian Meise
  *
  */
 @WebServlet("/start")
@@ -106,7 +106,7 @@ public class StartServlet extends HttpServlet {
 	}
 	
 	/**
-	 * Logout-method to handle the user logout.
+	 * Logout-Methode zum Logout eines Users. Session wird beendet.
 	 * @param request HttpServletRequest
 	 */
 	public void logout(HttpServletRequest request) {
@@ -115,7 +115,7 @@ public class StartServlet extends HttpServlet {
 	}
 	
 	/**
-	 * Returns articles matching the search-pattern to the request
+	 * Gibt alle Artikel zurück, die mit dem eingegeben Text des Suchfeldes übereinstimmen.
 	 * @param request
 	 * @param searchPattern Input search pattern to compare
 	 * @throws IOException 
@@ -130,20 +130,6 @@ public class StartServlet extends HttpServlet {
 			else {
 				articles = ArticleService.GetAllArticlesByCategorie(category, searchPattern,1,1);
 			}
-			
-			//Path currentRelativePath = Paths.get("");
-			//request.getSession().setAttribute("imagePath", currentRelativePath.toAbsolutePath().toString() + "\\");
-			//System.out.println(currentRelativePath.toAbsolutePath().toString());
-			/*for (Article a: articles) {
-				for(ArticlePicture ap: a.versions.get(a.GetSelectedVersion()).pictures) {
-					File file = new File("" + ap.name);
-					try {
-					   ImageIO.write((RenderedImage) ap.image, "jpg", file);  // ignore returned boolean
-					} catch(IOException e) {
-					 System.out.println("Write error for " + file.getPath() + ": " + e.getMessage());
-					}
-				}
-			}*/
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

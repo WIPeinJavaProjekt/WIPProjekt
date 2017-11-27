@@ -1,6 +1,6 @@
 /**
- * Beschreibung: 
- * @author Ansprechpartner 
+ * Beschreibung: Redirect auf Artikelseite für "onClick"-Funktionen
+ * @author Garrit Kniepkamp
  *
  */
 

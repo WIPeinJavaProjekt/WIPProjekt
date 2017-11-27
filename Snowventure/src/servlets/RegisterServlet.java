@@ -18,11 +18,8 @@ import classes.User;
 import services.*;
 
 /**
- * Servlet implementation for registration
- */
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Serlvet für die Registrierung von neuen Nutzern
+ * @author Garrit Kniepkamp
  *
  */
 @WebServlet("/register")
@@ -109,8 +106,9 @@ public class RegisterServlet extends HttpServlet {
 	 * @return int-value (0 for success, -1 for error)
 	 * @throws IOException
 	 * 
-	 * Registration method to write user-data into the database.
-	 * Checks whether passwords are the same.
+	 * Registrierungs-Methode um neue Nutzer in der Datenbank zu speichern.
+	 * Die eingegebenen Passwörter werden vorher auf Gleicheit überprüft.
+	 * Es wird auch kontrolliert, ob bereits ein Nutzer mit dem gleichen Benutzernamen vorhanden ist.
 	 */
 	private int registrate (HttpServletRequest request) throws IOException {
 		

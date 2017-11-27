@@ -1,10 +1,9 @@
 /**
- * Beschreibung: 
- * @author Ansprechpartner 
+ * Beschreibung: Funktion zum Anzeigen hochgeladener Bilder
+ * @author Garrit Kniepkamp 
  *
  */
 function readURL(input) {
-	console.log(input);
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 

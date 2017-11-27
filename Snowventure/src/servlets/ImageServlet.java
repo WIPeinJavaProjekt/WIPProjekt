@@ -20,8 +20,9 @@ import classes.ArticlePicture;
 import services.ArticleService;
 
 /**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Das Image-Servlet lädt das Bild aus der Datenbank, dessen ID in der URL angegeben ist.
+ * Das Servlet wird benötigt, um die Artikelbilder bspw. in der Artikelsuche anzuzeigen.
+ * @author Garrit Kniepkamp
  *
  */
 @WebServlet("/images/*")
