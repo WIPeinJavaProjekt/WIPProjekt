@@ -20,11 +20,8 @@ import classes.User;
 import services.OrderService;
 
 /**
- * Servlet zur Anzeige und Bearbeitung von Bestellungen
- */
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Servlet zur Anzeige und Bearbeitung von Bestellungen.
+ * @author Jacob Markus
  *
  */
 @WebServlet("/order")
@@ -109,9 +106,7 @@ public class OrderServlet extends HttpServlet {
 				response.sendRedirect("order?ID=" + currentOrder.orid);
 				return;
 			}
-			
-			response.sendRedirect("users?page=ordersearch");
-			
+						
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
@@ -119,10 +114,11 @@ public class OrderServlet extends HttpServlet {
 			}
 			
 			response.sendRedirect("users?page=ordersearch");
+			return;
 		}
 		else 
 		{
-			response.sendRedirect("login");
+			response.sendRedirect("login?accessorder=true");
 		}
 	}
 

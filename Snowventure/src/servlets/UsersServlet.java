@@ -18,11 +18,8 @@ import classes.*;
 import services.*;
 
 /**
- * Servlet für die Bearbeitung und Rückgabe von Nutzern
- */
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Servlet für die Bearbeitung und Rückgabe von Nutzern sowie Zugriffe innerhalb des Nutzerkontos.
+ * @author Jacob Markus
  *
  */
 @WebServlet("/users")
@@ -144,7 +141,7 @@ public class UsersServlet extends HttpServlet {
 	}
 
 	/**
-	 * Returns articles matching the search-pattern to the request
+	 * Die "findArticles"-Methode gibt alle Artikel zurück, die bestimmten Suchkriterien(Name, Kategorie) entsprechen.
 	 * @param request
 	 * @throws IOException 
 	 */
@@ -175,10 +172,12 @@ public class UsersServlet extends HttpServlet {
 	}
 	
 	/** 
+	 * Die "changePassword"-Methode überprüft ob das gegebene Passwort, dem des aktuellen Nutzers entspricht 
+	 * und ersetzt im Fall der Übereinstimmung das Nutzerpasswort durch das neue Passwort. 
+	 * 
 	 * @param request HttpServletRequest
 	 * @throws IOException
 	 * 
-	 * The "changePassword"-method checks whether the given password is correct for this specific user and can be updated to the new password.
 	 */
 	private void changePassword(HttpServletRequest request) throws IOException
 	{
@@ -213,12 +212,13 @@ public class UsersServlet extends HttpServlet {
 	}	
 	
 	/** 
+	 * Die "searchforUsers"-Methode erstellt eine Nutzerliste aus allen Nutzern, die bestimmten Suchkriterien(Nutzername, Nutzertyp) entsprechen. 
+	 * Sofern eine Nutzerliste besteht, wird diese in ein neues Attribut der aktuellen Session übergeben. 
+	 * 
 	 * @param request HttpServletRequest
 	 * @param response HttpServletResponse
 	 * @throws IOException
 	 * 
-	 * The "searchforUsers"-method gets all users depending on the given search criteria (username). 
-	 * If available the result list is added into the session attributes.
 	 */
 	private void searchforUsers(HttpServletRequest request, HttpServletResponse response) throws IOException
 	{		
@@ -249,11 +249,13 @@ public class UsersServlet extends HttpServlet {
 	
 	
 	/** 
+	 * Die "getSelectedUser"-Methode sucht nach dem Nutzer mit dem gegebenen Nutzernamen 
+	 * und setzt ihn, wenn vorhanden, in ein Attribut der aktuellen Session.
+	 * 
 	 * @param request HttpServletRequest
 	 * @param response HttpServletResponse
 	 * @throws IOException
 	 * 
-	 * The "getSelectedUser"-method searches for the user having the given username and if available the user is set into session attributes.
 	 */
 	private void getSelectedUser(HttpServletRequest request, HttpServletResponse response) throws IOException 
 	{		
@@ -272,11 +274,13 @@ public class UsersServlet extends HttpServlet {
 	
 	
 	/** 
+	 * Die "updateCurrentUser"-Methode aktualisiert Daten und Rechte des aktuell eingeloggten Nutzers.
+	 * Anschließend wird das currentUser-Objekt der aktuellen Session aktualisiert.
+	 * 
 	 * @param user User
 	 * @param request HttpServletRequest
 	 * @throws IOException
 	 * 
-	 * The "updateCurrentUser"-method updates data and rights of the user which is currently logged in and resets the currentUser attribute of the session.
 	 */
 	private void updateCurrentUser(User user, HttpServletRequest request) throws IOException
 	{
@@ -323,11 +327,13 @@ public class UsersServlet extends HttpServlet {
 	
 	
 	/** 
+	 * Die "updateSelectedUser"-Methode aktualisiert Daten und Rechte des ausgewählten Nutzers.
+	 * Anschließend wird das selectedUser-Objekt der aktuellen Session aktualisiert.
+	 * 
 	 * @param user User
 	 * @param request HttpServletRequest
 	 * @throws IOException
 	 * 
-	 * The "updateSelectedUser"-method updates data and rights of the selected user and resets the selectedUser attribute of the session.
 	 */
 	private void updateSelectedUser(User user, HttpServletRequest request) throws IOException
 	{
@@ -386,7 +392,9 @@ public class UsersServlet extends HttpServlet {
 	
 	
 	/**
-	 * Returns orders matching the search-pattern to the request and are accessible by the role of the user 
+	 * Die "findOrders"-Methode gibt alle Bestellungen zurück, die den gegebenen Suchkriterien
+	 * und dem Zugriffsrecht des aktuellen Nutzers entsprechen.
+	 * 
 	 * @param request HttpServletRequest
 	 * @param user User
 	 * @throws IOException 
@@ -436,7 +444,8 @@ public class UsersServlet extends HttpServlet {
 	
 	
 	/**
-	 * Returns list of possible status of an order 
+	 * Die "getStatusList"-Methode gibt eine Liste mit möglichen Status zurück, die eine Bestellung annehmen kann.
+	 * 
 	 * @return statusList ArrayList<OrderStatus>
 	 */
 	private ArrayList<OrderStatus> getStatusList()

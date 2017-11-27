@@ -18,11 +18,8 @@ import services.ShoppingCartService;
 import services.StockService;
 
 /**
- * Servlet für die Anzeige und Berechnungen des Warenkorbs
- */
-/**
- * Beschreibung:
- * @author Ansprechpartner
+ * Beschreibung: Servlet für die Anzeige und Berechnungen des Warenkorbs.
+ * @author Jacob Markus
  *
  */
 @WebServlet("/cart")
@@ -36,7 +33,6 @@ public class ShoppingCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ShoppingCart currentCart = (ShoppingCart) request.getSession().getAttribute("currentCart");
-		//User currentUser = (User) request.getSession().getAttribute("currentUser");
 
 		if(currentCart == null) {
 			System.out.println("Cart is Null");
@@ -47,14 +43,6 @@ public class ShoppingCartServlet extends HttpServlet {
 			System.out.println("WARENKORB Artikel: " + scp.article.getName() + " Amount: " + scp.amount + " Size: " + scp.size);
 		}
 		
-		/*
-		if(currentUser != null && currentCart != null && currentUser.shoppingcart.cartPositions.size() == 0)
-		{
-			currentUser.shoppingcart = currentCart;
-			request.getSession().setAttribute("currentUser", currentUser);
-		}
-		*/
-
 		if(request.getParameter("scpid")!= null && request.getParameter("amount") != null)
 		{
 			String scpid = request.getParameter("scpid").toString();
@@ -68,7 +56,6 @@ public class ShoppingCartServlet extends HttpServlet {
 				{changeSCPAmount(scpid, newamount, request);}
 			else 
 				{deleteShoppingCartPosition(request.getParameter("scpid"), request);}			
-			//System.out.println("changed amount of SCP:" + currentCart.cartPositions.get(Integer.parseInt(scpid)).amount + "  to  " + amount);
 			}
 			response.sendRedirect(request.getContextPath() + "/cart");
 			return;		
@@ -76,7 +63,6 @@ public class ShoppingCartServlet extends HttpServlet {
 		else if(request.getParameter("scpid")!= null && request.getParameter("option") != null && request.getParameter("option").toString().equals("delete"))
 		{
 			deleteShoppingCartPosition(request.getParameter("scpid"), request);
-			//System.out.println("deleted cart-position: " + request.getParameter("scpid"));
 			response.sendRedirect(request.getContextPath() + "/cart");
 			return;
 		}
@@ -91,7 +77,7 @@ public class ShoppingCartServlet extends HttpServlet {
 
 	
 	/**
-	 * Method for deleting a specific position of the shopping cart.
+	 * Die "deleteShoppingCartPosition"-Methode löscht bei Vorhandensein eines ShoppingCart, die ShoppingCartPosition mit dem gegebenen Index aus dem ShoppingCart.
 	 * @param scpid String
 	 * @param request HttpServletRequest
 	 * @throws ServletException, IOException
@@ -100,30 +86,6 @@ public class ShoppingCartServlet extends HttpServlet {
 	{
 		ShoppingCart cart = (ShoppingCart)request.getSession().getAttribute("currentCart");
 		
-		/*
-		User user = (User)request.getSession().getAttribute("currentUser");
-		
-		if(user != null && cart != null)
-		{
-			user.shoppingcart = cart;
-		}
-
-		
-		if(user != null && user.shoppingcart != null && user.shoppingcart.cartPositions != null && user.shoppingcart.cartPositions.size() > 0)
-		{			
-			ShoppingCartPosition scp = user.shoppingcart.cartPositions.get(Integer.parseInt(scpid));
-			
-			if(scp != null)
-			{
-				System.out.print("Delete Article " + scp.article.acid + " from shoppingcart.");
-				user.shoppingcart.cartPositions.remove(scp);
-				ShoppingCartService.UpdateShopping(user);
-				request.getSession().setAttribute("currentUser", user);
-				return;
-			}
-		}
-		else 
-		*/
 		if(cart != null && cart.cartPositions.size() > 0)
 		{
 			ShoppingCartPosition scp = cart.cartPositions.get(Integer.parseInt(scpid));
@@ -140,7 +102,7 @@ public class ShoppingCartServlet extends HttpServlet {
 	
 	
 	/**
-	 * Method for changing the amount of a specific shopping cart position.
+	 * Die "changeSCPAmount"-Methode verändert bei vorhandenem Einkaufswagen die Menge der angegebenen Position auf den neuen Wert.
 	 * @param scpid String
 	 * @param newamount integer
 	 * @param request HttpServletRequest
@@ -148,51 +110,19 @@ public class ShoppingCartServlet extends HttpServlet {
 	 */
 	private void changeSCPAmount(String scpid, int newamount,  HttpServletRequest request)throws ServletException, IOException 
 	{
-		//User user = (User)request.getSession().getAttribute("currentUser");
 		ShoppingCart cart = (ShoppingCart)request.getSession().getAttribute("currentCart");
 		
-		/* 
-		if(user != null && cart != null)
-		{
-			user.shoppingcart = cart;
-		}
-		*/	
-
-		try {
-				/*
-				if(user != null && user.shoppingcart != null && user.shoppingcart.cartPositions != null && user.shoppingcart.cartPositions.size() > 0)
-				{			
-					if (newamount <= StockService.GetStock(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.versions.get(user.shoppingcart.cartPositions.get(Integer.parseInt(scpid)).article.GetSelectedVersion())))
-					{
-						ShoppingCartPosition scp = user.shoppingcart.cartPositions.get(Integer.parseInt(scpid));
-						
-						if(scp != null)
-						{
-							System.out.print("Update Article " + scp.article.acid + " amount from " + scp.amount + " to " + newamount);
-							scp.amount = newamount;
-							ShoppingCartService.UpdateShopping(user);
-							request.getSession().setAttribute("currentUser", user);
-							return;
-						}
-					}
-					else 
-					{
-						System.out.println("out of stock - amount is higher than stock value");
-					} 
-				}	
-				else 
-				*/
-				
-				if (cart != null)
+		try {				
+			if (cart != null)
+			{
+				ShoppingCartPosition scp = cart.cartPositions.get(Integer.parseInt(scpid));
+				if(scp != null)
 				{
-					ShoppingCartPosition scp = cart.cartPositions.get(Integer.parseInt(scpid));
-					if(scp != null)
-					{
-						scp.amount = newamount;
-						request.getSession().setAttribute("currentCart", cart);
-						return;
-					}
+					scp.amount = newamount;
+					request.getSession().setAttribute("currentCart", cart);
+					return;
 				}
+			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -202,7 +132,7 @@ public class ShoppingCartServlet extends HttpServlet {
 	
 	
 	/**
-	 * Method for checking if the given string is convertable into an integer value.
+	 * Die "isIntegerValue"-Methode kontrolliert ob der gegebene String in einen Integer konvertiert werden kann.
 	 * @param value String
 	 * @return isInt boolean
 	 */

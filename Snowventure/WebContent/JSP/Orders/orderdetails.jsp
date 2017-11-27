@@ -109,9 +109,9 @@ Ansprechpartner: Jacob Markus
 					</div>
 					<div class="pure-u-1-4 fullwidth">
 							<div class="pure-u-1-1"><b>Bestellübersicht</b></div>
-							<div class="pure-u-2-5 orderdetailsvalue">Artikel</div><div class="pure-u-3-5" style="text-align: right">EUR ${ currentOrder.shoppingCart.GetShoppingCartPrice() }</div>
+							<div class="pure-u-2-5 orderdetailsvalue">Artikel</div><div class="pure-u-3-5" style="text-align: right">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
 							<div class="pure-u-2-5 orderdetailsvalue">Versand/Verpackung</div><div class="pure-u-3-5" style="text-align: right">EUR 0,00</div>
-							<div class="pure-u-2-5"  id="ordervaluedescription">Gesamtsumme</div><div class="pure-u-3-5" id="ordervaluesum">EUR ${ currentOrder.shoppingCart.GetShoppingCartPrice() }</div>
+							<div class="pure-u-2-5"  id="ordervaluedescription">Gesamtsumme</div><div class="pure-u-3-5" id="ordervaluesum">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
 					</div>
 				</div>
 				<div class="pure-u-1-1" style="height: 20px;"></div>
@@ -120,17 +120,17 @@ Ansprechpartner: Jacob Markus
 					<form id="orderitem">
 						 <div  id="scp-article-card" class="w3-card-4">
 							<div class="pure-u-1-5" id="sc-aimg-container">
-								<img class="article-img" src="images/${ position.article.GetAllVersions().get(position.article.GetSelectedVersion()).getArticleHeadPicture().GetImageId()}" alt="Artikelbild">
+								<img class="article-img" src="images/${ position.article.getAllVersions().get(position.article.getSelectedVersion()).getArticleHeadPicture().getImageId()}" alt="Artikelbild">
 							</div>
 					    	<div class="pure-u-1-4" id="scp-info-part">
-								<h4><b>${ position.article.GetName() } von ${ position.article.GetManufacturer()}</b></h4>
+								<h4><b>${ position.article.getName() } von ${ position.article.getManufacturer()}</b></h4>
 								<hr size="5">
-								<p>Farbe: ${ position.getArticle().GetAllVersions().get(position.getArticle().GetSelectedVersion()).getColorsAsString() }</p>
+								<p>Farbe: ${ position.getArticle().getAllVersions().get(position.getArticle().getSelectedVersion()).getColorsAsString() }</p>
 								<p>Variante: ${ position.size }</p>
 							</div>
 							<div class="pure-u-1-4" id="scp-info-part">
 								<p><b>Preis</b></p>
-								<p>${ position.article.GetAllVersions().get(position.article.GetSelectedVersion()).price } EUR</p>
+								<p>${ position.article.getAllVersions().get(position.article.getSelectedVersion()).price } EUR</p>
 							</div>
 							<div class="pure-u-1-4" id="scp-info-part">
 								<p><b>Menge</b></p>
@@ -153,73 +153,6 @@ Ansprechpartner: Jacob Markus
 					<c:if test="${ currentOrder.statuscycle.size() < 1 }"><input type="button" name="processOrder" value="Jetzt kaufen (verbindlich)" class="pure-button pure-button-primary boxedinput order-button" onclick="location.href='./order?processOrder=true'"></c:if>
 				</div>		
 			</div>	
-		</c:if>
-		
-		
-		<c:if test="${ empty currentOrder }">
-			<div class="pure-u-3-4">
-				<div class="pure-u-1-1">
-					<div class="pure-u-1-1"><h1>Bestelldetails</h1></div>
-					<div class="pure-u-3-4" style="float:left;">
-						<div class="pure-u-1-1">Bestellt am 26.03.2017</div>
-						<div class="pure-u-1-1">Bestellnr. 21545342326</div>
-					</div>
-					<div class="pure-u-1-4" style="float:left;"><center><h4><b>Status: <span style="color: green;">Abgeschlossen</span></b></h4></center></div>
-				</div>
-				<div class="pure-u-1-1" style="height: 20px;">
-				</div>
-				<div class="pure-u-1-1">
-					<div class="pure-u-1-4" id="orderdetails">
-							<div class="pure-u-1-1"><b>Versandadresse</b> <a style="font-size: 12px;" href="#">Ändern</a></div>
-							<div class="pure-u-1-1">Jacob Markus</div>
-							<div class="pure-u-1-1">Dorfstr. 3</div>
-							<div class="pure-u-1-1">23923 Retelsdorf</div>
-					</div>
-					<div class="pure-u-1-4" id="orderreceiptadr">
-							<div class="pure-u-1-1"><b>Rechnungsadresse</b></div>
-							<div class="pure-u-1-1">Identisch mit Lieferadresse</div>
-					</div>
-					<div class="pure-u-1-4" id="orderpaymentmethod">
-							<div class="pure-u-1-1"><b>Zahlungsart</b></div>
-							<div class="pure-u-1-1">Auf Rechnung</div>
-					</div>
-					
-					<div class="pure-u-1-4">
-							<div class="pure-u-1-1"><b>Bestellübersicht</b></div>
-							<div class="pure-u-2-5">Artikel</div><div class="pure-u-3-5" style="text-align: right">EUR 19,95</div>
-							<div class="pure-u-2-5">Versand (DHL)</div><div class="pure-u-3-5" style="text-align: right">EUR 0,00</div>
-							<div class="pure-u-2-5" id="ordervaluedescription">Gesamtsumme</div><div class="pure-u-3-5" id="ordervaluesum" style="text-align: right">EUR 19,95</div>
-					</div>
-				</div>
-				<div class="pure-u-1-1" style="height: 20px;"></div>
-				<div class="pure-g" style="margin-bottom: 20px;">
-					<form style="width:100%; border-style: outset; border-color: gainsboro;">
-						 <div  id="scp-article-card">
-							<div class="pure-u-1-5" style="float:left; max-height: 140px">
-								<img class="article-img" src="./Images/Brille_schwarz.jpg" alt="pic">
-							</div>
-					    	<div class="pure-u-1-4" id="scp-info-part">
-								<h4><b>Dieser Artikel ist schön</b></h4>
-								<hr size="5">
-								<p>Variante: XL</p>
-							</div>
-							<div class="pure-u-1-4" id="scp-info-part">
-								<p><b>Preis</b></p>
-								<p>19,95 EUR</p>
-							</div>
-							<div class="pure-u-1-4" id="scp-info-part">
-								<p><b>Menge</b></p>
-								<p>1</p>
-							</div>
-							<hr>
-						</div>
-					</form>
-				</div>	
-				<div class="pure-u-1-2" id="order-control-div">
-					<input id="order-button" type="button" name="back" value="Zurück" class="pure-button pure-button-primary boxedinput" onclick="location.href='./cart'">
-					<input id="order-button" type="submit" name="processOrder" value="Bestellung abschicken" class="pure-button pure-button-primary boxedinput">
-				</div>		
-			</div>
 		</c:if>
 		<div class="pure-u-1-8 sizezero"></div>
 	</div>

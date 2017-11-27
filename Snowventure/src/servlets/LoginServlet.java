@@ -79,6 +79,13 @@ public class LoginServlet extends HttpServlet {
 			}
 			request.getSession().setAttribute("currentUser", user);
 			request.getSession().removeAttribute("errorLogin");
+			
+			if(request.getParameter("accessorder") != null && request.getParameter("accessorder").toString().equals("true"))
+			{
+				response.sendRedirect("order?neworder=true");
+				return true;
+			}
+			
 	        response.sendRedirect("start");  
 	        return true;
 		} else {

@@ -29,7 +29,7 @@ Ansprechpartner: Garrit Kniepkamp, Jacob Markus
 			<div class="pure-u-3-5 fullwidth">
 				<h1>Anmelden</h1>
 
-				<form class="pure-form  textbox" action ="login" method="post">
+				<form class="pure-form  textbox" <c:choose><c:when test='${not empty param.accessorder}'>action ="login?accessorder=true"</c:when><c:otherwise>action ="login"</c:otherwise></c:choose> method="post">
 			        	<fieldset class="pure-group"> 
 				         <div class="pure-control-group">
 				            <input class="loginfield boxedinput" name="userId" id="userId" type="text" placeholder="Benutzername" required>
