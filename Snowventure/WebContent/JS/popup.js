@@ -1,6 +1,6 @@
 /**
- * Beschreibung: 
- * @author Ansprechpartner 
+ * Beschreibung: Funktionen zum Zeigen und Verstecken eines Pop-Up-Fensters.
+ * @author Jacob Markus 
  *
  */
 //Function To Display Popup

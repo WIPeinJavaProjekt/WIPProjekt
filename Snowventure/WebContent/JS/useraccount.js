@@ -1,9 +1,6 @@
 /**
- * Function to add an html object from another JSP-file having the same name as the given value of parameter page of the url.
- */
-/**
- * Beschreibung: 
- * @author Ansprechpartner 
+ * Beschreibung: JS zum hinzufügen eines neuen HTML-Obejktes aus einer JSP-Datei, die über denselben Namen verfügt, wie der gegebene Wert des Parameters der URL.
+ * @author Jacob Markus 
  *
  */
 					

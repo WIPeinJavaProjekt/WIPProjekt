@@ -1,6 +1,6 @@
 <!-- 
 Beschreibung: Seite um Passwort zurücksetzen zu können
-Ansprechpartner: Garrit Kniepkamp
+Ansprechpartner: Garrit Kniepkamp, Jacob Markus
  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>

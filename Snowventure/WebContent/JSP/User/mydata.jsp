@@ -1,6 +1,6 @@
 <!-- 
-Beschreibung: 
-Ansprechpartner:
+Beschreibung: Seitenbereich zum Anzeigen der Daten des eingeloggten Nutzers.
+Ansprechpartner: Jacob Markus
  -->
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <div class="pure-g">
