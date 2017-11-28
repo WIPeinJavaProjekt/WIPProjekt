@@ -126,7 +126,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		if(!isNumber(request.getParameter("phone").toString()))
 		{
-			request.setAttribute("error", "Die angegebene Telefonnumeer darf nur aus den Ziffern von 0-9 bestehen.");			
+			request.setAttribute("error", "Die angegebene Telefonnummer darf nur aus den Ziffern von 0-9 bestehen.");			
 			return -1;
 		}
 		else this.user.phone = request.getParameter("phone");
