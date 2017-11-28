@@ -92,7 +92,8 @@ public class UserService {
 					result.getInt("utid"),
 					result.getInt("ulid"),
 					result.getInt("TechIsActive"),
-					result.getInt("TechIsDeleted")
+					result.getInt("TechIsDeleted"), 
+					result.getString("phone")
 					);
 			u.orders = new ArrayList<Order>(OrderService.GetAllOrders(u.ulid));
 			u.shoppingcart = new ShoppingCart(ShoppingCartService.GetShoppingCart(u));
@@ -143,7 +144,8 @@ public class UserService {
 					result.getInt("utid"),
 					result.getInt("ulid"),
 					result.getInt("TechIsActive"),
-					result.getInt("TechIsDeleted")
+					result.getInt("TechIsDeleted"),
+					result.getString("phone")
 					);
 			user = u;
 			user.orders = new ArrayList<Order>(OrderService.GetAllOrders(u.ulid));
@@ -167,7 +169,7 @@ public class UserService {
 				user.adress.postcode,
 				user.adress.street,
 				user.adress.location,
-				"1337",
+				user.phone,
 				user.adress.houseno,
 				user.techisactive,
 				user.techisdeleted,

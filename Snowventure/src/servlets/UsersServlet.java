@@ -140,6 +140,8 @@ public class UsersServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	
+	
 	/**
 	 * Die "findArticles"-Methode gibt alle Artikel zurück, die bestimmten Suchkriterien(Name, Kategorie) entsprechen.
 	 * @param request
@@ -170,6 +172,8 @@ public class UsersServlet extends HttpServlet {
 		
 		request.getSession().setAttribute("articles", articles);		
 	}
+	
+	
 	
 	/** 
 	 * Die "changePassword"-Methode überprüft ob das gegebene Passwort, dem des aktuellen Nutzers entspricht 
@@ -210,6 +214,8 @@ public class UsersServlet extends HttpServlet {
 		System.out.println("Das angegebene Nutzerpasswort ist falsch.");
 		request.setAttribute("passworderror", "Das angegebene Nutzerpasswort ist falsch.");
 	}	
+	
+	
 	
 	/** 
 	 * Die "searchforUsers"-Methode erstellt eine Nutzerliste aus allen Nutzern, die bestimmten Suchkriterien(Nutzername, Nutzertyp) entsprechen. 
@@ -291,6 +297,12 @@ public class UsersServlet extends HttpServlet {
 		
 		user.adress = adress;
 		user.email = request.getParameter("email");
+		
+		if(isNumber(request.getParameter("phone").toString())) 
+		{
+			user.phone = request.getParameter("phone");
+		}
+		
 		user.surname = request.getParameter("surname");
 		user.name = request.getParameter("name");			
 		
@@ -304,6 +316,7 @@ public class UsersServlet extends HttpServlet {
 		
 		request.getSession().setAttribute("currentUser", user);
 	}
+	
 	
 	
 	/** 
@@ -357,6 +370,11 @@ public class UsersServlet extends HttpServlet {
 			request.getSession().setAttribute("error", "Die Passwörter stimmen nicht überein.");
 		}
 		
+		if(isNumber(request.getParameter("phone")))
+		{
+			user.phone = request.getParameter("phone");
+		}
+		
 		String usertype = request.getParameter("state");
 		
 		user.adress = adress;
@@ -389,6 +407,7 @@ public class UsersServlet extends HttpServlet {
 		
 		request.getSession().setAttribute("selectedUser", user);
 	}
+	
 	
 	
 	/**
@@ -443,6 +462,7 @@ public class UsersServlet extends HttpServlet {
 	}
 	
 	
+	
 	/**
 	 * Die "getStatusList"-Methode gibt eine Liste mit möglichen Status zurück, die eine Bestellung annehmen kann.
 	 * 
@@ -463,5 +483,25 @@ public class UsersServlet extends HttpServlet {
 		statusList.add(finished);
 		
 		return statusList;
+	}
+	
+	
+	
+	/** 
+	 * @param pattern String
+	 * @return boolean 
+	 * @throws IOException
+	 * 
+	 * Die "isNumber"-Methode übeprüft ob jedes Zeichen des Strings eine Zahl ist.
+	 */
+	private boolean isNumber(String pattern) throws IOException 
+	{
+	  for (int i = 0; i < pattern.length(); i++) {
+	    if (!Character.isDigit(pattern.charAt(i))) {
+	      return false;
+	    }
+	  }
+
+	  return true;
 	}
 }

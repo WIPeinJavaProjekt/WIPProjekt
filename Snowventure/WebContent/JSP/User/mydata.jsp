@@ -45,6 +45,11 @@ Ansprechpartner: Jacob Markus
 		            <div id="mydata-item email" class="pure-u-1 pure-u-md-1-3">
 		                <label for="email">E-Mail</label>
 		                <input id="email" name="email" class="pure-u-24-24" type="email" value="${currentUser.email}" required>
+		            </div>	
+		            
+		            <div id="mydata-item phone" class="pure-u-1 pure-u-md-1-3">
+		                <label for="phone">Telefon</label>
+		                <input id="phone" name="phone" class="pure-u-24-24" type="text" value="${currentUser.phone}" required>
 		            </div>			 
 				
 					<div id="mydata-item street" class="pure-u-1 pure-u-md-1-3">

@@ -59,6 +59,7 @@ public class RegisterServlet extends HttpServlet {
 			request.setAttribute("name", this.user.name);
 			request.setAttribute("surname", this.user.surname);
 			request.setAttribute("email", this.user.email);
+			request.setAttribute("phone", this.user.phone);
 			
 			request.setAttribute("safetyQuestion", this.user.squestion.getAnswer());
 			request.setAttribute("safetyAnswer", this.user.squestion.getQuestion());
@@ -119,8 +120,17 @@ public class RegisterServlet extends HttpServlet {
 		this.adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
 				request.getParameter("postcode"), request.getParameter("street"));
 		this.sfQuestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion")), "", request.getParameter("safetyAnswer"));
+				
 		this.user = new User(this.sfQuestion, request.getParameter("username"), request.getParameter("password"), request.getParameter("name"),
-				request.getParameter("surname"), this.adress, request.getParameter("email"), usertype == null ? 2 : usertype.toString().equals("admin")? 1 : usertype.toString().equals("employee")? 3 : 2);
+				request.getParameter("surname"), this.adress, request.getParameter("email"), null, usertype == null ? 2 : usertype.toString().equals("admin")? 1 : usertype.toString().equals("employee")? 3 : 2);
+		
+		if(!isNumber(request.getParameter("phone").toString()))
+		{
+			request.setAttribute("error", "Die angegebene Telefonnumeer darf nur aus den Ziffern von 0-9 bestehen.");			
+			return -1;
+		}
+		else this.user.phone = request.getParameter("phone");
+		
 		
 		if(!password.equals(passwordRepeat)) {
 			
@@ -144,5 +154,26 @@ public class RegisterServlet extends HttpServlet {
 			}
 		return -1;
 	}
+	
+	
+	
+	/** 
+	 * @param pattern String
+	 * @return boolean 
+	 * @throws IOException
+	 * 
+	 * Die "isNumber"-Methode übeprüft ob jedes Zeichen des Strings eine Zahl ist.
+	 */
+	private boolean isNumber(String pattern) throws IOException 
+	{
+	  for (int i = 0; i < pattern.length(); i++) {
+	    if (!Character.isDigit(pattern.charAt(i))) {
+	      return false;
+	    }
+	  }
+
+	  return true;
+	}
+
 
 }

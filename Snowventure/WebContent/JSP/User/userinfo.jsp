@@ -39,6 +39,9 @@ method="post">
 		        <div class="pure-control-group">
 		            <input class="boxedinput" id="email" name="email" <c:choose><c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.email}"</c:when><c:otherwise>value="${email}"</c:otherwise></c:choose> type="email" required placeholder="E-Mail-Addresse">
 		        </div>
+		        <div class="pure-control-group">
+		            <input class="boxedinput" id="phone" name="phone" <c:choose><c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.phone}"</c:when><c:otherwise>value="${phone}"</c:otherwise></c:choose> type="text" required placeholder="Telefon">
+		        </div>
 	        </fieldset>
 	            
        	</div> 
