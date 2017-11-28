@@ -85,10 +85,15 @@ public class ArticleServlet extends HttpServlet {
 			this.article = null;
 			request.getSession().setAttribute("article", this.article);
 			request.getSession().setAttribute("updateArticle", false);
-		}		
+		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/JSP/Articles/articleDetails.jsp");
-		rd.forward(request, response);
+		if(request.getParameter("stock") != null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/JSP/Articles/stock.jsp");
+			rd.forward(request, response);
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("/JSP/Articles/articleDetails.jsp");
+			rd.forward(request, response);
+		}		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
