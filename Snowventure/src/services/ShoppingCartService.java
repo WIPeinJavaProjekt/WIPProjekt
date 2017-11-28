@@ -31,7 +31,7 @@ public class ShoppingCartService {
 	 * @throws IOException
 	 */
 	public static ShoppingCart GetShoppingCart(User u) throws SQLException, IOException {
-		String query ="SELECT avid,ulid,amount,acolid,size from SHOPPINGCART WHERE ulid='%d'";
+		String query ="SELECT avid,ulid,amount,size from SHOPPINGCART WHERE ulid='%d'";
 		query = String.format(query, u.ulid);
 		ShoppingCart scp = new ShoppingCart(GetShoppingCartfromQuery(query));
 		
@@ -46,7 +46,7 @@ public class ShoppingCartService {
 	 * @throws IOException
 	 */
 	public static ShoppingCart GetShoppingCart(int ulid) throws SQLException, IOException {
-		String query ="SELECT avid,ulid,amount,acolid, size from SHOPPINGCART WHERE ulid='%d'";
+		String query ="SELECT avid,ulid,amount, size from SHOPPINGCART WHERE ulid='%d'";
 		query = String.format(query, ulid);
 		ShoppingCart scp = new ShoppingCart(GetShoppingCartfromQuery(query));
 
@@ -83,8 +83,8 @@ public class ShoppingCartService {
 	 */
 	private static int AddShoppingCartPosition(ShoppingCartPosition position, int ulid) {
 		int pid = -1;
-		String query ="INSERT INTO SHOPPINGCART(avid,ulid,amount,acolid, size) VALUES(%d,%d,%d,'%d',%s);";
-		query = String.format(query, position.article.versions.get(position.article.getSelectedVersion()).versionid, ulid, position.amount,position.color.acolid,position.size);
+		String query ="INSERT INTO SHOPPINGCART(avid,ulid,amount, size) VALUES(%d,%d,%d,%s);";
+		query = String.format(query, position.article.versions.get(position.article.getSelectedVersion()).versionid, ulid, position.amount,position.size);
 		pid = DatabaseConnector.createConnection().InsertQuery(query);
 		return pid;
 	}
@@ -102,7 +102,7 @@ public class ShoppingCartService {
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next()) {
-			ShoppingCartPosition position = new ShoppingCartPosition(ArticleService.GetSelectedArticle(result.getInt("avid")),result.getInt("amount"),result.getString("size"),ArticleColorService.GetSpecificColor(result.getInt("acolid")));
+			ShoppingCartPosition position = new ShoppingCartPosition(ArticleService.GetSelectedArticle(result.getInt("avid")),result.getInt("amount"),result.getString("size"));
 			scp.add(position);
 		}
 		

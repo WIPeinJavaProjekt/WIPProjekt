@@ -104,12 +104,9 @@ public class ArticleShoppingServlet  extends HttpServlet {
 			currentCart = new ShoppingCart();
 		}
 		
-		ArticleColor color = null;		
-		if(request.getParameter("selectColor") != null)
-		color = ArticleColorService.GetSpecificColor(Integer.parseInt(request.getParameter("selectColor")));
 				
 		ShoppingCartPosition cartPosition = null;
-		cartPosition = new ShoppingCartPosition(this.article, Integer.parseInt(request.getParameter("amount")), request.getParameter("selectedSize"), color);
+		cartPosition = new ShoppingCartPosition(this.article, Integer.parseInt(request.getParameter("amount")), request.getParameter("selectedSize"));
 				
 		if(!checkforDouble(currentCart, cartPosition, Integer.parseInt(request.getParameter("amount"))))
 		{ currentCart.cartPositions.add(cartPosition); }

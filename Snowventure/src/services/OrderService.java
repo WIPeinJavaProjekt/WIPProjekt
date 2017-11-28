@@ -84,9 +84,9 @@ public class OrderService {
 	private static int AddOrderDetailPosition(ShoppingCartPosition p, int orid) {
 		Locale.setDefault(Locale.ENGLISH);		
 		int id= -1;
-		String query = "INSERT INTO ASSIGNMENTDETAILS(orid,avid,ASSIGNMENTPRICE,amount,acolid,size) VALUES('%d','%d','%f','%d', '%d','%s')";
+		String query = "INSERT INTO ASSIGNMENTDETAILS(orid,avid,ASSIGNMENTPRICE,amount,size) VALUES('%d','%d','%f','%d', '%s')";
 
-		query = String.format(query,orid,p.article.versions.get(p.article.getSelectedVersion()).versionid, p.getPositionPrice(), p.amount, p.article.versions.get(p.article.getSelectedVersion()).colors.get(0).acolid,p.size);
+		query = String.format(query,orid,p.article.versions.get(p.article.getSelectedVersion()).versionid, p.getPositionPrice(), p.amount, p.size);
 		id = DatabaseConnector.createConnection().InsertQuery(query);
 		System.out.println("ARTIKEL EINGEFÜGT: " +query);
 		return id;
@@ -278,7 +278,7 @@ public class OrderService {
 	 */
 	private static ShoppingCart GetShoppingCartFromOrder(int orid) throws SQLException, IOException
 	{
-		String query ="SELECT odid,avid,assignmentprice,amount,acolid,size from ASSIGNMENTDETAILS WHERE orid='%d'";
+		String query ="SELECT odid,avid,assignmentprice,amount,size from ASSIGNMENTDETAILS WHERE orid='%d'";
 		query = String.format(query, orid);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
@@ -289,7 +289,7 @@ public class OrderService {
 			Article a = ArticleService.GetSelectedArticle(result.getInt("avid"));
 			System.out.println("PrepedArticlein Order"+a.ID);
 			a.versions.get(a.getSelectedVersion()).price = result.getDouble("assignmentprice");
-			ShoppingCartPosition p = new ShoppingCartPosition(a,result.getInt("amount"),result.getString("size"), ArticleColorService.GetSpecificColor(result.getInt("acolid")));
+			ShoppingCartPosition p = new ShoppingCartPosition(a,result.getInt("amount"),result.getString("size"));
 			scp.cartPositions.add(p);
 		}
 		

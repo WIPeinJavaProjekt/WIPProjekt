@@ -9,6 +9,11 @@ function changeVersion(aid, page){
 	location.href='./'+page+'?ID='+aid+'&version='+version;
 }
 
+function changeToStock(aid, page){
+	var version = $('#selectedVersion').find(':selected').text();
+	location.href='./'+page+'?ID='+aid+'&version='+version+'&stock';
+}
+
 function customerChangeVersion(aid, page, version){
 	console.log(version);
 	location.href='./'+page+'?ID='+aid+'&version='+version;
