@@ -219,6 +219,67 @@ public class OrderService {
 	}
 	
 	
+	
+	/**
+	 * Erhalte alle Bestellung mit einem bestimmten Status
+	 * @param status Bestellstatus
+	 * @return ArrayList aller bestellungen
+	 * @throws SQLException
+	 * @throws IOException
+	 */
+	public static ArrayList<Order> GetAllOrders(OrderStatus status) throws SQLException, IOException
+	{
+		ArrayList<Order> orders = new ArrayList<Order>();
+		String query = "SELECT ulid, orid, name, surname, email, postcode, street, streetno, city,"
+					+ " (SELECT s.status FROM ASSIGNMENTSTATUS s WHERE s.orid = a.orid Order By statusday desc LIMIT 1) as status"
+				    + " FROM ASSIGNMENT a where (SELECT s.status FROM ASSIGNMENTSTATUS s WHERE s.orid = a.orid Order By statusday desc LIMIT 1) Like '%" + status.description + "%'";
+
+		Order o;
+		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
+		
+		while(result.next())
+		{
+			
+			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("postcode"), result.getString("streetno"));
+			o = new Order(a, GetShoppingCartFromOrder(result.getInt("orid")),GetOrderStatuscycle(result.getInt("orid")),result.getInt("orid"), result.getString("name"), result.getString("surname"), result.getString("email"), result.getInt("ulid"));
+			orders.add(o);
+		}
+		return orders;
+	}
+	
+	
+	
+	/**
+	 * Erhalte alle Bestellung eines Nutzers mit einem bestimmten Status
+	 * @param status Bestellstatus
+	 * @param ulid Login-ID des Nutzers
+	 * @return ArrayList aller bestellungen
+	 * @throws SQLException
+	 * @throws IOException
+	 */
+	public static ArrayList<Order> GetAllOrders(OrderStatus status, int ulid) throws SQLException, IOException
+	{
+		ArrayList<Order> orders = new ArrayList<Order>();
+		String query = "SELECT ulid, orid, name, surname, email, postcode, street, streetno, city,"
+					+ " (SELECT s.status FROM ASSIGNMENTSTATUS s WHERE s.orid = a.orid Order By statusday desc LIMIT 1) as status"
+				    + " FROM ASSIGNMENT a where (SELECT s.status FROM ASSIGNMENTSTATUS s WHERE s.orid = a.orid Order By statusday desc LIMIT 1) Like '%" + status.description + "%' AND ulid='" + ulid + "'";
+
+		Order o;
+		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
+		
+		while(result.next())
+		{
+			
+			Adress a = new Adress(result.getString("city"),result.getString("streetno"),result.getString("postcode"), result.getString("streetno"));
+			o = new Order(a, GetShoppingCartFromOrder(result.getInt("orid")),GetOrderStatuscycle(result.getInt("orid")),result.getInt("orid"), result.getString("name"), result.getString("surname"), result.getString("email"), result.getInt("ulid"));
+			orders.add(o);
+		}
+		return orders;
+	}
+
+	
+	
+	
 	/**
 	 * Erhalte alle Bestellungen
 	 * @return ArrayList aller Bestellungen

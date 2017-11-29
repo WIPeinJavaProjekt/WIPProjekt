@@ -99,42 +99,45 @@ public class UsersServlet extends HttpServlet {
 		
 		User user = (User)request.getSession().getAttribute("currentUser");
 		
-		if(request.getParameter("update-data") != null){			
-			updateCurrentUser(user, request);
-		}
-		else if(request.getParameter("update-password") != null){
-			changePassword(request);
-		}
-		else if(request.getParameter("update-squestion") != null){
-			changeSafetyQuestion(user, request);
-		}
-		else if(request.getParameter("addArticle") != null){
-			response.sendRedirect("article");
-			return;
-		}
-		else if(request.getParameter("back") != null)
+		if(user != null)
 		{
-			response.sendRedirect("users?page=usersearch");
-			return;
-		}
-		else if(request.getParameter("updateSelection") != null)
-		{
-			User selectedUser = (User)request.getSession().getAttribute("selectedUser");
-
-			updateSelectedUser(selectedUser, request);
-			response.sendRedirect("users?page=userinfo&selectedUser=" + selectedUser.username );
-			return;
-		}
-		else if(request.getParameter("deleteUserByUser") != null)
-		{
-			user.techisactive = 0;
-			user.techisdeleted = 1;
-			
-			UserService.UpdateUser(user);
-			
-			request.getSession().removeAttribute("currentUser");
-			response.sendRedirect("start");
-			return;
+			if(request.getParameter("update-data") != null){			
+				updateCurrentUser(user, request);
+			}
+			else if(request.getParameter("update-password") != null){
+				changePassword(request);
+			}
+			else if(request.getParameter("update-squestion") != null){
+				changeSafetyQuestion(user, request);
+			}
+			else if(request.getParameter("addArticle") != null){
+				response.sendRedirect("article");
+				return;
+			}
+			else if(request.getParameter("back") != null)
+			{
+				response.sendRedirect("users?page=usersearch");
+				return;
+			}
+			else if(request.getParameter("updateSelection") != null)
+			{
+				User selectedUser = (User)request.getSession().getAttribute("selectedUser");
+	
+				updateSelectedUser(selectedUser, request);
+				response.sendRedirect("users?page=userinfo&selectedUser=" + selectedUser.username );
+				return;
+			}
+			else if(request.getParameter("deleteUserByUser") != null)
+			{
+				user.techisactive = 0;
+				user.techisdeleted = 1;
+				
+				UserService.UpdateUser(user);
+				
+				request.getSession().removeAttribute("currentUser");
+				response.sendRedirect("start");
+				return;
+			}
 		}
 				
 		doGet(request, response);
@@ -420,24 +423,54 @@ public class UsersServlet extends HttpServlet {
 	 */
 	private void findOrders(HttpServletRequest request, User user) throws IOException 
 	{		
-		String searchOrderIDPattern = request.getParameter("searchOrderIDPattern");
+		String searchOrderPattern = request.getParameter("searchOrderPattern");
 
 		ArrayList<OrderStatus> statusList = getStatusList();
 				
 		ArrayList<Order> orders = new ArrayList<Order>();
-		
+				
 		try {
-			if((user.utid == 1 || user.utid == 3) && searchOrderIDPattern != null && searchOrderIDPattern != "") 
+			if((user.utid == 1 || user.utid == 3) && searchOrderPattern != null && searchOrderPattern != "") 
 			{
-				Order order = OrderService.GetSpecificOrder(Integer.parseInt(searchOrderIDPattern));
-				if (order != null) 
-				{ orders.add(order);}
+				System.out.println("Selected Categorie Orders: " + request.getParameter("categorie").toString()); 
+				
+				if(Integer.parseInt(request.getParameter("categorie").toString()) == 0 && isNumber(searchOrderPattern))
+				{
+					Order order = OrderService.GetSpecificOrder(Integer.parseInt(searchOrderPattern));
+					if (order != null) 
+					{ orders.add(order);}
+				}
+				else if (Integer.parseInt(request.getParameter("categorie").toString()) == 1)
+				{
+					//get Order by status
+					OrderStatus status = new OrderStatus(null, searchOrderPattern);
+					orders = OrderService.GetAllOrders(status);
+					
+				}
+				else if (Integer.parseInt(request.getParameter("categorie").toString()) == 2)
+				{
+					//get orders of a specific user
+					User orderUser = UserService.GetUser(searchOrderPattern);
+					if(orderUser != null)
+					{
+						orders = OrderService.GetAllOrders(orderUser.ulid);
+					}
+				}
 			}
-			else if(user.utid == 2 && searchOrderIDPattern != null && searchOrderIDPattern != "")
+			else if(user.utid == 2 && searchOrderPattern != null && searchOrderPattern != "")
 			{
-				Order order = OrderService.GetSpecificOrder(Integer.parseInt(searchOrderIDPattern));
-				if (order != null && order.ulid == user.ulid) 
-				{ orders.add(order);}
+				if(Integer.parseInt(request.getParameter("categorie").toString()) == 0 && isNumber(searchOrderPattern))
+				{
+					Order order = OrderService.GetSpecificOrder(Integer.parseInt(searchOrderPattern));
+					if (order != null && order.ulid == user.ulid) 
+					{ orders.add(order);}
+				}
+				else if (Integer.parseInt(request.getParameter("categorie").toString()) == 1)
+				{
+					//get Orders of a specific user with a specific status
+					OrderStatus status = new OrderStatus(null, searchOrderPattern);
+					orders = OrderService.GetAllOrders(status, user.ulid);
+				}
 			}
 			else if(user.utid == 1 || user.utid == 3)
 			{

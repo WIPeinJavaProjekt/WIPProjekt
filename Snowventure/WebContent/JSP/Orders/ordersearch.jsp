@@ -13,9 +13,18 @@ Ansprechpartner: Jacob Markus
 			        <legend>
 			        	<h3>Bestellungen</h3>
 			        </legend>
-					<div class="pure-g">
-						<div class="pure-u-4-5">
-					        	<input type="text" name="searchOrderIDPattern" class="boxedinput" placeholder="Bestellnummer eingeben">
+					<div class="pure-g" id="searchbar">
+						<div class="pure-u-1-5">
+					        <select name="categorie" class="boxedinput">
+					        	<option value="0">Bestellnummer</option>
+					        	<option value="1">Status</option>
+					        	<c:if test="${ currentUser.utid == '1' || currentUser.utid == '3' }">
+					        		<option value="2">Nutzername</option>
+					        	</c:if>
+							</select>
+						</div>
+						<div class="pure-u-3-5">
+					        	<input type="text" name="searchOrderPattern" class="boxedinput" placeholder="Suchinformation eingeben">
 						</div>
 						<div class="pure-u-1-5">
 			        		<button type="submit" name="searchOrders" class="pure-button pure-button-primary boxedinput">Suchen</button>

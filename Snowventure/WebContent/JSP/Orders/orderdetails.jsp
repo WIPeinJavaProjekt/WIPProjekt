@@ -101,7 +101,7 @@ Ansprechpartner: Jacob Markus
 							<div class="pure-u-1-1 orderdetailsvalue">Identisch mit Lieferadresse</div>
 							<br>
 							<div class="pure-u-1-1"><b>Versandart</b></div>
-							<div class="pure-u-1-1 orderdetailsvalue">DHL Standardversand</div>
+							<div class="pure-u-1-1 orderdetailsvalue">DHL Express</div>
 					</div>
 					<div class="pure-u-1-4 fullwidth" id="orderpaymentmethod">
 							<div class="pure-u-1-1"><b>Zahlungsart</b></div>

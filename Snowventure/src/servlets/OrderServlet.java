@@ -124,7 +124,9 @@ public class OrderServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getParameter("delivery-adr-submit") != null)
+		User currentUser = (User) request.getSession().getAttribute("currentUser");
+		
+		if(currentUser != null && request.getParameter("delivery-adr-submit") != null)
 		{
 			Order currentOrder = (Order) request.getSession().getAttribute("currentOrder");
 			
