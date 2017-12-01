@@ -68,4 +68,9 @@ Ansprechpartner: Fabian Meise
 
 	<div align="center"><img src="./Images/favicon.png" height="128px" width= "128px" type ="image/png"></div>
 	
+	<hr>
+	<div id="copyright">
+	Copyright © 2017 Snowventure (fiktive Firma Studiumsprojekt)
+	</div>
+	
 </footer>

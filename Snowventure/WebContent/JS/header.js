@@ -18,8 +18,33 @@ function scalediv(){
 	console.log($( window ).height()-$('header').height()-$('footer').height());
 	$('.content-container').css("min-height",$( window ).height()-$('header').height()-$('footer').height()-80>0?$( window ).height()-$('header').height()-$('footer').height()-80 : 450);
 	$('.startslider-btn').css("width", $('.startslider').width()<1250? 38 : ($('.startslider').width()-1250)/2);
+	$('#headerdummy').css("height", $('header').height());
 	$('body').show();
 	//var paddingarticle = (($( window ).width()-(parseInt($( window ).width()/360)-1)*4)%360)/2;
 	//$('#articleresultcontainer').css("padding-left",paddingarticle < 1 ? 180 + $( window ).width()*0.2 : paddingarticle +$( window ).width()*0.2);
 	
 };
+
+var lastScrollTop = 0;
+$(window).scroll(function(event){
+	var st = $(this).scrollTop();
+    if(st < lastScrollTop){
+	
+	if ($(window).scrollTop() >= 122.5) {
+        $('header').addClass('fixed-header',3000);
+        $('#headerdummy').show();
+     }
+     else {
+        $('header').removeClass('fixed-header',3000);
+        $('#headerdummy').hide();
+     }
+    }
+    else
+    {
+    	
+            $('header').removeClass('fixed-header',3000);
+            $('#headerdummy').hide();
+         
+    }
+    lastScrollTop = st;
+});

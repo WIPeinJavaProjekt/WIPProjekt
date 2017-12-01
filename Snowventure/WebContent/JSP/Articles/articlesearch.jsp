@@ -7,7 +7,7 @@ Ansprechpartner: Garrit Kniepkamp
 
 <div class="pure-g" id ="account-searchbox">
 	<div class="pure-u-1-5 sizezero"></div>
-	<div id="wrapper" class="pure-u-3-5 fullwidth">
+	<div id="wrapper" class="pure-u-3-5 fullwidth textbox">
 		<div id="search-container" class="searchbox">
 			<form class="pure-form" action="users" method="POST">
 			    <fieldset>

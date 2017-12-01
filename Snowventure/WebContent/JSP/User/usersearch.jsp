@@ -9,9 +9,9 @@ Ansprechpartner: Jacob Markus
 
 <div class="pure-g" id ="account-searchbox">
 	<div class="pure-u-1-5 sizezero"></div>
-	<div id="wrapper" class="pure-u-3-5 fullwidth">
+	<div id="wrapper" class="pure-u-3-5 fullwidth  textbox">
 		<div id="search-container" class="searchbox">
-			<form class="pure-form  textbox" action="users?page=usersearch" method="POST">
+			<form class="pure-form" action="users?page=usersearch" method="POST">
 			    <fieldset>
 			        <legend>
 			        <h3>Nutzersuche</h3>

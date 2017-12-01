@@ -86,5 +86,5 @@ Ansprechpartner: Fabian Meise
 		
    	<!-- <div style="height:2px; width:100%; background-color:rgba(75,75,75,0.1);"></div> -->
 </header>
-
+<div id="headerdummy"></div>
 <script type="text/javascript" src="./JS/responsive.js"></script>

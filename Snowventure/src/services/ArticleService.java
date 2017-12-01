@@ -361,6 +361,8 @@ public class ArticleService {
 			subquery=" AND AID IN(SELECT aid FROM ARTICLEVERSIONSIZE s LEFT OUTER JOIN ARTICLEVERSION v ON  s.avid = v.avid WHERE INSTR('"+size+"',size))";
 		query+= subquery;
 		
+		
+		
 		return SearchForArticles(query,piclimit,versionlimit);
 	}
 	
@@ -375,7 +377,7 @@ public class ArticleService {
 	 */
 	private static ArrayList<Article> SearchForArticles(String query, int piclimit, int versionlimit) throws SQLException, IOException{
 		ArrayList<Article> articles = new ArrayList<Article>();
-
+		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())

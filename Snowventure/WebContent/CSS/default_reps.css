@@ -13,6 +13,10 @@
 	padding:10px;
 	}
 	
+	.pure-button{
+	padding: .5em .3em;
+	}
+	
 	/*HEADER*/
 	#responsiveheader{
 	display:block;}
@@ -152,6 +156,22 @@
 	
 	.fullwidth{
 	width: 100%;
+	}
+	
+	#advertisingbanner{
+		height: 320px;
+	}
+	
+	#advertisinglogo{
+		height: 320px;
+	}
+	#advertisinglogo .inner{
+	margin-left: auto;
+	margin-right: auto;
+	width: 340px;
+	text-align: center;
+	color: #fff;
+	font-size: 12px; 
 	}
 	
 	/*LOGIN*/

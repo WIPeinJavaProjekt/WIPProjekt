@@ -87,7 +87,7 @@ public class StartServlet extends HttpServlet {
 			
 		} else if(request.getParameter("search") != null) {	
 			
-			String searchPattern = request.getParameter("searchArticlePattern");
+			String searchPattern = request.getParameter("searchArticlePattern").replaceAll("[^a-zA-Z 0-9]+", "");
 			int category = Integer.parseInt(request.getParameter("categorie"));
 			findArticles(request, category,searchPattern);
 			

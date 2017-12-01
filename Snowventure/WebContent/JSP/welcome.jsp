@@ -73,6 +73,15 @@ Ansprechpartner: Fabian Meise
     		<div class="pure-u-1-3"><p align="center"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i><br>24h Lieferung</p></div>
 		</div>
 		
+		<div id="advertisingbanner">
+		<div id="advertisinglogo">
+			<div class="middle">
+				<div class="inner">
+					<h1>Warme Winterkleidung finden</h1>
+				</div>
+			</div>
+		</div>
+		</div>
 		
 		<div id="history">
 		<div align="center" id="historyheader"><h2>ÜBER SNOWVENTURE</h2></div>

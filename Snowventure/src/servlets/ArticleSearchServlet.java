@@ -66,7 +66,7 @@ public class ArticleSearchServlet extends HttpServlet {
 		
 		if(request.getParameter("search") != null) {	
 			
-			String searchPattern = request.getParameter("searchArticlePattern");			
+			String searchPattern = request.getParameter("searchArticlePattern").replaceAll("[^a-zA-Z 0-9]+", "");			
 			
 			double minprice = Double.parseDouble(request.getParameter("minprice") ==null || request.getParameter("minprice") ==""? "0":request.getParameter("minprice") );
 			double maxprice = Double.parseDouble(request.getParameter("maxprice") ==null || request.getParameter("maxprice") ==""? "0":request.getParameter("maxprice") );
