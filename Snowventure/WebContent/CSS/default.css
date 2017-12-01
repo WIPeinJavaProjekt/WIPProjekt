@@ -50,6 +50,13 @@ header .pure-menu-link{
     color: #fff !important;
 }
 
+.deleteImageButton {
+    margin-right: 1.7%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 .boxedinput {
     box-sizing: border-box;
     display: block;

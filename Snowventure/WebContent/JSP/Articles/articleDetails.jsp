@@ -156,6 +156,10 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
 					   		<div class="w3-display-container mySlides ">
 								<div class="productCardimage">
 							   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.getImageId()}" class="articlesearchimage"/>
+							   		<form action="article" method="post">
+							   			<button class="pure-button pure-button-primary deleteImageButton" name="deleteImage" id="deleteImage"><i class="fa fa-trash" aria-hidden="true"></i></button>
+							   			<input hidden="true" name="currentImage" id="currentImage" type="text" value="${ap.getImageId()}"/>
+						   			</form>
 							   	</div>
 							</div>
 						</c:forEach>

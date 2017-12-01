@@ -118,6 +118,12 @@ public class ArticleServlet extends HttpServlet {
 			addImage(request);
 			response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.getSelectedVersion());
 			return;
+		} else if(request.getParameter("deleteImage") != null) {
+			int imageId = Integer.parseInt(request.getParameter("currentImage"));
+			ArticleService.DeletePictureFromArticleVersion(this.article.getSelectedArticleVersion().versionid, imageId);
+			
+			response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.getSelectedVersion());
+			return;
 		} else if(request.getParameter("addArticleVersion") != null) {
 			try {
 				addArticleVersion(request);
@@ -128,16 +134,7 @@ public class ArticleServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if(request.getParameter("changeStock") != null) {
-			
-			for(String size: this.article.getSize()) {
-				try {
-					StockService.UpdateStock(this.article.getSelectedArticleVersion(), size, Integer.parseInt(request.getParameter(size)));
-				} catch (NumberFormatException | SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
+			changeStock(request);
 			response.sendRedirect("article?ID=" + this.article.ID + "&version=" + this.article.getSelectedVersion());
 			return;
 		}  else if(request.getParameter("back") != null) {
@@ -146,6 +143,17 @@ public class ArticleServlet extends HttpServlet {
 		}
 
 		doGet(request, response);
+	}
+	
+	private void changeStock(HttpServletRequest request) {
+		for(String size: this.article.getSize()) {
+			try {
+				StockService.UpdateStock(this.article.getSelectedArticleVersion(), size, Integer.parseInt(request.getParameter(size)));
+			} catch (NumberFormatException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**

@@ -49,7 +49,6 @@ public class ArticleService {
 				a.acid,
 				a.manufacturer,
 				a.gender);
-		System.out.println(query);
 		aid = DatabaseConnector.createConnection().InsertQuery(query);
 		a.ID = aid;
 		
@@ -159,8 +158,6 @@ public class ArticleService {
 		
 		query = String.format(query, a.name,a.description,a.ID,a.manufacturer,a.gender,a.acid);
 		
-		System.out.println(query);
-		
 		DatabaseConnector.createConnection().UpdateQuery(query);
 		for(ArticleVersion av: a.versions)
 			UpdateArticleVersion(av);
@@ -236,13 +233,9 @@ public class ArticleService {
 		{
 			ArrayList<String> sizes = new ArrayList<String>(GetAllArticleVersionsize(result.getInt("avid")));
 			ArticleVersion version = new ArticleVersion(result.getInt("avid"),result.getString("property"),result.getString("propertyvalue"),result.getDouble("defaultprice"),a,sizes,ArticleColorService.GetSpecificColors(result.getInt("avid")));
-			System.out.println("Kriege Version: "+ System.currentTimeMillis());
 			version.pictures = (ArrayList<ArticlePicture>)GetPicturesFromArticleVersionId(version.versionid,piclimit).clone();
-			System.out.println("Kriege Version+Bild: "+ System.currentTimeMillis());
 			av.add(version);
 		}
-		
-		System.out.println("Kriege alle Articleversionen: "+ System.currentTimeMillis());
 		
 		return av;
 	}
@@ -368,12 +361,6 @@ public class ArticleService {
 			subquery=" AND AID IN(SELECT aid FROM ARTICLEVERSIONSIZE s LEFT OUTER JOIN ARTICLEVERSION v ON  s.avid = v.avid WHERE INSTR('"+size+"',size))";
 		query+= subquery;
 		
-	
-		
-		System.out.println("Filter: "+subquery);
-		System.out.println("Filter: "+query);
-		
-		
 		return SearchForArticles(query,piclimit,versionlimit);
 	}
 	
@@ -416,8 +403,6 @@ public class ArticleService {
 		String query = "SELECT aid, name, description, acid, manufacturer,gender  FROM ARTICLE WHERE TechIsActive = 1 AND TechIsDeleted = 0 AND aid='%d';";
 		query = String.format(query, id);
 		
-//		System.out.println(query);
-		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
 		
 		while(result.next())
@@ -451,12 +436,8 @@ public class ArticleService {
 	 * @throws IOException 
 	 */
 	public static Article GetSelectedArticle(int avid) throws SQLException, IOException{
-		System.out.println("Suche nach AVID: "+avid);
 		Article article = GetArticle( GetArticleIdFromAvid(avid));
-		System.out.println("Ausgewählterartikel: "+article.ID);
-		System.out.println("Vor der Prep");
 		article = PrepSelectedArticle(avid,article);
-		System.out.println("Artikel sollte jetzt prepared sein");
 		return article;
 	}
 
@@ -478,9 +459,6 @@ public class ArticleService {
 		{
 			aid = result.getInt("aid");
 		}
-		
-		
-		System.out.println("Aushewählte AID: "+aid);
 		return aid;
 	}
 	
@@ -491,8 +469,8 @@ public class ArticleService {
 	 * @return modifizerter Artikel
 	 */
 	private static Article PrepSelectedArticle(int avid, Article a) {
-		System.out.println("Anzahl der versionen:"+ a.versions.size());
-		
+//		System.out.println("Anzahl der versionen:"+ a.versions.size());
+//		
 		for(int i = 0; i< a.versions.size(); i++)
 		{
 			System.out.println("Versionsvergleich "+ a.versions.get(i).versionid + " == "+ avid);
@@ -603,8 +581,12 @@ public class ArticleService {
 	 * @param imgid zulöschende Bildid
 	 */
 	public static void DeletePictureFromArticleVersion(int avid, int imgid) {
-		String query = "Delete ArticleImage WHERE avid = '%d' and aimgid ='%d'";
+		System.out.println("Delete Image");
+		System.out.println(avid);
+		System.out.println(imgid);
+		String query = "DELETE FROM ARTICLEIMAGE WHERE avid = '%d' and aimgid ='%d'";
 		query = String.format(query, avid, imgid);
+		System.out.println(query);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}	
 }

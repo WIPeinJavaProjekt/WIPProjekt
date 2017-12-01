@@ -62,7 +62,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
 											<div class="boxedinput">
 												<label> Ausgewählte Version:</label><br>
 												<select required id="selectedVersion" name="selectedVersion" class="boxedinput" 
-													onchange="changeVersion(${article.getId()}, 'article')">
+													onchange="changeToStock(${article.getId()}, 'article')">
 													<c:forEach items="${article.getAllVersions()}" var="version">
 										        		<option value="${article.getAllVersions().indexOf(version)}"
 										        			<c:if test="${article.getSelectedVersion()==article.getAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>
