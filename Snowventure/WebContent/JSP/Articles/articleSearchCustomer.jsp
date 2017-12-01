@@ -77,6 +77,7 @@ Ansprechpartner: Garrit Kniepkamp
 							    <div class="productCardimage">
 							    	<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${article.getAllVersions().get(article.getSelectedVersion()).getArticleHeadPicture().getImageId()}" class="articlesearchimage">
 							    </div>
+							
 							    <div class="w3-container w3-center">
 									<p>
 									<b>${article.getManufacturer()}</b> - ${article.getName()}</p>

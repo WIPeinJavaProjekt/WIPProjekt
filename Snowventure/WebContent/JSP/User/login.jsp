@@ -26,10 +26,10 @@ Ansprechpartner: Garrit Kniepkamp, Jacob Markus
 			
 			<div class="pure-u-1-5 sizezero"></div>
 
-			<div class="pure-u-3-5 fullwidth">
+			<div class="pure-u-3-5 fullwidth textbox">
 				<h1>Anmelden</h1>
 
-				<form class="pure-form  textbox" <c:choose><c:when test='${not empty param.accessorder}'>action ="login?accessorder=true"</c:when><c:otherwise>action ="login"</c:otherwise></c:choose> method="post">
+				<form class="pure-form  " <c:choose><c:when test='${not empty param.accessorder}'>action ="login?accessorder=true"</c:when><c:otherwise>action ="login"</c:otherwise></c:choose> method="post">
 			        	<fieldset class="pure-group"> 
 				         <div class="pure-control-group">
 				            <input class="loginfield boxedinput" name="userId" id="userId" type="text" placeholder="Benutzername" required>
@@ -47,7 +47,7 @@ Ansprechpartner: Garrit Kniepkamp, Jacob Markus
 				
 				<a name="passwordforgotten" href="forgottenPassword?param=login">Passwort vergessen?</a> 
 					
-				<form class="pure-form  textbox" action ="login" method="post">
+				<form class="pure-form  " action ="login" method="post">
 				 <!-- 	<fieldset>  -->
 			            <button class="loginfield-2 pure-button pure-button-primary" type="submit" name="register" class="pure-button pure-button-primary">Registrieren</button>
 			            <button class="loginfield-2 pure-button pure-button-primary" type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>

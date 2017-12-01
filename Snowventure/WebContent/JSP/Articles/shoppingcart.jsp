@@ -28,7 +28,7 @@ Ansprechpartner: Jacob Markus
 
 	<%@include file = "../Basic/header.jsp" %>
 	
-		<div class="pure-g content-container">
+		<div class="pure-g content-container textbox shoppingcart">
 			<form class=" textbox" action="cart" method="post" style="width:100%">
 				
 					<div class="pure-u-1-1">
@@ -104,7 +104,7 @@ Ansprechpartner: Jacob Markus
 					</c:when>
 					<c:otherwise>
 						<div  id="scp-article-card">
-							<h2><b>Ihre Einkaufswagen ist leer.</b></h2>
+							<h2><b>Ihr Einkaufswagen ist leer.</b></h2>
 							<h4>Ihr Einkaufswagen steht zu Ihrer Verfügung. Nutzen Sie ihn und befüllen Sie ihn mit Ski-Kleidung, Ausrüstung und mehr.
 								<c:if test="${empty currentUser}"><br>Wenn Sie bereits ein Konto besitzen, tippen Sie auf <a href="./login">Anmelden</a>, um den vollen Funktionsumfang von Snowventure nutzen zu können.<br></c:if>  
 								Setzen Sie den Einkauf bei <a href="./articles">Snowventure</a> fort.</h4>

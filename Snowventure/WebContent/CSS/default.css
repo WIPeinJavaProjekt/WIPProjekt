@@ -29,6 +29,7 @@ body *:not(.fa ){
 
 .pure-menu-item{
 	display:inline;
+	cursor: pointer;
 }
 
 header .pure-menu-link{
@@ -301,13 +302,14 @@ footer .pure-u-1-3 {
 #popup-div {
 	width:100%;
 	height:100%;
-	opacity:.95;
+	opacity:.98;
 	top:0;
 	left:0;
 	display:none;
 	position:fixed;
 	background-color:#313131;
-	overflow:auto
+	overflow:auto;
+	z-index: 5;
 }
 i#close {
 	position:absolute;
@@ -323,6 +325,11 @@ div#popup-div-content {
 	margin-left:-202px;
 	font-family:'Raleway',sans-serif
 }
+
+#popup-div-content h4{
+	letter-spacing: 2px;
+}
+
 #popup-div-form {
 	max-width:300px;
 	min-width:250px;
@@ -337,6 +344,9 @@ div#popup-div-content {
 	width: 100%;
 }
 
+.shoppingcart {
+	padding: 2%;
+}
 
 .pure-form input[type="checkbox"]{
 	display: inline !important;
@@ -483,7 +493,8 @@ overflow:scroll;
 }
 
 .productCardimage{
-
+	height:360px;
+	width:328px;
 	background-color:rgb(45,45,45);
 	margin: 16px 16px 0px 16px;
 	text-align: center;
@@ -513,7 +524,7 @@ overflow:scroll;
 
 
 .articleimagehelper {
-	    display: inline-block;
+	display: inline-block;
     height: 100%;
     vertical-align: middle;
     cursor: pointer;
