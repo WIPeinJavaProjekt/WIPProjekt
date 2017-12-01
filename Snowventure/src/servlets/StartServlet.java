@@ -55,12 +55,14 @@ public class StartServlet extends HttpServlet {
 			ArrayList<String> manufacturers = ArtilceManufacturerService.GetAllPossibleManufacturers();
 			ArrayList<String> sizes = ArticleSizesService.GetAllPossibleSizes();
 			ArrayList<ArticleColor> colors = ArticleColorService.GetAllPossibleColors();
+			Article article = ArticleService.GetArticle(39);
 			
 			request.getSession().setAttribute("articleColors", colors);
 			request.getSession().setAttribute("availableSizes", sizes);
 			request.getSession().setAttribute("availableManufacturers", manufacturers);
 			request.getSession().setAttribute("categories", categories);
-		} catch (SQLException e) {
+			request.getSession().setAttribute("bestseller", article);
+			} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		

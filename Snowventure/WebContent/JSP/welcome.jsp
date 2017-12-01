@@ -73,14 +73,44 @@ Ansprechpartner: Fabian Meise
     		<div class="pure-u-1-3"><p align="center"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i><br>24h Lieferung</p></div>
 		</div>
 		
-		<div id="advertisingbanner">
-		<div id="advertisinglogo">
-			<div class="middle">
-				<div class="inner">
-					<h1>Warme Winterkleidung finden</h1>
+		<div  class="advertisingbanner">
+			<div id="advertisinglogo" class="advertisinglogo">
+				<div class="middle">
+					<div class="inner">
+						<h1>Warme Winterkleidung finden</h1>
+					</div>
 				</div>
 			</div>
 		</div>
+		<div  id="bestseller" class="content-container">
+			
+			<h1>Entdecke unseren Bestseller</h1><br>
+			<div  class="productCard" onclick="location.href='./articleshopping?ID=${bestseller.getId()}&version=0';">
+						 		<div  style="width:100%">
+								    <div class="productCardimage">
+								    	<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${bestseller.getAllVersions().get(article.getSelectedVersion()).getArticleHeadPicture().getImageId()}" class="articlesearchimage">
+								    </div>
+								
+								    <div class="w3-container w3-center">
+										<p>
+										<b>${bestseller.getManufacturer()}</b> - ${bestseller.getName()}</p>
+										<div style="height:1px; width:100%; background-color:rgb(75,75,75);"></div>
+										<p>${bestseller.getPriceFormatted()} EUR <br></p>
+							    	</div>
+							  	</div>
+							</div>
+		</div>
+		
+
+		<div class="advertisingbanner">
+		<div id="advertisinglogo2" class="advertisinglogo">
+			<div class="middle">
+				<div class="inner">
+					<h1>Weihnachtsideen</h1>
+				</div>
+			</div>
+		</div>
+		
 		</div>
 		
 		<div id="history">
