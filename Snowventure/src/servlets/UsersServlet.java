@@ -234,8 +234,8 @@ public class UsersServlet extends HttpServlet {
 		List<User> userlist = null;
 		
 		try 
-		{
-			userlist = UserService.GetUsers(request.getParameter("user-info"), Integer.parseInt(request.getParameter("categories").toString()));
+		{						
+			userlist = UserService.GetUsers(request.getParameter("user-info").replaceAll("[^a-zA-Z0-9]", ""), Integer.parseInt(request.getParameter("categories").toString()));
 		} 
 		catch (SQLException e) 
 		{
@@ -293,8 +293,15 @@ public class UsersServlet extends HttpServlet {
 	 */
 	private void updateCurrentUser(User user, HttpServletRequest request) throws IOException
 	{
-		Adress adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
-				   				   request.getParameter("street"), request.getParameter("postcode"));		
+		String location = request.getParameter("location").replaceAll("[^a-zA-Z 0-9]+", "");
+		String houseno = request.getParameter("houseno").replaceAll("[^a-zA-Z 0-9]+", "");
+		String street = request.getParameter("street").replaceAll("[^a-zA-Z 0-9]+", "");
+		String postcode = request.getParameter("postcode").replaceAll("[^a-zA-Z 0-9]+", "");
+		String surname = request.getParameter("surname").replaceAll("[^a-zA-Z 0-9]+", "");
+		String name = request.getParameter("name").replaceAll("[^a-zA-Z 0-9]+", "");	
+		
+		Adress adress = new Adress(location.length() > 0 ? location : user.adress.location, houseno.length() > 0 ? houseno : user.adress.houseno,
+									postcode.length() > 0 ? postcode : user.adress.postcode, street.length() > 0 ? street : user.adress.street);		
 
 		String usertype = request.getParameter("state");
 		
@@ -306,8 +313,8 @@ public class UsersServlet extends HttpServlet {
 			user.phone = request.getParameter("phone");
 		}
 		
-		user.surname = request.getParameter("surname");
-		user.name = request.getParameter("name");			
+		user.surname = surname.length() > 0 ? surname: user.surname;
+		user.name = name.length() > 0 ? name: user.name;			
 		
 		if(usertype != null && usertype != "")
 		{
@@ -331,13 +338,18 @@ public class UsersServlet extends HttpServlet {
 	 */
 	private void changeSafetyQuestion(User user, HttpServletRequest request) throws IOException
 	{
-		user.squestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion").toString()), "", request.getParameter("safetyAnswer").toString());
+		String safetyAnswer =  request.getParameter("safetyAnswer").replaceAll("[^a-zA-Z 0-9]+", "").trim();
+		
+		if(safetyAnswer.length() > 0)
+		{
+		user.squestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion").toString()), "", safetyAnswer);
 		
 		UserService.UpdateUser(user);
 		
 		request.getSession().setAttribute("currentUser", user);
 		
 		System.out.println("sQuestion updated.");	
+		}
 	}
 	
 	
@@ -353,10 +365,20 @@ public class UsersServlet extends HttpServlet {
 	 */
 	private void updateSelectedUser(User user, HttpServletRequest request) throws IOException
 	{
-		Adress adress = new Adress(request.getParameter("location"), request.getParameter("houseno"),
-				   				   request.getParameter("street"), request.getParameter("postcode"));
+		//Remove special expressions from input strings
+		String location = request.getParameter("location").replaceAll("[^a-zA-Z 0-9]+", "");
+		String houseno = request.getParameter("houseno").replaceAll("[^a-zA-Z 0-9]+", "");
+		String street = request.getParameter("street").replaceAll("[^a-zA-Z 0-9]+", "");
+		String postcode = request.getParameter("postcode").replaceAll("[^a-zA-Z 0-9]+", "");
+		String surname = request.getParameter("surname").replaceAll("[^a-zA-Z 0-9]+", "");
+		String name = request.getParameter("name").replaceAll("[^a-zA-Z 0-9]+", "");
+		String safetyAnswer =  request.getParameter("safetyAnswer").replaceAll("[^a-zA-Z 0-9]+", "");
 		
-		user.squestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion").toString()), "", request.getParameter("safetyAnswer").toString());
+		Adress adress = new Adress(location.length() > 0 ? location : user.adress.location, houseno.length() > 0 ? houseno : user.adress.houseno,
+									postcode.length() > 0 ? postcode : user.adress.postcode, street.length() > 0 ? street : user.adress.street);		
+		
+		if(safetyAnswer.length() > 0)				
+		user.squestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion").toString()), "", safetyAnswer);
 
 		String password = request.getParameter("password");
 		String passwordrepeat = request.getParameter("passwordRepeat");
@@ -382,8 +404,8 @@ public class UsersServlet extends HttpServlet {
 		
 		user.adress = adress;
 		user.email = request.getParameter("email");
-		user.surname = request.getParameter("surname");
-		user.name = request.getParameter("name");			
+		user.surname = surname.length() > 0 ? surname: user.surname;
+		user.name = name.length() > 0 ? name: user.name;			
 
 		//Check if the usertype of the selected user was changed
 		if(usertype != null && usertype != "")
@@ -424,7 +446,7 @@ public class UsersServlet extends HttpServlet {
 	private void findOrders(HttpServletRequest request, User user) throws IOException 
 	{		
 		String searchOrderPattern = request.getParameter("searchOrderPattern");
-
+		
 		ArrayList<OrderStatus> statusList = getStatusList();
 				
 		ArrayList<Order> orders = new ArrayList<Order>();
@@ -443,7 +465,7 @@ public class UsersServlet extends HttpServlet {
 				else if (Integer.parseInt(request.getParameter("categorie").toString()) == 1)
 				{
 					//get Order by status
-					OrderStatus status = new OrderStatus(null, searchOrderPattern);
+					OrderStatus status = new OrderStatus(null, searchOrderPattern.replaceAll("[^\\p{L}\\p{Z}]", ""));
 					orders = OrderService.GetAllOrders(status);
 					
 				}
@@ -468,7 +490,7 @@ public class UsersServlet extends HttpServlet {
 				else if (Integer.parseInt(request.getParameter("categorie").toString()) == 1)
 				{
 					//get Orders of a specific user with a specific status
-					OrderStatus status = new OrderStatus(null, searchOrderPattern);
+					OrderStatus status = new OrderStatus(null, searchOrderPattern.replaceAll("[^\\p{L}\\p{Z}]", ""));
 					orders = OrderService.GetAllOrders(status, user.ulid);
 				}
 			}
