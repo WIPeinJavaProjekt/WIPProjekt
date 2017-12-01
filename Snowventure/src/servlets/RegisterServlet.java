@@ -3,6 +3,8 @@ package servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -122,15 +124,12 @@ public class RegisterServlet extends HttpServlet {
 		this.sfQuestion = new Safetyquestion(Integer.parseInt(request.getParameter("safetyQuestion")), "", request.getParameter("safetyAnswer"));
 				
 		this.user = new User(this.sfQuestion, request.getParameter("username"), request.getParameter("password"), request.getParameter("name"),
-				request.getParameter("surname"), this.adress, request.getParameter("email"), null, usertype == null ? 2 : usertype.toString().equals("admin")? 1 : usertype.toString().equals("employee")? 3 : 2);
-		
-		if(!isNumber(request.getParameter("phone").toString()))
+				request.getParameter("surname"), this.adress, request.getParameter("email"), request.getParameter("phone"), usertype == null ? 2 : usertype.toString().equals("admin")? 1 : usertype.toString().equals("employee")? 3 : 2);
+				
+		if(!validateUserInformation(user, request))
 		{
-			request.setAttribute("error", "Die angegebene Telefonnummer darf nur aus den Ziffern von 0-9 bestehen.");			
 			return -1;
 		}
-		else this.user.phone = request.getParameter("phone");
-		
 		
 		if(!password.equals(passwordRepeat)) {
 			
@@ -175,5 +174,105 @@ public class RegisterServlet extends HttpServlet {
 	  return true;
 	}
 
+	
+	
+	/** 
+	 * @param email String
+	 * @return boolean 
+	 * @throws IOException
+	 * 
+	 * Die "validateEmail"-Methode übeprüft ob die eingegebene Email-Adresse valide ist.
+	 */
+	private boolean validateEmail(String email) throws IOException 
+	{
+		Pattern p = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+		Matcher m = p.matcher(email);
+		boolean validEmail = m.matches();
 
+		return validEmail;
+	}
+	
+	
+	
+	/** 
+	 * @param text String
+	 * @return boolean 
+	 * @throws IOException
+	 * 
+	 * Die "validateStringInput"-Methode übeprüft ob der eingegebene Text unerwünschte Sonderzeichen enthält.
+	 */
+	private boolean validateStringInput(String text) throws IOException 
+	{
+		Pattern p = Pattern.compile("^[A-Za-z 0-9]+");
+		Matcher m = p.matcher(text);
+		boolean validString = m.matches();
+
+		return validString;
+	}
+	
+	
+	
+	/** 
+	 * @param user Benutzer
+	 * @param request HttpServletRequest 
+	 * @return boolean
+	 * @throws IOException
+	 * 
+	 * Die "validateUserInformation"-Methode überprüft die Angaben des zu registrierenden Nutzers auf unerlaubte Sonderzeichen.
+	 */
+	public boolean validateUserInformation(User user, HttpServletRequest request) throws IOException 
+	{
+		if(!isNumber(user.phone))
+		{
+			request.setAttribute("error", "Die angegebene Telefonnummer darf nur aus den Ziffern von 0-9 bestehen.");			
+			return false;
+		}
+		else if(!validateEmail(user.email))
+		{
+			request.setAttribute("error", "Die angegebene Email-Adresse enthält unerlaubte Sonderzeichen.");			
+			return false;
+		}
+		else if(!validateStringInput(user.username)) 
+		{ 
+			request.setAttribute("error", "Der angegebene Nutzername enthält unerlaubte Sonderzeichen.");			
+			return false;
+		}
+		else if(!validateStringInput(user.name)) 
+		{ 
+			request.setAttribute("error", "Der angegebene Name enthält unerlaubte Sonderzeichen.");			
+			return false;
+		}
+		else if(!validateStringInput(user.surname)) 
+		{ 
+			request.setAttribute("error", "Der angegebene Vorname enthält unerlaubte Sonderzeichen.");			
+			return false;
+		}
+		else if(!validateStringInput(user.adress.location)) 
+		{ 
+			request.setAttribute("error", "Der angegebene Wohnort enthält unerlaubte Sonderzeichen.");			
+			return false;
+		}
+		else if(!validateStringInput(user.adress.houseno)) 
+		{ 
+			request.setAttribute("error", "Die angegebene Hausnummer enthält unerlaubte Sonderzeichen.");			
+			return false;
+		}
+		else if(!validateStringInput(user.adress.postcode)) 
+		{ 			
+			request.setAttribute("error", "Die angegebene Postleitzahl enthält unerlaubte Sonderzeichen.");			
+			return false;
+		}
+		else if(!validateStringInput(user.adress.street)) 
+		{ 
+			request.setAttribute("error", "Der angegebene Straßenname enthält unerlaubte Sonderzeichen.");			
+			return false;
+		}
+		else if(!validateStringInput(user.squestion.getAnswer())) 
+		{ 
+			request.setAttribute("error", "Die angegebene Sicherheitsantwort enthält unerlaubte Sonderzeichen.");			
+			return false;
+		}
+
+		return true;
+	}
 }
