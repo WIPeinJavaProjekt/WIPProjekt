@@ -4,15 +4,28 @@ Ansprechpartner: Fabian Meise
  -->
 
 
+
+<!-- Basis fertiger Slider der W3-Schools jedoch angepasst für das notwendige Responsive Design -->
 <div class="w3-content w3-display-container w3slidmod startslider" style="max-width:100%;" align="center">
 
-<div class="w3-display-container mySlides">
-   <img  class="sliderimage" src="./Images/skityp.jpg"/>
-</div>
 
 <div class="w3-display-container mySlides">
-   <img  class="sliderimage" src="./Images/mountain.jpg"/>
+   <div class="sliderimage" style="background-image: url('./Images/mountain.jpeg');">
+   </div>
 </div>
+
+
+<div class="w3-display-container mySlides">
+   <div class="sliderimage" style="background-image: url('./Images/skityp.jpeg');">
+   </div>
+</div>
+
+
+<div class="w3-display-container mySlides">
+   <div class="sliderimage" style="background-image: url('./Images/photogirl.jpeg');">
+   </div>
+</div>
+
 
 <button class="w3-display-left startslider-btn" onclick="plusDivs(-1)"><h1>&#10094;</h1></button>
 <button class="w3-display-right startslider-btn" onclick="plusDivs(1)"><h1>&#10095;</h1></button>
@@ -48,6 +61,8 @@ function showDivs(n) {
   $(x[slideIndex-1]).fadeIn(1500);
 }
 
-
+setInterval(function() {
+	plusDivs(1);
+}, 4200);
 
 </script>

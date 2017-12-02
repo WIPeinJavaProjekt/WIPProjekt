@@ -648,7 +648,15 @@ overflow:scroll;
 
 .sliderimage{
 	max-width:1250px;
-	max-height:400px;
+	max-height:397.5px;
+	width:1250px;
+	height:397.5px;
+    background-repeat: no-repeat;
+    background-position: center top;
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 .slidertext{
