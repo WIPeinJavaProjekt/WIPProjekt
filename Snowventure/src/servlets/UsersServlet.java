@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -299,13 +301,15 @@ public class UsersServlet extends HttpServlet {
 		String postcode = request.getParameter("postcode").replaceAll("[^a-zA-Z 0-9]+", "");
 		String surname = request.getParameter("surname").replaceAll("[^a-zA-Z 0-9]+", "");
 		String name = request.getParameter("name").replaceAll("[^a-zA-Z 0-9]+", "");	
-		
+						
 		Adress adress = new Adress(location.length() > 0 ? location : user.adress.location, houseno.length() > 0 ? houseno : user.adress.houseno,
 									postcode.length() > 0 ? postcode : user.adress.postcode, street.length() > 0 ? street : user.adress.street);		
 
 		String usertype = request.getParameter("state");
 		
 		user.adress = adress;
+		
+		if(validateEmail(request.getParameter("email")))
 		user.email = request.getParameter("email");
 		
 		if(isNumber(request.getParameter("phone").toString())) 
@@ -403,7 +407,10 @@ public class UsersServlet extends HttpServlet {
 		String usertype = request.getParameter("state");
 		
 		user.adress = adress;
+		
+		if(validateEmail(request.getParameter("email")))
 		user.email = request.getParameter("email");
+		
 		user.surname = surname.length() > 0 ? surname: user.surname;
 		user.name = name.length() > 0 ? name: user.name;			
 
@@ -558,5 +565,23 @@ public class UsersServlet extends HttpServlet {
 	  }
 
 	  return true;
+	}
+	
+	
+	
+	/** 
+	 * @param email String
+	 * @return boolean 
+	 * @throws IOException
+	 * 
+	 * Die "validateEmail"-Methode übeprüft ob die eingegebene Email-Adresse valide ist.
+	 */
+	private boolean validateEmail(String email) throws IOException 
+	{
+		Pattern p = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+		Matcher m = p.matcher(email);
+		boolean validEmail = m.matches();
+
+		return validEmail;
 	}
 }
