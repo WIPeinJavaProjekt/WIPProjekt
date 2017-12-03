@@ -58,6 +58,11 @@ Ansprechpartner: Jacob Markus
 			<div class="pure-u-3-4 fullwidth">
 				<div class="pure-u-1-1">
 					<div class="pure-u-1-1"><h1>Bestelldetails <c:if test="${ currentOrder.statuscycle.size() < 1 }">prüfen</c:if></h1></div>
+					<c:if test="${not empty error}">
+						<form class="pure-form pure-form-aligned" action=#>
+								<p class="error">${error}</p>
+						</form>
+					</c:if>
 					<c:if test="${ currentOrder.statuscycle.size() > 0 }">
 					<div class="pure-u-3-4" id="orderdetails">
 						<div class="pure-u-1-1">Bestellt am ${ currentOrder.statuscycle.get(0).statusdate }</div>

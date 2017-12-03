@@ -35,7 +35,11 @@ Ansprechpartner: Jacob Markus
 															
 					<c:choose>					
 					<c:when test="${not empty currentCart && currentCart.getCartPositions().size() > 0}">						
-						
+						<c:if test="${not empty error}">
+							<form class="pure-form pure-form-aligned" action="#">
+									<p class="error">${error}</p>
+							</form>
+						</c:if>
 						<c:forEach var="position" items="${ currentCart.getCartPositions() }">
 							<div class="w3-card-4" id="scp-article-card">
 								<div class="pure-u-1-5" id="sc-aimg-container">
@@ -76,7 +80,7 @@ Ansprechpartner: Jacob Markus
 								</div>
 								<hr>
 							</div>
-						</c:forEach>
+						</c:forEach>						
 						
 						<div  id="scp-article-card">
 						
