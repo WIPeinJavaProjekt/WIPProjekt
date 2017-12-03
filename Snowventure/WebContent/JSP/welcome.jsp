@@ -86,19 +86,19 @@ Ansprechpartner: Fabian Meise
 			
 			<h1>Entdecke unseren Bestseller</h1><br>
 			<div  class="productCard" onclick="location.href='./articleshopping?ID=${bestseller.getId()}&version=0';">
-						 		<div  style="width:100%">
-								    <div class="productCardimage">
-								    	<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${bestseller.getAllVersions().get(article.getSelectedVersion()).getArticleHeadPicture().getImageId()}" class="articlesearchimage">
-								    </div>
-								
-								    <div class="w3-container w3-center">
-										<p>
-										<b>${bestseller.getManufacturer()}</b> - ${bestseller.getName()}</p>
-										<div style="height:1px; width:100%; background-color:rgb(75,75,75);"></div>
-										<p>${bestseller.getPriceFormatted()} EUR <br></p>
-							    	</div>
-							  	</div>
-							</div>
+		 		<div  style="width:100%">
+				    <div class="productCardimage">
+				    	<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${bestseller.getAllVersions().get(bestseller.getSelectedVersion()).getArticleHeadPicture().getImageId()}" class="articlesearchimage">
+				    </div>
+				
+				    <div class="w3-container w3-center">
+						<p>
+						<b>${bestseller.getManufacturer()}</b> - ${bestseller.getName()}</p>
+						<div style="height:1px; width:100%; background-color:rgb(75,75,75);"></div>
+						<p>${bestseller.getPriceFormatted()} EUR <br></p>
+			    	</div>
+			  	</div>
+			</div>
 		</div>
 		
 
