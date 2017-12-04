@@ -61,8 +61,5 @@ function showDivs(n) {
   $(x[slideIndex-1]).fadeIn(1500);
 }
 
-setInterval(function() {
-	plusDivs(1);
-}, 4200);
 
 </script>

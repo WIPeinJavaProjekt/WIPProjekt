@@ -36,7 +36,7 @@ Ansprechpartner: Fabian Meise
 		    <div class="pure-u-1-3">
 			    <div class="divrowone">
 			    <h3>ZAHLUNGSARTEN</h3>
-				   <img src="./Images/footer/paypal.jpg" width="100px" height="auto"> 
+				   <img src="./Images/footer/paypal.png" width="100px" height="auto"> 
 		    	</div>
 		    </div>
 		    <div class="pure-u-1-3">

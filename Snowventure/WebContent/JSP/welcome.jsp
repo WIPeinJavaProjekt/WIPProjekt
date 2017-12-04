@@ -82,9 +82,9 @@ Ansprechpartner: Fabian Meise
 				</div>
 			</div>
 		</div>
-		<div  id="bestseller" class="content-container">
+		<div  id="bestseller">
 			
-			<h1>Entdecke unseren Bestseller</h1><br>
+			<h1>Entdecke unseren Bestseller</h1>
 			<div  class="productCard" onclick="location.href='./articleshopping?ID=${bestseller.getId()}&version=0';">
 						 		<div  style="width:100%">
 								    <div class="productCardimage">
@@ -114,10 +114,10 @@ Ansprechpartner: Fabian Meise
 		</div>
 		
 		<div id="history">
-		<div align="center" id="historyheader"><h2>ÜBER SNOWVENTURE</h2></div>
+		<div align="center" id="historyheader"><h1>ÜBER SNOWVENTURE</h1></div>
 		
 		<div class="pure-g historyblock">
-	    <div class="pure-u-1-2 fullwidth"><img src="./Images/alpinehouse.jpg" alt="Webereibild" class="historypic"></div>
+	    <div class="pure-u-1-2 fullwidth" align="left"><img src="./Images/alpinehouse.jpg" alt="Webereibild" class="historypic"></div>
 	    <div class="pure-u-1-2 fullwidth textbox">
 	    <h3>Das Unternehmen</h3>
 	    
@@ -133,7 +133,7 @@ Ansprechpartner: Fabian Meise
 	    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
 		Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.   
 		Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse</p></div>
-		<div class="pure-u-1-2 fullwidth"><img src="./Images/weaving_glasses.jpg" alt="Alpines Haus" class="historypic"></div>
+		<div class="pure-u-1-2 fullwidth" align="right"><img src="./Images/weaving_glasses.jpg" alt="Alpines Haus" class="historypic"></div>
 		</div>
 		
 	    

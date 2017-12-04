@@ -7,11 +7,15 @@
 body {
     background-color: rgb(250,249,246);
     color: rgb(75,75,75);
-     
+    
     display:none;
 }
-body *:not(.fa ){
-	
+body *:not(.fa, .headerbtn span ){
+	font-family:"Segoe UI",Arial,sans-serif;
+}
+
+.pure-g [class*=pure-u]{
+	font-family:"Segoe UI",Arial,sans-serif !important;	
 }
 
 #searchfilter{
@@ -23,8 +27,9 @@ body *:not(.fa ){
 	height:163px;
 }
 #banner{
-	background-color: rgba(255,255,255,0.5);
+	/*background-color: rgba(255,255,255,0.5);*/
 	padding-bottom:25px;
+	padding-top:3%;
 }
 
 .pure-menu-item{
@@ -79,7 +84,8 @@ header .pure-menu-link{
     height: auto;
     min-width: 150px;
     font-size: 16px;
-    font-family: Georgia, serif !important;
+    font-family: "bitter" !important;
+    src: url("../fonts/Bitter-regular.ttf");
 }
 
 .second-headerbtn:hover{
@@ -98,7 +104,9 @@ header .pure-menu-link{
     min-width: 150px;
     padding: 23px 0px 0px 0px ;
     font-size: 20px;
-    font-family: Georgia, serif !important;
+    font-family: "bitter" !important;
+    src: url("../fonts/Bitter-regular.ttf");
+    font-weight: 500;
 }
 
 header{
@@ -120,7 +128,10 @@ header .pure-menu-link{
 }
 
 #titlemessage{
-	font-family: Georgia, serif !important;
+	font-family: "bitter" !important;
+    src: url("../fonts/Bitter-regular.ttf");
+    font-weight: 500;
+    font-size: 36px !important;
 }
 
 #searchbar {
@@ -189,13 +200,14 @@ header div .pure-u-3-5 {
 	background-color: rgb(78,104,118);
 	color: #fff;
 	margin:0px;
-	padding-top:20px;
+	padding-top:35px;
 	padding-bottom: 25px;
+	height: 150px;
 }
 
 
 .advertisingbanner{
-	height:480px;
+	height:600px;
 }
 
 #advertisinglogo{
@@ -209,7 +221,7 @@ header div .pure-u-3-5 {
 
 .advertisinglogo{
 	width: 100%;
-	height: 480px;
+	height: 600px;
 
 	    background-repeat: no-repeat;
     background-position: center top;
@@ -232,21 +244,22 @@ header div .pure-u-3-5 {
 	width: 920px;
 	text-align: center;
 	color: #fff;
-	font-size: 24px; 
 }
 
  .advertisinglogo .inner h1{
 	font-weight: 800;
-	text-decoration: underline;
+	font-size: 3.5em;
 }
 
 #bestseller{
 	background-color: #777;
 	color: #fff;
-	padding-top:15px;
 	padding-bottom: 15px;
 	text-align: center;
+	padding-top:10px;
+	padding-bottom:36px;
 }
+
 
 #bestseller .productCard{
 	margin-left: auto;
@@ -263,12 +276,8 @@ footer {
     align-items: center;
     /*background-color: rgb(230,226,220);*/
     background-color: #4F6877;
-    font-family: Georgia, serif !important;
 }
 
-footer *:not(.fa ) {
-	font-family: Georgia, serif !important;
-}
 
 footer .pure-u-1-3 {
     padding-bottom: 30px;
@@ -311,7 +320,7 @@ footer hr{
 }
 
 .contentwrapp {
-    background-image: url("../Images/background.png");
+    /*background-image: url("../Images/background.png");*/
     background-position: center top;
 }
 
@@ -337,7 +346,7 @@ footer hr{
 }
 
 #articlebox {
-	background-image: url("../Images/login_background.jpg");
+	/*background-image: url("../Images/login_background.jpg");*/
     background-repeat: no-repeat;
     background-position: center top;
     -webkit-background-size: cover;
@@ -357,26 +366,29 @@ footer hr{
 
 }
 #historyheader *{
-	font-family: Georgia, serif !important;
+	font-family: "bitter" !important;
+    src: url("../fonts/Bitter-regular.ttf");
 }
 
 .historypic{
-	width: 70%;
+	width: 90%;
 	height: auto;
-	margin-left: 15%;
-	margin-right: 15%;
-	border-radius: 10% 30%;
-	max-width:800px;
+	margin-left: 5%;
+	margin-right: 5%;
+	border-radius: 1% 1%;
+	max-width:1000px;
 }
 
 .historyblock{
-	margin-top: 20px;
+	margin-top: 50px;
+	max-width: 1600px;
+	margin-left:auto;
+	margin-right: auto;
+}
+.historyblock .textbox{
+	padding: 5px;
 }
 
-#history .textbox, .selecteduserbox{
-	padding-left: 5%;
-	padding-right: 5%;
-}
 
 
 #popup-div {
@@ -403,7 +415,6 @@ div#popup-div-content {
 	left:50%;
 	top:17%;
 	margin-left:-202px;
-	font-family:'Raleway',sans-serif
 }
 
 #popup-div-content h4{
@@ -872,7 +883,7 @@ overflow:scroll;
 
 /*http://doodlenerd.com/html-control/css-checkbox-generator? */
 .control {
-    font-family: arial;
+    font-family: "Segoe UI",Arial,sans-serif;
     display: block;
     position: relative;
     padding-left: 10px;

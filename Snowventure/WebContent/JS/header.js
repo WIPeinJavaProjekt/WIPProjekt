@@ -10,12 +10,11 @@ $(document).ready(function() {scalediv();});
 function scalediv(){
 	//$('#brandimg').width($( window ).width()*3/5*0.25);
 	//$('#innerbrandbox').css("padding-left","22%");
-	//$('.contentwrapp').css("min-height",$( window ).height()-$('#brandimg').height()-100);
+	$('.contentwrapp').css("min-height",$( window ).height()-653 >0 ? $( window ).height()-653 : 260);
 	$('#useroptions').css("min-height",$( window ).height()-872.5>350 ? $( window ).height()-872.5 : 350);
 	$('#loginbox').css("min-height",$( window ).height()-$('#brandimg').height()-300 > 350? $( window ).height()-$('#brandimg').height()-300 : 350);
 	$('#articleresultcontainer').css("min-height",$( window ).height()-300);
 	$('#articleadminbox').css("min-height",$( window ).height()-$('#brandimg').height()-300);
-	console.log($( window ).height()-$('header').height()-$('footer').height());
 	$('.content-container').css("min-height",$( window ).height()-$('header').height()-$('footer').height()-80>0?$( window ).height()-$('header').height()-$('footer').height()-80 : 450);
 	$('.startslider-btn').css("width", $('.startslider').width()<1250? 38 : ($('.startslider').width()-1250)/2);
 	$('#headerdummy').css("height", $('header').height());
