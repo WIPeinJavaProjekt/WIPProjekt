@@ -3,20 +3,20 @@ Beschreibung: Filter für Geschlecht
 Ansprechpartner: Garrit Kniepkamp, Fabian Meise
  -->
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
-<div class="pure-control-group">									
-	<div id="filter_gender" class="dropdown"> 
-	    <div>
-	    	<a href="javascript:void(0)">
-			    <span class="hida"><u>Geschlecht</u></span>    
-			    <p class="multiSel"></p>  
-		    </a>
-	    </div>
-	  
-	    <dd>
-	        <div class="mutliSelect">
-	            <ul>						            
-	            	<li>
-                        <label class="control control-checkbox">
+    <div class="pure-control-group">
+        <div id="filter_gender" class="dropdown">
+            <div>
+                <a href="javascript:void(0)">
+                    <span class="hida"><u>Geschlecht</u></span>
+                    <p class="multiSel"></p>
+                </a>
+            </div>
+
+            <dd>
+                <div class="mutliSelect">
+                    <ul>
+                        <li>
+                            <label class="control control-checkbox">
 				        	Herren 
 				        	<c:choose>
 				        		<c:when test="${fn:contains(genders, 'Herren')}">
@@ -28,9 +28,9 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
 		            		</c:choose>
 					        <div class="control_indicator"></div>
 					    </label>
-					</li>	
-					<li>
-                        <label class="control control-checkbox">
+                        </li>
+                        <li>
+                            <label class="control control-checkbox">
 				        	Damen 
 				        	<c:choose>
 				        		<c:when test="${fn:contains(genders, 'Damen')}">
@@ -42,9 +42,9 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
 		            		</c:choose>
 					        <div class="control_indicator"></div>
 					    </label>
-					</li>		
-					<li>
-                        <label class="control control-checkbox">
+                        </li>
+                        <li>
+                            <label class="control control-checkbox">
 				        	Kinder
 				        	<c:choose>
 				        		<c:when test="${fn:contains(genders, 'Kinder')}">
@@ -56,9 +56,9 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
 		            		</c:choose>
 					        <div class="control_indicator"></div>
 					    </label>
-					</li>			            
-	            </ul>
-	        </div>
-	    </dd>
-	</div>
-</div>	
+                        </li>
+                    </ul>
+                </div>
+            </dd>
+        </div>
+    </div>
