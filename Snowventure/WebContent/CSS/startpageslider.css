@@ -27,7 +27,7 @@
 
 .cssSlider {
     overflow-x: hidden;
-    padding-bottom:50px;
+    padding-bottom: 50px;
 }
 
 .sliderElements {
@@ -133,11 +133,11 @@
     color: #ddd;
 }
 
-
-.w3slidmod{
-	z-index:99;
-	padding-bottom:5px;
+.w3slidmod {
+    z-index: 99;
+    padding-bottom: 5px;
 }
-.w3slidmod .w3-button  {
-	background-color: #4F6877 !important;
+
+.w3slidmod .w3-button {
+    background-color: #4F6877 !important;
 }

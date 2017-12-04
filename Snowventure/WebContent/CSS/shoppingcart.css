@@ -4,35 +4,36 @@
  *
  */
 
-#scp-info-part{
-	height: 20%; 
-	text-align: center;
+#scp-info-part {
+    height: 20%;
+    text-align: center;
 }
 
-#sc-conclusion{
-	height: 15%; 
-	text-align: right; 
-	align: right;
+#sc-conclusion {
+    height: 15%;
+    text-align: right;
+    align: right;
 }
 
-.article-img{
-	max-width: 80%; 
-	max-height: 120px;
+.article-img {
+    max-width: 80%;
+    max-height: 120px;
 }
 
-#sc-aimg-container{
-	float:left; 
-	max-height: 140px;
+#sc-aimg-container {
+    float: left;
+    max-height: 140px;
 }
 
-#scp-article-card{
-	width: 100%;
+#scp-article-card {
+    width: 100%;
 }
 
 #articlelink {
-	cursor: pointer;
+    cursor: pointer;
 }
 
-#scp-button-1, #scp-button-2{
-	margin-top: 15px;
+#scp-button-1,
+#scp-button-2 {
+    margin-top: 15px;
 }

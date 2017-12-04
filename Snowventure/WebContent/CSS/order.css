@@ -5,57 +5,57 @@
  */
 
 #orderitem {
-  	width:100%; 
+    width: 100%;
 }
 
 #orderitems-div {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 #orderdetails {
-	float: left;
+    float: left;
 }
 
-#orderreceiptadr{
-	float: left;
+#orderreceiptadr {
+    float: left;
 }
 
-#orderpaymentmethod{
-	float: left;
+#orderpaymentmethod {
+    float: left;
 }
 
 #ordervaluesum {
     text-align: right;
-	font-weight: bold;
-	border-top: solid;
+    font-weight: bold;
+    border-top: solid;
 }
 
 #orderstatus {
-	color: green;
+    color: green;
 }
 
 #confirm {
-	margin-bottom: 20px;
-	float: right;
+    margin-bottom: 20px;
+    float: right;
 }
 
 #order-control-div {
-	margin-bottom: 20px; 
-	float: right;
+    margin-bottom: 20px;
+    float: right;
 }
 
 .order-button {
-	width: 45%;
-	margin-left: 5%;
-	float: left;
+    width: 45%;
+    margin-left: 5%;
+    float: left;
 }
 
 #ordervaluedescription {
-	font-weight: bold;
-	border-top: solid;
+    font-weight: bold;
+    border-top: solid;
 }
 
-#savestatus{
-	color: green;	
-	cursor: pointer;
+#savestatus {
+    color: green;
+    cursor: pointer;
 }
