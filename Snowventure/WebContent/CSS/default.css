@@ -4,6 +4,10 @@
  *
  */
 
+@font-face {     font-family: "bitter";
+    src: url("../fonts/Bitter-regular.ttf");}
+    
+
 body {
     background-color: rgb(250,249,246);
     color: rgb(75,75,75);
