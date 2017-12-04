@@ -81,8 +81,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
 												onchange="changeVersion(${article.getId()}, 'article')">
 													<c:forEach items="${article.getAllVersions()}" var="version">
 										        		<option value="${article.getAllVersions().indexOf(version)}"<c:if test="${article.getSelectedVersion()==article.getAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>${article.getAllVersions().indexOf(version)}</option>
-										  
-										    		</c:forEach>
+										  			</c:forEach>
 												</select>
 									        </div>
 									</c:when>
@@ -155,7 +154,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
 						<c:forEach items="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures()}" var="ap">
 					   		<div class="w3-display-container mySlides ">
 								<div class="productCardimage">
-							   		<span class="articleimagehelper"></span><img src="${pageContext.request.contextPath}/images/${ap.getImageId()}" class="articlesearchimage"/>
+							   		<span class="articleimagehelper"></span><img alt="./Images/noimagefound.png" src="${pageContext.request.contextPath}/images/${ap.getImageId()}" class="articlesearchimage"/>
 							   		<form action="article" method="post">
 							   			<button class="pure-button pure-button-primary deleteImageButton" name="deleteImage" id="deleteImage"><i class="fa fa-trash" aria-hidden="true"></i></button>
 							   			<input hidden="true" name="currentImage" id="currentImage" type="text" value="${ap.getImageId()}"/>
@@ -163,6 +162,13 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
 							   	</div>
 							</div>
 						</c:forEach>
+						<c:if test="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures().size()<1}">
+							<div class="w3-display-container">
+								<div class="productCardimage">
+							   		<span class="articleimagehelper"></span><img src="./Images/noimagefound.png" class="articlesearchimage"/>
+							   	</div>
+							</div>
+						</c:if>
 						<c:if test="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures().size()>1}"> 
 							<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
 							<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>

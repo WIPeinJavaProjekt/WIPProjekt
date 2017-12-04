@@ -1,13 +1,8 @@
 package servlets;
-import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,17 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import classes.Article;
 import classes.ArticleColor;
-import classes.ArticlePicture;
 import classes.Categorie;
-import classes.ShoppingCart;
 import classes.User;
 import classes.Utils;
 import services.ArticleColorService;
-import services.ArticleFilterService;
 import services.ArticleService;
-import services.CategorieService;	
-import services.ArtilceManufacturerService;
 import services.ArticleSizesService;
+import services.ArtilceManufacturerService;
+import services.CategorieService;
 
 /**
  * Start servlet implementation for the main page and the navigation
@@ -55,13 +47,13 @@ public class StartServlet extends HttpServlet {
 			ArrayList<String> manufacturers = ArtilceManufacturerService.GetAllPossibleManufacturers();
 			ArrayList<String> sizes = ArticleSizesService.GetAllPossibleSizes();
 			ArrayList<ArticleColor> colors = ArticleColorService.GetAllPossibleColors();
-			Article article = ArticleService.GetArticle(39);
+			Article bestseller = ArticleService.GetArticle(39);
 			
 			request.getSession().setAttribute("articleColors", colors);
 			request.getSession().setAttribute("availableSizes", sizes);
 			request.getSession().setAttribute("availableManufacturers", manufacturers);
 			request.getSession().setAttribute("categories", categories);
-			request.getSession().setAttribute("bestseller", article);
+			request.getSession().setAttribute("bestseller", bestseller);
 			} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -91,6 +83,7 @@ public class StartServlet extends HttpServlet {
 			
 			String searchPattern = request.getParameter("searchArticlePattern").replaceAll("[^a-zA-Z 0-9]+", "");
 			int category = Integer.parseInt(request.getParameter("categorie"));
+			request.getSession().setAttribute("selectedCategory", category);
 			findArticles(request, category,searchPattern);
 			
 			response.sendRedirect("articles");

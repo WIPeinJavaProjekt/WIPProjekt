@@ -33,7 +33,12 @@ public class ShoppingCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ShoppingCart currentCart = (ShoppingCart) request.getSession().getAttribute("currentCart");
-
+		
+		if(request.getParameter("amountchanged") == null)
+		{
+			request.getSession().removeAttribute("error");
+		}
+		
 		if(currentCart == null) {
 			System.out.println("Cart is Null");
 			currentCart = new ShoppingCart();
@@ -50,15 +55,20 @@ public class ShoppingCartServlet extends HttpServlet {
 			
 			if(isIntegerValue(amount))
 			{
-			int newamount = Integer.parseInt(amount);
-		
-			if(newamount > 0) 
-				{changeSCPAmount(scpid, newamount, request);}
-			else 
-				{deleteShoppingCartPosition(request.getParameter("scpid"), request);}			
-			}
-			response.sendRedirect(request.getContextPath() + "/cart");
-			return;		
+				int newamount = Integer.parseInt(amount);
+				boolean isStockAvailable = checkAvailableStock(scpid, newamount, request);
+				
+				if(isStockAvailable)
+				{
+					if(newamount > 0) 
+						{ changeSCPAmount(scpid, newamount, request); }
+					else 
+						{ deleteShoppingCartPosition(request.getParameter("scpid"), request); }			
+				}
+				
+				response.sendRedirect(request.getContextPath() + "/cart?amountchanged");
+				return;	
+			}	
 		}
 		else if(request.getParameter("scpid")!= null && request.getParameter("option") != null && request.getParameter("option").toString().equals("delete"))
 		{
@@ -72,6 +82,7 @@ public class ShoppingCartServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getSession().removeAttribute("error");
 		doGet(request, response);
 	}
 
@@ -129,6 +140,59 @@ public class ShoppingCartServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	/**
+	 * Die "checkAvailableStock"-Methode überprüft die Verfügbarkeit des Artikels einer Position des Einkaufswagens.
+	 * Bei nicht verfügbaren Artikeln wird die Position entweder gelöscht oder die Menge in Abhängigkeit von dem verfügbaren 
+	 * Bestand auf einen geringeren Wert gesenkt.
+	 * 
+	 * @param scpid String
+	 * @param newamount integer
+	 * @param request HttpServletRequest
+	 * @throws ServletException, IOException
+	 */
+	public boolean checkAvailableStock(String scpid, int newamount,  HttpServletRequest request) throws ServletException, IOException 
+	{		
+		ShoppingCart cart = (ShoppingCart)request.getSession().getAttribute("currentCart");
+		try 
+		{				
+			if (cart != null)
+			{				
+				ShoppingCartPosition scp = cart.cartPositions.get(Integer.parseInt(scpid));
+				
+				System.out.println(Integer.parseInt(scpid) + "   "  +  scp.article.getAllVersions().get(scp.article.getSelectedVersion()));
+
+				int stock =  StockService.GetStock(scp.article.getAllVersions().get(scp.article.getSelectedVersion()), scp.size);
+				
+				System.out.println("NewAmount: " + newamount + "  -  Stock:" + stock);
+				
+				if (stock >= newamount && newamount > scp.amount) {return true;}
+				if (stock >= newamount && newamount < scp.amount) {return true;}
+				if (stock == 0) 
+				{	
+					deleteShoppingCartPosition(scpid, request);
+					request.getSession().setAttribute("error", "Der von Ihnen veränderte Artikel ist leider nicht mehr verfügbar. Er wurde aus Ihrem Einkaufskorb entfernt.");
+				}
+				else if (stock > 0 && stock < newamount && stock >= scp.amount) 
+				{	
+					request.getSession().setAttribute("error", "Der Artikel '" + scp.article.name + "' ist in der von Ihnen ausgewählten Menge leider nicht mehr verfügbar. Die vorherige Menge wurde vorerst beibehalten.");
+				}
+				else if (stock > 0 && stock < newamount && stock < scp.amount) 
+				{	
+					scp.amount = stock; 
+					request.getSession().setAttribute("error", "Der Artikel ist in der von Ihnen ausgewählten Menge leider nicht mehr verfügbar. Die Menge wurde vorerst in den vorhandenen Lagerbestand geändert.");
+				}
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	
 	
 	/**

@@ -79,7 +79,7 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		} else if(request.getParameter("selectedSize") != null) {
 			String selectedSize = request.getParameter("selectedSize");
 			request.getSession().setAttribute("selectedSize", selectedSize);
-			System.out.println(selectedSize);
+			
 			response.sendRedirect("articleshopping?ID=" + this.article.ID + "&version=" + this.article.getSelectedVersion());
 			return;
 		} else if(request.getParameter("selectColor") != null) {
