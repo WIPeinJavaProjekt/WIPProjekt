@@ -3,7 +3,7 @@
  * @author Ansprechpartner Fabian Meise
  *
  */
-@media (max-width: 1200px), (max-device-width:1200px)
+@media (max-width: 1340px), (max-device-width:1340px)
 {
 	body{
 	min-width: 360px;
@@ -151,6 +151,10 @@
 	#banner{
 		padding-top: 14px;
 		padding-bottom: 12px;
+	}
+	
+	.contentwrapp{
+		max-height:250px;
 	}
 	
 	.fullwidth{

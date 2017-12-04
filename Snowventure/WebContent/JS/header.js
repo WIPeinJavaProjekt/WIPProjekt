@@ -10,7 +10,7 @@ $(document).ready(function() {scalediv();});
 function scalediv(){
 	//$('#brandimg').width($( window ).width()*3/5*0.25);
 	//$('#innerbrandbox').css("padding-left","22%");
-	$('.contentwrapp').css("min-height",$( window ).height()-653 >0 ? $( window ).height()-653 : 260);
+	$('.contentwrapp').css("min-height",$( window ).height()-788 >220 ? $( window ).width() >1340 ? $( window ).height()-853 : $( window ).height()-788 : 220);
 	$('#useroptions').css("min-height",$( window ).height()-872.5>350 ? $( window ).height()-872.5 : 350);
 	$('#loginbox').css("min-height",$( window ).height()-$('#brandimg').height()-300 > 350? $( window ).height()-$('#brandimg').height()-300 : 350);
 	$('#articleresultcontainer').css("min-height",$( window ).height()-300);
@@ -23,6 +23,9 @@ function scalediv(){
 	//$('#articleresultcontainer').css("padding-left",paddingarticle < 1 ? 180 + $( window ).width()*0.2 : paddingarticle +$( window ).width()*0.2);
 	
 };
+
+
+
 
 var lastScrollTop = 0;
 $(window).scroll(function(event){
