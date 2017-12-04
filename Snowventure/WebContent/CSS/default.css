@@ -5,8 +5,11 @@
  */
 
 @font-face {     font-family: "bitter";
-    src: url("../fonts/Bitter-regular.ttf");}
-    
+    src: url("../fonts/Bitter-Regular.ttf");
+    font-weight: normal;}
+@font-face {     font-family: "bitter";
+    src: url("../fonts/Bitter-Regular.ttf");
+    font-weight: bold;}    
 
 body {
     background-color: rgb(250,249,246);
@@ -87,7 +90,6 @@ header .pure-menu-link{
     min-width: 150px;
     font-size: 16px;
     font-family: "bitter" !important;
-    src: url("../fonts/Bitter-regular.ttf");
 }
 
 .second-headerbtn:hover{
@@ -107,7 +109,6 @@ header .pure-menu-link{
     padding: 23px 0px 0px 0px ;
     font-size: 20px;
     font-family: "bitter" !important;
-    src: url("../fonts/Bitter-regular.ttf");
     font-weight: 500;
 }
 
@@ -131,7 +132,6 @@ header .pure-menu-link{
 
 #titlemessage{
 	font-family: "bitter" !important;
-    src: url("../fonts/Bitter-regular.ttf");
     font-weight: 500;
     font-size: 36px !important;
 }
@@ -369,7 +369,6 @@ footer hr{
 }
 #historyheader *{
 	font-family: "bitter" !important;
-    src: url("../fonts/Bitter-regular.ttf");
 }
 
 .historypic{
