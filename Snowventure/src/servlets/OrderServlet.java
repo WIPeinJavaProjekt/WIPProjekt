@@ -64,7 +64,10 @@ public class OrderServlet extends HttpServlet {
 				}
 			}
 			else if(request.getParameter("neworder") != null && currentCart != null)
-			{				
+			{	
+				if(request.getParameter("review")==null)
+				{ request.getSession().removeAttribute("error"); }
+				
 				if(currentOrder == null || currentOrder.orid != 0)
 				{
 					Order neworder = new Order(new Adress(currentUser.adress.location, currentUser.adress.houseno, currentUser.adress.postcode, currentUser.adress.street), currentCart, '0', currentUser.name, currentUser.surname, currentUser.email, currentUser.ulid);
@@ -98,7 +101,7 @@ public class OrderServlet extends HttpServlet {
 				{
 					request.getSession().setAttribute("currentOrder", currentOrder);
 					request.getSession().setAttribute("error", "<b>Achtung!</b><br>Die in Ihrer Bestellung enthaltenen Artikel wurden entsprechend der Verfügbarkeiten angepasst.<br>Bitte kontrollieren Sie erneut die Richtigkeit aller Angaben oder nehmen Sie in Ihrem Einkaufswagen Anpassungen vor.");
-					response.sendRedirect("order?neworder=true");
+					response.sendRedirect("order?neworder=true&review");
 					return;
 				}
 			}
