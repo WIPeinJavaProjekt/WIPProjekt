@@ -126,7 +126,7 @@ Ansprechpartner: Jacob Markus
                                 <div class="pure-u-3-5 fullwidth" style="text-align: right">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
                                 <div class="pure-u-2-5 orderdetailsvalue">Versand/Verpackung</div>
                                 <div class="pure-u-3-5 fullwidth" style="text-align: right">EUR 0,00</div>
-                                <div class="pure-u-1-1 fullwidth" id="ordervaluedescription">Gesamtsumme</div>
+                                <div class="pure-u-3-5 fullwidth" id="ordervaluedescription">Gesamtsumme</div>
                                 <div class="pure-u-3-5 fullwidth" id="ordervaluesum">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
                             </div>
                         </div>
