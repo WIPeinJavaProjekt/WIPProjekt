@@ -9,7 +9,7 @@ Ansprechpartner: Jacob Markus
 
     <head>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+        	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
             <title>Bestelldetails</title>
             <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
@@ -123,11 +123,11 @@ Ansprechpartner: Jacob Markus
                             <div class="pure-u-1-4 fullwidth">
                                 <div class="pure-u-1-1"><b>Bestellübersicht</b></div>
                                 <div class="pure-u-2-5 orderdetailsvalue">Artikel</div>
-                                <div class="pure-u-3-5" style="text-align: right">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
+                                <div class="pure-u-3-5 fullwidth" style="text-align: right">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
                                 <div class="pure-u-2-5 orderdetailsvalue">Versand/Verpackung</div>
-                                <div class="pure-u-3-5" style="text-align: right">EUR 0,00</div>
-                                <div class="pure-u-2-5" id="ordervaluedescription">Gesamtsumme</div>
-                                <div class="pure-u-3-5" id="ordervaluesum">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
+                                <div class="pure-u-3-5 fullwidth" style="text-align: right">EUR 0,00</div>
+                                <div class="pure-u-1-1 fullwidth" id="ordervaluedescription">Gesamtsumme</div>
+                                <div class="pure-u-3-5 fullwidth" id="ordervaluesum">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
                             </div>
                         </div>
                         <div class="pure-u-1-1" style="height: 20px;"></div>

@@ -744,6 +744,9 @@ div#popup-div-content {
     margin-left: auto;
     margin-right: auto;
 }
+.articledescriptioncontainer select{
+	min-height:40px;
+}
 
 .w3-card-4,
 .w3-hover-shadow:hover {
