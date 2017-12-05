@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Beschreibung: Fachklasse für die Abbildung eines Nutzers
+ * 
  * @author Ansprechpartner Fabian Meise
  *
  */
@@ -24,25 +25,31 @@ public class User {
 	public Adress adress;
 	public ArrayList<Order> orders;
 	public ShoppingCart shoppingcart;
-	
+
 	/**
 	 * Leerer Konstruktor
 	 */
-	public User()
-	{}
-	
+	public User() {
+	}
+
 	/**
 	 * Konstruktor
-	 * @param username Nutzername
-	 * @param password Password
-	 * @param name Nachname
-	 * @param surname Vorname
-	 * @param adress Adresse
-	 * @param email 
-	 * @param utid Nutzertyp
+	 * 
+	 * @param username
+	 *            Nutzername
+	 * @param password
+	 *            Password
+	 * @param name
+	 *            Nachname
+	 * @param surname
+	 *            Vorname
+	 * @param adress
+	 *            Adresse
+	 * @param email
+	 * @param utid
+	 *            Nutzertyp
 	 */
-	public User(String username, String password, String name, String surname, Adress adress, String email, int utid)
-	{
+	public User(String username, String password, String name, String surname, Adress adress, String email, int utid) {
 		this.username = username;
 		this.password = password;
 		this.name = name;
@@ -51,21 +58,30 @@ public class User {
 		this.adress = adress;
 		this.utid = utid;
 	}
-	
+
 	/**
 	 * Konstruktor
-	 * @param question Sicherheitsfrage
-	 * @param username Nutzername
-	 * @param password Password
-	 * @param name Nachname
-	 * @param surname Vorname
-	 * @param adress Adresse
-	 * @param email 
-	 * @param phone Telefonnummer
-	 * @param utid Nutzertyp
+	 * 
+	 * @param question
+	 *            Sicherheitsfrage
+	 * @param username
+	 *            Nutzername
+	 * @param password
+	 *            Password
+	 * @param name
+	 *            Nachname
+	 * @param surname
+	 *            Vorname
+	 * @param adress
+	 *            Adresse
+	 * @param email
+	 * @param phone
+	 *            Telefonnummer
+	 * @param utid
+	 *            Nutzertyp
 	 */
-	public User(Safetyquestion question, String username, String password, String name, String surname, Adress adress, String email, String phone, int utid)
-	{
+	public User(Safetyquestion question, String username, String password, String name, String surname, Adress adress,
+			String email, String phone, int utid) {
 		this.squestion = question;
 		this.username = username;
 		this.password = password;
@@ -76,25 +92,36 @@ public class User {
 		this.utid = utid;
 		this.phone = phone;
 	}
-	
-	
+
 	/**
 	 * Konstruktor
-	 * @param question Sicherheitsfrage
-	 * @param username Nutzername
-	 * @param password Password
-	 * @param name Nachname
-	 * @param surname Vorname
-	 * @param adress Adresse
+	 * 
+	 * @param question
+	 *            Sicherheitsfrage
+	 * @param username
+	 *            Nutzername
+	 * @param password
+	 *            Password
+	 * @param name
+	 *            Nachname
+	 * @param surname
+	 *            Vorname
+	 * @param adress
+	 *            Adresse
 	 * @param email
-	 * @param utid Nutzertyp
-	 * @param ulid Login-ID
-	 * @param TechIsActive Account aktiv
-	 * @param TechIsDeleted Account deaktiviert
-	 * @param phone Telefonnummer
+	 * @param utid
+	 *            Nutzertyp
+	 * @param ulid
+	 *            Login-ID
+	 * @param TechIsActive
+	 *            Account aktiv
+	 * @param TechIsDeleted
+	 *            Account deaktiviert
+	 * @param phone
+	 *            Telefonnummer
 	 */
-	public User(Safetyquestion question, String username, String password, String name, String surname, Adress adress, String email, int utid, int ulid, int TechIsActive, int TechIsDeleted, String phone)
-	{
+	public User(Safetyquestion question, String username, String password, String name, String surname, Adress adress,
+			String email, int utid, int ulid, int TechIsActive, int TechIsDeleted, String phone) {
 		this.squestion = question;
 		this.username = username;
 		this.password = password;
@@ -109,73 +136,59 @@ public class User {
 		this.phone = phone;
 	}
 
-	
-	public static User get(String username, int usertype)
-	{	
+	public static User get(String username, int usertype) {
 		return null;
 	}
-	
-	public boolean insert()
-	{	
+
+	public boolean insert() {
 		return true;
 	}
-	
-	public boolean update()
-	{	
+
+	public boolean update() {
 		return true;
 	}
-	
+
 	public String getName() {
 		return this.name;
 	}
-	
-	public String getUsername()
-	{
+
+	public String getUsername() {
 		return this.username;
 	}
-	
-	public String getUtid()
-	{
+
+	public String getUtid() {
 		return Integer.toString(this.utid);
 	}
-	
-	public String getEmail()
-	{
+
+	public String getEmail() {
 		return this.email;
 	}
-	
-	public String getSurname()
-	{
+
+	public String getSurname() {
 		return this.surname;
 	}
-	
-	public Adress getAdress()
-	{
+
+	public Adress getAdress() {
 		return this.adress;
 	}
-	
-	public Safetyquestion getSquestion()
-	{
+
+	public Safetyquestion getSquestion() {
 		return this.squestion;
 	}
-	
-	public ShoppingCart getShoppingcart()
-	{
+
+	public ShoppingCart getShoppingcart() {
 		return this.shoppingcart;
 	}
-	
-	public int getTechisactive()
-	{
+
+	public int getTechisactive() {
 		return this.techisactive;
 	}
-	
-	public int getTechisdeleted()
-	{
+
+	public int getTechisdeleted() {
 		return this.techisdeleted;
 	}
-	
-	public String getPhone()
-	{
+
+	public String getPhone() {
 		return this.phone;
 	}
 }

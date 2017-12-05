@@ -11,25 +11,27 @@ import services.ArticleColorService;
 
 /**
  * Beschreibung: Klasse für diverse Testaufrufe, Hilfsmethoden
+ * 
  * @author Ansprechpartner
  *
  */
 public class Utils {
-	
+
 	/**
 	 * Redirects the User to the main page in case the session is invalid
+	 * 
 	 * @param request
 	 * @param response
 	 * @throws IOException
 	 */
 	public static boolean redirectUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		if(request.getSession().getAttribute("currentUser") == null) {
+		if (request.getSession().getAttribute("currentUser") == null) {
 			response.sendRedirect("start");
 			return true;
 		}
 		return false;
 	}
-	
+
 	public static ArrayList<String> getAllSizes() {
 		ArrayList<String> sizes = new ArrayList<String>();
 		sizes.add("Unigröße");
@@ -39,7 +41,7 @@ public class Utils {
 		sizes.add("XL");
 		sizes.add("XXL");
 		sizes.add("XXXL");
-		
+
 		sizes.add("40");
 		sizes.add("41");
 		sizes.add("42");
@@ -50,13 +52,15 @@ public class Utils {
 		sizes.add("47");
 		sizes.add("48");
 		sizes.add("49");
-		
+
 		return sizes;
 	}
-	
+
 	/**
 	 * Prints article-Details
-	 * @param a Article
+	 * 
+	 * @param a
+	 *            Article
 	 */
 	public static void printArticleDetails(Article a) {
 		System.out.println("Artikel:");
@@ -68,30 +72,29 @@ public class Utils {
 		System.out.println("Color: " + a.getColor());
 		System.out.println("Size: " + a.getSize());
 	}
-	
+
 	public static ArrayList<String> colorArraytoArrayList(String[] inputArray) {
 		ArrayList<String> outputArray = new ArrayList<String>();
-		if(inputArray != null) {
-		    for(int s= 0; s< inputArray.length;s++) {
-		    	ArticleColor artColor = null;
+		if (inputArray != null) {
+			for (int s = 0; s < inputArray.length; s++) {
+				ArticleColor artColor = null;
 				try {
 					artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(inputArray[s]));
 				} catch (NumberFormatException | SQLException e) {
 					e.printStackTrace();
 				}
-				if(artColor!=null) {
+				if (artColor != null) {
 					outputArray.add(artColor.getColorName());
 				}
 			}
-	    }
+		}
 		return outputArray;
 	}
-	
-	
+
 	public static ArrayList<String> stringArraytoArrayList(String[] inputArray) {
 		ArrayList<String> outputArray = new ArrayList<String>();
-		if(inputArray != null) {
-			for(int s= 0; s< inputArray.length;s++) {
+		if (inputArray != null) {
+			for (int s = 0; s < inputArray.length; s++) {
 				outputArray.add(inputArray[s]);
 			}
 		}
