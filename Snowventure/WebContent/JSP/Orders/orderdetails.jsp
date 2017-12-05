@@ -42,7 +42,7 @@ Ansprechpartner: Jacob Markus
                 <div id="popup-div">
                     <div id="popup-div-content">
                         <form action="order?neworder=true" id="popup-div-form" method="post" name="delivery-adr-form">
-                            <i id="close" class="fa fa-close fa-1g" aria-hidden="true" onclick="div_hide()"></i>
+                            <i id="close" class="fa fa-close fa-1g" aria-hidden="true" onclick="div_hide('popup-div')"></i>
                             <h4>Neue Versandadresse</h4>
                             <hr>
                             <input required id="name" name="name" placeholder="Vorname" type="text">
@@ -103,7 +103,7 @@ Ansprechpartner: Jacob Markus
                         <div class="pure-u-1-1">
                             <div class="pure-u-1-4 fullwidth" id="orderdetails">
                                 <div class="pure-u-1-1"><b>Versandadresse</b>
-                                    <c:if test="${ currentOrder.statuscycle.size() == 0 }"> <a style="font-size: 12px;" href="#" onclick="div_show()">Ändern</a></c:if>
+                                    <c:if test="${ currentOrder.statuscycle.size() == 0 }"> <a style="font-size: 12px;" href="#" onclick="div_show('popup-div')">Ändern</a></c:if>
                                 </div>
                                 <div class="pure-u-1-1 orderdetailsvalue">${ currentOrder.name} ${ currentOrder.surname }</div>
                                 <div class="pure-u-1-1 orderdetailsvalue">${ currentOrder.adress.street} ${ currentOrder.adress.houseno}</div>

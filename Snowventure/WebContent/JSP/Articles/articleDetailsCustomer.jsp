@@ -35,7 +35,11 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
             <div class="content-container">
                 <div class="pure-g articledescriptioncontainer">
                     <div class="pure-u-1-1 fullwidth">
-
+						<c:if test="${not empty error}">
+							<form class="pure-form pure-form-aligned" action=#>
+								<p class="error">${error}</p>
+							</form>
+						</c:if>
                         <div class="w3-content w3-display-container w3slidmod articleslider" align="center">
 
                             <c:forEach items="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures()}" var="ap">
@@ -91,7 +95,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                                 <br> Version wählen <br>
                                 <c:forEach items="${article.getAllVersions()}" var="av">
 
-                                    <div id="selectColor" name="selectColor" onclick="customerChangeVersion(${article.getId()}, 'articleshopping', ${article.getAllVersions().indexOf(article.getAvByVersionId(av.getAvId()))})" class="pure-button  <c:if test=" ${av.getAvId()==a rticle.getAllVersions().get(article.getSelectedVersion()).getAvId()} ">
+                                    <div id="selectColor" name="selectColor" onclick="customerChangeVersion(${article.getId()}, 'articleshopping', ${article.getAllVersions().indexOf(article.getAvByVersionId(av.getAvId()))})" class="pure-button  <c:if test=" ${av.getAvId()==article.getAllVersions().get(article.getSelectedVersion()).getAvId()} ">
 						    	 versionchoice 
 						    	</c:if>" style="background-color:${av.getColors().get(0).getHexcode()};">
                                         <div class="pure-control-group">

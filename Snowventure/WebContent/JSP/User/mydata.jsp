@@ -10,7 +10,7 @@ Ansprechpartner: Jacob Markus
             <div id="popup-div">
                 <div id="popup-div-content">
                     <form id="popup-div-form" name="delete-user-form" action="users" method="POST">
-                        <i id="close" class="fa fa-close fa-1g" aria-hidden="true" onclick="div_hide()"></i>
+                        <i id="close" class="fa fa-close fa-1g" aria-hidden="true" onclick="div_hide('popup-div')"></i>
                         <center>
                             <h4>Deaktivierung</h4>
                             <hr>
@@ -153,7 +153,7 @@ Ansprechpartner: Jacob Markus
                     <legend>
                         <h3>Mein Nutzerkonto deaktivieren</h3>
                     </legend>
-                    <button type="button" name="delete-user" class="pure-button pure-button-primary boxedinput" onclick="div_show()">Nutzerkonto deaktivieren</button>
+                    <button type="button" name="delete-user" class="pure-button pure-button-primary boxedinput" onclick="div_show('popup-div')">Nutzerkonto deaktivieren</button>
                 </fieldset>
             </form>
         </div>

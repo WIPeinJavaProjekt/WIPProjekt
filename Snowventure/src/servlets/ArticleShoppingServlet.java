@@ -20,6 +20,7 @@ import classes.ShoppingCart;
 import classes.ShoppingCartPosition;
 import services.ArticleColorService;
 import services.ArticleService;
+import services.StockService;
 
 /**
  * Servlet implementation class ArticleServlet
@@ -56,6 +57,11 @@ public class ArticleShoppingServlet  extends HttpServlet {
 			request.getSession().setAttribute("updateArticle", false);
 		}
 		
+		if(request.getParameter("amounterror") == null)
+		{
+			request.getSession().removeAttribute("error");
+		}
+		
 		if(this.article!=null) {
 			request.setAttribute("article", this.article);
 			request.setAttribute("availableVersions", this.article.versions.size()-1);
@@ -69,9 +75,19 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		
 		if(request.getParameter("addToCart") != null) {
 			try {
-				addArticleToCart(request, response);
-				response.sendRedirect("articles");
-				return;
+				request.getSession().removeAttribute("error");
+				
+				if(checkArticleStock(request, response))
+				{
+					addArticleToCart(request, response);
+					response.sendRedirect("articles");
+					return;
+				}
+				else 
+				{
+					response.sendRedirect("articleshopping?ID=" + this.article.ID + "&version=" + this.article.getSelectedVersion() + "&amounterror");
+					return;
+				}
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 			}
@@ -138,6 +154,57 @@ public class ArticleShoppingServlet  extends HttpServlet {
 			}
 		}
 		
+		return false;
+	}
+	
+	
+	
+	/**
+	 * Die "checkArticleStock"-Methode überprüft ob die wünschte Menge des Artikels verfügbar ist.
+ 	 * @param request
+	 * @param response	 
+	 * @return boolean Rückgabe true wenn der Artikel verfügbar ist, ansonsten false
+	 */
+	private boolean checkArticleStock(HttpServletRequest request, HttpServletResponse response)
+	{	ShoppingCart currentCart = (ShoppingCart)request.getSession().getAttribute("currentCart");
+		int stock = 0;
+		
+		try 
+		{
+			int amount = Integer.parseInt(request.getParameter("amount"));
+			
+			ArticleVersion av = this.article.getSelectedArticleVersion();
+			
+			if(currentCart != null)
+			{
+				for(ShoppingCartPosition scp : currentCart.cartPositions)
+				{
+					if(	scp.article.ID == this.article.ID 
+						&& scp.article.getSelectedVersion() == this.article.getSelectedVersion() 
+						&& scp.size.toString().equals(request.getParameter("selectedSize").toString())
+					)
+					{
+						amount += scp.amount;
+						break;
+					}
+				}
+			}			
+			stock = StockService.GetStock(this.article.getSelectedArticleVersion(), request.getParameter("selectedSize"));
+			if(stock >= amount)
+			{
+				return true;
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch(NumberFormatException e){
+			e.printStackTrace();
+		}
+		if(stock > 0)
+		{request.getSession().setAttribute("error", "Die angegebene Menge des gewünschten Artikels ist leider nicht mehr vorhanden. Es sind nur noch " + stock + " Stück auf Lager.");}
+		else 
+		{request.getSession().setAttribute("error", "Der von Ihnen gewünschte Artikel ist leider nicht mehr verfügbar.");}
 		return false;
 	}
 }
