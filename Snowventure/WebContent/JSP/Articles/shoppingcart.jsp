@@ -113,7 +113,7 @@ Ansprechpartner: Jacob Markus
                                     <h2><b>Ihr Einkaufswagen ist leer.</b></h2>
                                     <h4>Ihr Einkaufswagen steht zu Ihrer Verfügung. Nutzen Sie ihn und befüllen Sie ihn mit Ski-Kleidung, Ausrüstung und mehr.
                                         <c:if test="${empty currentUser}"><br>Wenn Sie bereits ein Konto besitzen, tippen Sie auf <a href="./login">Anmelden</a>, um den vollen Funktionsumfang von Snowventure nutzen zu können.<br></c:if>
-                                        Setzen Sie den Einkauf bei <a href="./articles">Snowventure</a> fort.</h4>
+                                        Setzen Sie den Einkauf bei <a href="./articles?search">Snowventure</a> fort.</h4>
                                 </div>
                             </c:otherwise>
                         </c:choose>

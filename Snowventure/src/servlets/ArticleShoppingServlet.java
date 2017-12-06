@@ -153,8 +153,6 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		return false;
 	}
 	
-	
-	
 	/**
 	 * Die "checkArticleStock"-Methode überprüft ob die wünschte Menge des Artikels verfügbar ist.
  	 * @param request
@@ -168,9 +166,7 @@ public class ArticleShoppingServlet  extends HttpServlet {
 		try 
 		{
 			int amount = Integer.parseInt(request.getParameter("amount"));
-			
-			ArticleVersion av = this.article.getSelectedArticleVersion();
-			
+						
 			if(currentCart != null)
 			{
 				for(ShoppingCartPosition scp : currentCart.cartPositions)

@@ -50,7 +50,7 @@ Ansprechpartner: Fabian Meise
 									</select>
                                         </div>
                                         <div class="pure-u-3-5">
-                                            <input type="text" name="searchArticlePattern" class="boxedinput" placeholder="Wï¿½hle deine Ausrï¿½stung">
+                                            <input type="text" name="searchArticlePattern" class="boxedinput" placeholder="Wähle deine Ausrüstung">
                                         </div>
                                         <div class="pure-u-1-5">
                                             <button type="submit" id="search" name="search" class="pure-button pure-button-primary boxedinput">Suchen</button>
@@ -71,13 +71,13 @@ Ansprechpartner: Fabian Meise
 
             <div class="pure-g" id="advertisingstrip">
                 <div class="pure-u-1-3">
-                    <p align="center"><i class="fa fa-globe fa-2x" aria-hidden="true"></i><br>Umweltfreundliche Verpackung</p>
+                    <p align="center"><i class="fa fa-globe fa-3x" aria-hidden="true"></i><br>Umweltfreundliche Verpackung</p>
                 </div>
                 <div class="pure-u-1-3">
-                    <p align="center"><i class="fa fa-compass fa-2x" aria-hidden="true"></i><br>Europaweiter Versand</p>
+                    <p align="center"><i class="fa fa-compass fa-3x" aria-hidden="true"></i><br>Europaweiter Versand</p>
                 </div>
                 <div class="pure-u-1-3">
-                    <p align="center"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i><br>24h Lieferung</p>
+                    <p align="center"><i class="fa fa-clock-o fa-3x" aria-hidden="true"></i><br>24h Lieferung</p>
                 </div>
             </div>
 
@@ -114,7 +114,7 @@ Ansprechpartner: Fabian Meise
                 <div id="advertisinglogo2" class="advertisinglogo">
                     <div class="middle">
                         <div class="inner">
-                            <h1>Weihnachtsideen</h1>
+                            <h1>Natur genießen</h1>
                         </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@ Ansprechpartner: Fabian Meise
 
             <div id="history">
                 <div align="center" id="historyheader">
-                    <h1>ÃœBER SNOWVENTURE</h1>
+                    <h1>ÜBER SNOWVENTURE</h1>
                 </div>
 
                 <div class="pure-g historyblock">
@@ -143,7 +143,7 @@ Ansprechpartner: Fabian Meise
 
                 <div class="pure-g historyblock">
                     <div class="pure-u-1-2 fullwidth textbox">
-                        <h3>Qualitï¿½t zahlt sich aus</h3>
+                        <h3>Qualitïät zahlt sich aus</h3>
 
                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
                             gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.

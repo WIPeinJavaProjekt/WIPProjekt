@@ -91,7 +91,7 @@ Ansprechpartner: Jacob Markus
                         <input class="boxedinput" id="street" name="street" <c:choose>
                         <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.adress.street}"</c:when>
                         <c:otherwise>value="${street}"</c:otherwise>
-                        </c:choose> type="text" required placeholder="Stra?e">
+                        </c:choose> type="text" required placeholder="Straße">
                     </div>
                     <div class="pure-control-group">
                         <input class="boxedinput" id="houseno" name="houseno" <c:choose>
@@ -137,7 +137,7 @@ Ansprechpartner: Jacob Markus
                     <label>Sicherheitsfrage</label>
                     <div class="pure-control-group">
                         <select class="boxedinput" id="safetyQuestion" name="safetyQuestion" required>
-		            	 <option value="">Bitte Sicherheitsfrage ausw?hlen</option>
+		            	 <option value="">Bitte Sicherheitsfrage auswählen</option>
 					    <c:forEach items="${squestions}" var="squestion">
 					        <option value="${squestion.getId()}"  <c:if test="${not empty currentUser && squestion.getId() == selectedUser.squestion.getId()}">selected</c:if>>${squestion.getQuestion()}</option>
 					    </c:forEach>
