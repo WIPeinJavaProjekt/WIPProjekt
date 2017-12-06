@@ -18,7 +18,7 @@ public class Article {
 	public String name;
 	public String description;
 	public String manufacturer;
-	public int acid =1;
+	public int acid;
 	public ArrayList<ArticleVersion> versions;
 	private int selectedversion;
 	public String gender;

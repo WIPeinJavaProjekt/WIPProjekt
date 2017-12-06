@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -14,11 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import classes.Article;
-import classes.ArticleColor;
 import classes.ArticleVersion;
 import classes.ShoppingCart;
 import classes.ShoppingCartPosition;
-import services.ArticleColorService;
 import services.ArticleService;
 import services.StockService;
 
