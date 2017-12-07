@@ -470,12 +470,9 @@ public class ArticleService {
 	 * @param der zu modifizerende Artikel
 	 * @return modifizerter Artikel
 	 */
-	private static Article PrepSelectedArticle(int avid, Article a) {
-//		System.out.println("Anzahl der versionen:"+ a.versions.size());
-//		
+	private static Article PrepSelectedArticle(int avid, Article a) {	
 		for(int i = 0; i< a.versions.size(); i++)
 		{
-			System.out.println("Versionsvergleich "+ a.versions.get(i).versionid + " == "+ avid);
 			if(a.versions.get(i).versionid == avid)
 			{
 				a.setSelectedVersion(i);
@@ -583,12 +580,8 @@ public class ArticleService {
 	 * @param imgid zulöschende Bildid
 	 */
 	public static void DeletePictureFromArticleVersion(int avid, int imgid) {
-		System.out.println("Delete Image");
-		System.out.println(avid);
-		System.out.println(imgid);
 		String query = "DELETE FROM ARTICLEIMAGE WHERE avid = '%d' and aimgid ='%d'";
 		query = String.format(query, avid, imgid);
-		System.out.println(query);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}	
 }

@@ -37,8 +37,6 @@ public class OrderService {
 				);
 		oid = DatabaseConnector.createConnection().InsertQuery(query);
 		
-		System.out.println("Neue OrderID: " + oid);
-		
 		if(oid == -1)
 			return oid;
 		
@@ -64,7 +62,6 @@ public class OrderService {
 	 */
 	private static int AddOrderDetails(ShoppingCart shoppingCart, int orid) {
 		int odid= -1;
-		System.out.println("RUFE EINFÜGEN AUF");
 		for(ShoppingCartPosition p: shoppingCart.cartPositions)
 		{
 			odid=AddOrderDetailPosition(p,orid);
@@ -88,7 +85,6 @@ public class OrderService {
 
 		query = String.format(query,orid,p.article.versions.get(p.article.getSelectedVersion()).versionid, p.getPositionPrice(), p.amount, p.size);
 		id = DatabaseConnector.createConnection().InsertQuery(query);
-		System.out.println("ARTIKEL EINGEFÜGT: " +query);
 		return id;
 	}
 	
@@ -343,12 +339,10 @@ public class OrderService {
 		query = String.format(query, orid);
 		
 		ResultSet result = DatabaseConnector.createConnection().SelectQuery(query);
-		System.out.println(query);
 		ShoppingCart scp = new ShoppingCart();
 		while(result.next())
 		{
 			Article a = ArticleService.GetSelectedArticle(result.getInt("avid"));
-			System.out.println("PrepedArticlein Order"+a.ID);
 			a.versions.get(a.getSelectedVersion()).price = result.getDouble("assignmentprice");
 			ShoppingCartPosition p = new ShoppingCartPosition(a,result.getInt("amount"),result.getString("size"));
 			scp.cartPositions.add(p);

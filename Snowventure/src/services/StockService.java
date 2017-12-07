@@ -46,7 +46,6 @@ public class StockService {
 		{
 			String query = "UPDATE STOCK SET amount = '%d' WHERE avid = '%d' AND size='%s'";			
 			query = String.format(query,amount,a.versionid, size);
-			System.out.println(query);
 			DatabaseConnector.createConnection().UpdateQuery(query);
 		}
 	}

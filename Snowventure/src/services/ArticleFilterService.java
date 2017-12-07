@@ -49,8 +49,6 @@ public class ArticleFilterService {
 			for(int v = 0; v < newarticles.get(i).versions.size(); v++)
 				for(String si: newarticles.get(i).versions.get(v).sizes)
 					for(int s= 0; s< size.length;s++) {
-						System.out.println("Vergleiche: "+ si +" mit "+size[s] );
-					
 						if(si.equals( size[s]) )
 						{
 							contained = true;
@@ -126,14 +124,12 @@ public class ArticleFilterService {
 			boolean contained= false;
 			for(int h = 0; h < manufactures.length;h++)
 			{
-				System.out.println("Vergleiche: "+newarticles.get(i).manufacturer +" mit "+manufactures[h] );
 				if(newarticles.get(i).manufacturer.equals(manufactures[h]))
 				{
 					contained = true;
 					break;
 				}
 			}
-			System.out.println("Vergleich ist:"+contained);
 			if(!contained)
 				newarticles.remove(i);
 			else

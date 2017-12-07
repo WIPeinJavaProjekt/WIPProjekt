@@ -175,8 +175,6 @@ public class UserService {
 				user.techisdeleted,
 				user.ulid
 				);
-		
-		System.out.println(query);
 
 		DatabaseConnector.createConnection().UpdateQuery(query);
 				
@@ -190,8 +188,6 @@ public class UserService {
 				user.techisdeleted,
 				user.ulid
 				);
-		
-		System.out.println(query);
 
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}

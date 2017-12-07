@@ -70,7 +70,6 @@ public class DatabaseConnector {
 	public int InsertQuery(String query) {
 		
 		if(this.connect != null) {
-			System.out.println("INSIDE");
 			try {
 				Statement statement = this.connect.createStatement();
 				statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
@@ -82,7 +81,6 @@ public class DatabaseConnector {
 			catch (SQLException e){
 			}
 		}
-		System.out.println("OUTSIDE");
 		return -1;
 	}
 	
@@ -113,7 +111,6 @@ public class DatabaseConnector {
 		if(this.connect != null)
 			try {
 				Statement statement = this.connect.createStatement();
-				System.out.println(statement.executeUpdate(query));
 			}
 			catch (SQLException e){
 				
