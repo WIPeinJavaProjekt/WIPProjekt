@@ -108,9 +108,14 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                                 <br> Version wählen <br>
                                 <c:forEach items="${article.getAllVersions()}" var="av">
 
-                                    <div id="selectColor" name="selectColor" onclick="customerChangeVersion(${article.getId()}, 'articleshopping', ${article.getAllVersions().indexOf(article.getAvByVersionId(av.getAvId()))})" class="pure-button  <c:if test=" ${av.getAvId()==article.getAllVersions().get(article.getSelectedVersion()).getAvId()} ">
-						    	 versionchoice 
-						    	</c:if>" style="background-color:${av.getColors().get(0).getHexcode()};">
+                            
+
+                                    <c:if test="${av.getAvId()==article.getAllVersions().get(article.getSelectedVersion()).getAvId()}">
+                                    	<div id="selectColor" name="selectColor" onclick="customerChangeVersion(${article.getId()}, 'articleshopping', ${article.getAllVersions().indexOf(article.getAvByVersionId(av.getAvId()))})" class="pure-button  versionchoice " style="background-color:${av.getColors().get(0).getHexcode()};">
+                                    </c:if>
+                                    <c:if test="${av.getAvId()!=article.getAllVersions().get(article.getSelectedVersion()).getAvId()}">
+                                    	<div id="selectColor" name="selectColor" onclick="customerChangeVersion(${article.getId()}, 'articleshopping', ${article.getAllVersions().indexOf(article.getAvByVersionId(av.getAvId()))})" class="pure-button" style="background-color:${av.getColors().get(0).getHexcode()};">
+                                    </c:if>                                    
                                         <div class="pure-control-group">
                                             <p>
                                                 <font color="${av.getColors().get(0).getBackgroundHexcode()}"><b>${av.getColorsAsString()}</b></font>
