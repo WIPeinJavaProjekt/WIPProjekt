@@ -89,6 +89,7 @@ public class OrderServlet extends HttpServlet {
 				System.out.println("Order process started");
 				currentOrder.statuscycle.add(new OrderStatus(new Date(),"Neu"));
 				OrderService.AddOrder(currentOrder);
+				reduceStock(currentOrder);
 				
 				request.getSession().removeAttribute("currentCart");
 				request.getSession().removeAttribute("currentOrder");
@@ -165,9 +166,7 @@ public class OrderServlet extends HttpServlet {
 		
 		doGet(request, response);
 	}
-	
-	
-	
+		
 	/** 
 	 * Die "checkCartPositionsAvailability"-Methode überprüft die Verfügbarkeit der Artikel der einzelnen ShoppingCartPositions des Einkaufswagens.
 	 * Bei nicht verfügbaren Artikeln wird die ShoppingCartPosition aus dem Einkaufswagen entfernt oder bei geringerer Verfügbarkeit, die Anzahl auf den Lagerbestand reduziert. 
@@ -209,8 +208,6 @@ public class OrderServlet extends HttpServlet {
 		return false;
 	}
 	
-	
-	
 	/**
 	 * Die "getStatusList"-Methode gibt eine Liste mit möglichen Status zurück, die eine Bestellung annehmen kann.
 	 * 
@@ -231,5 +228,27 @@ public class OrderServlet extends HttpServlet {
 		statusList.add(finished);
 		
 		return statusList;
+	}
+	
+	/**
+	 * Die "reduceStock"-Methode reduziert den Lagerbestand aller Artikel einer Bestellung um die Menge des jeweiligen Artikels.
+	 * 
+	 * @param currentOrder Order
+ 	 * @throws IOException
+	 */
+	private void reduceStock(Order currentOrder) throws IOException
+	{	
+		try 
+		{
+			for (ShoppingCartPosition scp : currentOrder.shoppingCart.cartPositions)
+			{
+					int stock = StockService.GetStock(scp.article.getAllVersions().get(scp.article.getSelectedVersion()), scp.size);
+					stock -= scp.amount;
+					StockService.UpdateStock(scp.article.getAllVersions().get(scp.article.getSelectedVersion()), scp.size, stock);
+			}
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 }
