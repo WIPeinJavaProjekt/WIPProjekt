@@ -19,11 +19,7 @@ public class Article {
 	public String name;
 	public String description;
 	public String manufacturer;
-<<<<<<< HEAD
 	public int acid;
-=======
-	public int acid = 1;
->>>>>>> cd8d7933fd67d06d411fe71d8d4cf7071c3e5ee3
 	public ArrayList<ArticleVersion> versions;
 	private int selectedversion;
 	public String gender;
@@ -112,6 +108,10 @@ public class Article {
 	public ArticleVersion getSelectedArticleVersion() {
 		ArticleVersion av = this.getAllVersions().get(getSelectedVersion());
 		return av;
+	}
+	
+	public int getAcid() {
+		return this.acid;
 	}
 
 	public void setSelectedVersion(int s) {

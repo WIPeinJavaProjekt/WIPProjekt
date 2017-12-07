@@ -283,7 +283,8 @@ public class ArticleServlet extends HttpServlet {
 		this.articleVersion.versionid = this.article.versions.get(this.article.getSelectedVersion()).versionid;
 		this.article.manufacturer = request.getParameter("manufacturer");
 		this.article.gender = Arrays.toString(request.getParameterValues("genders"));
-		this.article.acid = Integer.parseInt(request.getParameter("categories"));
+		System.out.println(request.getParameter("category"));
+		this.article.acid = Integer.parseInt(request.getParameter("category"));
 		this.article.versions.set(this.article.getSelectedVersion(), this.articleVersion);
 		
 		ArticleService.UpdateArticle(this.article);

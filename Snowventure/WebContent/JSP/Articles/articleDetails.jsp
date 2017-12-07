@@ -64,10 +64,10 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                                         </div>
                                         <div class="pure-control-group">
                                             <select name="category" class="boxedinput">
-								        <c:forEach items="${categories}" var="categories">
-							        		<option value="${categories.getACID()}">${categories.getName()}</option>
-							    		</c:forEach>
-									</select>
+										        <c:forEach items="${categories}" var="categories">
+									        		<option value="${categories.getACID()}"<c:if test="${article.getAcid()==categories.getACID()}"><c:out value="selected"/></c:if>>${categories.getName()}</option>
+									    		</c:forEach>
+											</select>
                                         </div>
                                         <div class="pure-control-group">
                                             <textarea required class="boxedinput" style="resize: vertical;" id="articleDescription" name="articleDescription" value="${article.getDescription()}" type="text" placeholder="Artikelbeschreibung <h1>HTML möglich</h1>">${article.getDescription()}</textarea>

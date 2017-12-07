@@ -88,7 +88,19 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                                     <select required id="selectedSize" name="selectedSize">
 							    	<option value="">Größe auswählen</option>
 							        <c:forEach items="${article.getAllSizesFromArticle()}" var="size">
-						        		<option value="${size}"<c:if test="${selectedSize==size}"><c:out value="selected"/></c:if>>${size} (${article.getStock(size)} auf Lager)</option>
+						        		<option value="${size}" <c:if test="${selectedSize==size}"><c:out value="selected"/></c:if>>
+						        			<c:choose>
+						        				<c:when test="${article.getStock(size)==0}">
+						        					${size} (Nicht verfügbar)
+						        				</c:when>
+						        				<c:when test="${article.getStock(size)<11}">
+						        					${size} (Noch ${article.getStock(size)} auf Lager)
+						        				</c:when>						        				
+						        				<c:when test="${article.getStock(size)>=11}">
+						       						${size}
+						      					</c:when>
+						        			</c:choose>
+						        		</option>
 						    		</c:forEach>
 								</select>
                                 </div>
