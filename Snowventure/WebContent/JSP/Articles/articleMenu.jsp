@@ -1,3 +1,7 @@
+<!-- 
+Beschreibung: Menü-Navigation zwischen Artikeldetails und Lagerbestand für Arikel
+Ansprechpartner: Garrit Kniepkamp
+--> 
 <div id="user-account-menu" class="ure-menu pure-menu-horizontal pure-menu-scrollable">
     <ul class="pure-menu-list">
         <li class="pure-menu-item">

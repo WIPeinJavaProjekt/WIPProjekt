@@ -53,21 +53,13 @@ Ansprechpartner: Fabian Meise
                 </div>
             </div>
         </div>
-
-
     </div>
-
-
-
-
     <div id="secondfooterline" align="center">
         <h2>NEWSLETTER</h2>
         <b>Registriere dich für unseren Newletter und du wirst automatisch über Neugikeiten und Aktionen zu deinem nächsten Abenteuer informiert</b>
 
     </div>
-
     <div align="center"><img src="./Images/favicon.png" height="128px" width="128px" type="image/png"></div>
-
     <hr>
     <div id="copyright">
         Copyright © 2017 Snowventure (fiktive Firma Studiumsprojekt)

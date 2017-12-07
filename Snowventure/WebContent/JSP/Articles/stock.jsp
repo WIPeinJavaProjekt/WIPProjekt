@@ -1,6 +1,6 @@
 <!-- 
-Beschreibung: Detailansicht zum bearbeiten von Artikeln
-Ansprechpartner: Garrit Kniepkamp, Fabian Meise
+Beschreibung: Lagerbestand der verschiedenen Versionen eines Artikels
+Ansprechpartner: Garrit Kniepkamp
  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -62,19 +62,19 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                                                     <div class="boxedinput">
                                                         <label> Ausgewählte Version:</label><br>
                                                         <select required id="selectedVersion" name="selectedVersion" class="boxedinput" onchange="changeToStock(${article.getId()}, 'article')">
-													<c:forEach items="${article.getAllVersions()}" var="version">
-										        		<option value="${article.getAllVersions().indexOf(version)}"
-										        			<c:if test="${article.getSelectedVersion()==article.getAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>
-									        				${article.getAllVersions().indexOf(version)}</option>
-										    		</c:forEach>
-												</select>
+															<c:forEach items="${article.getAllVersions()}" var="version">
+												        		<option value="${article.getAllVersions().indexOf(version)}"
+												        			<c:if test="${article.getSelectedVersion()==article.getAllVersions().indexOf(version)}"><c:out value="selected"/></c:if>>
+											        				${article.getAllVersions().indexOf(version)}</option>
+												    		</c:forEach>
+														</select>
                                                     </div>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="pure-control-group">
                                                         <select required name="selectedVersion" class="boxedinput">
-									        		<option value="0">0</option>
-												</select>
+											        		<option value="0">0</option>
+														</select>
                                                     </div>
                                                 </c:otherwise>
                                             </c:choose>
