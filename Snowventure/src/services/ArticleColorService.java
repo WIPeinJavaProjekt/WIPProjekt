@@ -91,8 +91,9 @@ public class ArticleColorService {
 	 * @param avid Artikelversion
 	 */
 	public static void DeleteArticleColorToVersion(int avid) {
-		String query = "DELETE ARTICLEVERSION_TO_COLOR WHERE avid='%d'";
+		String query = "DELETE FROM ARTICLEVERSION_TO_COLOR WHERE avid=%d";
 		query = String.format(query, avid);
+		System.out.println("Delete klappt nicht" +query);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 }

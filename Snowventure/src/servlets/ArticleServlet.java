@@ -258,11 +258,12 @@ public class ArticleServlet extends HttpServlet {
 		
 	    String[] colors = request.getParameterValues("color");
 	    String[] sizes = request.getParameterValues("size");
-	    
+	    System.out.println(colors.toString());
 	    if(colors != null) {
 		    for(int s= 0; s< colors.length;s++) {
 		    	ArticleColor artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(colors[s]));
-				colorsArr.add(artColor);
+				System.out.println(artColor.acolid + "Farbe");
+		    	colorsArr.add(artColor);
 			}
 	    } else {
 	    	request.setAttribute("errorArticle", "Bitte wählen Sie Farben für die Artikelversion aus!");

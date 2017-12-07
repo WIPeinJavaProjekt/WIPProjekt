@@ -174,6 +174,8 @@ public class ArticleService {
 	public static void UpdateArticleVersion(ArticleVersion av) throws SQLException, IOException {
 		Locale.setDefault(Locale.ENGLISH);
 		String query;
+		
+		System.out.println("Update folgenden Artikel" + av.versionid);
 		query = "UPDATE ARTICLEVERSION SET property = '%s', propertyvalue = '%s', defaultprice = '%f' where avid ='%d'";
 		
 		query = String.format(query,
@@ -181,6 +183,7 @@ public class ArticleService {
 				av.propertyvalue,
 				av.price,
 				av.versionid);
+		
 		ArticleColorService.DeleteArticleColorToVersion(av.versionid);		
 		
 		int dummy=0;
