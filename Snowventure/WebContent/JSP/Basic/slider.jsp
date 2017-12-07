@@ -8,18 +8,15 @@ Ansprechpartner: Fabian Meise
 <!-- Basis fertiger Slider der W3-Schools jedoch angepasst für das notwendige Responsive Design -->
 <div class="w3-content w3-display-container w3slidmod startslider" style="max-width:100%;" align="center">
 
-
-    <div class="w3-display-container mySlides">
-        <div class="sliderimage" style="background-image: url('./Images/mountain.jpeg');">
-        </div>
-    </div>
-
-
     <div class="w3-display-container mySlides">
         <div class="sliderimage" style="background-image: url('./Images/skityp.jpeg');">
         </div>
     </div>
 
+    <div class="w3-display-container mySlides">
+        <div class="sliderimage" style="background-image: url('./Images/mountain.jpeg');">
+        </div>
+    </div>
 
     <div class="w3-display-container mySlides">
         <div class="sliderimage" style="background-image: url('./Images/photogirl.jpeg');">
