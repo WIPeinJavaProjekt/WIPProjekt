@@ -110,20 +110,18 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                                         </div>
                                         <br>
                                         <%@include file = "../Basic/filterColor.jsp" %>
-                                            <br>
-                                            <%@include file = "../Basic/filterGender.jsp" %>
-                                                <br>
-                                                <%@include file = "../Basic/filterSize.jsp" %>
-                                                    <br>
-                                                    <script type="text/javascript" src="./JS/dropdown.js"></script>
-                                                    <div class="pure-control-group">
-                                                        <input required class="boxedinput" id="price" name="price" value="${article.getPrice()}" type="number" step="0.01" placeholder="Preis">
-                                                    </div>
-                                                    <div class="pure-control-group">
-                                                        <c:if test="${updateArticle}">
-                                                            <button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticleVersion" onclick="changeVersion(${article.getId()}, 'article')">Als neue Artikelversion speichern</button>
-                                                        </c:if>
-                                                    </div>
+                                        <%@include file = "../Basic/filterGender.jsp" %>
+                                        <%@include file = "../Basic/filterSize.jsp" %>
+                                                    
+                                         <script type="text/javascript" src="./JS/dropdown.js"></script>
+                                         <div class="pure-control-group">
+                                             <input required class="boxedinput" id="price" name="price" value="${article.getPrice()}" type="number" step="0.01" placeholder="Preis">
+                                         </div>
+                                         <div class="pure-control-group">
+                                             <c:if test="${updateArticle}">
+                                                 <button class="pure-button pure-button-primary boxedinput" type="submit" name="addArticleVersion" onclick="changeVersion(${article.getId()}, 'article')">Als neue Artikelversion speichern</button>
+                                             </c:if>
+                                         </div>
                                     </div>
                                 </div>
                             </fieldset>
