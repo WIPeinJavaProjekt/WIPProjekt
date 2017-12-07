@@ -20,6 +20,7 @@ public class Article {
 	public String description;
 	public String manufacturer;
 	public int acid;
+	public Categorie categorie;
 	public ArrayList<ArticleVersion> versions;
 	private int selectedversion;
 	public String gender;
