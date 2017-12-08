@@ -140,7 +140,7 @@ public class ArticleService {
 	 */
 	private static void DeleteArticleVersionSize(int avid)
 	{
-		String query ="DELETE ARTICLEVERSIONSIZE WHERE avid = '%d'";
+		String query ="DELETE FROM ARTICLEVERSIONSIZE WHERE avid = %d";
 		query = String.format(query, avid);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
@@ -193,13 +193,6 @@ public class ArticleService {
 			System.out.println("Return addColor: " + dummy);
 		}
 
-		DeletePictureFromArticleVersion(av.versionid);
-		for(ArticlePicture pic: av.pictures)
-		{
-			dummy = AddPictureToArticleVersion(pic, av.versionid);
-			System.out.println("Return addPicture: " + dummy);
-		}
-		System.out.println(query);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
@@ -573,7 +566,7 @@ public class ArticleService {
 	 * @param avid Artikelversionsid
 	 */
 	public static void DeletePictureFromArticleVersion(int avid) {
-		String query = "Delete ArticleImage WHERE avid = '%d'";
+		String query = "Delete FROM ARTICLEIMAGE WHERE avid = %d";
 		query = String.format(query, avid);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
@@ -584,7 +577,7 @@ public class ArticleService {
 	 * @param imgid zulöschende Bildid
 	 */
 	public static void DeletePictureFromArticleVersion(int avid, int imgid) {
-		String query = "DELETE FROM ARTICLEIMAGE WHERE avid = '%d' and aimgid ='%d'";
+		String query = "DELETE FROM ARTICLEIMAGE WHERE avid = %d and aimgid =%d";
 		query = String.format(query, avid, imgid);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}	

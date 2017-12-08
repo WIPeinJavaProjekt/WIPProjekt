@@ -112,6 +112,7 @@ public class DatabaseConnector {
 		if(this.connect != null)
 			try {
 				Statement statement = this.connect.createStatement();
+				statement.executeUpdate(query);
 			}
 			catch (SQLException e){
 				
