@@ -48,7 +48,7 @@ public class ArticleService {
 				a.description,
 				a.acid,
 				a.manufacturer,
-				a.gender);
+				a.gender.replaceAll("([\\[\\]])", ""));
 		aid = DatabaseConnector.createConnection().InsertQuery(query);
 		a.ID = aid;
 		
@@ -156,7 +156,7 @@ public class ArticleService {
 		String query;
 		query = "UPDATE ARTICLE SET name ='%s', description ='%s', manufacturer = '%s', acid = '%s', gender = '%s' where aid ='%d'";
 		
-		query = String.format(query, a.name,a.description,a.manufacturer,a.acid,a.gender, a.ID);
+		query = String.format(query, a.name,a.description,a.manufacturer,a.acid,a.gender.replaceAll("([\\[\\]])", ""), a.ID);
 		System.out.println(query);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 		for(ArticleVersion av: a.versions)
@@ -332,8 +332,11 @@ public class ArticleService {
 		if(manufacturer != "")
 			query +=" AND INSTR('"+manufacturer+"',manufacturer)";
 		if(gender != "")
-			query +=" AND INSTR('"+gender+"',gender)";
-			
+		{
+			gender = gender.replaceAll("([\\[\\]])", "");
+			query +=" AND (INSTR('"+gender+"',gender) OR INSTR(gender,'"+gender+"'))";
+		}
+		
 		String subquery="";
 		if(minprice >0)
 			subquery=" AND AID IN(SELECT distinct aid from ARTICLEVERSION where defaultprice >="+minprice+"";

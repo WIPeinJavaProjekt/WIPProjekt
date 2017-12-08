@@ -235,7 +235,7 @@
 		font-size: 2.5em;
 	}
 	
-	.historyblock p{
+	.historyblock p, .articledescriptioncontainer{
 		font-size: 1.25em;
 	}
 	

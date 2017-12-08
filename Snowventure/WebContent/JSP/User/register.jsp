@@ -52,7 +52,7 @@ Ansprechpartner: Garrit Kniepkamp
                     <%@include file = "userinfo.jsp" %>
 
                         <div class="pure-g">
-                            <div class="pure-u-1-2 leftdiv fullwidth">
+                            <div class="pure-u-1-2 leftdiv fullwidth textbox">
                                 <c:if test="${empty currentUser}">
                                     <form class="pure-form pure-form-aligned" action="register" method="post">
                                         <div class="pure-control-group">

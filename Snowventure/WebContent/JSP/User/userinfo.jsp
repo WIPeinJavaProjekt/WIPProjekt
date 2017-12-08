@@ -20,10 +20,10 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
         </legend>
     </c:if>
 
-    <div class="pure-g content-container textbox">
+    <div class="pure-g textbox">
         <div class="pure-u-1-2 leftdiv fullwidth">
             <fieldset class="pure-group">
-                <label>Name</label>
+                <h3>Name</h3>
                 <c:if test="${selectedUser == null || empty currentUser}">
                     <div class="pure-control-group">
                         <input class="boxedinput" id="username" name="username" <c:choose>
@@ -61,7 +61,7 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
         </div>
         <div class="pure-u-1-2 fullwidth">
             <fieldset class="pure-group rightdiv">
-                <label>Passwort</label>
+                <h3>Passwort</h3>
                 <div class="pure-control-group">
                     <input class="boxedinput" id="password" name="password" type="password" placeholder="Passwort" <c:if test="${empty currentUser && selectedUser == null}">required</c:if>>
                 </div>
@@ -80,7 +80,7 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
     <div class="pure-g">
         <div class="pure-u-1-2 leftdiv fullwidth">
             <fieldset class="pure-group">
-                <label>Anschrift</label>
+                <h3>Anschrift</h3>
                 <div class="pure-control-group">
                     <input class="boxedinput" id="location" name="location" <c:choose>
                     <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.adress.location}"</c:when>
@@ -110,7 +110,7 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
             <fieldset class="pure-group">
                 <c:if test="${not empty currentUser && currentUser.utid == '1'}">
                     <div class="pure-control-group">
-                        <label>Nutzertyp</label>
+                        <h3>Nutzertyp</h3>
                         <select id="state" name="state" class="boxedinput" required>
                  <option value="customer" <c:if test="${not empty currentUser && selectedUser.utid=='2'}"><c:out value="selected"/></c:if>>Kunde</option>
                  <option value="employee" <c:if test="${not empty currentUser && selectedUser.utid=='3'}"><c:out value="selected"/></c:if>>Mitarbeiter</option>
@@ -119,22 +119,11 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
                     </div>
                 </c:if>
             </fieldset>
-            <fieldset>
-                <div class="pure-control-group">
-                    <c:choose>
-                        <c:when test="${empty currentUser || selectedUser == null}">
-                            <button class="pure-button pure-button-primary boxedinput" type="submit" name="submitRegister" class="pure-button pure-button-primary">Abschicken</button>
-                        </c:when>
-                        <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">
-                            <button class="pure-button pure-button-primary boxedinput" type="submit" name="updateSelection" class="pure-button pure-button-primary">Speichern</button>
-                        </c:when>
-                    </c:choose>
-                </div>
-            </fieldset>
+
         </div>
         <div class="pure-u-1-2 rightdiv fullwidth">
             <fieldset class="pure-group">
-                <label>Sicherheitsfrage</label>
+                <h3>Sicherheitsfrage</h3>
                 <div class="pure-control-group">
                     <select class="boxedinput" id="safetyQuestion" name="safetyQuestion" required>
           	 <option value="">Bitte Sicherheitsfrage auswählen</option>
@@ -149,7 +138,7 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
             </fieldset>
             <c:if test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">
                 <fieldset class="pure-group">
-                    <label>Nutzerstatus</label>
+                    <h3>Nutzerstatus</h3>
                     <div class="pure-control-group">
                         <input style="margin-left: 10px" type="checkbox" name="user-status" id="user-status" <c:if test="${selectedUser.techisactive == 1}">checked</c:if>> aktiv</input>
             </div>
@@ -157,13 +146,30 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
             </c:if>
         </div>
     </div>
+    
+	<div class="pure-g selecteduserbox">
+		<div class="pure-u-1-2 leftdiv fullwidth">   
+			<fieldset>
+				<div class="pure-control-group">
+					<c:choose>
+						<c:when test="${empty currentUser || selectedUser == null}">
+							<button class="pure-button pure-button-primary boxedinput" type="submit" name="submitRegister" class="pure-button pure-button-primary">Abschicken</button>
+						</c:when>
+						<c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">
+							<button class="pure-button pure-button-primary boxedinput" type="submit" name="updateSelection" class="pure-button pure-button-primary">Speichern</button>
+						</c:when>
+					</c:choose>
+				</div>
+			</fieldset>
+		</div>
+	</div>    
 </form>
 
 <c:if test="${not empty currentUser && selectedUser != null}">
-    <div class="pure-g selecteduserbox" style="padding-bottom:5%;">
-        <div class="pure-u-1-2 leftdiv">
+    <div class="pure-g selecteduserbox textbox" style="padding-bottom:5%;">
+        <div class="pure-u-1-2 leftdiv fullwidth">
             <form action="users" method="post">
-                <button class="pure-button pure-button-primary boxedinput" type="submit" name="back" class="pure-button pure-button-primary">Zur?ck</button>
+                <button class="pure-button pure-button-primary boxedinput" type="submit" name="back" class="pure-button pure-button-primary">Zurück</button>
             </form>
         </div>
     </div>
