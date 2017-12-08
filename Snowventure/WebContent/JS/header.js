@@ -4,8 +4,8 @@
  *
  */
 window.onresize = function() { scalediv(); };
-window.onload = function() { scalediv(); };
-$(document).ready(function() { scalediv(); });
+window.onload = function() { scalediv();  };
+$(document).ready(function() { scalediv(); if($(window).width() < 1340){$("#responsiveheader").addClass('responsiveheaderimg');} });
 
 function scalediv() {
     //$('#brandimg').width($( window ).width()*3/5*0.25);
@@ -23,6 +23,7 @@ function scalediv() {
     if($(window).width() >= 1340)
 	{
     	$('#headermenu').css("display","block");
+    	$("#responsiveheader").removeClass('responsiveheaderimg');
 	}
 };
 
