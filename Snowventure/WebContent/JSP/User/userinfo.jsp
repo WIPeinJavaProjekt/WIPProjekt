@@ -16,11 +16,11 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
 
     <c:if test="${not empty selectedUser && not empty currentUser}">
         <legend>
-            <h1>Ausgew?hlter Nutzer: "${selectedUser.username}"</h1>
+            <h1>Ausgewählter Nutzer: "${selectedUser.username}"</h1>
         </legend>
     </c:if>
 
-    <div class="pure-g">
+    <div class="pure-g content-container textbox">
         <div class="pure-u-1-2 leftdiv fullwidth">
             <fieldset class="pure-group">
                 <label>Name</label>

@@ -118,16 +118,16 @@ Ansprechpartner: Jacob Markus
                             </div>
                             <div class="pure-u-1-4 fullwidth" id="orderpaymentmethod">
                                 <div class="pure-u-1-1"><b>Zahlungsart</b></div>
-                                <div class="pure-u-1-1 orderdetailsvalue">Auf Rechnung</div>
+                                <div class="pure-u-1-1 orderdetailsvalue">per Paypal</div>
                             </div>
                             <div class="pure-u-1-4 fullwidth">
                                 <div class="pure-u-1-1"><b>Bestellübersicht</b></div>
-                                <div class="pure-u-2-5 orderdetailsvalue">Artikel</div>
-                                <div class="pure-u-3-5 fullwidth" style="text-align: right">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
-                                <div class="pure-u-2-5 orderdetailsvalue">Versand/Verpackung</div>
-                                <div class="pure-u-3-5 fullwidth" style="text-align: right">EUR 0,00</div>
-                                <div class="pure-u-3-5 fullwidth" id="ordervaluedescription">Gesamtsumme</div>
-                                <div class="pure-u-3-5 fullwidth" id="ordervaluesum">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
+                                <div class="pure-u-1-5 orderdetailsvalue">Artikel</div>
+                                <div class="pure-u-4-5 fullwidth" style="text-align: right">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
+                                <div class="pure-u-1-5 orderdetailsvalue">Versand/Verpackung</div>
+                                <div class="pure-u-4-5 fullwidth" style="text-align: right">EUR 0,00</div>
+                                <div class="pure-u-1-5 fullwidth" id="ordervaluedescription">Gesamtsumme</div>
+                                <div class="pure-u-4-5 fullwidth" id="ordervaluesum">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
                             </div>
                         </div>
                         <div class="pure-u-1-1" style="height: 20px;"></div>

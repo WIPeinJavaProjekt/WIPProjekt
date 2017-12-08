@@ -95,8 +95,11 @@ public class UserService {
 					result.getInt("TechIsDeleted"), 
 					result.getString("phone")
 					);
-			u.orders = new ArrayList<Order>(OrderService.GetAllOrders(u.ulid));
-			u.shoppingcart = new ShoppingCart(ShoppingCartService.GetShoppingCart(u));
+			
+			//u.orders = new ArrayList<Order>(OrderService.GetAllOrders(u.ulid));
+			//u.shoppingcart = new ShoppingCart(ShoppingCartService.GetShoppingCart(u));
+			u.orders = new ArrayList<Order>();
+			u.shoppingcart = new ShoppingCart();
 			users.add(u);
 			
 		}
@@ -148,8 +151,12 @@ public class UserService {
 					result.getString("phone")
 					);
 			user = u;
-			user.orders = new ArrayList<Order>(OrderService.GetAllOrders(u.ulid));
-			user.shoppingcart = new ShoppingCart(ShoppingCartService.GetShoppingCart(u));
+			
+			//Performancegewinn
+			//user.orders = new ArrayList<Order>(OrderService.GetAllOrders(u.ulid));
+			//user.shoppingcart = new ShoppingCart(ShoppingCartService.GetShoppingCart(u));
+			user.orders = new ArrayList<Order>();
+			user.shoppingcart = new ShoppingCart();
 		}
 		
 		return user;

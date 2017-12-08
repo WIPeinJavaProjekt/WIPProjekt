@@ -25,9 +25,9 @@ Ansprechpartner: Fabian Meise
                 <div class="divborderleft">
                     <h3>SNOWVENTURE</h3>
                     <a href="impressum">Impressum</a><br>
-                    <a href="impressum">Jobs</a><br>
-                    <a href="impressum">Historie</a><br>
-                    <a href="impressum">Abenteuer</a><br>
+                    <a href="https://www.monster.de/">Jobs</a><br>
+                    <a href="start#history">Historie</a><br>
+                    <a href="#">Abenteuer</a><br>
                 </div>
             </div>
         </div>
@@ -55,12 +55,11 @@ Ansprechpartner: Fabian Meise
         </div>
     </div>
     <div id="secondfooterline" align="center">
-        <h2>NEWSLETTER</h2>
-        <b>Registriere dich für unseren Newletter und du wirst automatisch über Neugikeiten und Aktionen zu deinem nächsten Abenteuer informiert</b>
+        <a href="mailto:info@snowventure.de"><h2>NEWSLETTER</h2></a>
+        <p>Registriere dich für unseren Newletter und du wirst automatisch über Neugikeiten und Aktionen zu deinem nächsten Abenteuer informiert</p>
 
     </div>
     <div align="center"><img src="./Images/favicon.png" height="128px" width="128px" type="image/png"></div>
-    <hr>
     <div id="copyright">
         Copyright © 2017 Snowventure (fiktive Firma Studiumsprojekt)
     </div>
