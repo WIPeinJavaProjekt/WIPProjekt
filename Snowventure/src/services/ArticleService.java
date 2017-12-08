@@ -27,7 +27,7 @@ import classes.Categorie;
 **/
 /**
  * Beschreibung: Modelklasse zur Administration von Artikeln
- * @author Ansprechpartner
+ * @author Ansprechpartner Fabian Meise
  *
  */
 public class ArticleService {
@@ -193,6 +193,7 @@ public class ArticleService {
 			System.out.println("Return addColor: " + dummy);
 		}
 
+		UpdateArticleVersionSize(av);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	
@@ -200,7 +201,7 @@ public class ArticleService {
 	
 	/**
 	 * Aktualisiere alle Größen einer Artikelversion
-	 * @param av
+	 * @param av ArticleVersion
 	 */
 	public static void UpdateArticleVersionSize(ArticleVersion av) {
 		DeleteArticleVersionSize(av.versionid);
