@@ -156,13 +156,12 @@ public class ArticleService {
 		String query;
 		query = "UPDATE ARTICLE SET name ='%s', description ='%s', manufacturer = '%s', acid = '%s', gender = '%s' where aid ='%d'";
 		
-		query = String.format(query, a.name,a.description,a.ID,a.manufacturer,a.gender,a.acid);
-		
+		query = String.format(query, a.name,a.description,a.manufacturer,a.acid,a.gender, a.ID);
+		System.out.println(query);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 		for(ArticleVersion av: a.versions)
 			UpdateArticleVersion(av);
 		
-
 	}
 	
 	/**
@@ -175,7 +174,7 @@ public class ArticleService {
 		Locale.setDefault(Locale.ENGLISH);
 		String query;
 		
-		System.out.println("Update folgenden Artikel" + av.versionid);
+		System.out.println("Update folgenden Artikel " + av.versionid);
 		query = "UPDATE ARTICLEVERSION SET property = '%s', propertyvalue = '%s', defaultprice = '%f' where avid ='%d'";
 		
 		query = String.format(query,
@@ -191,14 +190,16 @@ public class ArticleService {
 		for(ArticleColor c: av.colors)
 		{
 			dummy = ArticleColorService.AddArticleColorToVersion(c.acolid,av.versionid);
+			System.out.println("Return addColor: " + dummy);
 		}
 
 		DeletePictureFromArticleVersion(av.versionid);
 		for(ArticlePicture pic: av.pictures)
 		{
 			dummy = AddPictureToArticleVersion(pic, av.versionid);
+			System.out.println("Return addPicture: " + dummy);
 		}
-		
+		System.out.println(query);
 		DatabaseConnector.createConnection().UpdateQuery(query);
 	}
 	

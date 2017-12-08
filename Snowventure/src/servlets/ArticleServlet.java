@@ -258,11 +258,9 @@ public class ArticleServlet extends HttpServlet {
 		
 	    String[] colors = request.getParameterValues("color");
 	    String[] sizes = request.getParameterValues("size");
-	    System.out.println(colors.toString());
 	    if(colors != null) {
 		    for(int s= 0; s< colors.length;s++) {
 		    	ArticleColor artColor = ArticleColorService.GetSpecificColor(Integer.parseInt(colors[s]));
-				System.out.println(artColor.acolid + "Farbe");
 		    	colorsArr.add(artColor);
 			}
 	    } else {
@@ -284,7 +282,6 @@ public class ArticleServlet extends HttpServlet {
 		this.articleVersion.versionid = this.article.versions.get(this.article.getSelectedVersion()).versionid;
 		this.article.manufacturer = request.getParameter("manufacturer");
 		this.article.gender = Arrays.toString(request.getParameterValues("genders"));
-		System.out.println(request.getParameter("category"));
 		this.article.acid = Integer.parseInt(request.getParameter("category"));
 		this.article.versions.set(this.article.getSelectedVersion(), this.articleVersion);
 		

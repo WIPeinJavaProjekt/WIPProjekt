@@ -90,6 +90,7 @@ public class DatabaseConnector {
 	 * @return Resultset welches das Ergebnis des SELECTs enthält
 	 */
 	public ResultSet SelectQuery(String query) {
+		System.out.println(query);
 		if(this.connect != null)
 			try {
 				Statement statement = this.connect.createStatement();
