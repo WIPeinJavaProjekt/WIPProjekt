@@ -27,7 +27,7 @@ Ansprechpartner: Fabian Meise
                     <a href="impressum">Impressum</a><br>
                     <a href="https://www.monster.de/">Jobs</a><br>
                     <a href="start#history">Historie</a><br>
-                    <a href="#">Abenteuer</a><br>
+                    <a href="start#">Abenteuer</a><br>
                 </div>
             </div>
         </div>

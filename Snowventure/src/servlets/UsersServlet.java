@@ -65,7 +65,15 @@ public class UsersServlet extends HttpServlet {
 			{
 				findOrders(request, user);
 					
-				response.sendRedirect("users?page=ordersearch");
+				response.sendRedirect("users?page=ordersearch&specified");
+				
+				return;
+			}
+			else if(user != null && user.utid == 2 && request.getSession().getAttribute("orders") == null && request.getParameter("searchOrders") == null && request.getParameter("specified") == null && request.getParameter("page") != null && request.getParameter("page").toString().equals("ordersearch") && request.getParameter("all") == null) 
+			{
+				findOrders(request, user);
+					
+				response.sendRedirect("users?page=ordersearch&all");
 				
 				return;
 			}
@@ -295,12 +303,12 @@ public class UsersServlet extends HttpServlet {
 	 */
 	private void updateCurrentUser(User user, HttpServletRequest request) throws IOException
 	{
-		String location = request.getParameter("location").replaceAll("[^a-zA-Z 0-9]+", "");
-		String houseno = request.getParameter("houseno").replaceAll("[^a-zA-Z 0-9]+", "");
-		String street = request.getParameter("street").replaceAll("[^a-zA-Z 0-9]+", "");
-		String postcode = request.getParameter("postcode").replaceAll("[^a-zA-Z 0-9]+", "");
-		String surname = request.getParameter("surname").replaceAll("[^a-zA-Z 0-9]+", "");
-		String name = request.getParameter("name").replaceAll("[^a-zA-Z 0-9]+", "");	
+		String location = request.getParameter("location").replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+		String houseno = request.getParameter("houseno").replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+		String street = request.getParameter("street").replaceAll("[^a-zA-Z 0-9\\u002E\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+		String postcode = request.getParameter("postcode").replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+		String surname = request.getParameter("surname").replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+		String name = request.getParameter("name").replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");	
 						
 		Adress adress = new Adress(location.length() > 0 ? location : user.adress.location, houseno.length() > 0 ? houseno : user.adress.houseno,
 									postcode.length() > 0 ? postcode : user.adress.postcode, street.length() > 0 ? street : user.adress.street);		
@@ -342,7 +350,7 @@ public class UsersServlet extends HttpServlet {
 	 */
 	private void changeSafetyQuestion(User user, HttpServletRequest request) throws IOException
 	{
-		String safetyAnswer =  request.getParameter("safetyAnswer").replaceAll("[^a-zA-Z 0-9]+", "").trim();
+		String safetyAnswer =  request.getParameter("safetyAnswer").replaceAll("[^a-zA-Z 0-9\\u002E\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "").trim();
 		
 		if(safetyAnswer.length() > 0)
 		{
@@ -370,13 +378,13 @@ public class UsersServlet extends HttpServlet {
 	private void updateSelectedUser(User user, HttpServletRequest request) throws IOException
 	{
 		//Remove special expressions from input strings
-		String location = request.getParameter("location").replaceAll("[^a-zA-Z 0-9]+", "");
-		String houseno = request.getParameter("houseno").replaceAll("[^a-zA-Z 0-9]+", "");
-		String street = request.getParameter("street").replaceAll("[^a-zA-Z 0-9]+", "");
-		String postcode = request.getParameter("postcode").replaceAll("[^a-zA-Z 0-9]+", "");
-		String surname = request.getParameter("surname").replaceAll("[^a-zA-Z 0-9]+", "");
-		String name = request.getParameter("name").replaceAll("[^a-zA-Z 0-9]+", "");
-		String safetyAnswer =  request.getParameter("safetyAnswer").replaceAll("[^a-zA-Z 0-9]+", "");
+		String location = request.getParameter("location").replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+		String houseno = request.getParameter("houseno").replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+		String street = request.getParameter("street").replaceAll("[^a-zA-Z 0-9\\u002E\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+		String postcode = request.getParameter("postcode").replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+		String surname = request.getParameter("surname").replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+		String name = request.getParameter("name").replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+		String safetyAnswer =  request.getParameter("safetyAnswer").replaceAll("[^a-zA-Z 0-9\\u002E\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
 		
 		Adress adress = new Adress(location.length() > 0 ? location : user.adress.location, houseno.length() > 0 ? houseno : user.adress.houseno,
 									postcode.length() > 0 ? postcode : user.adress.postcode, street.length() > 0 ? street : user.adress.street);		

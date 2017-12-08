@@ -203,7 +203,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	private boolean validateStringInput(String text) throws IOException 
 	{
-		Pattern p = Pattern.compile("^[A-Za-z 0-9]+");
+		Pattern p = Pattern.compile("^[A-Za-z 0-9\\u002E\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+");
 		Matcher m = p.matcher(text);
 		boolean validString = m.matches();
 
