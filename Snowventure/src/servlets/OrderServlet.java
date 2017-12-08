@@ -152,12 +152,12 @@ public class OrderServlet extends HttpServlet {
 			
 			if(currentOrder != null)
 			{
-				currentOrder.name = request.getParameter("name").toString();
-				currentOrder.surname = request.getParameter("surename").toString();
-				currentOrder.adress.street = request.getParameter("street").toString();
-				currentOrder.adress.houseno = request.getParameter("houseno").toString();
-				currentOrder.adress.postcode = request.getParameter("postcode").toString();
-				currentOrder.adress.location = request.getParameter("location").toString();
+				currentOrder.name = request.getParameter("name").toString().replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+				currentOrder.surname = request.getParameter("surename").toString().replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+				currentOrder.adress.street = request.getParameter("street").toString().replaceAll("[^a-zA-Z 0-9\\u002E\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+				currentOrder.adress.houseno = request.getParameter("houseno").toString().replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+				currentOrder.adress.postcode = request.getParameter("postcode").toString().replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
+				currentOrder.adress.location = request.getParameter("location").toString().replaceAll("[^a-zA-Z 0-9\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", "");
 			}
 			RequestDispatcher rd = request.getRequestDispatcher("/JSP/Orders/orderdetails.jsp");
 			rd.forward(request, response);
@@ -242,9 +242,9 @@ public class OrderServlet extends HttpServlet {
 		{
 			for (ShoppingCartPosition scp : currentOrder.shoppingCart.cartPositions)
 			{
-					int stock = StockService.GetStock(scp.article.getAllVersions().get(scp.article.getSelectedVersion()), scp.size);
-					stock -= scp.amount;
-					StockService.UpdateStock(scp.article.getAllVersions().get(scp.article.getSelectedVersion()), scp.size, stock);
+				int stock = StockService.GetStock(scp.article.getAllVersions().get(scp.article.getSelectedVersion()), scp.size);
+				stock -= scp.amount;
+				StockService.UpdateStock(scp.article.getAllVersions().get(scp.article.getSelectedVersion()), scp.size, stock);
 			}
 		} catch (SQLException e) 
 		{
