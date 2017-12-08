@@ -19,7 +19,11 @@ function scalediv() {
     $('body').show();
     //var paddingarticle = (($( window ).width()-(parseInt($( window ).width()/360)-1)*4)%360)/2;
     //$('#articleresultcontainer').css("padding-left",paddingarticle < 1 ? 180 + $( window ).width()*0.2 : paddingarticle +$( window ).width()*0.2);
-
+    
+    if($(window).width() >= 1340)
+	{
+    	$('#headermenu').css("display","block");
+	}
 };
 
 
