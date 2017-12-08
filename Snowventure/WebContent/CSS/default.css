@@ -549,7 +549,7 @@ div#popup-div-content {
 .validation {
     border: 1px solid;
     margin: 10px 0px;
-    padding: 15px 10px 15px 50px;
+    padding: 15px 10px 15px 10px;
     background-repeat: no-repeat;
     background-position: 10px center;
 }
