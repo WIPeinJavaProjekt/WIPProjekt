@@ -30,7 +30,7 @@ public class UserService {
 				user.adress.street,
 				user.adress.houseno,
 				user.adress.location,
-				"1337"
+				user.phone
 				);
 		udid = DatabaseConnector.createConnection().InsertQuery(query);
 		if(udid != -1) {

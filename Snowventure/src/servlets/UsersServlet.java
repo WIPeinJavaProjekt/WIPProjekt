@@ -37,7 +37,7 @@ public class UsersServlet extends HttpServlet {
 		User user = (User)request.getSession().getAttribute("currentUser");
 		
 		if(user != null)
-		{
+		{		
 			if(user.utid == 1 && request.getParameter("search-user") != null || request.getParameter("back") != null)
 			{			
 				searchforUsers(request, response);
@@ -96,6 +96,11 @@ public class UsersServlet extends HttpServlet {
 					System.out.println(-1);	
 				}
 				
+				if(request.getParameter("falsepassword")==null && request.getSession().getAttribute("passworderror")!=null)
+				{
+					request.getSession().removeAttribute("passworderror");
+				}
+				
 				RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=mydata");
 				rd.forward(request, response);
 			}
@@ -114,8 +119,13 @@ public class UsersServlet extends HttpServlet {
 			if(request.getParameter("update-data") != null){			
 				updateCurrentUser(user, request);
 			}
-			else if(request.getParameter("update-password") != null){
-				changePassword(request);
+			else if(request.getParameter("update-password") != null){				
+				if(!changePassword(request))
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("/JSP/User/useraccount.jsp?page=mydata&falsepassword");
+					rd.forward(request, response);
+					return;
+				}
 			}
 			else if(request.getParameter("update-squestion") != null){
 				changeSafetyQuestion(user, request);
@@ -194,9 +204,9 @@ public class UsersServlet extends HttpServlet {
 	 * 
 	 * @param request HttpServletRequest
 	 * @throws IOException
-	 * 
+	 * @return boolean
 	 */
-	private void changePassword(HttpServletRequest request) throws IOException
+	private boolean changePassword(HttpServletRequest request) throws IOException
 	{
 		String old_password = request.getParameter("password");
 		String new_password = request.getParameter("new-password");
@@ -215,17 +225,18 @@ public class UsersServlet extends HttpServlet {
 				UserService.UpdateUser(user);	
 				
 				session.setAttribute("currentUser", user);
-				return;
+				return true;
 			}
 			else {
 				System.out.println("Die Passwörter stimmen nicht überein.");
-				request.setAttribute("passworderror", "Die Passwörter stimmen nicht überein.");
-				return;
+				request.getSession().setAttribute("passworderror", "Die Passwörter stimmen nicht überein. Eine Änderung konnte nicht vorgenommen werden.");
+				return false;
 			}		
 		}		
 		
 		System.out.println("Das angegebene Nutzerpasswort ist falsch.");
-		request.setAttribute("passworderror", "Das angegebene Nutzerpasswort ist falsch.");
+		request.getSession().setAttribute("passworderror", "Das angegebene Nutzerpasswort ist falsch.");
+		return false;
 	}	
 	
 	
@@ -245,7 +256,7 @@ public class UsersServlet extends HttpServlet {
 		
 		try 
 		{						
-			userlist = UserService.GetUsers(request.getParameter("user-info").replaceAll("[^a-zA-Z0-9]", ""), Integer.parseInt(request.getParameter("categories").toString()));
+			userlist = UserService.GetUsers(request.getParameter("user-info").replaceAll("[^a-zA-Z 0-9\\u002E\\u002D\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00df]+", ""), Integer.parseInt(request.getParameter("categories").toString()));
 		} 
 		catch (SQLException e) 
 		{

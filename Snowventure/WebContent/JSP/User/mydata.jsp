@@ -23,6 +23,12 @@ Ansprechpartner: Jacob Markus
                 </div>
             </div>
 
+			<c:if test="${not empty passworderror}">
+                <form id="change-password-error" class="pure-form pure-form-stacked security-form  textbox" action="users?page=mydata" method="get">
+                    <p class="error">${passworderror}</p>
+                </form>
+            </c:if>
+
             <form class="pure-form pure-form-stacked  textbox" id="mydata-form" action="users?page=mydata" method="post">
                 <fieldset>
 
@@ -115,12 +121,6 @@ Ansprechpartner: Jacob Markus
                     </div>
                 </fieldset>
             </form>
-
-            <c:if test="${not empty passworderror}">
-                <form class="pure-form pure-form-aligned" action="users?page=mydata" method="get">
-                    <p class="error">${passworderror}</p>
-                </form>
-            </c:if>
 
             <form class="pure-form pure-form-stacked security-form  textbox" action="users?page=mydata" method="post">
                 <fieldset>

@@ -177,7 +177,7 @@ public class ShoppingCartServlet extends HttpServlet {
 				}
 				else if (stock > 0 && stock < newamount && stock >= scp.amount) 
 				{	
-					request.getSession().setAttribute("error", "Der Artikel '" + scp.article.name + "' ist in der von Ihnen ausgewählten Menge leider nicht mehr verfügbar. Die vorherige Menge wurde vorerst beibehalten.");
+					request.getSession().setAttribute("error", "Der Artikel '" + scp.article.name + "' ist in der von Ihnen ausgewählten Menge leider nicht mehr verfügbar. Es sind nur noch " + stock +" Stück auf Lager.");
 				}
 				else if (stock > 0 && stock < newamount && stock < scp.amount) 
 				{	
