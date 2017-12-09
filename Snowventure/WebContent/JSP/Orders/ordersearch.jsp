@@ -24,7 +24,7 @@ Ansprechpartner: Jacob Markus
 							</select>
                             </div>
                             <div class="pure-u-3-5">
-                                <input type="text" name="searchOrderPattern" class="boxedinput" placeholder="Suchinformation eingeben">
+                                <input type="text" name="searchOrderPattern" maxlength="125" class="boxedinput" placeholder="Suchinformation eingeben">
                             </div>
                             <div class="pure-u-1-5">
                                 <button type="submit" name="searchOrders" class="pure-button pure-button-primary boxedinput">Suchen</button>

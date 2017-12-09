@@ -50,7 +50,7 @@ Ansprechpartner: Fabian Meise
 									</select>
                                         </div>
                                         <div class="pure-u-3-5">
-                                            <input type="text" name="searchArticlePattern" class="boxedinput" placeholder="Wähle deine Ausrüstung">
+                                            <input type="text" name="searchArticlePattern" maxlength="255" class="boxedinput" placeholder="Wähle deine Ausrüstung">
                                         </div>
                                         <div class="pure-u-1-5">
                                             <button type="submit" id="search" name="search" class="pure-button pure-button-primary boxedinput">Suchen</button>

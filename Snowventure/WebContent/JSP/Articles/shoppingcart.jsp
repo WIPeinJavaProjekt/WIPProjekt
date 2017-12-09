@@ -72,7 +72,7 @@ Ansprechpartner: Jacob Markus
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="pure-u-1-8" style="align: center; min-width: 50px;">
-                                                        <input class="boxedinput" id="amount${currentCart.getCartPositions().indexOf(position)}" name="amount${currentCart.getCartPositions().indexOf(position)}" value="${ position.amount }" min="0" type="number" placeholder="Menge" onblur="location.href='./cart?scpid=${currentCart.getCartPositions().indexOf(position)}&amount=' + jQuery('#amount${currentCart.getCartPositions().indexOf(position)}').val();">
+                                                        <input class="boxedinput" id="amount${currentCart.getCartPositions().indexOf(position)}" name="amount${currentCart.getCartPositions().indexOf(position)}" value="${ position.amount }" min="0" max="10000000" step="1" type="number" placeholder="Menge" oninput="this.value = this.value.replace(/[^0-9]/g, '');" onblur="location.href='./cart?scpid=${currentCart.getCartPositions().indexOf(position)}&amount=' + (this.value != '' ? jQuery('#amount${currentCart.getCartPositions().indexOf(position)}').val() : 'novalue');">
                                                     </div>
                                                 </c:otherwise>
                                             </c:choose>

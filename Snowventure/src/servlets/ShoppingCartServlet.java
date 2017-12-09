@@ -51,7 +51,10 @@ public class ShoppingCartServlet extends HttpServlet {
 		if(request.getParameter("scpid")!= null && request.getParameter("amount") != null)
 		{
 			String scpid = request.getParameter("scpid").toString();
-			String amount = request.getParameter("amount").toString();
+			String amount = request.getParameter("amount");
+			
+			if(amount != null && amount != "")			
+			amount = amount.length() > 8 ? amount.substring(0, 8) : amount;
 			
 			if(isIntegerValue(amount))
 			{
@@ -68,7 +71,12 @@ public class ShoppingCartServlet extends HttpServlet {
 				
 				response.sendRedirect(request.getContextPath() + "/cart?amountchanged");
 				return;	
-			}	
+			}
+			else 
+			{
+				response.sendRedirect(request.getContextPath() + "/cart");
+				return;	
+			}
 		}
 		else if(request.getParameter("scpid")!= null && request.getParameter("option") != null && request.getParameter("option").toString().equals("delete"))
 		{
@@ -211,6 +219,10 @@ public class ShoppingCartServlet extends HttpServlet {
 		catch (NumberFormatException ex) 
 		{
 		    isInt = false;
+		}
+		catch (Exception e)
+		{
+			isInt = false;
 		}
 		
 		return isInt;

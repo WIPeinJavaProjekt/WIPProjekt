@@ -40,42 +40,42 @@ Ansprechpartner: Jacob Markus
 
                         <div id="mydata-item name" class="pure-u-1 pure-u-md-1-3">
                             <label for="first-name">Vorname</label>
-                            <input id="first-name" name="name" class="pure-u-24-24" type="text" value="${currentUser.name}" required>
+                            <input id="first-name" name="name" class="pure-u-24-24" type="text" value="${currentUser.name}" maxlength="125" required>
                         </div>
 
                         <div id="mydata-item last-name" class="pure-u-1 pure-u-md-1-3">
                             <label for="last-name">Nachname</label>
-                            <input id="last-name" name="surname" class="pure-u-24-24" type="text" value="${currentUser.surname}" required>
+                            <input id="last-name" name="surname" class="pure-u-24-24" type="text" value="${currentUser.surname}" maxlength="125" required>
                         </div>
 
                         <div id="mydata-item email" class="pure-u-1 pure-u-md-1-3">
                             <label for="email">E-Mail</label>
-                            <input id="email" name="email" class="pure-u-24-24" type="email" value="${currentUser.email}" required>
+                            <input id="email" name="email" class="pure-u-24-24" type="email" value="${currentUser.email}" maxlength="125" required>
                         </div>
 
                         <div id="mydata-item phone" class="pure-u-1 pure-u-md-1-3">
                             <label for="phone">Telefon</label>
-                            <input id="phone" name="phone" class="pure-u-24-24" type="text" value="${currentUser.phone}" required>
+                            <input id="phone" name="phone" class="pure-u-24-24" type="text" value="${currentUser.phone}" maxlength="125" required>
                         </div>
 
                         <div id="mydata-item street" class="pure-u-1 pure-u-md-1-3">
                             <label for="street">Straße</label>
-                            <input id="street" name="street" class="pure-u-24-24" type="text" value="${currentUser.adress.getStreet()}" required>
+                            <input id="street" name="street" class="pure-u-24-24" type="text" value="${currentUser.adress.getStreet()}" maxlength="125" required>
                         </div>
 
                         <div id="mydata-item houseno" class="pure-u-1 pure-u-md-1-3">
                             <label for="houseno">Hausnummer</label>
-                            <input id="houseno" name="houseno" class="pure-u-24-24" type="text" value="${currentUser.adress.getHouseno()}" required>
+                            <input id="houseno" name="houseno" class="pure-u-24-24" type="text" value="${currentUser.adress.getHouseno()}" maxlength="50" required>
                         </div>
 
                         <div id="mydata-item location" class="pure-u-1 pure-u-md-1-3">
                             <label for="location">Stadt</label>
-                            <input id="location" name="location" class="pure-u-24-24" type="text" value="${currentUser.adress.getLocation()}" required>
+                            <input id="location" name="location" class="pure-u-24-24" type="text" value="${currentUser.adress.getLocation()}" maxlength="125" required>
                         </div>
 
                         <div id="mydata-item postcode" class="pure-u-1 pure-u-md-1-3">
                             <label for="postcode">PLZ</label>
-                            <input id="postcode" name="postcode" class="pure-u-24-24" type="text" value="${currentUser.adress.postcode}" required>
+                            <input id="postcode" name="postcode" class="pure-u-24-24" type="text" value="${currentUser.adress.postcode}" maxlength="10" required>
                         </div>
                         <c:if test="${currentUser.utid == '1'}">
                             <div class="pure-u-1 pure-u-md-1-3">
@@ -104,17 +104,17 @@ Ansprechpartner: Jacob Markus
 
                         <div class="pure-u-1 pure-u-md-1-3">
                             <label for="password">Aktuelles Passwort</label>
-                            <input id="password" name="password" type="password" class="boxedinput">
+                            <input id="password" name="password" type="password" class="boxedinput" maxlength="50">
                         </div>
 
                         <div class="pure-u-1 pure-u-md-1-3">
                             <label for="new-password">Neues Passwort</label>
-                            <input id="new-password" name="new-password" type="password" class="boxedinput">
+                            <input id="new-password" name="new-password" type="password" class="boxedinput" maxlength="50">
                         </div>
 
                         <div class="pure-u-1 pure-u-md-1-3">
                             <label for="new-passwordRepeat">Neues Passwort wiederholen</label>
-                            <input id="new-passwordRepeat" name="new-passwordRepeat" type="password" class="boxedinput">
+                            <input id="new-passwordRepeat" name="new-passwordRepeat" type="password" class="boxedinput" maxlength="50">
                         </div>
 
                         <button type="submit" name="update-password" class="pure-button pure-button-primary boxedinput">Änderung speichern</button>
@@ -141,7 +141,7 @@ Ansprechpartner: Jacob Markus
 					</select>
                         </div>
                         <div class="pure-control-group">
-                            <input class="boxedinput" id="safetyAnswer" name="safetyAnswer" type="text" value="${currentUser.squestion.getAnswer()}" required placeholder="Antwort">
+                            <input class="boxedinput" id="safetyAnswer" name="safetyAnswer" type="text" value="${currentUser.squestion.getAnswer()}" maxlength="200" required placeholder="Antwort">
                         </div>
 
                         <button type="submit" name="update-squestion" class="pure-button pure-button-primary boxedinput">Änderung speichern</button>

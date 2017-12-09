@@ -21,7 +21,7 @@ Ansprechpartner: Garrit Kniepkamp
 								</select>
                             </div>
                             <div class="pure-u-3-5">
-                                <input type="text" class="boxedinput" name="searchArticlePattern" placeholder="Wähle deine Ausrüstung">
+                                <input type="text" class="boxedinput" name="searchArticlePattern" maxlength="255" placeholder="Wähle deine Ausrüstung">
                             </div>
                             <div class="pure-u-1-5">
                                 <button type="submit" id="search" name="search" class="pure-button pure-button-primary boxedinput">Suchen</button>

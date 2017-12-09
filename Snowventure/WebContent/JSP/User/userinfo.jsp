@@ -26,32 +26,32 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
                 <h3>Name</h3>
                 <c:if test="${selectedUser == null || empty currentUser}">
                     <div class="pure-control-group">
-                        <input class="boxedinput" id="username" name="username" <c:choose>
+                        <input class="boxedinput" id="username" name="username" maxlength="125" <c:choose>
                         <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.username}"</c:when>
                         <c:otherwise>value="${username}"</c:otherwise>
                         </c:choose> value="${username}" type="text" required placeholder="Benutzername">
                     </div>
                 </c:if>
                 <div class="pure-control-group">
-                    <input class="boxedinput" id="name" name="name" <c:choose>
+                    <input class="boxedinput" id="name" name="name" maxlength="125" <c:choose>
                     <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.name}"</c:when>
                     <c:otherwise>value="${name}"</c:otherwise>
                     </c:choose> type="text" required placeholder="Vorname">
                 </div>
                 <div class="pure-control-group">
-                    <input class="boxedinput" id="surname" name="surname" <c:choose>
+                    <input class="boxedinput" id="surname" name="surname" maxlength="125" <c:choose>
                     <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.surname}"</c:when>
                     <c:otherwise>value="${surname}"</c:otherwise>
                     </c:choose> type="text" required placeholder="Nachname">
                 </div>
                 <div class="pure-control-group">
-                    <input class="boxedinput" id="email" name="email" <c:choose>
+                    <input class="boxedinput" id="email" name="email" maxlength="125" <c:choose>
                     <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.email}"</c:when>
                     <c:otherwise>value="${email}"</c:otherwise>
                     </c:choose> type="email" required placeholder="E-Mail-Addresse">
                 </div>
                 <div class="pure-control-group">
-                    <input class="boxedinput" id="phone" name="phone" <c:choose>
+                    <input class="boxedinput" id="phone" name="phone" maxlength="125" <c:choose>
                     <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.phone}"</c:when>
                     <c:otherwise>value="${phone}"</c:otherwise>
                     </c:choose> type="text" required placeholder="Telefon">
@@ -63,10 +63,10 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
             <fieldset class="pure-group rightdiv">
                 <h3>Passwort</h3>
                 <div class="pure-control-group">
-                    <input class="boxedinput" id="password" name="password" type="password" placeholder="Passwort" <c:if test="${empty currentUser && selectedUser == null}">required</c:if>>
+                    <input class="boxedinput" id="password" name="password" type="password" placeholder="Passwort" maxlength="50" <c:if test="${empty currentUser && selectedUser == null}">required</c:if>>
                 </div>
                 <div class="pure-control-group">
-                    <input class="boxedinput" id="passwordRepeat" name="passwordRepeat" type="password" placeholder="Passwort wiederholen" <c:if test="${empty currentUser && selectedUser == null}">required</c:if>>
+                    <input class="boxedinput" id="passwordRepeat" name="passwordRepeat" type="password" placeholder="Passwort wiederholen" maxlength="50" <c:if test="${empty currentUser && selectedUser == null}">required</c:if>>
                 </div>
                 <c:if test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null && not empty error}">
                     <div class="pure-control-group">
@@ -82,25 +82,25 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
             <fieldset class="pure-group">
                 <h3>Anschrift</h3>
                 <div class="pure-control-group">
-                    <input class="boxedinput" id="location" name="location" <c:choose>
+                    <input class="boxedinput" id="location" name="location" maxlength="125" <c:choose>
                     <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.adress.location}"</c:when>
                     <c:otherwise>value="${location}"</c:otherwise>
                     </c:choose> type="text" required placeholder="Wohnort">
                 </div>
                 <div class="pure-control-group">
-                    <input class="boxedinput" id="street" name="street" <c:choose>
+                    <input class="boxedinput" id="street" name="street" maxlength="125" <c:choose>
                     <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.adress.street}"</c:when>
                     <c:otherwise>value="${street}"</c:otherwise>
                     </c:choose> type="text" required placeholder="Straße">
                 </div>
                 <div class="pure-control-group">
-                    <input class="boxedinput" id="houseno" name="houseno" <c:choose>
+                    <input class="boxedinput" id="houseno" name="houseno" maxlength="50" <c:choose>
                     <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.adress.houseno}"</c:when>
                     <c:otherwise>value="${houseno}"</c:otherwise>
                     </c:choose> type="text" required placeholder="Hausnummer">
                 </div>
                 <div class="pure-control-group">
-                    <input class="boxedinput" id="postcode" name="postcode" <c:choose>
+                    <input class="boxedinput" id="postcode" name="postcode" maxlength="10" <c:choose>
                     <c:when test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">value="${selectedUser.adress.postcode}"</c:when>
                     <c:otherwise>value="${postcode}"</c:otherwise>
                     </c:choose> type="text" required placeholder="Postleitzahl">
@@ -133,7 +133,7 @@ Ansprechpartner: Jacob Markus, Garrit Kniepkamp
 	</select>
                 </div>
                 <div class="pure-control-group">
-                    <input class="boxedinput" id="safetyAnswer" name="safetyAnswer" type="text" <c:if test="${not empty currentUser && selectedUser != null}">value="${ selectedUser.squestion.getAnswer() }"</c:if> required placeholder="Antwort">
+                    <input class="boxedinput" id="safetyAnswer" name="safetyAnswer" type="text" maxlength="200" <c:if test="${not empty currentUser && selectedUser != null}">value="${ selectedUser.squestion.getAnswer() }"</c:if> required placeholder="Antwort">
                 </div>
             </fieldset>
             <c:if test="${not empty currentUser && currentUser.utid == '1' && selectedUser != null}">

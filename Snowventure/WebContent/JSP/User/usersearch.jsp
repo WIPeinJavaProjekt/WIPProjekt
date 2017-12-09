@@ -27,7 +27,7 @@ Ansprechpartner: Jacob Markus
 							</select>
                              </div>
                              <div class="pure-u-3-5">
-                                 <input type="text" name="user-info" value="${userinfo}" class="boxedinput" placeholder="Nutzername eingeben">
+                                 <input type="text" name="user-info" value="${userinfo}" maxlength="125" class="boxedinput" placeholder="Nutzername eingeben">
                         </div>
                         <div class="pure-u-1-5">
                             <button type="submit" name="search-user" class="pure-button pure-button-primary boxedinput">Suchen</button>

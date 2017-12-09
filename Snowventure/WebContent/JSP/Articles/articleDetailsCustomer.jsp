@@ -127,7 +127,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                                 <h3>Preis ${article.getPriceFormatted()} EUR</h3>
                                 <div>
                                     <div class="pure-control-group">
-                                        <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge" min="1">
+                                        <input required class="boxedinput" id="amount" name="amount" value="1" type="number" step="1" placeholder="Menge" min="1" max="10000000">
                                     </div>
                                     <div class="pure-control-group">
                                         <button class="pure-button pure-button-primary boxedinput" type="submit" id="addToCart" name="addToCart">IN DEN WARENKORB</button>
