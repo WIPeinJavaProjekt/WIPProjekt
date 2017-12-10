@@ -63,7 +63,7 @@ public class OrderServlet extends HttpServlet {
 					return;
 				}
 			}
-			else if(request.getParameter("neworder") != null && currentCart != null)
+			else if(request.getParameter("neworder") != null && currentCart != null && currentCart.cartPositions != null && currentCart.cartPositions.size() > 0)
 			{	
 				if(request.getParameter("review")==null)
 				{ request.getSession().removeAttribute("error"); }
