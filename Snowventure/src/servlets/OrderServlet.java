@@ -80,7 +80,7 @@ public class OrderServlet extends HttpServlet {
 				rd.forward(request, response);
 				return;
 			}
-			else if(request.getParameter("processOrder") != null && currentOrder != null && request.getParameter("processOrder").toString().equals("true"))
+			else if(request.getParameter("processOrder") != null && currentOrder != null && currentOrder.shoppingCart != null && currentOrder.shoppingCart.cartPositions != null && currentOrder.shoppingCart.cartPositions.size() > 0 && request.getParameter("processOrder").toString().equals("true"))
 			{
 				boolean CartIsAvailable = checkCartPositionsAvailability(currentOrder.getShoppingCart());
 				
