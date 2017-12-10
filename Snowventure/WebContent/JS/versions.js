@@ -11,7 +11,8 @@ function changeVersion(aid, page) {
 
 function changeToStock(aid, page) {
     var version = $('#selectedVersion').find(':selected').text();
-    location.href = './' + page + '?ID=' + aid + '&version=' + version + '&stock';
+    var url = './' + page + '?ID=' + aid + '&version=' + version + '&stock';
+    location.href = url;
 }
 
 function customerChangeVersion(aid, page, version) {

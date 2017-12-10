@@ -66,7 +66,8 @@ public class ArticleServlet extends HttpServlet {
 		if(request.getParameter("ID") != null) {
 			try {
 				this.article = ArticleService.GetArticle(Integer.parseInt(request.getParameter("ID")));
-				this.article.setSelectedVersion(Integer.parseInt(request.getParameter("version")));
+				String version = request.getParameter("version").replace(" ", "");
+				this.article.setSelectedVersion(Integer.parseInt(version));
 				
 				ArrayList<String> colorStrings = this.article.versions.get(this.article.getSelectedVersion()).getColorNames();
 				ArrayList<String> sizes = this.article.getSize();
