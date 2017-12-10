@@ -451,7 +451,8 @@ div#popup-div-content {
     padding: 10px 50px;
     border: 2px solid gray;
     border-radius: 10px;
-    background-color: #fff
+    background-color: #fff;
+    margin-left: 50px;
 }
 
 #popup-submit {

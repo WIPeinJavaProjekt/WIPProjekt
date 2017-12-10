@@ -52,6 +52,16 @@
 
 #ordervaluedescription {
     font-weight: bold;
+    border-top: solid;
+    float: left;
+}
+
+.order-sum-values {
+	padding-top: 2px;
+}
+
+.orderdetailsvalue {
+	float: left;
 }
 
 #savestatus {

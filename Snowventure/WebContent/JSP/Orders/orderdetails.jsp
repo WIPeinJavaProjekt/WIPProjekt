@@ -45,12 +45,12 @@ Ansprechpartner: Jacob Markus
                             <i id="close" class="fa fa-close fa-1g" aria-hidden="true" onclick="div_hide('popup-div')"></i>
                             <h4>Neue Versandadresse</h4>
                             <hr>
-                            <input required id="name" name="name" placeholder="Vorname" type="text">
-                            <input required id="surename" name="surename" placeholder="Nachname" type="text">
-                            <input required id="street" name="street" placeholder="Straße" type="text">
-                            <input required id="houseno" name="houseno" placeholder="Hausnummer" type="text">
-                            <input required id="postcode" name="postcode" placeholder="PLZ" type="text">
-                            <input required id="location" name="location" placeholder="Ort" type="text">
+                            <input required id="name" name="name" placeholder="Vorname" type="text" maxlength="125">
+                            <input required id="surename" name="surename" placeholder="Nachname" type="text" maxlength="125">
+                            <input required id="street" name="street" placeholder="Straße" type="text" maxlength="125">
+                            <input required id="houseno" name="houseno" placeholder="Hausnummer" type="text" maxlength="50">
+                            <input required id="postcode" name="postcode" placeholder="PLZ" type="text" maxlength="10">
+                            <input required id="location" name="location" placeholder="Ort" type="text" maxlength="125">
                             <input class="pure-button pure-button-primary" name="delivery-adr-submit" type="submit" id="popup-submit" value="Speichern">
                         </form>
                     </div>
@@ -122,12 +122,12 @@ Ansprechpartner: Jacob Markus
                             </div>
                             <div class="pure-u-1-4 fullwidth">
                                 <div class="pure-u-1-1"><b>Bestellübersicht</b></div>
-                                <div class="pure-u-1-5 orderdetailsvalue">Artikel</div>
-                                <div class="pure-u-4-5 fullwidth" style="text-align: right">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
-                                <div class="pure-u-1-5 orderdetailsvalue">Versand/Verpackung</div>
-                                <div class="pure-u-4-5 fullwidth" style="text-align: right">EUR 0,00</div>
-                                <div class="pure-u-1-5 fullwidth" id="ordervaluedescription">Gesamtsumme</div>
-                                <div class="pure-u-4-5 fullwidth" id="ordervaluesum">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
+                                <div class="pure-u-3-5 orderdetailsvalue">Artikel</div>
+                                <div class="pure-u-2-5 order-sum-values" style="text-align: right">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
+                                <div class="pure-u-3-5 orderdetailsvalue">Versand/Verpackung</div>
+                                <div class="pure-u-2-5 order-sum-values" style="text-align: right">EUR 0,00</div>
+                                <div class="pure-u-3-5" id="ordervaluedescription">Gesamtsumme</div>
+                                <div class="pure-u-2-5 order-sum-values" id="ordervaluesum">EUR ${ currentOrder.shoppingCart.getShoppingCartPrice() }</div>
                             </div>
                         </div>
                         <div class="pure-u-1-1" style="height: 20px;"></div>
