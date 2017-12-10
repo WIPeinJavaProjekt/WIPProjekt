@@ -102,7 +102,7 @@ Ansprechpartner: Jacob Markus
                                 <p>${order.statuscycle.get(order.statuscycle.size()-1).description}</p>
                             </div>
                             <div class="pure-u-1-4 overflowhider">
-                                <p>${order.statuscycle.get(order.statuscycle.size()-1).statusdate}</p>
+                                <p>${order.statuscycle.get(0).statusdate}</p>
                             </div>
                             <div class="pure-u-1-4 overflowhider">
                                 <p>
