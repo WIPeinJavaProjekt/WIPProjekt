@@ -39,14 +39,20 @@ public class ArticleSearchServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getParameterValues("size") != null) {
+		    for(int i=0; i<request.getParameterValues("size").length; i++) {
+		    	System.out.println(request.getParameterValues("size")[i]);
+		    }
+	    }
+		
 		try {
 			ArrayList<Categorie> categories = CategorieService.GetCategories();
 			ArrayList<String> manufacturers = ArtilceManufacturerService.GetAllPossibleManufacturers();
-			ArrayList<String> sizes = ArticleSizesService.GetAllPossibleSizes();
+			ArrayList<String> availableSizes = ArticleSizesService.GetAllPossibleSizes();
 			ArrayList<ArticleColor> colors = ArticleColorService.GetAllPossibleColors();
 			
 			request.getSession().setAttribute("articleColors", colors);
-			request.getSession().setAttribute("availableSizes", sizes);
+			request.getSession().setAttribute("availableSizes", availableSizes);
 			request.getSession().setAttribute("availableManufacturers", manufacturers);
 			request.getSession().setAttribute("categories", categories);
 			
@@ -72,6 +78,13 @@ public class ArticleSearchServlet extends HttpServlet {
 			double maxprice = Double.parseDouble(request.getParameter("maxprice") ==null || request.getParameter("maxprice") ==""? "0":request.getParameter("maxprice") );
 			String[] colors = request.getParameterValues("color");
 		    String[] sizes = request.getParameterValues("size");
+		    
+		    if(sizes != null) {
+			    for(int i=0; i<sizes.length; i++) {
+			    	System.out.println(sizes[i]);
+			    }
+		    }
+		    
 			String[] manufacturers = request.getParameterValues("manufacturer");
 			int category = Integer.parseInt(request.getParameter("categorie"));
 			String[] genders = request.getParameterValues("genders");
@@ -121,24 +134,9 @@ public class ArticleSearchServlet extends HttpServlet {
 				si = Arrays.toString(sizes);
 			if(colors != null)
 				col = Arrays.toString(colors);
-			System.out.println("Suche Starten: "+ System.currentTimeMillis());
 			articles = ArticleService.GetAllArticlesByFilter(category,searchPattern == null? "" : searchPattern,1,1,gen,mf,minprice,maxprice,col,si);
-			System.out.println("Suche beendet: "+System.currentTimeMillis());
 			Path currentRelativePath = Paths.get("");
-			System.out.println(currentRelativePath.toAbsolutePath().toString());
 			request.getSession().setAttribute("imagePath", currentRelativePath.toAbsolutePath().toString() + "\\");
-			
-			/*for (Article a: articles) {
-				for(ArticlePicture ap: a.versions.get(a.GetSelectedVersion()).pictures) {
-					File file = new File("" + ap.name);
-					try {
-					   ImageIO.write((RenderedImage) ap.image, "jpg", file);  // ignore returned boolean
-					} catch(IOException e) {
-					 System.out.println("Write error for " + file.getPath() + ": " + e.getMessage());
-					}
-				}
-			}*/
-			System.out.println("Bilder angezeigt: "+System.currentTimeMillis());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
