@@ -552,17 +552,20 @@ public class ArticleService {
 	 * @throws IOException
 	 */
 	public static int AddPictureToArticleVersion(ArticlePicture img, int avid) throws SQLException, IOException {
-		int apid =-1;
-		String query = "INSERT INTO ARTICLEIMAGE(name,image, avid) VALUES( ?, ?, ?)";
-		PreparedStatement statement = (PreparedStatement) DatabaseConnector.connect.prepareStatement(query);
-		statement.setString(1, img.name);
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		ImageIO.write((RenderedImage) img.image,"png", os); 
-		ByteArrayInputStream fis = new ByteArrayInputStream(os.toByteArray());
-		statement.setBlob(2, fis);
-		statement.setInt(3, avid);
-		apid = statement.executeUpdate();
-		return apid;
+		if(img.image != null) {
+			int apid =-1;
+			String query = "INSERT INTO ARTICLEIMAGE(name,image, avid) VALUES( ?, ?, ?)";
+			PreparedStatement statement = (PreparedStatement) DatabaseConnector.connect.prepareStatement(query);
+			statement.setString(1, img.name);
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			ImageIO.write((RenderedImage) img.image,"png", os);
+			ByteArrayInputStream fis = new ByteArrayInputStream(os.toByteArray());
+			statement.setBlob(2, fis);
+			statement.setInt(3, avid);
+			apid = statement.executeUpdate();
+			return apid;
+		}
+		return -1;
 	}
 
 	/**

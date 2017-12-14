@@ -138,6 +138,8 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                                     </c:choose>
                                 </div>
                             </fieldset>
+                        </form>
+                       	<form id="articleadminboxform" class="pure-form  textbox" action="article" method="post">
                             <fieldset>
                                 <div class="pure-control-group">
                                     <button class="pure-button pure-button-primary" type="submit" name="back">Zurück zur Artikelübersicht</button>
