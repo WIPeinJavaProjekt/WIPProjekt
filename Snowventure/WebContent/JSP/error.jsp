@@ -26,7 +26,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
     </head>
 
     <body>
-
+		<!-- Einfügen des Header -->
         <%@include file = "./Basic/header.jsp" %>
 
             <div>
@@ -41,6 +41,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                     <div class="pure-u-1-5"></div>
                 </div>
             </div>
+            <!-- Einfügen des Footer -->
             <%@include file = "./Basic/footer.jsp" %>
     </body>
 

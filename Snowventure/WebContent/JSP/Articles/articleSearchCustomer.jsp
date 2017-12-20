@@ -29,34 +29,34 @@ Ansprechpartner: Garrit Kniepkamp
                         </div>
                     </fieldset>
 
+					<!-- Filter zur Verfeinerung der Artikelsuche -->
                     <a id="filterbtn-show" href="javascript:void(0)">Filter &#x25bc;</a>
                     <fieldset id="filtersfield" style="display:none;">
 
                         <%@include file = "../Basic/filterManufacturer.jsp" %>
-                            <%@include file = "../Basic/filterColor.jsp" %>
-                                <%@include file = "../Basic/filterSize.jsp" %>
-                                    <%@include file = "../Basic/filterGender.jsp" %>
+                        <%@include file = "../Basic/filterColor.jsp" %>
+                        <%@include file = "../Basic/filterSize.jsp" %>
+                        <%@include file = "../Basic/filterGender.jsp" %>
 
-                                        <div style="clear:both;">
-                                            <br>
-                                            <u style="font-size: 16px;">Preis</u>
+                        <div style="clear:both;">
+                            <br>
+                            <u style="font-size: 16px;">Preis</u>
 
-                                            <span> von </span>
-                                            <c:if test="${minprice>0 }">
-                                                <input name="minprice" value="${minprice}" type="number" min="0" max="10000" step=".01">
-                                            </c:if>
-                                            <c:if test="${minprice<= 0 || minprice == null}">
-                                                <input name="minprice" type="number" min="0" max="10000" step=".01">
-                                            </c:if>
-                                            <span> bis </span>
-                                            <c:if test="${maxprice >0 }">
-                                                <input name="maxprice" value="${maxprice}" type="number" min="0" max="10000" step=".01">
-                                            </c:if>
-                                            <c:if test="${maxprice<= 0 || maxprice == null}">
-                                                <input name="maxprice" type="number" min="0" max="10000" step=".01">
-                                            </c:if>
-                                        </div>
-
+                            <span> von </span>
+                            <c:if test="${minprice>0 }">
+                                <input name="minprice" value="${minprice}" type="number" min="0" max="10000" step=".01">
+                            </c:if>
+                            <c:if test="${minprice<= 0 || minprice == null}">
+                                <input name="minprice" type="number" min="0" max="10000" step=".01">
+                            </c:if>
+                            <span> bis </span>
+                            <c:if test="${maxprice >0 }">
+                                <input name="maxprice" value="${maxprice}" type="number" min="0" max="10000" step=".01">
+                            </c:if>
+                            <c:if test="${maxprice<= 0 || maxprice == null}">
+                                <input name="maxprice" type="number" min="0" max="10000" step=".01">
+                            </c:if>
+                       	</div>
                     </fieldset>
                 </form>
             </div>
@@ -64,8 +64,8 @@ Ansprechpartner: Garrit Kniepkamp
         <div class="pure-u-1-5 sizezero"></div>
     </div>
 
-    <center>
-
+	<!-- Anzeige aller Artikel, die den vorher eingebenen Suchkriterien entsprechen -->
+    <center>		
         <form name="cardForm" id="cardForm" action="articles" method="post">
             <div id="articleresultcontainer" class="search-results" align="left">
                 <c:if test="${ not empty articles }">

@@ -49,10 +49,12 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                 <div class="pure-u-1-5 sizezero"></div>
                 <div class="pure-u-3-5 fullwidth">
 
+					<!-- Artikel-Menü um zwischen den Artikeleigenschaften und dem Lagerbestand wechseln zu können -->
                     <%@include file = "./articleMenu.jsp" %>
 
                         <form id="articleadminboxform" class="pure-form  textbox" enctype="multipart/form-data" action="article" method="post">
 
+							<!-- Alle Artikel-Eigenschaften -->
                             <fieldset class="pure-group">
                                 <div class="pure-g">
                                     <div class="pure-u-1-2 fullwidth">
@@ -146,6 +148,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                                 </div>
                             </fieldset>
                         </form>
+                        <!-- Slider mit allen Blidern der ausgewähten Artikelversion -->
                         <div class="w3-content w3-display-container w3slidmod fullwidth" align="center">
 
                             <c:forEach items="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures()}" var="ap">
@@ -172,8 +175,6 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                             </c:if>
 
                         </div>
-
-
                         <c:if test="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures().size()>0}">
                             <script>
                                 var slideIndex = 1;
@@ -200,6 +201,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                             </script>
                         </c:if>
 
+						<!-- Mögliche Fehlermeldungen auf der Artikeldetailseite -->
                         <c:if test="${not empty errorArticle}">
                             <div class="pure-g">
                                 <div class="pure-u-1-2 fullwidth">

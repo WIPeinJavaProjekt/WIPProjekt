@@ -35,6 +35,7 @@ Ansprechpartner: Jacob Markus
 
                     <div class="pure-u-1-1">
 
+						<!-- Anzeige des aktuellen Warenkorbs mit den wichtigsten Informationen -->
                         <c:choose>
                             <c:when test="${not empty currentCart && currentCart.getCartPositions().size() > 0}">
                                 <c:if test="${not empty error}">
@@ -87,18 +88,6 @@ Ansprechpartner: Jacob Markus
                                 <div id="scp-article-card">
 
                                     <div class="pure-u-11-12" id="sc-conclusion">
-
-                                        <!--
-						    	<c:choose>
-						    	<c:when test="${ not empty currentUser }">
-							    	<h3><b>Summe (${currentUser.shoppingcart.getArticleCount()} Artikel):  EUR ${currentUser.shoppingcart.getShoppingCartPrice()}</b></h3>
-					    		</c:when>
-					    		<c:otherwise>
-					    			<h3><b>Summe (${currentCart.getArticleCount()} Artikel):  EUR ${currentCart.getShoppingCartPrice()}</b></h3>
-					    		</c:otherwise>
-					    		</c:choose>
-					    		-->
-
                                         <h3><b>Summe (${currentCart.getArticleCount()} Artikel):  EUR ${currentCart.getShoppingCartPrice()}</b></h3>
                                         <h4>
                                             <input id="scp-button-1" class="pure-button pure-button-primary" type="button" value="Weitershoppen" onclick="location.href='./articles'">
@@ -108,6 +97,8 @@ Ansprechpartner: Jacob Markus
                                     <div class="pure-u-1-12" style="height: 15%;"></div>
                                 </div>
                             </c:when>
+                            
+                            <!-- Alternative Anzeige, wenn der Warenkorb leer ist -->
                             <c:otherwise>
                                 <div id="scp-article-card">
                                     <h2><b>Ihr Einkaufswagen ist leer.</b></h2>

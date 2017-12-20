@@ -26,7 +26,7 @@ Ansprechpartner: Fabian Meise
     </head>
 
     <body>
-
+		<!-- Einfügen des Headers -->
         <%@include file = "./Basic/header.jsp" %>
 
             <div class="contentwrapp" id="searchbox">
@@ -64,6 +64,7 @@ Ansprechpartner: Fabian Meise
                     <div class="pure-u-1-5 sizezero"></div>
                 </div>
             </div>
+            <!-- Einfügen des Slider -->
             <div id="slider">
                 <%@include file = "./Basic/slider.jsp" %>
             </div>
@@ -90,6 +91,8 @@ Ansprechpartner: Fabian Meise
                     </div>
                 </div>
             </div>
+            
+            <!-- Unser Bestseller -->
             <div id="bestseller">
 
                 <h1>Entdecke unseren Bestseller</h1>
@@ -109,7 +112,7 @@ Ansprechpartner: Fabian Meise
                 </div>
             </div>
 
-
+			
             <div class="advertisingbanner">
                 <div id="advertisinglogo2" class="advertisinglogo">
                     <div class="middle">
@@ -121,6 +124,7 @@ Ansprechpartner: Fabian Meise
 
             </div>
 
+			<!-- Informationen über unser Unternehmen -->
             <div id="history">
                 <div align="center" id="historyheader">
                     <h1>ÜBER SNOWVENTURE</h1>
@@ -160,8 +164,7 @@ Ansprechpartner: Fabian Meise
 
             </div>
 
-
-
+			<!-- Einfügen des Footer -->
             <%@include file = "./Basic/footer.jsp" %>
     </body>
 

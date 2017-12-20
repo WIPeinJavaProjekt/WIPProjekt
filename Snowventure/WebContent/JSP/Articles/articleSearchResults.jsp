@@ -27,13 +27,12 @@ Ansprechpartner: Garrit Kniepkamp
 	
 	<body>
 	    <%@include file = "../Basic/header.jsp" %>
-	        <div class="contentwrapp">
-	            <div class="pure-u-5-5">
-	                <%@include file = "articleSearchCustomer.jsp"%>
-	            </div>
-	        </div>
-	
-	        <%@include file = "../Basic/footer.jsp"%>
+        <div class="contentwrapp">
+            <div class="pure-u-5-5">
+                <%@include file = "articleSearchCustomer.jsp"%>
+            </div>
+        </div>
+     	<%@include file = "../Basic/footer.jsp"%>
 	</body>
 
 </html>

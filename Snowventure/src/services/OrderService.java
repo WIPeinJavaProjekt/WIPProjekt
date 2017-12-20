@@ -4,22 +4,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Locale;
 
-import classes.*;
+import classes.Adress;
+import classes.Article;
+import classes.Order;
+import classes.OrderStatus;
+import classes.ShoppingCart;
+import classes.ShoppingCartPosition;
 
 /**
- * Beschreibung: Modelklasse fï¿½r Bestelladministration
+ * Beschreibung: Modelklasse für Bestelladministration
  * @author Ansprechpartner Fabian Meise
  *
  */
 public class OrderService {
 	
 	/**
-	 * Fï¿½ge eine Bestellung hinzu
+	 * Füge eine Bestellung hinzu
 	 * @param o Bestellung
-	 * @return -1 bei Fehler anosnten id des hinzufï¿½gten Datensatzes
+	 * @return -1 bei Fehler ansonsten id des hinzufügten Datensatzes
 	 */
 	public static int AddOrder(Order o){
 		int oid= -1;
@@ -55,10 +59,10 @@ public class OrderService {
 	}
 	
 	/**
-	 * Hilfsmethode zum Hinzufï¿½gen von Bestelldetails
+	 * Hilfsmethode zum Hinzufügen von Bestelldetails
 	 * @param Warenkorb
 	 * @param Bestellid
-	 * @return -1 bei Fehler anosnten id des hinzufï¿½gten Datensatzes
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
 	 */
 	private static int AddOrderDetails(ShoppingCart shoppingCart, int orid) {
 		int odid= -1;
@@ -73,10 +77,10 @@ public class OrderService {
 	}
 	
 	/**
-	 * Hilfsmethode zum Hinzufï¿½gen der Warenkorbpositionen	
+	 * Hilfsmethode zum Hinzufügen der Warenkorbpositionen	
 	 * @param p Warenkorbposition
 	 * @param orid Bestellid
-	 * @return -1 bei Fehler anosnten id des hinzufï¿½gten Datensatzes
+	 * @return -1 bei Fehler anosnten id des hinzufügten Datensatzes
 	 */
 	private static int AddOrderDetailPosition(ShoppingCartPosition p, int orid) {
 		Locale.setDefault(Locale.ENGLISH);		
@@ -89,7 +93,7 @@ public class OrderService {
 	}
 	
 	/**
-	 * Hilfsmethode zum Hinzufï¿½gen der Bestellhistorie
+	 * Hilfsmethode zum Hinzufügen der Bestellhistorie
 	 * @param statuscycle Bestellhistorie
 	 * @param orid Bestellid
 	 * @return
@@ -108,7 +112,7 @@ public class OrderService {
 	}	
 	
 	/**
-	 * Hilfsmethode zum Einfï¿½gen eines Bestellstatus
+	 * Hilfsmethode zum Einfügen eines Bestellstatus
 	 * @param os Bestellstatus
 	 * @param orid Bestellid
 	 * @return
@@ -127,7 +131,7 @@ public class OrderService {
 	
 	
 	/**
-	 * Lï¿½sche eine Bestellung
+	 * Lösche eine Bestellung
 	 * @param orid Bestellid
 	 */
 	public static void DeleteOrder(int orid)
@@ -140,7 +144,7 @@ public class OrderService {
 	}
 	
 	/**
-	 * Lï¿½sche alle Bestellpositionen einer Bestellung
+	 * Lösche alle Bestellpositionen einer Bestellung
 	 * @param orid Bestellid
 	 */
 	private static void DeleteOrderDetailPosition(int orid)
@@ -151,7 +155,7 @@ public class OrderService {
 	}
 
 	/**
-	 * Lï¿½sche alle Bestellstati einer Bestellung
+	 * Lösche alle Bestellstati einer Bestellung
 	 * @param orid Bestellid
 	 */
 	public static void DeleteOrderStatuscycle(int orid)

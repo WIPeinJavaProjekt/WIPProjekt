@@ -41,6 +41,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
 								<p class="error">${error}</p>
 							</form>
 						</c:if>
+						<!-- Slider mit allen Bildern der ausgewählten Artikelversion -->
                         <div class="w3-content w3-display-container w3slidmod articleslider" align="center">
 
                             <c:forEach items="${article.getAllVersions().get(article.getSelectedVersion()).getArticlesPictures()}" var="ap">
@@ -79,6 +80,7 @@ Ansprechpartner: Garrit Kniepkamp, Fabian Meise
                             }
                         </script>
                     </div>
+                    <!-- Artikelinformationen für den Kunden -->
                     <div class="pure-u-1-1 fullwidth  textbox">
                         <div>
                             <form class="pure-form" action="articleshopping" method="post">
